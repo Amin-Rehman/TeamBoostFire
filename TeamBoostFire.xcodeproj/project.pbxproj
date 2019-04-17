@@ -26,6 +26,7 @@
 		EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */; };
 		EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */; };
 		EB1D48CF2267D303001A754D /* ParticipantLobbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48CD2267D303001A754D /* ParticipantLobbyViewController.xib */; };
+		EB1D48D12267DA3F001A754D /* MeetingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48D02267DA3F001A754D /* MeetingState.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
 		EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67322668D2E0047CD75 /* Main.storyboard */; };
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostMeetingViewController.xib; sourceTree = "<group>"; };
 		EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantLobbyViewController.swift; sourceTree = "<group>"; };
 		EB1D48CD2267D303001A754D /* ParticipantLobbyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantLobbyViewController.xib; sourceTree = "<group>"; };
+		EB1D48D02267DA3F001A754D /* MeetingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingState.swift; sourceTree = "<group>"; };
 		EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamBoostFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBFCA67422668D2E0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				EB1D48B122672E45001A754D /* MeetingParams.swift */,
 				EB1D48C222675827001A754D /* Participant.swift */,
+				EB1D48D02267DA3F001A754D /* MeetingState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
 				EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */,
 				EB1D48CA2267CB07001A754D /* HostMeetingViewController.swift in Sources */,
+				EB1D48D12267DA3F001A754D /* MeetingState.swift in Sources */,
 				EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */,
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,

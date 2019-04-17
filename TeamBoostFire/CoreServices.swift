@@ -43,7 +43,7 @@ extension CoreServices {
         meetingReference = databaseRef?.child(meetingIdentifier!)
 
         meetingStateReference = meetingReference?.child("meeting_state")
-        meetingReference?.setValue("suspended")
+        meetingStateReference?.setValue("suspended")
 
         activeSpeakerReference = meetingReference?.child("active_speaker")
         activeSpeakerReference?.setValue("")
@@ -64,11 +64,11 @@ extension CoreServices {
     }
 
     public func startMeeting() {
-        meetingReference?.setValue("started")
+        meetingStateReference?.setValue("started")
     }
 
     public func endMeeting() {
-        meetingReference?.setValue("ended")
+        meetingStateReference?.setValue("ended")
     }
 
     private func subscribeToParticipantChangesList() {
@@ -112,12 +112,11 @@ extension CoreServices {
 
     private func observeMeetingStateDidChange() {
         meetingStateReference?.observe(DataEventType.value, with: { snapshot in
-            let object = snapshot.children.allObjects as! [DataSnapshot]
-
+            print(snapshot.key)
+            let meetingState = MeetingState(rawValue: snapshot.value as! String)
             let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
             NotificationCenter.default.post(name: name,
-                                            object: nil)
-
+                                            object: meetingState)
         })
     }
 }

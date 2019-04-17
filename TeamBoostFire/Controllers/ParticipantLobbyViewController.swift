@@ -20,6 +20,19 @@ class ParticipantLobbyViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
             self.lobbyImageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }, completion: nil)
+
+        let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(meetingStateDidChange(notification:)),
+                                               name: notificationName, object: nil)
+
+    }
+
+    @objc private func meetingStateDidChange(notification: NSNotification) {
+        let meetingState = notification.object as! MeetingState
+        if meetingState == .started {
+            dismiss(animated: true, completion: nil)
+        }
     }
 
 }
