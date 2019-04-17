@@ -36,8 +36,9 @@ class CoreServices {
 // MARK: - Host
 extension CoreServices {
     public func setupMeeting(with params: MeetingsParams) {
-        let meetingIdentifier = String.makeSixDigitUUID()
-        meetingReference = databaseRef?.child(meetingIdentifier)
+        meetingIdentifier = String.makeSixDigitUUID()
+        print("ALOG: About to setup meeting with identifier: \(meetingIdentifier!)")
+        meetingReference = databaseRef?.child(meetingIdentifier!)
 
         activeSpeakerReference = meetingReference?.child("active_speaker")
         activeSpeakerReference?.setValue("")

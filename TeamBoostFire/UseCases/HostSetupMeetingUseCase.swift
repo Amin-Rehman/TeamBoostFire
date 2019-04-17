@@ -14,8 +14,8 @@ struct HostSetupMeetingUseCase {
                         meetingParams: MeetingsParams) {
         let coreServices = CoreServices.shared
         coreServices.setupMeeting(with: meetingParams)
-
-
+        let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
+        viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
     }
 
 }
