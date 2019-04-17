@@ -172,7 +172,7 @@
         <!--Set Up Meeting-->
         <scene sceneID="LyT-9o-8SZ">
             <objects>
-                <viewController title="Set Up Meeting" id="VVg-16-JcS" sceneMemberID="viewController">
+                <viewController title="Set Up Meeting" id="VVg-16-JcS" customClass="HostSetupMeetingViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DnO-16-9rG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,6 +227,9 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="azg-Mh-Cze"/>
                                                 </constraints>
                                                 <state key="normal" title="Next"/>
+                                                <connections>
+                                                    <action selector="nextButtonTapped:" destination="VVg-16-JcS" eventType="touchUpInside" id="4gW-Og-lZo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,6 +272,13 @@
                             <constraint firstItem="J30-bB-V1G" firstAttribute="centerX" secondItem="DnO-16-9rG" secondAttribute="centerX" id="wws-zV-vHD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="agendaQuestionTextField" destination="a28-yJ-j15" id="7OF-uy-VF5"/>
+                        <outlet property="maxTalkingTimeTextField" destination="aDI-Ec-AQO" id="Xdd-dy-dJ1"/>
+                        <outlet property="meetingTimeTextField" destination="kcc-fM-NrG" id="wpy-0c-fI8"/>
+                        <outlet property="moderationModeTextField" destination="g6w-J2-E10" id="ZnQ-KS-kOm"/>
+                        <outlet property="scrollView" destination="J30-bB-V1G" id="xMh-k8-nBa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXn-py-aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
