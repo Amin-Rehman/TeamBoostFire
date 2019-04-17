@@ -67,11 +67,6 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let participant = Participant(id: participantIdentifier, name: participantNameText)
         CoreServices.shared.setupMeetingAsParticipant(participant: participant, meetingCode: meetingCodeText!)
 
-        /*
-        ParticipantJoinMeetingUseCase.perform(at: self,
-                                              participantName: participantNameText,
-                                              hostIPAddress: hostIPAddressText!)
-         */
     }
 
 
