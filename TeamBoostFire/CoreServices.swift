@@ -31,6 +31,7 @@ class CoreServices {
         self.databaseRef = Database.database().reference()
     }
 
+
 }
 
 // MARK: - Host
@@ -66,7 +67,16 @@ extension CoreServices {
 
 // MARK: - Participant
 extension CoreServices {
-
+    public func addParticipant(participant: Participant, meetingCode: String) {
+        meetingIdentifier = meetingCode
+        meetingReference = databaseRef?.child(meetingIdentifier!)
+        activeSpeakerReference = meetingReference?.child("active_speaker")
+        participantsReference = meetingReference?.child("participants")
+        meetingParamsReference = meetingReference?.child("meeting_params")
+        meetingParamsTimeReference = meetingParamsReference?.child("time")
+        meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
+        participantsReference?.child(participant.id).setValue(["name": participant.name])
+    }
 }
 
 extension String {

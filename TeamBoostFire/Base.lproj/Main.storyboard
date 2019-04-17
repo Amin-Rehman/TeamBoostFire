@@ -168,7 +168,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ipAddressTextField" destination="HcI-cW-6zH" id="J9E-nr-yBG"/>
+                        <outlet property="meetingCode" destination="HcI-cW-6zH" id="J9E-nr-yBG"/>
                         <outlet property="participantNameTextField" destination="aDC-0F-rrt" id="hTN-R6-x3J"/>
                         <outlet property="scrollView" destination="GuZ-FJ-YgS" id="3kj-mD-OaI"/>
                     </connections>

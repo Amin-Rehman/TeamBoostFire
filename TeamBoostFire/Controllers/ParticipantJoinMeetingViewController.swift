@@ -10,7 +10,7 @@ import UIKit
 
 class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var ipAddressTextField: UITextField!
+    @IBOutlet weak var meetingCode: UITextField!
     @IBOutlet weak var participantNameTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
 
@@ -36,8 +36,8 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
     }
 
     @IBAction func joinMeetingButtonClicked(_ sender: Any) {
-        let hostIPAddressText = ipAddressTextField.text
-        if hostIPAddressText?.count == 0 {
+        let meetingCodeText = meetingCode.text
+        if meetingCodeText?.count == 0 {
             let alertController = UIAlertController(title: "Incomplete data",
                                                     message: "Please enter IP Address of the Host",
                                                     preferredStyle: .alert)
@@ -62,6 +62,10 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
             self.present(alertController, animated: true, completion: nil)
             return
         }
+
+        let participantIdentifier = UUID().uuidString
+        let participant = Participant(id: participantIdentifier, name: participantNameText)
+        CoreServices.shared.addParticipant(participant: participant, meetingCode: meetingCodeText!)
 
         /*
         ParticipantJoinMeetingUseCase.perform(at: self,
