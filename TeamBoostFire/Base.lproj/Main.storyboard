@@ -95,7 +95,7 @@
         <!--Join Meeting-->
         <scene sceneID="wl6-Nd-Kp4">
             <objects>
-                <viewController title="Join Meeting" id="hv1-QO-Hvr" sceneMemberID="viewController">
+                <viewController title="Join Meeting" id="hv1-QO-Hvr" customClass="ParticipantJoinMeetingViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3aP-Px-AuJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,6 +132,9 @@
                                                     <constraint firstAttribute="height" constant="30" id="rUS-i3-eTH"/>
                                                 </constraints>
                                                 <state key="normal" title="Join Meeting"/>
+                                                <connections>
+                                                    <action selector="joinMeetingButtonClicked:" destination="hv1-QO-Hvr" eventType="touchUpInside" id="HHf-h7-749"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -164,6 +167,11 @@
                             <constraint firstAttribute="trailing" secondItem="GuZ-FJ-YgS" secondAttribute="trailing" id="m8I-xR-00x"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ipAddressTextField" destination="HcI-cW-6zH" id="J9E-nr-yBG"/>
+                        <outlet property="participantNameTextField" destination="aDC-0F-rrt" id="hTN-R6-x3J"/>
+                        <outlet property="scrollView" destination="GuZ-FJ-YgS" id="3kj-mD-OaI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-cE-HiS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

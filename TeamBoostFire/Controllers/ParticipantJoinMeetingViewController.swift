@@ -1,5 +1,5 @@
 //
-//  HostSetupMeetingViewController.swift
+//  ParticipantJoinMeetingViewController.swift
 //  TeamBoostFire
 //
 //  Created by Amin Rehman on 17.04.19.
@@ -8,16 +8,13 @@
 
 import UIKit
 
-class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var agendaQuestionTextField: UITextField!
-    @IBOutlet weak var meetingTimeTextField: UITextField!
-    @IBOutlet weak var maxTalkingTimeTextField: UITextField!
-    @IBOutlet weak var moderationModeTextField: UITextField!
+class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var ipAddressTextField: UITextField!
+    @IBOutlet weak var participantNameTextField: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         let center = NotificationCenter.default
         center.addObserver(self, selector:
             #selector(handleKeyboardAction),
@@ -31,22 +28,33 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+
+        super.viewDidLoad()
     }
 
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        guard let agendaQuestion = agendaQuestionTextField?.text else {
-            return
-        }
-        guard let meetingTime = meetingTimeTextField?.text else {
-            return
-        }
-        guard let maxTalkingTime = maxTalkingTimeTextField?.text else {
+    override func viewDidDisappear(_ animated: Bool) {
+    }
+
+    @IBAction func joinMeetingButtonClicked(_ sender: Any) {
+        let hostIPAddressText = ipAddressTextField.text
+        if hostIPAddressText?.count == 0 {
+            let alertController = UIAlertController(title: "Incomplete data",
+                                                    message: "Please enter IP Address of the Host",
+                                                    preferredStyle: .alert)
+
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
 
-        if agendaQuestion.count == 0 || meetingTime.count == 0 || maxTalkingTime.count == 0 {
+        guard let participantNameText = participantNameTextField.text else {
+            return
+        }
+
+        if participantNameText.count == 0 {
             let alertController = UIAlertController(title: "Incomplete data",
-                                                    message: "Please enter all required fields",
+                                                    message: "Please enter your name to join the meeting",
                                                     preferredStyle: .alert)
 
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -56,14 +64,12 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
         }
 
         /*
-        let meetingParams = MeetingsParams(agenda: agendaQuestion,
-                                           meetingTime: Int(meetingTime)!,
-                                           maxTalkTime: Int(maxTalkingTime)!,
-                                           moderationMode: nil)
-        HostWaitingForParticipantsUseCase.perform(at: self, meetingParams: meetingParams)
+        ParticipantJoinMeetingUseCase.perform(at: self,
+                                              participantName: participantNameText,
+                                              hostIPAddress: hostIPAddressText!)
          */
-
     }
+
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -85,7 +91,5 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
         }
     }
-
-
 
 }
