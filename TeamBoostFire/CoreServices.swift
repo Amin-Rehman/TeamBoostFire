@@ -53,6 +53,15 @@ extension CoreServices {
         meetingParamsAgendaReference?.setValue(params.agenda)
     }
 
+    public func subscribeToParticipantChangesList() {
+        participantsReference?.observe(DataEventType.value, with: { snapshot in
+            if snapshot.hasChildren() {
+                let allObjects = snapshot.children.allObjects
+                print(allObjects)
+            }
+        })
+    }
+
 }
 
 // MARK: - Participant

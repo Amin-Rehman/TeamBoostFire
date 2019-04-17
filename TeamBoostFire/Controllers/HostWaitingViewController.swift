@@ -28,6 +28,8 @@ class HostWaitingViewController: UIViewController {
         let meetingIdentifier = CoreServices.shared.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
 
+        CoreServices.shared.subscribeToParticipantChangesList()
+
     }
 
     @IBAction func startMeetingClicked(_ sender: Any) {
