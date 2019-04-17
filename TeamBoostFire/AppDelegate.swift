@@ -14,10 +14,10 @@ import FirebaseDatabase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    public var coreServices: CoreServices?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
-        let ref = Database.database().reference()
-        ref.child("MeetingURLCode").removeValue()
+        coreServices = CoreServices.shared
         return true
     }
 
