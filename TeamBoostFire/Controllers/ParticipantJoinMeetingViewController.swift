@@ -66,6 +66,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let participantIdentifier = UUID().uuidString
         let participant = Participant(id: participantIdentifier, name: participantNameText)
         CoreServices.shared.setupMeetingAsParticipant(participant: participant, meetingCode: meetingCodeText!)
+        present(ParticipantLobbyViewController(), animated: true, completion: nil)
 
     }
 
