@@ -31,7 +31,8 @@ class ParticipantLobbyViewController: UIViewController {
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .started {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: false, completion: nil)
+            presentingViewController?.present(ParticipantMainViewController(), animated: true, completion: nil)
         }
     }
 
