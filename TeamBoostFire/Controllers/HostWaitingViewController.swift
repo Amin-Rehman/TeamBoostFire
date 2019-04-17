@@ -50,7 +50,8 @@ class HostWaitingViewController: UIViewController {
 
     @IBAction func startMeetingClicked(_ sender: Any) {
         CoreServices.shared.startMeeting()
-        let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController", bundle: nil)
+        let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
+                                                                  bundle: nil)
         self.navigationController?.pushViewController(hostMeetingViewController, animated: true)
     }
 }
