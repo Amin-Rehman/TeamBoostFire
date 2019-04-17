@@ -15,6 +15,7 @@ class CoreServices {
     private var databaseRef: DatabaseReference?
 
     private var meetingReference: DatabaseReference?
+    private var meetingStateReference: DatabaseReference?
     private var activeSpeakerReference: DatabaseReference?
     private var participantsReference: DatabaseReference?
     private var meetingParamsReference: DatabaseReference?
@@ -38,8 +39,13 @@ class CoreServices {
 extension CoreServices {
     public func setupMeetingAsHost(with params: MeetingsParams) {
         meetingIdentifier = String.makeSixDigitUUID()
-        print("ALOG: About to setup meeting with identifier: \(meetingIdentifier!)")
         meetingReference = databaseRef?.child(meetingIdentifier!)
+
+        meetingStateReference = meetingReference?.child("meeting_state")
+        meetingReference?.setValue("suspended")
+
+        activeSpeakerReference = meetingReference?.child("active_speaker")
+        activeSpeakerReference?.setValue("")
 
         activeSpeakerReference = meetingReference?.child("active_speaker")
         activeSpeakerReference?.setValue("")
@@ -54,6 +60,14 @@ extension CoreServices {
         meetingParamsAgendaReference?.setValue(params.agenda)
 
         subscribeToParticipantChangesList()
+    }
+
+    public func startMeeting() {
+        meetingReference?.setValue("started")
+    }
+
+    public func endMeeting() {
+        meetingReference?.setValue("ended")
     }
 
     private func subscribeToParticipantChangesList() {
