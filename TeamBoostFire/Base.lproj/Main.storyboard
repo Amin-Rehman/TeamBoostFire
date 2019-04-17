@@ -105,7 +105,45 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fct-yF-gmn" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-cW-6zH">
+                                                <rect key="frame" x="62.5" y="50" width="250" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="CuO-Ml-TkN"/>
+                                                    <constraint firstAttribute="height" constant="30" id="J09-Mx-8tb"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDC-0F-rrt">
+                                                <rect key="frame" x="62.5" y="120" width="250" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="qjA-Hh-NVV"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UX-y1-rcV">
+                                                <rect key="frame" x="142.5" y="210" width="90" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="90" id="WxE-Wy-2iJ"/>
+                                                    <constraint firstAttribute="height" constant="30" id="rUS-i3-eTH"/>
+                                                </constraints>
+                                                <state key="normal" title="Join Meeting"/>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="9UX-y1-rcV" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="3Vh-CP-EwN"/>
+                                            <constraint firstItem="HcI-cW-6zH" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="GZN-qr-Yvp"/>
+                                            <constraint firstItem="aDC-0F-rrt" firstAttribute="trailing" secondItem="HcI-cW-6zH" secondAttribute="trailing" id="NTj-rI-fZ8"/>
+                                            <constraint firstItem="9UX-y1-rcV" firstAttribute="top" secondItem="aDC-0F-rrt" secondAttribute="bottom" constant="60" id="ULI-uE-UDD"/>
+                                            <constraint firstItem="aDC-0F-rrt" firstAttribute="leading" secondItem="HcI-cW-6zH" secondAttribute="leading" id="w36-ag-nIV"/>
+                                            <constraint firstItem="aDC-0F-rrt" firstAttribute="top" secondItem="HcI-cW-6zH" secondAttribute="bottom" constant="40" id="y6d-nz-mus"/>
+                                            <constraint firstItem="HcI-cW-6zH" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="50" id="zxC-hP-BcS"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
