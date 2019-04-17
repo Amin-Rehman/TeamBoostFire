@@ -27,8 +27,24 @@ class HostWaitingViewController: UIViewController {
         activityIndicatorView.startAnimating()
         let meetingIdentifier = CoreServices.shared.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
+        let notificationName = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
 
-        CoreServices.shared.subscribeToParticipantChangesList()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(participantsListChanged(notification:)),
+        name: notificationName, object: nil)
+
+    }
+
+    @objc private func participantsListChanged(notification: NSNotification){
+        let objects = notification.object as! [Participant]
+        var participantNames = [String]()
+
+        for object in objects {
+            participantNames.append(object.name)
+        }
+
+        hostWaitingTableViewController.tableViewDataSource = participantNames
+        hostWaitingTableViewController.tableView.reloadData()
 
     }
 

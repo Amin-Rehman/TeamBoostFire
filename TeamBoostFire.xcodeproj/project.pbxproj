@@ -20,6 +20,7 @@
 		EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */; };
 		EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */; };
 		EB1D48C322675827001A754D /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C222675827001A754D /* Participant.swift */; };
+		EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C4226762A5001A754D /* TeamBoostNotifications.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
 		EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67322668D2E0047CD75 /* Main.storyboard */; };
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostWaitingTableViewController.swift; sourceTree = "<group>"; };
 		EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostWaitingTableViewController.xib; sourceTree = "<group>"; };
 		EB1D48C222675827001A754D /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		EB1D48C4226762A5001A754D /* TeamBoostNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostNotifications.swift; sourceTree = "<group>"; };
 		EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamBoostFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBFCA67422668D2E0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				EB1D48A82267260F001A754D /* Controllers */,
 				EB1D48AA22672624001A754D /* Model */,
 				EB1D48A92267261E001A754D /* UseCases */,
+				EB1D48C4226762A5001A754D /* TeamBoostNotifications.swift */,
 			);
 			path = TeamBoostFire;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			files = (
 				EB1D48BC226740BA001A754D /* TeamBoostTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
+				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
 				EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */,
 				EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */,
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
