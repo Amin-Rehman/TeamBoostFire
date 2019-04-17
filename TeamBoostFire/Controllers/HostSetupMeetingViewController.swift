@@ -55,13 +55,11 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        /*
         let meetingParams = MeetingsParams(agenda: agendaQuestion,
                                            meetingTime: Int(meetingTime)!,
                                            maxTalkTime: Int(maxTalkingTime)!,
                                            moderationMode: nil)
-        HostWaitingForParticipantsUseCase.perform(at: self, meetingParams: meetingParams)
-         */
+        HostSetupMeetingUseCase.perform(at: self, meetingParams: meetingParams)
 
     }
 
