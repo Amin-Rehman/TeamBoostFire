@@ -96,6 +96,7 @@ extension CoreServices {
     public func setupMeetingAsParticipant(participant: Participant, meetingCode: String) {
         meetingIdentifier = meetingCode
         meetingReference = databaseRef?.child(meetingIdentifier!)
+        meetingStateReference = meetingReference?.child("meeting_state")
         activeSpeakerReference = meetingReference?.child("active_speaker")
         participantsReference = meetingReference?.child("participants")
         meetingParamsReference = meetingReference?.child("meeting_params")
@@ -103,6 +104,19 @@ extension CoreServices {
         meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
+
+        observeMeetingStateDidChange()
+    }
+
+    private func observeMeetingStateDidChange() {
+        meetingStateReference?.observe(DataEventType.value, with: { snapshot in
+            let object = snapshot.children.allObjects as! [DataSnapshot]
+
+            let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: nil)
+
+        })
     }
 }
 
