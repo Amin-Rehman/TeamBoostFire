@@ -11,9 +11,19 @@ import UIKit
 class HostWaitingViewController: UIViewController {
     @IBOutlet weak var meetingCodeLabel: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var childContainerView: UIView!
+
+    var hostWaitingTableViewController = HostWaitingTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        hostWaitingTableViewController.view.frame = childContainerView.bounds;
+        hostWaitingTableViewController.willMove(toParent: self)
+        childContainerView.addSubview(hostWaitingTableViewController.view)
+        self.addChild(hostWaitingTableViewController)
+        hostWaitingTableViewController.didMove(toParent: self)
+
         activityIndicatorView.startAnimating()
         let meetingIdentifier = CoreServices.shared.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier

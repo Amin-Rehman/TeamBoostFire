@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HostWaitingViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicatorView" destination="oYS-NF-xqI" id="Bii-x4-nA2"/>
+                <outlet property="childContainerView" destination="iFD-jr-vAI" id="sGn-j4-f3W"/>
                 <outlet property="meetingCodeLabel" destination="HOT-cW-Mx4" id="7d6-HC-IXB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
