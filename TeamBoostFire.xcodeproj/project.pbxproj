@@ -102,18 +102,8 @@
 		EB1D48A82267260F001A754D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */,
-				EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */,
-				EB1D48B52267395E001A754D /* HostWaitingViewController.swift */,
-				EB1D48B62267395E001A754D /* HostWaitingViewController.xib */,
-				EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */,
-				EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */,
-				EB1D48C82267CB07001A754D /* HostMeetingViewController.swift */,
-				EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */,
-				EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */,
-				EB1D48CD2267D303001A754D /* ParticipantLobbyViewController.xib */,
-				EB1D48D22267DC66001A754D /* ParticipantMainViewController.swift */,
-				EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */,
+				EB1D48D62268A271001A754D /* Participant */,
+				EB1D48D72268A28C001A754D /* Host */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +134,32 @@
 				EB1D48BB226740BA001A754D /* TeamBoostTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EB1D48D62268A271001A754D /* Participant */ = {
+			isa = PBXGroup;
+			children = (
+				EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */,
+				EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */,
+				EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */,
+				EB1D48CD2267D303001A754D /* ParticipantLobbyViewController.xib */,
+				EB1D48D22267DC66001A754D /* ParticipantMainViewController.swift */,
+			);
+			path = Participant;
+			sourceTree = "<group>";
+		};
+		EB1D48D72268A28C001A754D /* Host */ = {
+			isa = PBXGroup;
+			children = (
+				EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */,
+				EB1D48B52267395E001A754D /* HostWaitingViewController.swift */,
+				EB1D48B62267395E001A754D /* HostWaitingViewController.xib */,
+				EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */,
+				EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */,
+				EB1D48C82267CB07001A754D /* HostMeetingViewController.swift */,
+				EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */,
+			);
+			path = Host;
 			sourceTree = "<group>";
 		};
 		EBFCA66322668D2E0047CD75 = {
