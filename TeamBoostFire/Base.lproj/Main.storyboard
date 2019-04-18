@@ -118,7 +118,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-cW-6zH">
-                                                <rect key="frame" x="62.5" y="50" width="250" height="30"/>
+                                                <rect key="frame" x="62.5" y="100" width="250" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="CuO-Ml-TkN"/>
                                                     <constraint firstAttribute="height" constant="30" id="J09-Mx-8tb"/>
@@ -128,7 +128,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDC-0F-rrt">
-                                                <rect key="frame" x="62.5" y="120" width="250" height="30"/>
+                                                <rect key="frame" x="62.5" y="170" width="250" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="qjA-Hh-NVV"/>
                                                 </constraints>
@@ -137,7 +137,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UX-y1-rcV">
-                                                <rect key="frame" x="142.5" y="210" width="90" height="30"/>
+                                                <rect key="frame" x="142.5" y="260" width="90" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="WxE-Wy-2iJ"/>
                                                     <constraint firstAttribute="height" constant="30" id="rUS-i3-eTH"/>
@@ -147,16 +147,28 @@
                                                     <action selector="joinMeetingButtonClicked:" destination="hv1-QO-Hvr" eventType="touchUpInside" id="HHf-h7-749"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which meeting would you like to join?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doI-IY-xxp">
+                                                <rect key="frame" x="16" y="35" width="343" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="egz-kb-Cez"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="9UX-y1-rcV" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="3Vh-CP-EwN"/>
                                             <constraint firstItem="HcI-cW-6zH" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="GZN-qr-Yvp"/>
                                             <constraint firstItem="aDC-0F-rrt" firstAttribute="trailing" secondItem="HcI-cW-6zH" secondAttribute="trailing" id="NTj-rI-fZ8"/>
+                                            <constraint firstItem="doI-IY-xxp" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="16" id="Rbl-y6-MVg"/>
                                             <constraint firstItem="9UX-y1-rcV" firstAttribute="top" secondItem="aDC-0F-rrt" secondAttribute="bottom" constant="60" id="ULI-uE-UDD"/>
+                                            <constraint firstItem="doI-IY-xxp" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="35" id="hG5-Of-JkE"/>
                                             <constraint firstItem="aDC-0F-rrt" firstAttribute="leading" secondItem="HcI-cW-6zH" secondAttribute="leading" id="w36-ag-nIV"/>
                                             <constraint firstItem="aDC-0F-rrt" firstAttribute="top" secondItem="HcI-cW-6zH" secondAttribute="bottom" constant="40" id="y6d-nz-mus"/>
-                                            <constraint firstItem="HcI-cW-6zH" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="50" id="zxC-hP-BcS"/>
+                                            <constraint firstAttribute="trailing" secondItem="doI-IY-xxp" secondAttribute="trailing" constant="16" id="yp1-E7-DW5"/>
+                                            <constraint firstItem="HcI-cW-6zH" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="100" id="zxC-hP-BcS"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -203,7 +215,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Agenda Question" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a28-yJ-j15">
-                                                <rect key="frame" x="87.5" y="50" width="200" height="30"/>
+                                                <rect key="frame" x="87.5" y="100" width="200" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="7nw-LC-rYA"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="wMW-Cb-Dx0"/>
@@ -213,7 +225,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meeting time (minutes)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-fM-NrG">
-                                                <rect key="frame" x="82" y="125" width="205.5" height="30"/>
+                                                <rect key="frame" x="82" y="175" width="205.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1Zv-pG-psV"/>
                                                 </constraints>
@@ -222,7 +234,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max talking time (seconds)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDI-Ec-AQO">
-                                                <rect key="frame" x="82" y="200" width="205.5" height="30"/>
+                                                <rect key="frame" x="82" y="250" width="205.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="oHu-4W-cLq"/>
                                                 </constraints>
@@ -231,7 +243,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Moderation Mode (Disabled)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g6w-J2-E10">
-                                                <rect key="frame" x="82" y="275" width="205.5" height="30"/>
+                                                <rect key="frame" x="82" y="325" width="205.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="S3L-ey-bB0"/>
                                                 </constraints>
@@ -240,7 +252,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-cV-94m">
-                                                <rect key="frame" x="171.5" y="385" width="32" height="30"/>
+                                                <rect key="frame" x="171.5" y="435" width="32" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="X00-Nh-Pkl"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="azg-Mh-Cze"/>
@@ -259,7 +271,7 @@
                                             <constraint firstItem="g6w-J2-E10" firstAttribute="leading" secondItem="aDI-Ec-AQO" secondAttribute="leading" id="8O3-KB-nTP"/>
                                             <constraint firstItem="g6w-J2-E10" firstAttribute="top" secondItem="aDI-Ec-AQO" secondAttribute="bottom" constant="45" id="8wg-Iq-xhD"/>
                                             <constraint firstItem="kcc-fM-NrG" firstAttribute="trailing" secondItem="a28-yJ-j15" secondAttribute="trailing" id="Ei7-hh-HSJ"/>
-                                            <constraint firstItem="a28-yJ-j15" firstAttribute="top" secondItem="kyU-bV-xmB" secondAttribute="top" constant="50" id="Smt-Cz-MXz"/>
+                                            <constraint firstItem="a28-yJ-j15" firstAttribute="top" secondItem="kyU-bV-xmB" secondAttribute="top" constant="100" id="Smt-Cz-MXz"/>
                                             <constraint firstItem="a28-yJ-j15" firstAttribute="centerX" secondItem="kyU-bV-xmB" secondAttribute="centerX" id="buI-7V-2Cv"/>
                                             <constraint firstItem="aDI-Ec-AQO" firstAttribute="top" secondItem="kcc-fM-NrG" secondAttribute="bottom" constant="45" id="fEG-kd-6Xa"/>
                                             <constraint firstItem="Kcv-cV-94m" firstAttribute="top" secondItem="g6w-J2-E10" secondAttribute="bottom" constant="80" id="iaw-Lx-8XE"/>
@@ -267,8 +279,19 @@
                                             <constraint firstItem="g6w-J2-E10" firstAttribute="trailing" secondItem="aDI-Ec-AQO" secondAttribute="trailing" id="v4k-rO-U8n"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter some details about your meeting ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucp-D0-NZp">
+                                        <rect key="frame" x="31" y="30" width="313" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="csh-3Z-cJ8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ucp-D0-NZp" firstAttribute="top" secondItem="J30-bB-V1G" secondAttribute="top" constant="30" id="BT5-F4-fun"/>
+                                    <constraint firstItem="ucp-D0-NZp" firstAttribute="centerX" secondItem="J30-bB-V1G" secondAttribute="centerX" id="DVC-Wz-VED"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="top" secondItem="J30-bB-V1G" secondAttribute="top" id="LA2-dy-pmN"/>
                                     <constraint firstAttribute="trailing" secondItem="kyU-bV-xmB" secondAttribute="trailing" id="S8e-62-bht"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="centerY" secondItem="J30-bB-V1G" secondAttribute="centerY" id="d1Z-sX-O0U"/>
@@ -301,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXn-py-aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="151"/>
+            <point key="canvasLocation" x="1720.8" y="150.67466266866569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h7v-pi-u8B">
