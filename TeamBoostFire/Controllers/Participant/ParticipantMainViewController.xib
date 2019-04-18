@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParticipantMainViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
+                <outlet property="fooLabel" destination="rZ8-ZB-vNW" id="f2d-eA-F8y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

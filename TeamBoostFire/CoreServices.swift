@@ -129,6 +129,7 @@ extension CoreServices {
                                                                "id":participant.id])
 
         observeMeetingStateDidChange()
+        observeActiveSpeakerDidChange()
     }
 
     private func observeMeetingStateDidChange() {
