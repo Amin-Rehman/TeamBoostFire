@@ -13,7 +13,6 @@ import FirebaseDatabase
 class CoreServices {
     static let shared = CoreServices()
     private var databaseRef: DatabaseReference?
-
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
     private var activeSpeakerReference: DatabaseReference?
@@ -36,6 +35,14 @@ class CoreServices {
         self.databaseRef = Database.database().reference()
     }
 
+    private func observeActiveSpeakerDidChange() {
+        activeSpeakerReference?.observe(DataEventType.value, with: { snapshot in
+            let activeSpeakerId = snapshot.value as! String
+            let name = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: activeSpeakerId)
+        })
+    }
 
 }
 
@@ -100,17 +107,6 @@ extension CoreServices {
 
         })
     }
-
-    private func observeActiveSpeakerDidChange() {
-        activeSpeakerReference?.observe(DataEventType.value, with: { snapshot in
-            let activeSpeakerId = snapshot.value as! String
-            let name = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: activeSpeakerId)
-        })
-    }
-
-
 }
 
 // MARK: - Participant
@@ -142,6 +138,8 @@ extension CoreServices {
     }
 }
 
+
+// MARK: - String extension
 extension String {
     fileprivate static func makeSixDigitUUID() -> String {
         let shortUUID = UUID().uuidString.lowercased()
