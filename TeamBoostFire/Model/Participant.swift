@@ -11,4 +11,5 @@ import Foundation
 struct Participant {
     let id: String
     let name: String
+    let isActiveSpeaker: Bool
 }

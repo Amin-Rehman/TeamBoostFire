@@ -9,10 +9,16 @@
 import UIKit
 
 class HostMeetingViewController: UIViewController {
+    @IBOutlet weak var childContainerView: UIView!
+
+    var hostInMeetingTableViewController = HostInMeetingTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        hostInMeetingTableViewController.view.frame = childContainerView.bounds;
+        hostInMeetingTableViewController.willMove(toParent: self)
+        childContainerView.addSubview(hostInMeetingTableViewController.view)
+        self.addChild(hostInMeetingTableViewController)
+        hostInMeetingTableViewController.didMove(toParent: self)
     }
-
 }

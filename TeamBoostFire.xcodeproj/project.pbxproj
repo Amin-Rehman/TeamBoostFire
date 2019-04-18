@@ -31,6 +31,8 @@
 		EB1D48D52267DC66001A754D /* ParticipantMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */; };
 		EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FAB912268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift */; };
 		EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1FAB922268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib */; };
+		EB1FAB972268AF300037A6A5 /* HostInMeetingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FAB952268AF300037A6A5 /* HostInMeetingTableViewController.swift */; };
+		EB1FAB982268AF300037A6A5 /* HostInMeetingTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
 		EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67322668D2E0047CD75 /* Main.storyboard */; };
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 		EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantMainViewController.xib; sourceTree = "<group>"; };
 		EB1FAB912268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInMeetingTableViewCell.swift; sourceTree = "<group>"; };
 		EB1FAB922268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostInMeetingTableViewCell.xib; sourceTree = "<group>"; };
+		EB1FAB952268AF300037A6A5 /* HostInMeetingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInMeetingTableViewController.swift; sourceTree = "<group>"; };
+		EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostInMeetingTableViewController.xib; sourceTree = "<group>"; };
 		EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamBoostFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBFCA67422668D2E0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */,
 				EB1D48C82267CB07001A754D /* HostMeetingViewController.swift */,
 				EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */,
+				EB1FAB952268AF300037A6A5 /* HostInMeetingTableViewController.swift */,
+				EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */,
 			);
 			path = Host;
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 			files = (
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,
+				EB1FAB982268AF300037A6A5 /* HostInMeetingTableViewController.xib in Resources */,
 				EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */,
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
 				EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */,
@@ -351,6 +358,7 @@
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,
 				EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */,
+				EB1FAB972268AF300037A6A5 /* HostInMeetingTableViewController.swift in Sources */,
 				EB1D48B222672E45001A754D /* MeetingParams.swift in Sources */,
 				EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */,
 				EB1D48B0226729FD001A754D /* CoreServices.swift in Sources */,

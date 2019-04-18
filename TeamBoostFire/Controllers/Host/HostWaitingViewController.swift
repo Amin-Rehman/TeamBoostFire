@@ -43,6 +43,7 @@ class HostWaitingViewController: UIViewController {
             participantNames.append(object.name)
         }
 
+        CoreServices.shared.allParticipants = objects
         hostWaitingTableViewController.tableViewDataSource = participantNames
         hostWaitingTableViewController.tableView.reloadData()
 

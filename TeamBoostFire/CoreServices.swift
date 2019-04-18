@@ -23,6 +23,7 @@ class CoreServices {
     private var meetingParamsTimeReference: DatabaseReference?
     private var meetingParamsAgendaReference: DatabaseReference?
 
+    public var allParticipants: [Participant]?
 
     private(set) public var meetingIdentifier: String?
     private(set) public var selfIdentifier: String?
@@ -79,7 +80,7 @@ extension CoreServices {
                 let dict = object.value as! [String: String]
                 let participantIdentifier = dict["id"]
                 let participantName = dict["name"]
-                let participant = Participant(id: participantIdentifier!, name: participantName!)
+                let participant = Participant(id: participantIdentifier!, name: participantName!, isActiveSpeaker: false)
                 allParticipants.append(participant)
             }
 
