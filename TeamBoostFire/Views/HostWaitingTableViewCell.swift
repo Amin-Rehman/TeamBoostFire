@@ -1,5 +1,5 @@
 //
-//  TeamBoostTableViewCell.swift
+//  HostWaitingTableViewCell.swift
 //  TeamBoostFire
 //
 //  Created by Amin Rehman on 17.04.19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamBoostTableViewCell: UITableViewCell {
+class HostWaitingTableViewCell: UITableViewCell {
     @IBOutlet weak var participantName: UILabel!
 
     override func awakeFromNib() {

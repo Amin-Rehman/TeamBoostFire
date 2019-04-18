@@ -15,8 +15,8 @@
 		EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48B322672E82001A754D /* HostSetupMeetingUseCase.swift */; };
 		EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48B52267395E001A754D /* HostWaitingViewController.swift */; };
 		EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48B62267395E001A754D /* HostWaitingViewController.xib */; };
-		EB1D48BC226740BA001A754D /* TeamBoostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48BA226740BA001A754D /* TeamBoostTableViewCell.swift */; };
-		EB1D48BD226740BA001A754D /* TeamBoostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48BB226740BA001A754D /* TeamBoostTableViewCell.xib */; };
+		EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48BA226740BA001A754D /* HostWaitingTableViewCell.swift */; };
+		EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48BB226740BA001A754D /* HostWaitingTableViewCell.xib */; };
 		EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */; };
 		EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */; };
 		EB1D48C322675827001A754D /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C222675827001A754D /* Participant.swift */; };
@@ -46,8 +46,8 @@
 		EB1D48B322672E82001A754D /* HostSetupMeetingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingUseCase.swift; sourceTree = "<group>"; };
 		EB1D48B52267395E001A754D /* HostWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostWaitingViewController.swift; sourceTree = "<group>"; };
 		EB1D48B62267395E001A754D /* HostWaitingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostWaitingViewController.xib; sourceTree = "<group>"; };
-		EB1D48BA226740BA001A754D /* TeamBoostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostTableViewCell.swift; sourceTree = "<group>"; };
-		EB1D48BB226740BA001A754D /* TeamBoostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamBoostTableViewCell.xib; sourceTree = "<group>"; };
+		EB1D48BA226740BA001A754D /* HostWaitingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostWaitingTableViewCell.swift; sourceTree = "<group>"; };
+		EB1D48BB226740BA001A754D /* HostWaitingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostWaitingTableViewCell.xib; sourceTree = "<group>"; };
 		EB1D48BE22675248001A754D /* HostWaitingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostWaitingTableViewController.swift; sourceTree = "<group>"; };
 		EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostWaitingTableViewController.xib; sourceTree = "<group>"; };
 		EB1D48C222675827001A754D /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 		EB1D48B922674074001A754D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EB1D48BA226740BA001A754D /* TeamBoostTableViewCell.swift */,
-				EB1D48BB226740BA001A754D /* TeamBoostTableViewCell.xib */,
+				EB1D48BA226740BA001A754D /* HostWaitingTableViewCell.swift */,
+				EB1D48BB226740BA001A754D /* HostWaitingTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,
 				EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */,
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
-				EB1D48BD226740BA001A754D /* TeamBoostTableViewCell.xib in Resources */,
+				EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */,
 				EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */,
 				EB1D48D52267DC66001A754D /* ParticipantMainViewController.xib in Resources */,
 				EB1D48CF2267D303001A754D /* ParticipantLobbyViewController.xib in Resources */,
@@ -330,7 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB1D48BC226740BA001A754D /* TeamBoostTableViewCell.swift in Sources */,
+				EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
 				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
 				EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */,

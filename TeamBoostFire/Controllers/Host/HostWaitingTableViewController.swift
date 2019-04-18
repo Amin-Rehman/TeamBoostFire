@@ -23,8 +23,8 @@ class HostWaitingTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let teamBoostTableViewCell = UINib(nibName: "TeamBoostTableViewCell", bundle: nil)
-        self.tableView.register(teamBoostTableViewCell, forCellReuseIdentifier: "TeamBoostTableViewCell")
+        let hostWaitingTableViewCell = UINib(nibName: "HostWaitingTableViewCell", bundle: nil)
+        self.tableView.register(hostWaitingTableViewCell, forCellReuseIdentifier: "HostWaitingTableViewCell")
     }
 
     // MARK: - Table view data source
@@ -40,7 +40,7 @@ class HostWaitingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamBoostTableViewCell", for: indexPath) as! TeamBoostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HostWaitingTableViewCell", for: indexPath) as! HostWaitingTableViewCell
         cell.participantName.text = self.tableViewDataSource[indexPath.row]
         return cell
     }
