@@ -61,7 +61,8 @@ extension CoreServices {
         meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
         meetingParamsAgendaReference?.setValue(params.agenda)
 
-        subscribeToParticipantChangesList()
+        observeParticipantListChanges()
+        observeActiveSpeakerDidChange()
     }
 
     public func startMeeting() {
@@ -72,7 +73,7 @@ extension CoreServices {
         meetingStateReference?.setValue("ended")
     }
 
-    private func subscribeToParticipantChangesList() {
+    private func observeParticipantListChanges() {
         participantsReference?.observe(DataEventType.value, with: { snapshot in
             let allObjects = snapshot.children.allObjects as! [DataSnapshot]
             var allParticipants =  [Participant]()
@@ -90,6 +91,16 @@ extension CoreServices {
 
         })
     }
+
+    private func observeActiveSpeakerDidChange() {
+        activeSpeakerReference?.observe(DataEventType.value, with: { snapshot in
+            let activeSpeakerId = snapshot.value as! String
+            let name = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: activeSpeakerId)
+        })
+    }
+
 
 }
 
@@ -113,7 +124,6 @@ extension CoreServices {
 
     private func observeMeetingStateDidChange() {
         meetingStateReference?.observe(DataEventType.value, with: { snapshot in
-            print(snapshot.key)
             let meetingState = MeetingState(rawValue: snapshot.value as! String)
             let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
             NotificationCenter.default.post(name: name,

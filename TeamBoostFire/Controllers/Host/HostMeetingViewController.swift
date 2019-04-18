@@ -20,5 +20,28 @@ class HostMeetingViewController: UIViewController {
         childContainerView.addSubview(hostInMeetingTableViewController.view)
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
+
+        let notificationName = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(activeSpeakerDidChange(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func activeSpeakerDidChange(notification: NSNotification) {
+        let activeSpeakerIdentifier = notification.object as! String
+
+        let allParticipants = CoreServices.shared.allParticipants!
+        var updatedAllParticipants = [Participant]()
+        for participant in allParticipants {
+            let updatedParticipant = Participant(id: participant.id,
+                                                 name: participant.name,
+                                                 isActiveSpeaker: participant.id == activeSpeakerIdentifier)
+            updatedAllParticipants.append(updatedParticipant)
+        }
+
+        CoreServices.shared.allParticipants = updatedAllParticipants
+        hostInMeetingTableViewController.tableViewDataSource = updatedAllParticipants
+        hostInMeetingTableViewController.tableView.reloadData()
+
     }
 }

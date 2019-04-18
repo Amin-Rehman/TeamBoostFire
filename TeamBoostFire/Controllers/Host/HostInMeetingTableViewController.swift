@@ -16,12 +16,15 @@ class HostInMeetingTableViewController: UITableViewController {
         super.init(style: .plain)
     }
 
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let hostInMeetingTableViewCell = UINib(nibName: "HostInMeetingTableViewCell", bundle: nil)
+        self.tableView.register(hostInMeetingTableViewCell, forCellReuseIdentifier: "HostInMeetingTableViewCell")
     }
 
     // MARK: - Table view data source
@@ -37,7 +40,15 @@ class HostInMeetingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostInMeetingTableViewCell", for: indexPath) as! HostInMeetingTableViewCell
         cell.participantNameLabel.text = self.tableViewDataSource[indexPath.row].name
-        cell.redCircleImage.isHidden = !self.tableViewDataSource[indexPath.row].isActiveSpeaker
+        let shouldHideRedCircle = !self.tableViewDataSource[indexPath.row].isActiveSpeaker
+        cell.redCircleImage.isHidden = shouldHideRedCircle
+
+        if !shouldHideRedCircle {
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+                cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            }, completion: nil)
+        }
+
         cell.orderLabel.isHidden = true
         return cell
     }
