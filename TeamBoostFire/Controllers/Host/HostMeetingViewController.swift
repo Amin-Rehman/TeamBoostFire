@@ -12,6 +12,10 @@ class HostMeetingViewController: UIViewController {
     @IBOutlet weak var childContainerView: UIView!
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
+    var timer: Timer?
+
+    var allIdentifiers = [String]()
+    var currentSpeakerIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,37 @@ class HostMeetingViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(activeSpeakerDidChange(notification:)),
                                                name: notificationName, object: nil)
+
+        let meetingParams = CoreServices.shared.meetingParams
+        let allParticipants = CoreServices.shared.allParticipants
+
+        for participant in allParticipants! {
+            allIdentifiers.append(participant.id)
+        }
+
+        changeActiveParticipant()
+
+        timer = Timer.scheduledTimer(timeInterval: Double(meetingParams!.maxTalkTime), target: self,
+                                     selector: #selector(changeActiveParticipant),
+                                     userInfo: nil, repeats: true)
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer?.invalidate()
+    }
+
+    @objc func changeActiveParticipant() {
+        if currentSpeakerIndex == allIdentifiers.count - 1 {
+            currentSpeakerIndex = 0
+        } else {
+            currentSpeakerIndex = currentSpeakerIndex + 1
+        }
+
+        let activeSpeakerIdentifier = allIdentifiers[currentSpeakerIndex]
+        CoreServices.shared.setActiveSpeaker(identifier: activeSpeakerIdentifier)
+
     }
 
     @objc private func activeSpeakerDidChange(notification: NSNotification) {

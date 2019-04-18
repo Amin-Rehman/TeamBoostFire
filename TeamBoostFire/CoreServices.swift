@@ -21,11 +21,13 @@ class CoreServices {
     private var meetingParamsReference: DatabaseReference?
 
     private var meetingParamsTimeReference: DatabaseReference?
+    private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private var meetingParamsAgendaReference: DatabaseReference?
 
     public var allParticipants: [Participant]?
 
     private(set) public var meetingIdentifier: String?
+    private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfIdentifier: String?
 
     private init() {
@@ -56,11 +58,14 @@ extension CoreServices {
         meetingParamsReference = meetingReference?.child("meeting_params")
         meetingParamsReference?.setValue("")
 
-        meetingParamsTimeReference = meetingParamsReference?.child("time")
+        meetingParamsTimeReference = meetingParamsReference?.child("meeting_time")
         meetingParamsTimeReference?.setValue(params.meetingTime)
         meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
         meetingParamsAgendaReference?.setValue(params.agenda)
+        meetingParamsMaxTalkingTimeReference = meetingParamsReference?.child("max_talking_time")
+        meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
 
+        meetingParams = params
         observeParticipantListChanges()
         observeActiveSpeakerDidChange()
     }
@@ -71,6 +76,10 @@ extension CoreServices {
 
     public func endMeeting() {
         meetingStateReference?.setValue("ended")
+    }
+
+    public func setActiveSpeaker(identifier: String) {
+        activeSpeakerReference?.setValue(identifier)
     }
 
     private func observeParticipantListChanges() {
@@ -114,7 +123,7 @@ extension CoreServices {
         activeSpeakerReference = meetingReference?.child("active_speaker")
         participantsReference = meetingReference?.child("participants")
         meetingParamsReference = meetingReference?.child("meeting_params")
-        meetingParamsTimeReference = meetingParamsReference?.child("time")
+        meetingParamsTimeReference = meetingParamsReference?.child("meeting_time")
         meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
