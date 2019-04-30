@@ -6,3 +6,9 @@ target 'TeamBoostFire' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
 end
+
+target 'TeamBoostFireTests' do
+  use_frameworks!
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+end

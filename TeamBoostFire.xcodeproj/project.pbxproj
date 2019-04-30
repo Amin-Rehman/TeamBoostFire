@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		271A8C1FDC01D84560074987 /* Pods_TeamBoostFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6636C804E2430BA83BAA878 /* Pods_TeamBoostFire.framework */; };
+		DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
 		EB1D48B0226729FD001A754D /* CoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* CoreServices.swift */; };
@@ -35,6 +36,7 @@
 		EB1FAB982268AF300037A6A5 /* HostInMeetingTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */; };
 		EB1FAB9A22777B3C0037A6A5 /* TableKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FAB9922777B3C0037A6A5 /* TableKeys.swift */; };
 		EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF347802278C20B008A6154 /* ArrayRotation.swift */; };
+		EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
 		EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67322668D2E0047CD75 /* Main.storyboard */; };
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
@@ -42,9 +44,22 @@
 		EBFCA68222668E050047CD75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA68122668E050047CD75 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EBF347A02278E69E008A6154 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBFCA66422668D2E0047CD75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EBFCA66B22668D2E0047CD75;
+			remoteInfo = TeamBoostFire;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		3579CA3806A3CB8EF0A0814E /* Pods-TeamBoostFireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.release.xcconfig"; sourceTree = "<group>"; };
 		60165D08B4F6B6041ED361E1 /* Pods-TeamBoostFire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFire.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire.debug.xcconfig"; sourceTree = "<group>"; };
 		606177A8447B888DA624D051 /* Pods-TeamBoostFire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFire.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire.release.xcconfig"; sourceTree = "<group>"; };
+		60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamBoostFireTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AF226729FD001A754D /* CoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreServices.swift; sourceTree = "<group>"; };
@@ -72,6 +87,9 @@
 		EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostInMeetingTableViewController.xib; sourceTree = "<group>"; };
 		EB1FAB9922777B3C0037A6A5 /* TableKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableKeys.swift; sourceTree = "<group>"; };
 		EBF347802278C20B008A6154 /* ArrayRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayRotation.swift; sourceTree = "<group>"; };
+		EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostFireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireTests.swift; sourceTree = "<group>"; };
+		EBF3479F2278E69E008A6154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamBoostFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBFCA67422668D2E0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +101,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EBF347982278E69E008A6154 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBFCA66922668D2E0047CD75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -99,6 +125,8 @@
 			children = (
 				60165D08B4F6B6041ED361E1 /* Pods-TeamBoostFire.debug.xcconfig */,
 				606177A8447B888DA624D051 /* Pods-TeamBoostFire.release.xcconfig */,
+				76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */,
+				3579CA3806A3CB8EF0A0814E /* Pods-TeamBoostFireTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -107,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F6636C804E2430BA83BAA878 /* Pods_TeamBoostFire.framework */,
+				60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,10 +215,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		EBF3479C2278E69E008A6154 /* TeamBoostFireTests */ = {
+			isa = PBXGroup;
+			children = (
+				EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */,
+				EBF3479F2278E69E008A6154 /* Info.plist */,
+			);
+			path = TeamBoostFireTests;
+			sourceTree = "<group>";
+		};
 		EBFCA66322668D2E0047CD75 = {
 			isa = PBXGroup;
 			children = (
 				EBFCA66E22668D2E0047CD75 /* TeamBoostFire */,
+				EBF3479C2278E69E008A6154 /* TeamBoostFireTests */,
 				EBFCA66D22668D2E0047CD75 /* Products */,
 				707EC7923C6896DD9DDCC0D2 /* Pods */,
 				7DBD6B24C39A664C35E599E3 /* Frameworks */,
@@ -200,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */,
+				EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,6 +268,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EBF3479A2278E69E008A6154 /* TeamBoostFireTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBF347A42278E69E008A6154 /* Build configuration list for PBXNativeTarget "TeamBoostFireTests" */;
+			buildPhases = (
+				CBA776C075970B4122834D90 /* [CP] Check Pods Manifest.lock */,
+				EBF347972278E69E008A6154 /* Sources */,
+				EBF347982278E69E008A6154 /* Frameworks */,
+				EBF347992278E69E008A6154 /* Resources */,
+				DED5B0A29B228117BCF4D440 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EBF347A12278E69E008A6154 /* PBXTargetDependency */,
+			);
+			name = TeamBoostFireTests;
+			productName = TeamBoostFireTests;
+			productReference = EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EBFCA66B22668D2E0047CD75 /* TeamBoostFire */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBFCA67E22668D2F0047CD75 /* Build configuration list for PBXNativeTarget "TeamBoostFire" */;
@@ -257,6 +317,10 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Amin Rehman";
 				TargetAttributes = {
+					EBF3479A2278E69E008A6154 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = EBFCA66B22668D2E0047CD75;
+					};
 					EBFCA66B22668D2E0047CD75 = {
 						CreatedOnToolsVersion = 10.2;
 					};
@@ -276,11 +340,19 @@
 			projectRoot = "";
 			targets = (
 				EBFCA66B22668D2E0047CD75 /* TeamBoostFire */,
+				EBF3479A2278E69E008A6154 /* TeamBoostFireTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EBF347992278E69E008A6154 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBFCA66A22668D2E0047CD75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -329,6 +401,54 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CBA776C075970B4122834D90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeamBoostFireTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DED5B0A29B228117BCF4D440 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FC9D5D3F99F28CC278BF4C0C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +474,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EBF347972278E69E008A6154 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EBFCA66822668D2E0047CD75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +511,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EBF347A12278E69E008A6154 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EBFCA66B22668D2E0047CD75 /* TeamBoostFire */;
+			targetProxy = EBF347A02278E69E008A6154 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		EBFCA67322668D2E0047CD75 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -403,6 +539,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EBF347A22278E69E008A6154 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68QQNWZDTF;
+				INFOPLIST_FILE = TeamBoostFireTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostFireTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamBoostFire.app/TeamBoostFire";
+			};
+			name = Debug;
+		};
+		EBF347A32278E69E008A6154 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3579CA3806A3CB8EF0A0814E /* Pods-TeamBoostFireTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68QQNWZDTF;
+				INFOPLIST_FILE = TeamBoostFireTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostFireTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamBoostFire.app/TeamBoostFire";
+			};
+			name = Release;
+		};
 		EBFCA67C22668D2F0047CD75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -560,6 +738,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EBF347A42278E69E008A6154 /* Build configuration list for PBXNativeTarget "TeamBoostFireTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBF347A22278E69E008A6154 /* Debug */,
+				EBF347A32278E69E008A6154 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EBFCA66722668D2E0047CD75 /* Build configuration list for PBXProject "TeamBoostFire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
