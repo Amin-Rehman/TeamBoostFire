@@ -55,7 +55,7 @@ extension CoreServices {
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
         meetingStateReference?.setValue("suspended")
 
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .ActiveSpeaker)
+        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
         activeSpeakerReference?.setValue("")
 
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
@@ -114,7 +114,7 @@ extension CoreServices {
         selfIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .ActiveSpeaker)
+        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
