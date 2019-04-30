@@ -1,7 +1,7 @@
 import Foundation
 
 extension Array {
-    func tb_rotate() -> Array {
+    func circularRotate() -> Array {
         let arrayCount = self.count
         var result = Array()
 

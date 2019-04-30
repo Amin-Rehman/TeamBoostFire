@@ -13,9 +13,9 @@ class TeamBoostFireTests: XCTestCase {
 
     func testSimpleRotate() {
         let sut = ["hello", "there", "how", "are", "you"]
-        let result1 = sut.tb_rotate()
+        let result1 = sut.circularRotate()
         XCTAssertEqual(result1, ["there", "how", "are", "you", "hello"])
-        let result2 = result1.tb_rotate()
+        let result2 = result1.circularRotate()
         XCTAssertEqual(result2, ["how", "are", "you", "hello", "there"])
     }
 }
