@@ -9,21 +9,27 @@
 import UIKit
 
 class ParticipantMainViewController: UIViewController {
-    @IBOutlet weak var fooLabel: UILabel!
+
+    @IBOutlet weak var agendaQuestionLabel: UILabel!
+    @IBOutlet weak var meetingTimeLabel: UILabel!
+
+    @IBOutlet weak var speakerSpeakingTimeLabel: UILabel!
+    @IBOutlet weak var currentSpeakerLabel: UILabel!
+
+    @IBOutlet weak var speakingOrderLabel: UILabel!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let notificationName = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(activeSpeakerDidChange(notification:)),
-                                               name: notificationName, object: nil)
-
     }
 
-    @objc private func activeSpeakerDidChange(notification: NSNotification) {
-        let activeSpeakerIdentifier = notification.object as! String        
-        fooLabel.text = activeSpeakerIdentifier
+    @IBAction func likeButtonTapped(_ sender: Any) {
     }
 
+
+    @IBAction func continueButtonTapped(_ sender: Any) {
+    }
+
+    @IBAction func callForSpeakerTapped(_ sender: Any) {
+    }
 }
