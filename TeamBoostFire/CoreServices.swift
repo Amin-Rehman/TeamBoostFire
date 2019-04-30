@@ -52,24 +52,22 @@ extension CoreServices {
         meetingIdentifier = String.makeSixDigitUUID()
         meetingReference = databaseRef?.child(meetingIdentifier!)
 
-        meetingStateReference = meetingReference?.child("meeting_state")
+        meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
         meetingStateReference?.setValue("suspended")
 
-        activeSpeakerReference = meetingReference?.child("active_speaker")
+        activeSpeakerReference = meetingReference?.referenceOfChild(with: .ActiveSpeaker)
         activeSpeakerReference?.setValue("")
 
-        activeSpeakerReference = meetingReference?.child("active_speaker")
-        activeSpeakerReference?.setValue("")
-        participantsReference = meetingReference?.child("participants")
+        participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.setValue("")
-        meetingParamsReference = meetingReference?.child("meeting_params")
+        meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
         meetingParamsReference?.setValue("")
 
-        meetingParamsTimeReference = meetingParamsReference?.child("meeting_time")
+        meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         meetingParamsTimeReference?.setValue(params.meetingTime)
-        meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
+        meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
         meetingParamsAgendaReference?.setValue(params.agenda)
-        meetingParamsMaxTalkingTimeReference = meetingParamsReference?.child("max_talking_time")
+        meetingParamsMaxTalkingTimeReference = meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
         meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
 
         meetingParams = params
@@ -115,14 +113,14 @@ extension CoreServices {
         meetingIdentifier = meetingCode
         selfIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)
-        meetingStateReference = meetingReference?.child("meeting_state")
-        activeSpeakerReference = meetingReference?.child("active_speaker")
-        participantsReference = meetingReference?.child("participants")
-        meetingParamsReference = meetingReference?.child("meeting_params")
-        meetingParamsTimeReference = meetingParamsReference?.child("meeting_time")
-        meetingParamsAgendaReference = meetingParamsReference?.child("agenda")
+        meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
+        activeSpeakerReference = meetingReference?.referenceOfChild(with: .ActiveSpeaker)
+        participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
+        meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
+        meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
+        meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
 
         observeMeetingStateDidChange()
         observeActiveSpeakerDidChange()
@@ -146,5 +144,11 @@ extension String {
         return shortUUID.components(separatedBy: "-").first!
     }
 
+}
+
+extension DatabaseReference {
+    func referenceOfChild(with key: TableKeys) -> DatabaseReference {
+        return self.child(key.rawValue)
+    }
 }
 
