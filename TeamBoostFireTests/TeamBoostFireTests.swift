@@ -11,17 +11,11 @@ import XCTest
 
 class TeamBoostFireTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testSimpleRotate() {
+        let sut = ["hello", "there", "how", "are", "you"]
+        let result1 = sut.tb_rotate()
+        XCTAssertEqual(result1, ["there", "how", "are", "you", "hello"])
+        let result2 = result1.tb_rotate()
+        XCTAssertEqual(result2, ["how", "are", "you", "hello", "there"])
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        let array = ["Hello", "There"]
-        array.tb_rotate()
-    }
-
 }

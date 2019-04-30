@@ -7,7 +7,7 @@ extension Array {
 
         var baseIndex = 0
 
-        while baseIndex < (arrayCount - 2) {
+        while baseIndex < (arrayCount - 1) {
             let itemToInsert = self[baseIndex + 1]
             result.append(itemToInsert)
             baseIndex = baseIndex + 1
