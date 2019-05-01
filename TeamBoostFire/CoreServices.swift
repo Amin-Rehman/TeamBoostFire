@@ -15,7 +15,7 @@ class CoreServices {
     public private(set) var allParticipants: [Participant]?
     public private(set) var speakerOrder: [String]?
 
-    private var isHost: Bool?
+    private var isHost: Bool
     private var databaseRef: DatabaseReference?
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
@@ -35,6 +35,7 @@ class CoreServices {
         print("ALOG: CoreServices: Initialiser called")
         FirebaseApp.configure()
         self.databaseRef = Database.database().reference()
+        self.isHost = false
     }
 
     private func observeSpeakerOrderDidChange() {
@@ -110,7 +111,7 @@ extension CoreServices {
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
-        assert(isHost!, "Only Host can update speaker order")
+        assert(isHost, "Only Host can update speaker order")
         speakerOrder = identifiers
         speakerOrderReference?.setValue(speakerOrder)
 
