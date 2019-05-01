@@ -14,35 +14,45 @@ class HostMeetingViewController: UIViewController {
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
     var timer: Timer?
 
-    var allIdentifiers = [String]()
     var currentSpeakerIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupChildTableViewController()
+        setupSpeakerOrderObserver()
+        setupInitialSpeakingOrder()
+        setupTimer()
+    }
+
+    private func setupChildTableViewController() {
         hostInMeetingTableViewController.view.frame = childContainerView.bounds;
         hostInMeetingTableViewController.willMove(toParent: self)
         childContainerView.addSubview(hostInMeetingTableViewController.view)
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
+    }
 
+    private func setupSpeakerOrderObserver() {
         let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(speakerOrderDidChange(notification:)),
                                                name: notificationName, object: nil)
+    }
 
-        let meetingParams = CoreServices.shared.meetingParams
+    private func setupInitialSpeakingOrder() {
+        var allParticipantIdentifiers = [String]()
         let allParticipants = CoreServices.shared.allParticipants
-
         for participant in allParticipants! {
-            allIdentifiers.append(participant.id)
+            allParticipantIdentifiers.append(participant.id)
         }
+        CoreServices.shared.updateSpeakerOrder(with: allParticipantIdentifiers)
+    }
 
-        changeActiveParticipant()
-
+    private func setupTimer() {
+        let meetingParams = CoreServices.shared.meetingParams
         timer = Timer.scheduledTimer(timeInterval: Double(meetingParams!.maxTalkTime), target: self,
-                                     selector: #selector(changeActiveParticipant),
+                                     selector: #selector(rotateSpeakerOrder),
                                      userInfo: nil, repeats: true)
-
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,16 +60,13 @@ class HostMeetingViewController: UIViewController {
         timer?.invalidate()
     }
 
-    @objc func changeActiveParticipant() {
-        if currentSpeakerIndex == allIdentifiers.count - 1 {
-            currentSpeakerIndex = 0
-        } else {
-            currentSpeakerIndex = currentSpeakerIndex + 1
+    @objc func rotateSpeakerOrder() {
+        guard var speakingOrder = CoreServices.shared.speakerOrder else {
+            assertionFailure("No speaker order available in CoreServices")
+            return
         }
-
-        let activeSpeakerIdentifier = allIdentifiers[currentSpeakerIndex]
-        CoreServices.shared.setActiveSpeaker(identifier: activeSpeakerIdentifier)
-
+        speakingOrder = speakingOrder.circularRotate()
+        CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
     }
 
     @objc private func speakerOrderDidChange(notification: NSNotification) {

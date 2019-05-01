@@ -12,6 +12,9 @@ import FirebaseDatabase
 
 class CoreServices {
     static let shared = CoreServices()
+    public var allParticipants: [Participant]?
+    public var speakerOrder: [String]?
+
     private var databaseRef: DatabaseReference?
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
@@ -22,8 +25,6 @@ class CoreServices {
     private var meetingParamsTimeReference: DatabaseReference?
     private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private var meetingParamsAgendaReference: DatabaseReference?
-
-    public var allParticipants: [Participant]?
 
     private(set) public var meetingIdentifier: String?
     private(set) public var meetingParams: MeetingsParams?
@@ -37,7 +38,7 @@ class CoreServices {
 
     private func observeSpeakerOrderDidChange() {
         speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
-            let activeSpeakerId = snapshot.value as! String
+            let activeSpeakerId = snapshot.value as! [String]
             let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: activeSpeakerId)
@@ -83,8 +84,9 @@ extension CoreServices {
         meetingStateReference?.setValue("ended")
     }
 
-    public func setActiveSpeaker(identifier: String) {
-        speakerOrderReference?.setValue(identifier)
+    public func updateSpeakerOrder(with identifiers: [String]) {
+        speakerOrder = identifiers
+        speakerOrderReference?.setValue(speakerOrder)
     }
 
     private func observeParticipantListChanges() {
