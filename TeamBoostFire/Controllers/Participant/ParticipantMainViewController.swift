@@ -23,7 +23,22 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTopBar()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupSpeakerOrderObserver()
+
+    }
+
+    private func setupTopBar() {
+        guard let agenda = CoreServices.shared.meetingParams?.agenda else {
+            assertionFailure("No agenda found in CoreServices")
+            return
+        }
+        agendaQuestionLabel.text = agenda
+
     }
 
     private func setupSpeakerOrderObserver() {

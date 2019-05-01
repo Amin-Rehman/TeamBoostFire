@@ -12,8 +12,6 @@ import FirebaseDatabase
 
 class CoreServices {
     static let shared = CoreServices()
-    public private(set) var allParticipants: [Participant]?
-    public private(set) var speakerOrder: [String]?
 
     private var isHost: Bool
     private var databaseRef: DatabaseReference?
@@ -27,6 +25,8 @@ class CoreServices {
     private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private var meetingParamsAgendaReference: DatabaseReference?
 
+    public private(set) var allParticipants: [Participant]?
+    public private(set) var speakerOrder: [String]?
     private(set) public var meetingIdentifier: String?
     private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfIdentifier: String?
@@ -158,6 +158,36 @@ extension CoreServices {
                                             object: meetingState)
         })
     }
+
+    private func observeMeetingParamsDidChange() {
+        meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
+            guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
+                assertionFailure("Error while retrieving agenda")
+                return
+            }
+
+            guard let meetingTime = snapshot.childSnapshot(forPath: TableKeys.MeetingTime.rawValue).value as? Int else {
+                assertionFailure("Error while retrieving meeting time")
+                return
+            }
+
+            guard let maxTalkTime = snapshot.childSnapshot(forPath: TableKeys.MaxTalkTime.rawValue).value as? Int else {
+                assertionFailure("Error while retrieving max talk time")
+                return
+            }
+
+
+            self.meetingParams = MeetingsParams(agenda: agenda,
+                                                meetingTime: meetingTime,
+                                                maxTalkTime: maxTalkTime,
+                                                moderationMode: nil)
+
+            let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: self.meetingParams)
+        })
+    }
+
 }
 
 

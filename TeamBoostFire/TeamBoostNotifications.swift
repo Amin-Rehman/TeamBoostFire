@@ -11,5 +11,6 @@ import Foundation
 enum TeamBoostNotifications: String {
     case participantListDidChange = "ParticipantListDidChange"
     case meetingStateDidChange = "MeetingStateDidChange"
+    case meetingParamsDidChange = "MeetingParamsDidChange"
     case speakerOrderDidChange = "SpeakerOrderDidChange"
 }
