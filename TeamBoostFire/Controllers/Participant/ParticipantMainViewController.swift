@@ -21,6 +21,18 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSpeakerOrderObserver()
+    }
+
+    private func setupSpeakerOrderObserver() {
+        let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(speakerOrderDidChange(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func speakerOrderDidChange(notification: Notification) {
+
     }
 
     @IBAction func likeButtonTapped(_ sender: Any) {

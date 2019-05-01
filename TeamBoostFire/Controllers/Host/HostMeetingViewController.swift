@@ -19,7 +19,6 @@ class HostMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupChildTableViewController()
-        setupSpeakerOrderObserver()
         setupInitialSpeakingOrder()
         setupTimer()
     }
@@ -32,13 +31,6 @@ class HostMeetingViewController: UIViewController {
         hostInMeetingTableViewController.didMove(toParent: self)
     }
 
-    private func setupSpeakerOrderObserver() {
-        let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(speakerOrderDidChange(notification:)),
-                                               name: notificationName, object: nil)
-    }
-
     private func setupInitialSpeakingOrder() {
         var allParticipantIdentifiers = [String]()
         let allParticipants = CoreServices.shared.allParticipants
@@ -46,6 +38,13 @@ class HostMeetingViewController: UIViewController {
             allParticipantIdentifiers.append(participant.id)
         }
         CoreServices.shared.updateSpeakerOrder(with: allParticipantIdentifiers)
+
+        updateUIWithSpeakerOrder()
+    }
+
+    private func updateUIWithSpeakerOrder() {
+        hostInMeetingTableViewController.tableViewDataSource = CoreServices.shared.allParticipants!
+        hostInMeetingTableViewController.tableView.reloadData()
     }
 
     private func setupTimer() {
@@ -67,23 +66,7 @@ class HostMeetingViewController: UIViewController {
         }
         speakingOrder = speakingOrder.circularRotate()
         CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+        updateUIWithSpeakerOrder()
     }
 
-    @objc private func speakerOrderDidChange(notification: NSNotification) {
-        let activeSpeakerIdentifier = notification.object as! String
-
-        let allParticipants = CoreServices.shared.allParticipants!
-        var updatedAllParticipants = [Participant]()
-        for participant in allParticipants {
-            let updatedParticipant = Participant(id: participant.id,
-                                                 name: participant.name,
-                                                 isActiveSpeaker: participant.id == activeSpeakerIdentifier)
-            updatedAllParticipants.append(updatedParticipant)
-        }
-
-        CoreServices.shared.allParticipants = updatedAllParticipants
-        hostInMeetingTableViewController.tableViewDataSource = updatedAllParticipants
-        hostInMeetingTableViewController.tableView.reloadData()
-
-    }
 }

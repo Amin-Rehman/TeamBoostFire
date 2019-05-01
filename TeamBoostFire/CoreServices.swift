@@ -15,6 +15,7 @@ class CoreServices {
     public var allParticipants: [Participant]?
     public var speakerOrder: [String]?
 
+    private var isHost: Bool?
     private var databaseRef: DatabaseReference?
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
@@ -38,10 +39,10 @@ class CoreServices {
 
     private func observeSpeakerOrderDidChange() {
         speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
-            let activeSpeakerId = snapshot.value as! [String]
+            let speakerOrder = snapshot.value as! [String]
             let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
-                                            object: activeSpeakerId)
+                                            object: speakerOrder)
         })
     }
 
@@ -50,6 +51,7 @@ class CoreServices {
 // MARK: - Host
 extension CoreServices {
     public func setupMeetingAsHost(with params: MeetingsParams) {
+        isHost = true
         meetingIdentifier = String.makeSixDigitUUID()
         meetingReference = databaseRef?.child(meetingIdentifier!)
 
@@ -85,8 +87,21 @@ extension CoreServices {
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
+        assert(isHost!, "Only Host can update speaker order")
         speakerOrder = identifiers
         speakerOrderReference?.setValue(speakerOrder)
+
+        var updatedAllParticipants = [Participant]()
+        for participant in allParticipants! {
+            let participantSpeakingOrder = speakerOrder?.firstIndex(of: participant.id)
+            let updatedParticipant = Participant(id: participant.id,
+                                                 name: participant.name,
+                                                 speakerOrder: participantSpeakingOrder!)
+            updatedAllParticipants.append(updatedParticipant)
+        }
+
+        allParticipants = updatedAllParticipants
+
     }
 
     private func observeParticipantListChanges() {
@@ -97,7 +112,9 @@ extension CoreServices {
                 let dict = object.value as! [String: String]
                 let participantIdentifier = dict["id"]
                 let participantName = dict["name"]
-                let participant = Participant(id: participantIdentifier!, name: participantName!, isActiveSpeaker: false)
+                let participant = Participant(id: participantIdentifier!,
+                                              name: participantName!,
+                                              speakerOrder: -1)
                 allParticipants.append(participant)
             }
 
@@ -112,6 +129,7 @@ extension CoreServices {
 // MARK: - Participant
 extension CoreServices {
     public func setupMeetingAsParticipant(participant: Participant, meetingCode: String) {
+        isHost = false
         meetingIdentifier = meetingCode
         selfIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)

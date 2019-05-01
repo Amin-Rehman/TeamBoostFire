@@ -40,7 +40,7 @@ class HostInMeetingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostInMeetingTableViewCell", for: indexPath) as! HostInMeetingTableViewCell
         cell.participantNameLabel.text = self.tableViewDataSource[indexPath.row].name
-        let shouldHideRedCircle = !self.tableViewDataSource[indexPath.row].isActiveSpeaker
+        let shouldHideRedCircle = !(self.tableViewDataSource[indexPath.row].speakerOrder == 0)
         cell.redCircleImage.isHidden = shouldHideRedCircle
 
         if !shouldHideRedCircle {
