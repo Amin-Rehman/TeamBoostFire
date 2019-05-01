@@ -18,6 +18,8 @@ class ParticipantMainViewController: UIViewController {
 
     @IBOutlet weak var speakingOrderLabel: UILabel!
 
+    private var speakerOrder = [String]()
+    private var allParticipants = [Participant]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,13 @@ class ParticipantMainViewController: UIViewController {
     }
 
     @objc private func speakerOrderDidChange(notification: Notification) {
+        // Update current speaker
+        let currentSpeakingParticipant = currentSpeaker()!
+        currentSpeakerLabel.text = currentSpeakingParticipant.name
 
+        // Update self speaking order
+        let selfSpeakingOrder = speakingOrder()
+        speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
     }
 
     @IBAction func likeButtonTapped(_ sender: Any) {
@@ -44,4 +52,26 @@ class ParticipantMainViewController: UIViewController {
 
     @IBAction func callForSpeakerTapped(_ sender: Any) {
     }
+
+    private func currentSpeaker() -> Participant? {
+        let speakerOrder = CoreServices.shared.speakerOrder!
+        let allParticipants = CoreServices.shared.allParticipants!
+        let currentSpeakerIdentifier = speakerOrder.first!
+
+        for participant in allParticipants {
+            if participant.id == currentSpeakerIdentifier {
+                return participant
+            }
+        }
+
+        assertionFailure("Current speaker not found")
+        return nil
+    }
+
+    private func speakingOrder() -> Int {
+        let speakerOrder = CoreServices.shared.speakerOrder!
+        let selfIdentifier = CoreServices.shared.selfIdentifier!
+        return speakerOrder.firstIndex(of: selfIdentifier)!
+    }
+
 }

@@ -12,8 +12,8 @@ import FirebaseDatabase
 
 class CoreServices {
     static let shared = CoreServices()
-    public var allParticipants: [Participant]?
-    public var speakerOrder: [String]?
+    public private(set) var allParticipants: [Participant]?
+    public private(set) var speakerOrder: [String]?
 
     private var isHost: Bool?
     private var databaseRef: DatabaseReference?
@@ -40,9 +40,32 @@ class CoreServices {
     private func observeSpeakerOrderDidChange() {
         speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             let speakerOrder = snapshot.value as! [String]
+            self.speakerOrder = speakerOrder
             let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: speakerOrder)
+        })
+    }
+
+    private func observeParticipantListChanges() {
+        participantsReference?.observe(DataEventType.value, with: { snapshot in
+            let allObjects = snapshot.children.allObjects as! [DataSnapshot]
+            var allParticipants =  [Participant]()
+            for object in allObjects {
+                let dict = object.value as! [String: String]
+                let participantIdentifier = dict["id"]
+                let participantName = dict["name"]
+                let participant = Participant(id: participantIdentifier!,
+                                              name: participantName!,
+                                              speakerOrder: -1)
+                allParticipants.append(participant)
+            }
+
+            self.allParticipants = allParticipants
+            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: allParticipants)
+
         })
     }
 
@@ -101,28 +124,6 @@ extension CoreServices {
         }
 
         allParticipants = updatedAllParticipants
-
-    }
-
-    private func observeParticipantListChanges() {
-        participantsReference?.observe(DataEventType.value, with: { snapshot in
-            let allObjects = snapshot.children.allObjects as! [DataSnapshot]
-            var allParticipants =  [Participant]()
-            for object in allObjects {
-                let dict = object.value as! [String: String]
-                let participantIdentifier = dict["id"]
-                let participantName = dict["name"]
-                let participant = Participant(id: participantIdentifier!,
-                                              name: participantName!,
-                                              speakerOrder: -1)
-                allParticipants.append(participant)
-            }
-
-            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: allParticipants)
-
-        })
     }
 }
 
@@ -142,9 +143,11 @@ extension CoreServices {
         meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
 
+        observeParticipantListChanges()
         observeMeetingStateDidChange()
         observeSpeakerOrderDidChange()
     }
+
 
     private func observeMeetingStateDidChange() {
         meetingStateReference?.observe(DataEventType.value, with: { snapshot in

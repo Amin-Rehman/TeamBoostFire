@@ -38,7 +38,6 @@ class HostMeetingViewController: UIViewController {
             allParticipantIdentifiers.append(participant.id)
         }
         CoreServices.shared.updateSpeakerOrder(with: allParticipantIdentifiers)
-
         updateUIWithSpeakerOrder()
     }
 
