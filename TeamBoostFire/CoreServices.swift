@@ -12,10 +12,12 @@ import FirebaseDatabase
 
 class CoreServices {
     static let shared = CoreServices()
+
+    private var isHost: Bool
     private var databaseRef: DatabaseReference?
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
-    private var activeSpeakerReference: DatabaseReference?
+    private var speakerOrderReference: DatabaseReference?
     private var participantsReference: DatabaseReference?
     private var meetingParamsReference: DatabaseReference?
 
@@ -23,8 +25,8 @@ class CoreServices {
     private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private var meetingParamsAgendaReference: DatabaseReference?
 
-    public var allParticipants: [Participant]?
-
+    public private(set) var allParticipants: [Participant]?
+    public private(set) var speakerOrder: [String]?
     private(set) public var meetingIdentifier: String?
     private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfIdentifier: String?
@@ -33,14 +35,40 @@ class CoreServices {
         print("ALOG: CoreServices: Initialiser called")
         FirebaseApp.configure()
         self.databaseRef = Database.database().reference()
+        self.isHost = false
     }
 
-    private func observeActiveSpeakerDidChange() {
-        activeSpeakerReference?.observe(DataEventType.value, with: { snapshot in
-            let activeSpeakerId = snapshot.value as! String
-            let name = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+    private func observeSpeakerOrderDidChange() {
+        speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
+            guard let speakerOrder = snapshot.value as? [String] else {
+                return
+            }
+            self.speakerOrder = speakerOrder
+            let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
-                                            object: activeSpeakerId)
+                                            object: speakerOrder)
+        })
+    }
+
+    private func observeParticipantListChanges() {
+        participantsReference?.observe(DataEventType.value, with: { snapshot in
+            let allObjects = snapshot.children.allObjects as! [DataSnapshot]
+            var allParticipants =  [Participant]()
+            for object in allObjects {
+                let dict = object.value as! [String: String]
+                let participantIdentifier = dict["id"]
+                let participantName = dict["name"]
+                let participant = Participant(id: participantIdentifier!,
+                                              name: participantName!,
+                                              speakerOrder: -1)
+                allParticipants.append(participant)
+            }
+
+            self.allParticipants = allParticipants
+            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: allParticipants)
+
         })
     }
 
@@ -49,14 +77,23 @@ class CoreServices {
 // MARK: - Host
 extension CoreServices {
     public func setupMeetingAsHost(with params: MeetingsParams) {
-        meetingIdentifier = String.makeSixDigitUUID()
+        isHost = true
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+
+        } else {
+            meetingIdentifier = String.makeSixDigitUUID()
+        }
+
         meetingReference = databaseRef?.child(meetingIdentifier!)
 
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
         meetingStateReference?.setValue("suspended")
 
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
-        activeSpeakerReference?.setValue("")
+        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
+        speakerOrderReference?.setValue([""])
 
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.setValue("")
@@ -72,10 +109,22 @@ extension CoreServices {
 
         meetingParams = params
         observeParticipantListChanges()
-        observeActiveSpeakerDidChange()
+        observeSpeakerOrderDidChange()
     }
 
     public func startMeeting() {
+        var allParticipantIdentifiers = [String]()
+        guard let allParticipantsGuarded = allParticipants else {
+            assertionFailure("No participants found in CoreServices")
+            return
+        }
+
+        for participant in allParticipantsGuarded {
+            allParticipantIdentifiers.append(participant.id)
+        }
+
+        updateSpeakerOrder(with: allParticipantIdentifiers)
+
         meetingStateReference?.setValue("started")
     }
 
@@ -83,38 +132,33 @@ extension CoreServices {
         meetingStateReference?.setValue("ended")
     }
 
-    public func setActiveSpeaker(identifier: String) {
-        activeSpeakerReference?.setValue(identifier)
-    }
+    public func updateSpeakerOrder(with identifiers: [String]) {
+        assert(isHost, "Only Host can update speaker order")
+        speakerOrder = identifiers
+        speakerOrderReference?.setValue(speakerOrder)
 
-    private func observeParticipantListChanges() {
-        participantsReference?.observe(DataEventType.value, with: { snapshot in
-            let allObjects = snapshot.children.allObjects as! [DataSnapshot]
-            var allParticipants =  [Participant]()
-            for object in allObjects {
-                let dict = object.value as! [String: String]
-                let participantIdentifier = dict["id"]
-                let participantName = dict["name"]
-                let participant = Participant(id: participantIdentifier!, name: participantName!, isActiveSpeaker: false)
-                allParticipants.append(participant)
-            }
+        var updatedAllParticipants = [Participant]()
+        for participant in allParticipants! {
+            let participantSpeakingOrder = speakerOrder?.firstIndex(of: participant.id)
+            let updatedParticipant = Participant(id: participant.id,
+                                                 name: participant.name,
+                                                 speakerOrder: participantSpeakingOrder!)
+            updatedAllParticipants.append(updatedParticipant)
+        }
 
-            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: allParticipants)
-
-        })
+        allParticipants = updatedAllParticipants
     }
 }
 
 // MARK: - Participant
 extension CoreServices {
     public func setupMeetingAsParticipant(participant: Participant, meetingCode: String) {
+        isHost = false
         meetingIdentifier = meetingCode
         selfIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
+        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
@@ -122,8 +166,10 @@ extension CoreServices {
         meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
 
+        observeParticipantListChanges()
         observeMeetingStateDidChange()
-        observeActiveSpeakerDidChange()
+        observeSpeakerOrderDidChange()
+        observeMeetingParamsDidChange()
     }
 
     private func observeMeetingStateDidChange() {
@@ -134,6 +180,36 @@ extension CoreServices {
                                             object: meetingState)
         })
     }
+
+    private func observeMeetingParamsDidChange() {
+        meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
+            guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
+                assertionFailure("Error while retrieving agenda")
+                return
+            }
+
+            guard let meetingTime = snapshot.childSnapshot(forPath: TableKeys.MeetingTime.rawValue).value as? Int else {
+                assertionFailure("Error while retrieving meeting time")
+                return
+            }
+
+            guard let maxTalkTime = snapshot.childSnapshot(forPath: TableKeys.MaxTalkTime.rawValue).value as? Int else {
+                assertionFailure("Error while retrieving max talk time")
+                return
+            }
+
+
+            self.meetingParams = MeetingsParams(agenda: agenda,
+                                                meetingTime: meetingTime,
+                                                maxTalkTime: maxTalkTime,
+                                                moderationMode: nil)
+
+            let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: self.meetingParams)
+        })
+    }
+
 }
 
 

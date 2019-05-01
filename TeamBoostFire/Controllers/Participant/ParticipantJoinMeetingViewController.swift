@@ -15,6 +15,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         let center = NotificationCenter.default
         center.addObserver(self, selector:
             #selector(handleKeyboardAction),
@@ -28,8 +29,20 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+    }
 
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupTestEnvironmentIfNeeded()
+    }
+
+    private func setupTestEnvironmentIfNeeded() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            meetingCode.text = StubMeetingVars.MeetingCode.rawValue
+            participantNameTextField.text = UUID().uuidString
+        }
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -65,8 +78,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
 
         let participantIdentifier = UUID().uuidString
         let participant = Participant(id: participantIdentifier,
-                                      name: participantNameText,
-                                      isActiveSpeaker: false)
+                                      name: participantNameText, speakerOrder: -1)
         CoreServices.shared.setupMeetingAsParticipant(participant: participant,
                                                       meetingCode: meetingCodeText!)
         present(ParticipantLobbyViewController(), animated: true, completion: nil)
