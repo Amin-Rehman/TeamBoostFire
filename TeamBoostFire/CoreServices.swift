@@ -82,7 +82,7 @@ extension CoreServices {
         meetingStateReference?.setValue("suspended")
 
         speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
-        speakerOrderReference?.setValue("")
+        speakerOrderReference?.setValue([""])
 
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.setValue("")
