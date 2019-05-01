@@ -15,7 +15,7 @@ class CoreServices {
     private var databaseRef: DatabaseReference?
     private var meetingReference: DatabaseReference?
     private var meetingStateReference: DatabaseReference?
-    private var activeSpeakerReference: DatabaseReference?
+    private var speakerOrderReference: DatabaseReference?
     private var participantsReference: DatabaseReference?
     private var meetingParamsReference: DatabaseReference?
 
@@ -35,10 +35,10 @@ class CoreServices {
         self.databaseRef = Database.database().reference()
     }
 
-    private func observeActiveSpeakerDidChange() {
-        activeSpeakerReference?.observe(DataEventType.value, with: { snapshot in
+    private func observeSpeakerOrderDidChange() {
+        speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             let activeSpeakerId = snapshot.value as! String
-            let name = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+            let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: activeSpeakerId)
         })
@@ -55,8 +55,8 @@ extension CoreServices {
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
         meetingStateReference?.setValue("suspended")
 
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
-        activeSpeakerReference?.setValue("")
+        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
+        speakerOrderReference?.setValue("")
 
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.setValue("")
@@ -72,7 +72,7 @@ extension CoreServices {
 
         meetingParams = params
         observeParticipantListChanges()
-        observeActiveSpeakerDidChange()
+        observeSpeakerOrderDidChange()
     }
 
     public func startMeeting() {
@@ -84,7 +84,7 @@ extension CoreServices {
     }
 
     public func setActiveSpeaker(identifier: String) {
-        activeSpeakerReference?.setValue(identifier)
+        speakerOrderReference?.setValue(identifier)
     }
 
     private func observeParticipantListChanges() {
@@ -114,7 +114,7 @@ extension CoreServices {
         selfIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
-        activeSpeakerReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
+        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
         participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
@@ -123,7 +123,7 @@ extension CoreServices {
         meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
 
         observeMeetingStateDidChange()
-        observeActiveSpeakerDidChange()
+        observeSpeakerOrderDidChange()
     }
 
     private func observeMeetingStateDidChange() {

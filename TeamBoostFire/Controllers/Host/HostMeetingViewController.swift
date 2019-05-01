@@ -25,9 +25,9 @@ class HostMeetingViewController: UIViewController {
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
 
-        let notificationName = Notification.Name(TeamBoostNotifications.activeSpeakerDidChange.rawValue)
+        let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(activeSpeakerDidChange(notification:)),
+                                               selector: #selector(speakerOrderDidChange(notification:)),
                                                name: notificationName, object: nil)
 
         let meetingParams = CoreServices.shared.meetingParams
@@ -62,7 +62,7 @@ class HostMeetingViewController: UIViewController {
 
     }
 
-    @objc private func activeSpeakerDidChange(notification: NSNotification) {
+    @objc private func speakerOrderDidChange(notification: NSNotification) {
         let activeSpeakerIdentifier = notification.object as! String
 
         let allParticipants = CoreServices.shared.allParticipants!
