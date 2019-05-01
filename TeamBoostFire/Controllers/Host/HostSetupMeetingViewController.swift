@@ -33,6 +33,19 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupTestEnvironmentIfNeeded()
+    }
+    private func setupTestEnvironmentIfNeeded() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            agendaQuestionTextField.text = StubMeetingVars.MeetingAgenda.rawValue
+            meetingTimeTextField.text = StubMeetingVars.MeetingTime.rawValue
+            maxTalkingTimeTextField.text = StubMeetingVars.MaxTalkTime.rawValue
+        }
+    }
+
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let agendaQuestion = agendaQuestionTextField?.text else {
             return

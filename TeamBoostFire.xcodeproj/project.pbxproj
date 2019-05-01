@@ -42,6 +42,7 @@
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
 		EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67822668D2F0047CD75 /* LaunchScreen.storyboard */; };
 		EBFCA68222668E050047CD75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA68122668E050047CD75 /* GoogleService-Info.plist */; };
+		EBFF147E2279ABD6006F218F /* StubMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF147D2279ABD6006F218F /* StubMeeting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		EBFCA67922668D2F0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBFCA67B22668D2F0047CD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFCA68122668E050047CD75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EBFF147D2279ABD6006F218F /* StubMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubMeeting.swift; sourceTree = "<group>"; };
 		F6636C804E2430BA83BAA878 /* Pods_TeamBoostFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamBoostFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -261,6 +263,7 @@
 				EBF3477F2278C1E4008A6154 /* Extensions */,
 				EB1D48A92267261E001A754D /* UseCases */,
 				EB1FAB9922777B3C0037A6A5 /* TableKeys.swift */,
+				EBFF147D2279ABD6006F218F /* StubMeeting.swift */,
 			);
 			path = TeamBoostFire;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				EB1D48CA2267CB07001A754D /* HostMeetingViewController.swift in Sources */,
 				EB1D48D12267DA3F001A754D /* MeetingState.swift in Sources */,
 				EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */,
+				EBFF147E2279ABD6006F218F /* StubMeeting.swift in Sources */,
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
 				EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */,

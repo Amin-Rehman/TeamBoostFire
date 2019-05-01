@@ -76,7 +76,15 @@ class CoreServices {
 extension CoreServices {
     public func setupMeetingAsHost(with params: MeetingsParams) {
         isHost = true
-        meetingIdentifier = String.makeSixDigitUUID()
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+
+        } else {
+            meetingIdentifier = String.makeSixDigitUUID()
+        }
+
         meetingReference = databaseRef?.child(meetingIdentifier!)
 
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
