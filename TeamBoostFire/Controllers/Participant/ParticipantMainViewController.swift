@@ -29,7 +29,7 @@ class ParticipantMainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupSpeakerOrderObserver()
-
+        updateUIWithCurrentSpeaker()
     }
 
     private func setupTopBar() {
@@ -38,7 +38,15 @@ class ParticipantMainViewController: UIViewController {
             return
         }
         agendaQuestionLabel.text = agenda
+    }
 
+    private func updateUIWithCurrentSpeaker() {
+        let currentSpeakingParticipant = currentSpeaker()!
+        currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
+
+        // Update self speaking order
+        let selfSpeakingOrder = speakingOrder()
+        speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
     }
 
     private func setupSpeakerOrderObserver() {
@@ -48,14 +56,9 @@ class ParticipantMainViewController: UIViewController {
                                                name: notificationName, object: nil)
     }
 
-    @objc private func speakerOrderDidChange(notification: Notification) {
+    @objc private func speakerOrderDidChange(notification: NSNotification) {
         // Update current speaker
-        let currentSpeakingParticipant = currentSpeaker()!
-        currentSpeakerLabel.text = currentSpeakingParticipant.name
-
-        // Update self speaking order
-        let selfSpeakingOrder = speakingOrder()
-        speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
+        updateUIWithCurrentSpeaker()
     }
 
     @IBAction func likeButtonTapped(_ sender: Any) {

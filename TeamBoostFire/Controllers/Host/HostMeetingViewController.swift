@@ -19,7 +19,7 @@ class HostMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupChildTableViewController()
-        setupInitialSpeakingOrder()
+        updateUIWithSpeakerOrder()
         setupTimer()
     }
 
@@ -31,15 +31,6 @@ class HostMeetingViewController: UIViewController {
         hostInMeetingTableViewController.didMove(toParent: self)
     }
 
-    private func setupInitialSpeakingOrder() {
-        var allParticipantIdentifiers = [String]()
-        let allParticipants = CoreServices.shared.allParticipants
-        for participant in allParticipants! {
-            allParticipantIdentifiers.append(participant.id)
-        }
-        CoreServices.shared.updateSpeakerOrder(with: allParticipantIdentifiers)
-        updateUIWithSpeakerOrder()
-    }
 
     private func updateUIWithSpeakerOrder() {
         hostInMeetingTableViewController.tableViewDataSource = CoreServices.shared.allParticipants!

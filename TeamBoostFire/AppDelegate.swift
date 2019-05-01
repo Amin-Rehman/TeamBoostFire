@@ -13,13 +13,15 @@ import FirebaseDatabase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var testEnvironment: Bool?
+    // A boolean to pre-populate the UI with a pre-set meeting environment
+    // Only for development
+    var testEnvironment = false
+
     var window: UIWindow?
     public var coreServices: CoreServices?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        testEnvironment = true
         coreServices = CoreServices.shared
         return true
     }

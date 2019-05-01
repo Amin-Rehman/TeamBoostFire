@@ -16,6 +16,7 @@
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="speakerSpeakingTimeLabel" destination="DBh-0Q-edH" id="QmM-AH-NBz"/>
+                <outlet property="speakingOrderLabel" destination="kVu-5R-Ju0" id="Ppr-Yh-B7e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,18 +38,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agenda Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-Jk-zhF">
-                            <rect key="frame" x="16" y="66" width="288" height="22"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                            <rect key="frame" x="16" y="56" width="288" height="36"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="ZM5-Jk-zhF" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" constant="66" id="00K-Uz-dep"/>
+                        <constraint firstItem="ZM5-Jk-zhF" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" constant="56" id="00K-Uz-dep"/>
                         <constraint firstItem="CoP-On-ROX" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" constant="18" id="6nb-Rd-aUY"/>
                         <constraint firstAttribute="height" constant="116" id="9U5-CA-Zx5"/>
-                        <constraint firstAttribute="bottom" secondItem="ZM5-Jk-zhF" secondAttribute="bottom" constant="28" id="TIP-Cm-NpV"/>
+                        <constraint firstAttribute="bottom" secondItem="ZM5-Jk-zhF" secondAttribute="bottom" constant="24" id="TIP-Cm-NpV"/>
                         <constraint firstAttribute="trailing" secondItem="ZM5-Jk-zhF" secondAttribute="trailing" constant="16" id="iW1-Va-3EJ"/>
                         <constraint firstItem="ZM5-Jk-zhF" firstAttribute="leading" secondItem="N4J-H2-OAP" secondAttribute="leading" constant="16" id="sf1-jN-rfg"/>
                         <constraint firstAttribute="trailing" secondItem="CoP-On-ROX" secondAttribute="trailing" constant="8" id="ulm-0u-iaa"/>
@@ -64,7 +65,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Speaker " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-eu-meq">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Speaker " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-eu-meq">
                     <rect key="frame" x="12" y="205" width="296" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="RKN-VD-Y9O"/>
@@ -99,10 +100,22 @@
                                 <action selector="callForSpeakerTapped:" destination="-1" eventType="touchUpInside" id="d0N-Us-aiA"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaking Order:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVu-5R-Ju0">
+                            <rect key="frame" x="4" y="4" width="312" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="h0a-e9-JRF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="kVu-5R-Ju0" firstAttribute="top" secondItem="i43-R9-CzX" secondAttribute="top" constant="4" id="Rwe-g2-82A"/>
+                        <constraint firstItem="kVu-5R-Ju0" firstAttribute="leading" secondItem="i43-R9-CzX" secondAttribute="leading" constant="4" id="eWn-su-RV7"/>
                         <constraint firstItem="d5c-bh-dLX" firstAttribute="centerX" secondItem="i43-R9-CzX" secondAttribute="centerX" id="eys-3R-xtk"/>
+                        <constraint firstAttribute="trailing" secondItem="kVu-5R-Ju0" secondAttribute="trailing" constant="4" id="rm6-nT-t4t"/>
                         <constraint firstItem="d5c-bh-dLX" firstAttribute="centerY" secondItem="i43-R9-CzX" secondAttribute="centerY" id="yEl-Lc-zrV"/>
                     </constraints>
                 </view>

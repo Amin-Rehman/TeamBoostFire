@@ -113,6 +113,18 @@ extension CoreServices {
     }
 
     public func startMeeting() {
+        var allParticipantIdentifiers = [String]()
+        guard let allParticipantsGuarded = allParticipants else {
+            assertionFailure("No participants found in CoreServices")
+            return
+        }
+
+        for participant in allParticipantsGuarded {
+            allParticipantIdentifiers.append(participant.id)
+        }
+
+        updateSpeakerOrder(with: allParticipantIdentifiers)
+
         meetingStateReference?.setValue("started")
     }
 
