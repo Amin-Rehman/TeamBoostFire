@@ -40,7 +40,9 @@ class CoreServices {
 
     private func observeSpeakerOrderDidChange() {
         speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
-            let speakerOrder = snapshot.value as! [String]
+            guard let speakerOrder = snapshot.value as? [String] else {
+                return
+            }
             self.speakerOrder = speakerOrder
             let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
@@ -155,8 +157,8 @@ extension CoreServices {
         observeParticipantListChanges()
         observeMeetingStateDidChange()
         observeSpeakerOrderDidChange()
+        observeMeetingParamsDidChange()
     }
-
 
     private func observeMeetingStateDidChange() {
         meetingStateReference?.observe(DataEventType.value, with: { snapshot in
