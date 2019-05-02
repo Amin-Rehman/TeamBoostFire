@@ -41,12 +41,24 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func updateUIWithCurrentSpeaker() {
-        let currentSpeakingParticipant = currentSpeaker()!
-        currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
-
-        // Update self speaking order
         let selfSpeakingOrder = speakingOrder()
-        speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
+        let isSpeakerSelf = selfSpeakingOrder == 0
+
+        if isSpeakerSelf {
+            let selfSpeakerViewController = ParticipantSelfSpeakerViewController(
+                nibName: "ParticipantSelfSpeakerViewController",
+                bundle: nil)
+            present(selfSpeakerViewController, animated: true, completion: nil)
+        } else {
+            presentedViewController?.dismiss(animated: true, completion: nil)
+
+            let currentSpeakingParticipant = currentSpeaker()!
+            currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
+
+            // Update self speaking order
+            let selfSpeakingOrder = speakingOrder()
+            speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
+        }
     }
 
     private func setupSpeakerOrderObserver() {
@@ -57,7 +69,6 @@ class ParticipantMainViewController: UIViewController {
     }
 
     @objc private func speakerOrderDidChange(notification: NSNotification) {
-        // Update current speaker
         updateUIWithCurrentSpeaker()
     }
 
@@ -88,7 +99,7 @@ class ParticipantMainViewController: UIViewController {
 
     private func speakingOrder() -> Int {
         let speakerOrder = CoreServices.shared.speakerOrder!
-        let selfIdentifier = CoreServices.shared.selfIdentifier!
+        let selfIdentifier = CoreServices.shared.selfParticipantIdentifier!
         return speakerOrder.firstIndex(of: selfIdentifier)!
     }
 
