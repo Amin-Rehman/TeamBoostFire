@@ -29,7 +29,7 @@ class CoreServices {
     public private(set) var speakerOrder: [String]?
     private(set) public var meetingIdentifier: String?
     private(set) public var meetingParams: MeetingsParams?
-    private(set) public var selfIdentifier: String?
+    private(set) public var selfParticipantIdentifier: String?
 
     private init() {
         print("ALOG: CoreServices: Initialiser called")
@@ -154,7 +154,7 @@ extension CoreServices {
     public func setupMeetingAsParticipant(participant: Participant, meetingCode: String) {
         isHost = false
         meetingIdentifier = meetingCode
-        selfIdentifier = participant.id
+        selfParticipantIdentifier = participant.id
         meetingReference = databaseRef?.child(meetingIdentifier!)
         meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
         speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
