@@ -96,7 +96,6 @@ extension CoreServices {
         speakerOrderReference?.setValue([""])
 
         participantsReference = meetingReference?.referenceOfChild(with: .Participants)
-        participantsReference?.setValue("")
         meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
         meetingParamsReference?.setValue("")
 

@@ -6,6 +6,8 @@
 //  Copyright © 2019 Amin Rehman. All rights reserved.
 //
 
+
+
 import UIKit
 import Firebase
 import FirebaseDatabase
@@ -15,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // A boolean to pre-populate the UI with a pre-set meeting environment
     // Only for development
-    var testEnvironment = false
+    var testEnvironment = true
 
     var window: UIWindow?
     public var coreServices: CoreServices?
