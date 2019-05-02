@@ -6,8 +6,6 @@
 //  Copyright © 2019 Amin Rehman. All rights reserved.
 //
 
-
-
 import UIKit
 import Firebase
 import FirebaseDatabase
