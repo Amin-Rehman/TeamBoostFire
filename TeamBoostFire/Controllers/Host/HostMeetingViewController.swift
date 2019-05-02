@@ -10,6 +10,7 @@ import UIKit
 
 class HostMeetingViewController: UIViewController {
     @IBOutlet weak var childContainerView: UIView!
+    @IBOutlet weak var agendaQuestionLabel: UILabel!
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
     var timer: Timer?
@@ -18,9 +19,20 @@ class HostMeetingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAgendaQuestion()
         setupChildTableViewController()
         updateUIWithSpeakerOrder()
         setupTimer()
+    }
+
+    private func setupAgendaQuestion() {
+        let meetingParams = CoreServices.shared.meetingParams
+        guard let agenda = meetingParams?.agenda else {
+            assertionFailure("Unable to retrieve agenda from meeting params")
+            return
+        }
+
+        agendaQuestionLabel.text = agenda
     }
 
     private func setupChildTableViewController() {
