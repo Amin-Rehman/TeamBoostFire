@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HostMeetingViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
+                <outlet property="agendaQuestionLabel" destination="Hh7-kI-Aae" id="rbW-CC-yCv"/>
                 <outlet property="childContainerView" destination="Kf3-G9-107" id="rMF-2r-uDv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
