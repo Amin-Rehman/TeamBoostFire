@@ -45,12 +45,16 @@ class HostInMeetingTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostInMeetingTableViewCell", for: indexPath) as! HostInMeetingTableViewCell
         cell.participantNameLabel.text = self.tableViewDataSource[indexPath.row].name
         let shouldHideRedCircle = !(self.tableViewDataSource[indexPath.row].speakerOrder == 0)
-        cell.redCircleImage.isHidden = shouldHideRedCircle
+
 
         if !shouldHideRedCircle {
             UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
                 cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             }, completion: nil)
+            cell.redCircleImage.isHidden = false
+        } else {
+            cell.redCircleImage.transform = .identity
+            cell.redCircleImage.isHidden = true
         }
 
         cell.orderLabel.isHidden = true
