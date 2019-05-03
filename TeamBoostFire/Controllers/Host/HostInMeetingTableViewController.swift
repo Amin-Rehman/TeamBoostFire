@@ -44,23 +44,44 @@ class HostInMeetingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostInMeetingTableViewCell",
                                                  for: indexPath) as! HostInMeetingTableViewCell
-        cell.participantNameLabel.text = self.tableViewDataSource[indexPath.row].name
-        let shouldHideRedCircle = !(self.tableViewDataSource[indexPath.row].speakerOrder == 0)
+        let cellParticipant = tableViewDataSource[indexPath.row]
+        cell.participantNameLabel.text = cellParticipant.name
+        let speakerOrder = cellParticipant.speakerOrder
 
+        let isCurrentSpeaker = (cellParticipant.speakerOrder == 0)
 
-        if !shouldHideRedCircle {
-            UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
-                cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            }, completion: nil)
-            cell.redCircleImage.isHidden = false
+        if isCurrentSpeaker {
+            showAndAnimateRedCircle(for: cell)
+            cell.orderLabel.isHidden = true
         } else {
-            cell.redCircleImage.transform = .identity
-            cell.redCircleImage.isHidden = true
+            hideRedAnimatingCircle(for: cell)
+            showSpeakingOrderIfNeeded(for: cell, speakingOrder: speakerOrder)
         }
 
-        cell.orderLabel.isHidden = true
         return cell
     }
 
+    private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+            cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }, completion: nil)
+        cell.redCircleImage.isHidden = false
+    }
+
+    private func hideRedAnimatingCircle(for cell: HostInMeetingTableViewCell) {
+        cell.redCircleImage.transform = .identity
+        cell.redCircleImage.isHidden = true
+    }
+
+    private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
+                                           speakingOrder:Int) {
+        if speakingOrder < 3 {
+            cell.orderLabel.text = String(speakingOrder)
+            cell.orderLabel.isHidden = false
+        } else {
+            cell.orderLabel.isHidden = true
+        }
+
+    }
 
 }
