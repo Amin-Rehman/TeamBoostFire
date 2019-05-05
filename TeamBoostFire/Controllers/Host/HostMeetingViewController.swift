@@ -8,21 +8,32 @@
 
 import UIKit
 
-class HostMeetingViewController: UIViewController {
+class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserver {
+
     @IBOutlet weak var childContainerView: UIView!
     @IBOutlet weak var agendaQuestionLabel: UILabel!
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
-    var timer: Timer?
-
     var currentSpeakerIndex = 0
+
+    var speakerControllerService: SpeakerControllerService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSpeakerControllerService()
         setupAgendaQuestion()
         setupChildTableViewController()
         updateUIWithSpeakerOrder()
-        setupTimer()
+    }
+
+    private func setupSpeakerControllerService() {
+        guard let meetingParams = CoreServices.shared.meetingParams else {
+            assertionFailure("Unable to retrieve meeting params")
+            return
+        }
+
+        speakerControllerService = SpeakerControllerService(meetingParams: meetingParams,
+                                                            orderObserver: self)
     }
 
     private func setupAgendaQuestion() {
@@ -49,26 +60,13 @@ class HostMeetingViewController: UIViewController {
         hostInMeetingTableViewController.tableView.reloadData()
     }
 
-    private func setupTimer() {
-        let meetingParams = CoreServices.shared.meetingParams
-        timer = Timer.scheduledTimer(timeInterval: Double(meetingParams!.maxTalkTime), target: self,
-                                     selector: #selector(rotateSpeakerOrder),
-                                     userInfo: nil, repeats: true)
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        timer?.invalidate()
     }
 
-    @objc func rotateSpeakerOrder() {
-        guard var speakingOrder = CoreServices.shared.speakerOrder else {
-            assertionFailure("No speaker order available in CoreServices")
-            return
-        }
-        speakingOrder = speakingOrder.circularRotate()
-        CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+    func speakingOrderUpdated() {
         updateUIWithSpeakerOrder()
     }
+
 
 }
