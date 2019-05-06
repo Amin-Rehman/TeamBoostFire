@@ -16,7 +16,6 @@ class HostInMeetingTableViewController: UITableViewController {
         super.init(style: .plain)
     }
 
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -81,7 +80,6 @@ class HostInMeetingTableViewController: UITableViewController {
         } else {
             cell.orderLabel.isHidden = true
         }
-
     }
 
 }

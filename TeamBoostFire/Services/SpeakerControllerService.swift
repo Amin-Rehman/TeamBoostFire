@@ -10,23 +10,21 @@ protocol SpeakerControllerOrderObserver: class {
 class SpeakerControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
-    var timer: Timer?
+    var speakerTimer: Timer?
+    var secondTickTimer: Timer?
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
-        setupTimer()
-    }
 
-    private func setupTimer() {
-        let meetingParams = CoreServices.shared.meetingParams
-        timer = Timer.scheduledTimer(timeInterval: Double(meetingParams!.maxTalkTime), target: self,
-                                     selector: #selector(rotateSpeakerOrder),
-                                     userInfo: nil, repeats: true)
+        shuffleSpeakerOrder()
+        startSpeakerTimer()
     }
 
     @objc func rotateSpeakerOrder() {
+        stopSpeakerTimer()
+
         guard var speakingOrder = CoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
@@ -35,6 +33,30 @@ class SpeakerControllerService {
         CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated()
 
+        startSpeakerTimer()
+
     }
+
+    private func shuffleSpeakerOrder() {
+        guard var speakingOrder = CoreServices.shared.speakerOrder else {
+            assertionFailure("No speaker order available in CoreServices")
+            return
+        }
+        speakingOrder = speakingOrder.shuffled()
+        CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+    }
+    
+    // MARK :- Speaker timer
+    private func startSpeakerTimer() {
+        speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
+                                            selector: #selector(rotateSpeakerOrder),
+                                            userInfo: nil, repeats: false)
+    }
+
+    private func stopSpeakerTimer() {
+        speakerTimer?.invalidate()
+        speakerTimer = nil
+    }
+
 }
 
