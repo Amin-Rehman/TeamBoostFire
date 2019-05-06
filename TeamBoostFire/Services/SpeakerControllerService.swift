@@ -7,11 +7,20 @@ protocol SpeakerControllerOrderObserver: class {
     func speakingOrderUpdated()
 }
 
+
+protocol SpeakerControllerSecondTickObserver: class {
+    func speakerSecondTicked()
+}
+
 class SpeakerControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
+    weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
+
     var speakerTimer: Timer?
     var secondTickTimer: Timer?
+
+    var secondTicker = 0
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver) {
@@ -20,9 +29,11 @@ class SpeakerControllerService {
 
         shuffleSpeakerOrder()
         startSpeakerTimer()
+        startSecondTickerTimer()
     }
 
     @objc func rotateSpeakerOrder() {
+        stopSecondTickerTimer()
         stopSpeakerTimer()
 
         guard var speakingOrder = CoreServices.shared.speakerOrder else {
@@ -33,8 +44,14 @@ class SpeakerControllerService {
         CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated()
 
+        startSecondTickerTimer()
         startSpeakerTimer()
 
+    }
+
+    @objc func secondTicked() {
+        secondTicker = secondTicker + 1
+        speakerSecondTickObserver?.speakerSecondTicked()
     }
 
     private func shuffleSpeakerOrder() {
@@ -45,7 +62,19 @@ class SpeakerControllerService {
         speakingOrder = speakingOrder.shuffled()
         CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
     }
-    
+
+    private func startSecondTickerTimer() {
+        secondTicker = 0
+        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                                               selector: #selector(secondTicked),
+                                               userInfo: nil, repeats: true)
+    }
+
+    private func stopSecondTickerTimer() {
+        secondTickTimer?.invalidate()
+        secondTickTimer = nil
+    }
+
     // MARK :- Speaker timer
     private func startSpeakerTimer() {
         speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,

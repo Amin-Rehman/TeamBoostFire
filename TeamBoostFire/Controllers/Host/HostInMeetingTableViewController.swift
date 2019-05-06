@@ -8,8 +8,9 @@
 
 import UIKit
 
-class HostInMeetingTableViewController: UITableViewController {
+class HostInMeetingTableViewController: UITableViewController, SpeakerControllerSecondTickObserver {
     var tableViewDataSource: [Participant]
+    weak var speakerControllerService: SpeakerControllerService?
 
     init() {
         self.tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
@@ -80,6 +81,10 @@ class HostInMeetingTableViewController: UITableViewController {
         } else {
             cell.orderLabel.isHidden = true
         }
+    }
+
+    func speakerSecondTicked() {
+        print("Speaker second tick!")
     }
 
 }

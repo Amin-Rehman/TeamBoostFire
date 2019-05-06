@@ -20,9 +20,11 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupSpeakerControllerService()
-        setupAgendaQuestion()
         setupChildTableViewController()
+
+        setupAgendaQuestion()
         updateUIWithSpeakerOrder()
     }
 
@@ -32,8 +34,9 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
             return
         }
 
-        speakerControllerService = SpeakerControllerService(meetingParams: meetingParams,
-                                                            orderObserver: self)
+        speakerControllerService = SpeakerControllerService(
+            meetingParams: meetingParams,
+            orderObserver: self)
     }
 
     private func setupAgendaQuestion() {
@@ -47,13 +50,15 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     private func setupChildTableViewController() {
+        assert(speakerControllerService != nil, "Speaker controller service is not instantiated")
         hostInMeetingTableViewController.view.frame = childContainerView.bounds;
         hostInMeetingTableViewController.willMove(toParent: self)
         childContainerView.addSubview(hostInMeetingTableViewController.view)
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
+        hostInMeetingTableViewController.speakerControllerService = speakerControllerService
+        speakerControllerService?.speakerSecondTickObserver = hostInMeetingTableViewController
     }
-
 
     private func updateUIWithSpeakerOrder() {
         hostInMeetingTableViewController.tableViewDataSource = CoreServices.shared.allParticipants!
@@ -67,6 +72,5 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     func speakingOrderUpdated() {
         updateUIWithSpeakerOrder()
     }
-
 
 }
