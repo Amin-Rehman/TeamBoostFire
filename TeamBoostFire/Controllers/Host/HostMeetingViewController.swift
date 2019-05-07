@@ -70,7 +70,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
             return
         }
         let meetingTimeInMinutes = meetingParams.meetingTime
-        totalMeetingTimeInSeconds = meetingTimeInMinutes * 3600
+        totalMeetingTimeInSeconds = meetingTimeInMinutes * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
         let initialTimeElapsedString = "00:00/" + totalMeetingTimeString
         timeElapsedLabel?.text = initialTimeElapsedString
