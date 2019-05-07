@@ -38,6 +38,8 @@
 		EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */; };
 		EBBB4A87227B501600D61976 /* ParticipantSelfSpeakerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */; };
 		EBBB4A89227F84A800D61976 /* SpeakerControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* SpeakerControllerService.swift */; };
+		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
+		EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */; };
 		EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF347802278C20B008A6154 /* ArrayRotation.swift */; };
 		EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
@@ -93,6 +95,8 @@
 		EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantSelfSpeakerViewController.swift; sourceTree = "<group>"; };
 		EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantSelfSpeakerViewController.xib; sourceTree = "<group>"; };
 		EBBB4A88227F84A800D61976 /* SpeakerControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerControllerService.swift; sourceTree = "<group>"; };
+		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
+		EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyStringTests.swift; sourceTree = "<group>"; };
 		EBF347802278C20B008A6154 /* ArrayRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayRotation.swift; sourceTree = "<group>"; };
 		EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostFireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireTests.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				EBF347802278C20B008A6154 /* ArrayRotation.swift */,
+				EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			children = (
 				EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */,
 				EBF3479F2278E69E008A6154 /* Info.plist */,
+				EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */,
 			);
 			path = TeamBoostFireTests;
 			sourceTree = "<group>";
@@ -499,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */,
 				EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +524,7 @@
 				EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */,
 				EBFF147E2279ABD6006F218F /* StubMeeting.swift in Sources */,
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
+				EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
 				EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */,
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,

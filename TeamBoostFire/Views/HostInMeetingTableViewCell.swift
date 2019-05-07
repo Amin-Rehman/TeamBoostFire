@@ -12,6 +12,7 @@ class HostInMeetingTableViewCell: UITableViewCell {
     @IBOutlet weak var participantNameLabel: UILabel!
     @IBOutlet weak var redCircleImage: UIImageView!
     @IBOutlet weak var orderLabel: UILabel!
+    @IBOutlet weak var speakingTimeLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

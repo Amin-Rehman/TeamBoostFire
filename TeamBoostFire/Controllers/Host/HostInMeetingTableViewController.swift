@@ -10,12 +10,13 @@ import UIKit
 
 class HostInMeetingTableViewController: UITableViewController {
     var tableViewDataSource: [Participant]
+    weak var speakerControllerService: SpeakerControllerService?
 
     init() {
-        self.tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
+        tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
         super.init(style: .plain)
+        self.tableView.allowsSelection = false
     }
-
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,11 +46,16 @@ class HostInMeetingTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HostInMeetingTableViewCell",
                                                  for: indexPath) as! HostInMeetingTableViewCell
         let cellParticipant = tableViewDataSource[indexPath.row]
+        let participantIdentifier = cellParticipant.id
+
         cell.participantNameLabel.text = cellParticipant.name
+        if let timeSpoken = speakerControllerService?.participantSpeakingRecord[participantIdentifier] {
+            cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
+        }
+
         let speakerOrder = cellParticipant.speakerOrder
 
         let isCurrentSpeaker = (cellParticipant.speakerOrder == 0)
-
         if isCurrentSpeaker {
             showAndAnimateRedCircle(for: cell)
             cell.orderLabel.isHidden = true
@@ -62,8 +68,8 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
-            cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseInOut], animations: {
+            cell.redCircleImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: nil)
         cell.redCircleImage.isHidden = false
     }
@@ -75,13 +81,24 @@ class HostInMeetingTableViewController: UITableViewController {
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
                                            speakingOrder:Int) {
-        if speakingOrder < 3 {
+        let nextSpeakersToShow = 3
+        if speakingOrder <= nextSpeakersToShow {
             cell.orderLabel.text = String(speakingOrder)
             cell.orderLabel.isHidden = false
         } else {
             cell.orderLabel.isHidden = true
         }
-
     }
+}
 
+extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver {
+    func speakerSecondTicked(participantIdentifier: String) {
+        guard let index = tableViewDataSource.firstIndex(where: { $0.id == participantIdentifier }) else {
+            assertionFailure("Unable to find participant in the table view datasource")
+            return
+        }
+
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
 }
