@@ -47,15 +47,15 @@ class HostInMeetingTableViewController: UITableViewController {
                                                  for: indexPath) as! HostInMeetingTableViewCell
         let cellParticipant = tableViewDataSource[indexPath.row]
         let participantIdentifier = cellParticipant.id
-        let timeSpoken = speakerControllerService?.participantSpeakingRecord[participantIdentifier]
 
         cell.participantNameLabel.text = cellParticipant.name
-        cell.speakingTimeLabel.text = String(timeSpoken!)
+        if let timeSpoken = speakerControllerService?.participantSpeakingRecord[participantIdentifier] {
+            cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
+        }
+
         let speakerOrder = cellParticipant.speakerOrder
 
-
         let isCurrentSpeaker = (cellParticipant.speakerOrder == 0)
-
         if isCurrentSpeaker {
             showAndAnimateRedCircle(for: cell)
             cell.orderLabel.isHidden = true
