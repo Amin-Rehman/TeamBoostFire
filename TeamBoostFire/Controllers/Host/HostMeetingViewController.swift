@@ -12,9 +12,16 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
     @IBOutlet weak var childContainerView: UIView!
     @IBOutlet weak var agendaQuestionLabel: UILabel!
+    @IBOutlet weak var timeElapsedLabel: UILabel!
+    @IBOutlet weak var timeElapsedProgressView: UIProgressView!
+    
+    private var secondTickTimer: Timer?
+    private var totalMeetingTimeInSeconds = 0
+    private var totalMeetingTimeString = String()
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
     var currentSpeakerIndex = 0
+    private var secondTimerCount = 0
 
     var speakerControllerService: SpeakerControllerService?
 
@@ -24,8 +31,50 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         setupSpeakerControllerService()
         setupChildTableViewController()
 
+        setupInitialElapsedMeetingTimeRatio()
         setupAgendaQuestion()
         updateUIWithSpeakerOrder()
+        startSecondTickerTimer()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopSecondTickerTimer()
+    }
+
+    private func startSecondTickerTimer() {
+        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                                               selector: #selector(secondTicked),
+                                               userInfo: nil, repeats: true)
+    }
+
+    private func stopSecondTickerTimer() {
+        secondTickTimer?.invalidate()
+        secondTickTimer = nil
+    }
+
+    @objc func secondTicked() {
+        secondTimerCount = secondTimerCount + 1
+        let timeElapsedString = secondTimerCount.minutesAndSecondsPrettyString()
+        let timeElapsedRatioString = timeElapsedString + "/" + totalMeetingTimeString
+        timeElapsedLabel?.text = timeElapsedRatioString
+
+        let progressRatio = Float(secondTimerCount) / Float(totalMeetingTimeInSeconds)
+        timeElapsedProgressView.progress = progressRatio
+    }
+
+
+    private func setupInitialElapsedMeetingTimeRatio() {
+        guard let meetingParams = CoreServices.shared.meetingParams else {
+            assertionFailure("Unable to retrieve meeting params")
+            return
+        }
+        let meetingTimeInMinutes = meetingParams.meetingTime
+        totalMeetingTimeInSeconds = meetingTimeInMinutes * 3600
+        totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
+        let initialTimeElapsedString = "00:00/" + totalMeetingTimeString
+        timeElapsedLabel?.text = initialTimeElapsedString
+        timeElapsedProgressView.progress = 0.0
     }
 
     private func setupSpeakerControllerService() {
