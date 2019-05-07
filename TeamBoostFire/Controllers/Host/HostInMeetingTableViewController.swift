@@ -68,8 +68,8 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
-            cell.redCircleImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseInOut], animations: {
+            cell.redCircleImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }, completion: nil)
         cell.redCircleImage.isHidden = false
     }
