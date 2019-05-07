@@ -13,8 +13,9 @@ class HostInMeetingTableViewController: UITableViewController, SpeakerController
     weak var speakerControllerService: SpeakerControllerService?
 
     init() {
-        self.tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
+        tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
         super.init(style: .plain)
+        self.tableView.allowsSelection = false
     }
 
     required init?(coder aDecoder: NSCoder) {
