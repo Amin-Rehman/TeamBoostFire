@@ -10,8 +10,8 @@ import Foundation
 
 extension Int {
     func minutesAndSecondsPrettyString() -> String {
-        let seconds = self % 3600
-        let minutes = self / 3600
+        let seconds = self % 60
+        let minutes = self / 60
 
         var secondsString: String
         var minutesString: String
