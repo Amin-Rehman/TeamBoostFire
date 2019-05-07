@@ -9,7 +9,7 @@ protocol SpeakerControllerOrderObserver: class {
 
 
 protocol SpeakerControllerSecondTickObserver: class {
-    func speakerSecondTicked()
+    func speakerSecondTicked(participantIdentifier: String)
 }
 
 class SpeakerControllerService {
@@ -20,16 +20,30 @@ class SpeakerControllerService {
     var speakerTimer: Timer?
     var secondTickTimer: Timer?
 
-    var secondTicker = 0
+
+    public private(set) var participantSpeakingRecord = [String: Int]()
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
 
+        setupParticipantSpeakingRecord()
         shuffleSpeakerOrder()
         startSpeakerTimer()
         startSecondTickerTimer()
+    }
+
+    func setupParticipantSpeakingRecord() {
+        guard let allParticipantIdentifiers = CoreServices.shared.speakerOrder else {
+            assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
+            return
+        }
+
+        for identifiers in allParticipantIdentifiers {
+            participantSpeakingRecord[identifiers] = 0
+        }
+
     }
 
     @objc func rotateSpeakerOrder() {
@@ -50,8 +64,20 @@ class SpeakerControllerService {
     }
 
     @objc func secondTicked() {
-        secondTicker = secondTicker + 1
-        speakerSecondTickObserver?.speakerSecondTicked()
+        guard let speakerOrder = CoreServices.shared.speakerOrder,
+            let currentSpeakerIdentifier = speakerOrder.first else {
+            assertionFailure("Unable to retrieve current speaker")
+            return
+        }
+
+        guard var speakerTime = participantSpeakingRecord[currentSpeakerIdentifier] else {
+            assertionFailure("Unable to retrieve speaker time")
+            return
+        }
+
+        speakerTime = speakerTime + 1
+        participantSpeakingRecord[currentSpeakerIdentifier] = speakerTime
+        speakerSecondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 
     private func shuffleSpeakerOrder() {
@@ -64,7 +90,6 @@ class SpeakerControllerService {
     }
 
     private func startSecondTickerTimer() {
-        secondTicker = 0
         secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
                                                selector: #selector(secondTicked),
                                                userInfo: nil, repeats: true)
