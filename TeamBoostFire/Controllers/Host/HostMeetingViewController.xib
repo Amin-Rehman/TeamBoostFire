@@ -74,12 +74,21 @@
                     <state key="normal" title="Action Item"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kf3-G9-107" userLabel="Table View Content Area">
-                    <rect key="frame" x="24" y="238" width="366" height="564"/>
+                    <rect key="frame" x="24" y="238" width="366" height="546"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXN-pM-ob8">
+                    <rect key="frame" x="132" y="808" width="150" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Vvz-3p-x6u"/>
+                        <constraint firstAttribute="width" constant="150" id="lHr-yL-P18"/>
+                    </constraints>
+                    <state key="normal" title="End Meeting"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="kXN-pM-ob8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0er-wF-EzZ"/>
                 <constraint firstItem="lmu-2e-eS9" firstAttribute="leading" secondItem="Hh7-kI-Aae" secondAttribute="leading" id="32H-ej-CaW"/>
                 <constraint firstItem="e86-hC-GdM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="7WX-vW-K9x"/>
                 <constraint firstItem="wFV-Sy-pr3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9lt-QN-0H2"/>
@@ -91,9 +100,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kf3-G9-107" secondAttribute="trailing" constant="24" id="PNC-pc-cGk"/>
                 <constraint firstItem="lmu-2e-eS9" firstAttribute="top" secondItem="Hh7-kI-Aae" secondAttribute="bottom" constant="4" id="Tg8-mH-Eo2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hh7-kI-Aae" secondAttribute="trailing" constant="24" id="TxH-zG-RId"/>
+                <constraint firstItem="kXN-pM-ob8" firstAttribute="top" secondItem="Kf3-G9-107" secondAttribute="bottom" constant="24" id="WuA-9G-Kd4"/>
+                <constraint firstItem="kXN-pM-ob8" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-24" id="YnA-Fn-64e"/>
                 <constraint firstItem="Kf3-G9-107" firstAttribute="top" secondItem="e86-hC-GdM" secondAttribute="bottom" constant="24" id="aLK-aW-3PB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lmu-2e-eS9" secondAttribute="trailing" constant="24" id="bND-Qj-FKb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Kf3-G9-107" secondAttribute="bottom" constant="60" id="d3t-kb-Vh4"/>
                 <constraint firstItem="2s1-l1-nvs" firstAttribute="bottom" secondItem="wFV-Sy-pr3" secondAttribute="bottom" id="j6O-kW-XpG"/>
                 <constraint firstItem="ItT-os-sEb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="kJY-eL-wbE"/>
                 <constraint firstAttribute="trailing" secondItem="ItT-os-sEb" secondAttribute="trailing" constant="24" id="mbm-C7-dqK"/>
