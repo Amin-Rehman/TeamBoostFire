@@ -31,6 +31,8 @@ class SpeakerControllerService {
         setupParticipantSpeakingRecord()
         shuffleSpeakerOrder()
         startSpeakerTimer()
+        // First second gets missed so brute force the first secondTicked
+        secondTicked()
         startSecondTickerTimer()
     }
 
