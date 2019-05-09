@@ -28,7 +28,7 @@
                 <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4J-H2-OAP">
                     <rect key="frame" x="0.0" y="20" width="320" height="116"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoP-On-ROX">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoP-On-ROX">
                             <rect key="frame" x="16" y="18" width="296" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="X3r-zk-TWI"/>
@@ -56,7 +56,7 @@
                         <constraint firstItem="CoP-On-ROX" firstAttribute="leading" secondItem="N4J-H2-OAP" secondAttribute="leading" constant="16" id="vFT-oZ-9iO"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Speaking Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBh-0Q-edH">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBh-0Q-edH">
                     <rect key="frame" x="12" y="158" width="296" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="SMb-l7-uec"/>
