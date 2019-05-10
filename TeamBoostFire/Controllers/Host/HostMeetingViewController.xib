@@ -84,6 +84,9 @@
                         <constraint firstAttribute="width" constant="160" id="tBF-8d-Jvu"/>
                     </constraints>
                     <state key="normal" title="Go to Next Participant"/>
+                    <connections>
+                        <action selector="goToNextParticipantTapped:" destination="-1" eventType="touchUpInside" id="dxo-uT-6jb"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXN-pM-ob8">
                     <rect key="frame" x="132" y="808" width="150" height="30"/>

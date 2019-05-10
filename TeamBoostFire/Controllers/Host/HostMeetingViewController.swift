@@ -122,4 +122,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         updateUIWithSpeakerOrder()
     }
 
+    @IBAction func goToNextParticipantTapped(_ sender: Any) {
+        speakerControllerService?.goToNextSpeaker()
+    }
 }
