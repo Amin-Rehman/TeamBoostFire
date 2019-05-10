@@ -45,7 +45,10 @@ class SpeakerControllerService {
         for identifiers in allParticipantIdentifiers {
             participantSpeakingRecord[identifiers] = 0
         }
+    }
 
+    public func goToNextSpeaker() {
+        rotateSpeakerOrder()
     }
 
     @objc func rotateSpeakerOrder() {

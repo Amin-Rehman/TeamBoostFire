@@ -122,4 +122,26 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         updateUIWithSpeakerOrder()
     }
 
+    @IBAction func endMeetingTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "End Meeting",
+                                                message: "Would you like to end meeting?",
+                                                preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // TODO: Ignore
+        }
+        alertController.addAction(cancelAction)
+
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // TODO: Cancel meeting
+        }
+        alertController.addAction(OKAction)
+
+        present(alertController, animated: true)
+    }
+
+    @IBAction func goToNextParticipantTapped(_ sender: Any) {
+        speakerControllerService?.goToNextSpeaker()
+    }
+
 }
