@@ -95,6 +95,9 @@
                         <constraint firstAttribute="width" constant="150" id="lHr-yL-P18"/>
                     </constraints>
                     <state key="normal" title="End Meeting"/>
+                    <connections>
+                        <action selector="endMeetingTapped:" destination="-1" eventType="touchUpInside" id="x7U-EQ-9W6"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
