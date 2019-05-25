@@ -44,7 +44,7 @@ class SpeakerControllerService {
                                                name: notificationName, object: nil)
     }
 
-    @objc private func participantIsDoneInterrupt(notification: NSNotification) {
+    @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
         rotateSpeakerOrder()
     }
 

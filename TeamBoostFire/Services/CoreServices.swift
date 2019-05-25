@@ -187,7 +187,8 @@ extension CoreServices {
     }
 
     public func registerParticipantIsDoneInterrupt() {
-        iAmDoneInterruptReference?.setValue(selfParticipantIdentifier)
+        let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
+        iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
 
     private func observeMeetingStateDidChange() {
