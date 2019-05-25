@@ -20,6 +20,7 @@ class CoreServices {
     private var speakerOrderReference: DatabaseReference?
     private var participantsReference: DatabaseReference?
     private var meetingParamsReference: DatabaseReference?
+    private var iAmDoneInterruptReference: DatabaseReference?
 
     private var meetingParamsTimeReference: DatabaseReference?
     private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
@@ -68,7 +69,6 @@ class CoreServices {
             let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: allParticipants)
-
         })
     }
 
@@ -99,6 +99,9 @@ extension CoreServices {
         meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
         meetingParamsReference?.setValue("")
 
+        iAmDoneInterruptReference = meetingReference?.referenceOfChild(with: .IAmDoneInterrupt)
+        iAmDoneInterruptReference?.setValue("")
+
         meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         meetingParamsTimeReference?.setValue(params.meetingTime)
         meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
@@ -109,6 +112,7 @@ extension CoreServices {
         meetingParams = params
         observeParticipantListChanges()
         observeSpeakerOrderDidChange()
+        observeIAmDoneInterrupt()
     }
 
     public func startMeeting() {
@@ -147,6 +151,15 @@ extension CoreServices {
 
         allParticipants = updatedAllParticipants
     }
+
+    private func observeIAmDoneInterrupt() {
+        iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
+            let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: nil)
+        })
+    }
+
 }
 
 // MARK: - Participant
@@ -165,10 +178,17 @@ extension CoreServices {
         meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
 
+        iAmDoneInterruptReference = meetingReference?.referenceOfChild(with: .IAmDoneInterrupt)
+
         observeParticipantListChanges()
         observeMeetingStateDidChange()
         observeSpeakerOrderDidChange()
         observeMeetingParamsDidChange()
+    }
+
+    public func registerParticipantIsDoneInterrupt() {
+        let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
+        iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
 
     private func observeMeetingStateDidChange() {

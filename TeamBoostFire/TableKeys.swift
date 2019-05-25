@@ -14,5 +14,6 @@ enum TableKeys: String {
     case MeetingTime = "meeting_time"
     case Agenda = "agenda"
     case MaxTalkTime = "max_talk_time"
+    case IAmDoneInterrupt = "i_am_done_interrupt"
 }
 

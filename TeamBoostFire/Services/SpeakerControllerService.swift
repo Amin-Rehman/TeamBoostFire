@@ -34,6 +34,18 @@ class SpeakerControllerService {
         // First second gets missed so brute force the first secondTicked
         secondTicked()
         startSecondTickerTimer()
+        setupParticipantIsDoneInterrupt()
+    }
+
+    private func setupParticipantIsDoneInterrupt() {
+        let notificationName = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(participantIsDoneInterrupt(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
+        rotateSpeakerOrder()
     }
 
     func setupParticipantSpeakingRecord() {

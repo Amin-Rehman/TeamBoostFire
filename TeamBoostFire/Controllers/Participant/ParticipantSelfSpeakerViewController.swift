@@ -27,6 +27,10 @@ class ParticipantSelfSpeakerViewController: UIViewController {
         stopSecondTickerTimer()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
     private func startSecondTickerTimer() {
         secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
                                                selector: #selector(secondTicked),
@@ -39,6 +43,7 @@ class ParticipantSelfSpeakerViewController: UIViewController {
     }
 
     @IBAction func doneTapped(_ sender: Any) {
+        CoreServices.shared.registerParticipantIsDoneInterrupt()
         dismiss(animated: true, completion: nil)
     }
 
