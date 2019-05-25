@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // A boolean to pre-populate the UI with a pre-set meeting environment
     // Only for development
-    var testEnvironment = true
+    var testEnvironment = false
 
     var window: UIWindow?
     public var coreServices: CoreServices?
