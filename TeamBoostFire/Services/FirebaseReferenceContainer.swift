@@ -4,6 +4,9 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
+/**
+ A container which holds references to all the keys in the Firebase database
+ */
 struct FirebaseReferenceContainer {
     private(set) var databaseRef: DatabaseReference?
     private(set) var meetingReference: DatabaseReference?

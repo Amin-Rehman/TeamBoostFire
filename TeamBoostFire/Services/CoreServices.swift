@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-
 class CoreServices {
     static let shared = CoreServices()
     private var isHost: Bool
@@ -22,45 +21,14 @@ class CoreServices {
     private(set) public var selfParticipantIdentifier: String?
 
     private var firebaseReferenceContainer: FirebaseReferenceContainer
+    private var firebaseObserverUtility: FirebaseObserverUtility
 
     private init() {
         print("ALOG: CoreServices: Initialiser called")
         // TODO: Fixme
         self.firebaseReferenceContainer = FirebaseReferenceContainer(with: "foo")
+        self.firebaseObserverUtility = FirebaseObserverUtility(with: self.firebaseReferenceContainer)
         self.isHost = false
-    }
-
-    private func observeSpeakerOrderDidChange() {
-        firebaseReferenceContainer.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
-            guard let speakerOrder = snapshot.value as? [String] else {
-                return
-            }
-            self.speakerOrder = speakerOrder
-            let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: speakerOrder)
-        })
-    }
-
-    private func observeParticipantListChanges() {
-        firebaseReferenceContainer.participantsReference?.observe(DataEventType.value, with: { snapshot in
-            let allObjects = snapshot.children.allObjects as! [DataSnapshot]
-            var allParticipants =  [Participant]()
-            for object in allObjects {
-                let dict = object.value as! [String: String]
-                let participantIdentifier = dict["id"]
-                let participantName = dict["name"]
-                let participant = Participant(id: participantIdentifier!,
-                                              name: participantName!,
-                                              speakerOrder: -1)
-                allParticipants.append(participant)
-            }
-
-            self.allParticipants = allParticipants
-            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: allParticipants)
-        })
     }
 
 }
@@ -69,6 +37,7 @@ class CoreServices {
 extension CoreServices {
     public func setupMeetingAsHost(with params: MeetingsParams) {
         isHost = true
+        meetingParams = params
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.testEnvironment == true {
@@ -79,20 +48,19 @@ extension CoreServices {
 
         // TODO: Remove bang!
         firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
-
         firebaseReferenceContainer.meetingStateReference?.setValue("suspended")
         firebaseReferenceContainer.speakerOrderReference?.setValue([""])
         firebaseReferenceContainer.meetingParamsReference?.setValue("")
         firebaseReferenceContainer.iAmDoneInterruptReference?.setValue("")
-
         firebaseReferenceContainer.meetingParamsTimeReference?.setValue(params.meetingTime)
         firebaseReferenceContainer.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
 
-        meetingParams = params
-        observeParticipantListChanges()
-        observeSpeakerOrderDidChange()
-        observeIAmDoneInterrupt()
+        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+
+        firebaseObserverUtility.observeParticipantListChanges()
+        firebaseObserverUtility.observeSpeakerOrderDidChange()
+        firebaseObserverUtility.observeIAmDoneInterrupt()
     }
 
     public func startMeeting() {
@@ -131,14 +99,6 @@ extension CoreServices {
         allParticipants = updatedAllParticipants
     }
 
-    private func observeIAmDoneInterrupt() {
-        firebaseReferenceContainer.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
-            let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: nil)
-        })
-    }
-
 }
 
 // MARK: - Participant
@@ -150,53 +110,16 @@ extension CoreServices {
         firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
         firebaseReferenceContainer.participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
-        observeParticipantListChanges()
-        observeMeetingStateDidChange()
-        observeSpeakerOrderDidChange()
-        observeMeetingParamsDidChange()
+        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        firebaseObserverUtility.observeParticipantListChanges()
+        firebaseObserverUtility.observeMeetingStateDidChange()
+        firebaseObserverUtility.observeSpeakerOrderDidChange()
+        firebaseObserverUtility.observeMeetingParamsDidChange()
     }
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
         firebaseReferenceContainer.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
-    }
-
-    private func observeMeetingStateDidChange() {
-        firebaseReferenceContainer.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
-            let meetingState = MeetingState(rawValue: snapshot.value as! String)
-            let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: meetingState)
-        })
-    }
-
-    private func observeMeetingParamsDidChange() {
-        firebaseReferenceContainer.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
-            guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
-                assertionFailure("Error while retrieving agenda")
-                return
-            }
-
-            guard let meetingTime = snapshot.childSnapshot(forPath: TableKeys.MeetingTime.rawValue).value as? Int else {
-                assertionFailure("Error while retrieving meeting time")
-                return
-            }
-
-            guard let maxTalkTime = snapshot.childSnapshot(forPath: TableKeys.MaxTalkTime.rawValue).value as? Int else {
-                assertionFailure("Error while retrieving max talk time")
-                return
-            }
-
-
-            self.meetingParams = MeetingsParams(agenda: agenda,
-                                                meetingTime: meetingTime,
-                                                maxTalkTime: maxTalkTime,
-                                                moderationMode: nil)
-
-            let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: self.meetingParams)
-        })
     }
 
 }
