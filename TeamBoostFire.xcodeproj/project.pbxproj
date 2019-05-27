@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		271A8C1FDC01D84560074987 /* Pods_TeamBoostFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6636C804E2430BA83BAA878 /* Pods_TeamBoostFire.framework */; };
 		DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */; };
+		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
 		EB1D48B0226729FD001A754D /* CoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* CoreServices.swift */; };
@@ -66,6 +67,7 @@
 		606177A8447B888DA624D051 /* Pods-TeamBoostFire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFire.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire.release.xcconfig"; sourceTree = "<group>"; };
 		60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamBoostFireTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AF226729FD001A754D /* CoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreServices.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			children = (
 				EB1D48AF226729FD001A754D /* CoreServices.swift */,
 				EBBB4A88227F84A800D61976 /* SpeakerControllerService.swift */,
+				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				EB1FAB9A22777B3C0037A6A5 /* TableKeys.swift in Sources */,
 				EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */,
 				EBBB4A89227F84A800D61976 /* SpeakerControllerService.swift in Sources */,
+				EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */,
 				EB1FAB972268AF300037A6A5 /* HostInMeetingTableViewController.swift in Sources */,
 				EB1D48B222672E45001A754D /* MeetingParams.swift in Sources */,
 				EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */,

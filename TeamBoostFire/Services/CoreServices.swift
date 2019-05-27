@@ -10,21 +10,10 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
+
 class CoreServices {
     static let shared = CoreServices()
-
     private var isHost: Bool
-    private var databaseRef: DatabaseReference?
-    private var meetingReference: DatabaseReference?
-    private var meetingStateReference: DatabaseReference?
-    private var speakerOrderReference: DatabaseReference?
-    private var participantsReference: DatabaseReference?
-    private var meetingParamsReference: DatabaseReference?
-    private var iAmDoneInterruptReference: DatabaseReference?
-
-    private var meetingParamsTimeReference: DatabaseReference?
-    private var meetingParamsMaxTalkingTimeReference: DatabaseReference?
-    private var meetingParamsAgendaReference: DatabaseReference?
 
     public private(set) var allParticipants: [Participant]?
     public private(set) var speakerOrder: [String]?
@@ -32,15 +21,17 @@ class CoreServices {
     private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfParticipantIdentifier: String?
 
+    private var firebaseReferenceContainer: FirebaseReferenceContainer
+
     private init() {
         print("ALOG: CoreServices: Initialiser called")
-        FirebaseApp.configure()
-        self.databaseRef = Database.database().reference()
+        // TODO: Fixme
+        self.firebaseReferenceContainer = FirebaseReferenceContainer(with: "foo")
         self.isHost = false
     }
 
     private func observeSpeakerOrderDidChange() {
-        speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceContainer.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
             }
@@ -52,7 +43,7 @@ class CoreServices {
     }
 
     private func observeParticipantListChanges() {
-        participantsReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceContainer.participantsReference?.observe(DataEventType.value, with: { snapshot in
             let allObjects = snapshot.children.allObjects as! [DataSnapshot]
             var allParticipants =  [Participant]()
             for object in allObjects {
@@ -82,32 +73,21 @@ extension CoreServices {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.testEnvironment == true {
             meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
-
         } else {
             meetingIdentifier = String.makeSixDigitUUID()
         }
 
-        meetingReference = databaseRef?.child(meetingIdentifier!)
+        // TODO: Remove bang!
+        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
 
-        meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
-        meetingStateReference?.setValue("suspended")
+        firebaseReferenceContainer.meetingStateReference?.setValue("suspended")
+        firebaseReferenceContainer.speakerOrderReference?.setValue([""])
+        firebaseReferenceContainer.meetingParamsReference?.setValue("")
+        firebaseReferenceContainer.iAmDoneInterruptReference?.setValue("")
 
-        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
-        speakerOrderReference?.setValue([""])
-
-        participantsReference = meetingReference?.referenceOfChild(with: .Participants)
-        meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
-        meetingParamsReference?.setValue("")
-
-        iAmDoneInterruptReference = meetingReference?.referenceOfChild(with: .IAmDoneInterrupt)
-        iAmDoneInterruptReference?.setValue("")
-
-        meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
-        meetingParamsTimeReference?.setValue(params.meetingTime)
-        meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
-        meetingParamsAgendaReference?.setValue(params.agenda)
-        meetingParamsMaxTalkingTimeReference = meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
-        meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+        firebaseReferenceContainer.meetingParamsTimeReference?.setValue(params.meetingTime)
+        firebaseReferenceContainer.meetingParamsAgendaReference?.setValue(params.agenda)
+        firebaseReferenceContainer.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
 
         meetingParams = params
         observeParticipantListChanges()
@@ -127,18 +107,17 @@ extension CoreServices {
         }
 
         updateSpeakerOrder(with: allParticipantIdentifiers)
-
-        meetingStateReference?.setValue("started")
+        firebaseReferenceContainer.meetingStateReference?.setValue("started")
     }
 
     public func endMeeting() {
-        meetingStateReference?.setValue("ended")
+        firebaseReferenceContainer.meetingStateReference?.setValue("ended")
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
         assert(isHost, "Only Host can update speaker order")
         speakerOrder = identifiers
-        speakerOrderReference?.setValue(speakerOrder)
+        firebaseReferenceContainer.speakerOrderReference?.setValue(speakerOrder)
 
         var updatedAllParticipants = [Participant]()
         for participant in allParticipants! {
@@ -153,7 +132,7 @@ extension CoreServices {
     }
 
     private func observeIAmDoneInterrupt() {
-        iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceContainer.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
             let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: nil)
@@ -168,18 +147,9 @@ extension CoreServices {
         isHost = false
         meetingIdentifier = meetingCode
         selfParticipantIdentifier = participant.id
-        meetingReference = databaseRef?.child(meetingIdentifier!)
-        meetingStateReference = meetingReference?.referenceOfChild(with: .MeetingState)
-        speakerOrderReference = meetingReference?.referenceOfChild(with: .SpeakerOrder)
-        participantsReference = meetingReference?.referenceOfChild(with: .Participants)
-        participantsReference?.child(participant.id).setValue(["name": participant.name,
+        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
+        firebaseReferenceContainer.participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                "id":participant.id])
-        meetingParamsReference = meetingReference?.referenceOfChild(with: .MeetingParams)
-        meetingParamsTimeReference = meetingParamsReference?.referenceOfChild(with: .MeetingTime)
-        meetingParamsAgendaReference = meetingParamsReference?.referenceOfChild(with: .Agenda)
-
-        iAmDoneInterruptReference = meetingReference?.referenceOfChild(with: .IAmDoneInterrupt)
-
         observeParticipantListChanges()
         observeMeetingStateDidChange()
         observeSpeakerOrderDidChange()
@@ -188,11 +158,11 @@ extension CoreServices {
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
-        iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
+        firebaseReferenceContainer.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
 
     private func observeMeetingStateDidChange() {
-        meetingStateReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceContainer.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
             let meetingState = MeetingState(rawValue: snapshot.value as! String)
             let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
             NotificationCenter.default.post(name: name,
@@ -201,7 +171,7 @@ extension CoreServices {
     }
 
     private func observeMeetingParamsDidChange() {
-        meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceContainer.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
             guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
                 assertionFailure("Error while retrieving agenda")
                 return
@@ -231,7 +201,6 @@ extension CoreServices {
 
 }
 
-
 // MARK: - String extension
 extension String {
     fileprivate static func makeSixDigitUUID() -> String {
@@ -239,11 +208,5 @@ extension String {
         return shortUUID.components(separatedBy: "-").first!
     }
 
-}
-
-extension DatabaseReference {
-    func referenceOfChild(with key: TableKeys) -> DatabaseReference {
-        return self.child(key.rawValue)
-    }
 }
 
