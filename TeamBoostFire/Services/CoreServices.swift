@@ -10,15 +10,21 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-class HostCoreServices {
+
+protocol TeamBoostCore: class {
+    var speakerOrder: [String]? { get set }
+    var allParticipants: [Participant]? { get set }
+    var meetingParams: MeetingsParams? { get set }
+}
+
+class HostCoreServices: TeamBoostCore {
+    var speakerOrder: [String]?
+    var allParticipants: [Participant]?
+    var meetingParams: MeetingsParams?
+
     static let shared = HostCoreServices()
-    public var speakerOrder: [String]?
 
-    public private(set) var allParticipants: [Participant]?
     private(set) public var meetingIdentifier: String?
-    private(set) public var meetingParams: MeetingsParams?
-    private(set) public var selfParticipantIdentifier: String?
-
     private var firebaseReferenceContainer: FirebaseReferenceContainer?
     private var firebaseObserverUtility: FirebaseObserverUtility?
 
@@ -46,7 +52,8 @@ class HostCoreServices {
             assertionFailure("guardedFirebaseReferenceContainer not properly setup")
             return
         }
-        firebaseObserverUtility = FirebaseObserverUtility(with: guardedFirebaseReferenceContainer)
+        firebaseObserverUtility = FirebaseObserverUtility(with: guardedFirebaseReferenceContainer,
+                                                          teamBoostCore: self)
 
         firebaseReferenceContainer?.meetingStateReference?.setValue("suspended")
         firebaseReferenceContainer?.speakerOrderReference?.setValue([""])
@@ -91,18 +98,16 @@ class HostCoreServices {
 
         allParticipants = updatedAllParticipants
     }
-
-
 }
 
 
-class ParticipantCoreServices {
-    static let shared = ParticipantCoreServices()
+class ParticipantCoreServices: TeamBoostCore {
+    var speakerOrder: [String]?
+    var allParticipants: [Participant]?
+    var meetingParams: MeetingsParams?
 
-    public private(set) var allParticipants: [Participant]?
-    public private(set) var speakerOrder: [String]?
+    static let shared = ParticipantCoreServices()
     private(set) public var meetingIdentifier: String?
-    private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfParticipantIdentifier: String?
 
     private var firebaseReferenceContainer: FirebaseReferenceContainer?
@@ -119,6 +124,7 @@ class ParticipantCoreServices {
         } else {
             self.meetingIdentifier = meetingCode
         }
+        selfParticipantIdentifier = participant.id
         self.firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
         firebaseReferenceContainer?.participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                                           "id":participant.id])
@@ -127,7 +133,8 @@ class ParticipantCoreServices {
             assertionFailure("fireBaseReferenceContainer unable to be initialised")
             return
         }
-        self.firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        self.firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer,
+                                                               teamBoostCore: self)
     }
 
     public func registerParticipantIsDoneInterrupt() {

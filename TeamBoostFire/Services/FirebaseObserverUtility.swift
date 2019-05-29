@@ -8,9 +8,12 @@ import FirebaseDatabase
 
 struct FirebaseObserverUtility {
     let firebaseReferenceContainer: FirebaseReferenceContainer
+    weak var teamBoostCore: TeamBoostCore?
     
-    init(with firebaseReferenceContainer: FirebaseReferenceContainer) {
+    init(with firebaseReferenceContainer: FirebaseReferenceContainer,
+        teamBoostCore: TeamBoostCore) {
         self.firebaseReferenceContainer = firebaseReferenceContainer
+        self.teamBoostCore = teamBoostCore
         self.observeSpeakerOrderDidChange()
         self.observeParticipantListChanges()
         self.observeIAmDoneInterrupt()
@@ -23,7 +26,7 @@ struct FirebaseObserverUtility {
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
             }
-            HostCoreServices.shared.speakerOrder = speakerOrder
+            self.teamBoostCore?.speakerOrder = speakerOrder
             let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: speakerOrder)
@@ -44,7 +47,7 @@ struct FirebaseObserverUtility {
                 allParticipants.append(participant)
             }
 
-            self.allParticipants = allParticipants
+            self.teamBoostCore?.allParticipants = allParticipants
             let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: allParticipants)
@@ -90,7 +93,7 @@ struct FirebaseObserverUtility {
                                                 maxTalkTime: maxTalkTime,
                                                 moderationMode: nil)
 
-            self.meetingParams = meetingParams
+            self.teamBoostCore?.meetingParams = meetingParams
 
             let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
             NotificationCenter.default.post(name: name,
