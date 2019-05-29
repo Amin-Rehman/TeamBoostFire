@@ -12,8 +12,8 @@ import UIKit
 struct HostSetupMeetingUseCase {
     static func perform(at viewController: UIViewController,
                         meetingParams: MeetingsParams) {
-        let coreServices = CoreServices.shared
-        coreServices.setupMeetingAsHost(with: meetingParams)
+        let coreServices = HostCoreServices.shared
+        coreServices.setupCore(with: meetingParams)
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
     }

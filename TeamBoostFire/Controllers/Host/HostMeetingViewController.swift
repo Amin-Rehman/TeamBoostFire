@@ -65,7 +65,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
 
     private func setupInitialElapsedMeetingTimeRatio() {
-        guard let meetingParams = CoreServices.shared.meetingParams else {
+        guard let meetingParams = HostCoreServices.shared.meetingParams else {
             assertionFailure("Unable to retrieve meeting params")
             return
         }
@@ -78,7 +78,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     private func setupSpeakerControllerService() {
-        guard let meetingParams = CoreServices.shared.meetingParams else {
+        guard let meetingParams = HostCoreServices.shared.meetingParams else {
             assertionFailure("Unable to retrieve meeting params")
             return
         }
@@ -89,7 +89,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     private func setupAgendaQuestion() {
-        let meetingParams = CoreServices.shared.meetingParams
+        let meetingParams = HostCoreServices.shared.meetingParams
         guard let agenda = meetingParams?.agenda else {
             assertionFailure("Unable to retrieve agenda from meeting params")
             return
@@ -110,7 +110,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     private func updateUIWithSpeakerOrder() {
-        hostInMeetingTableViewController.tableViewDataSource = CoreServices.shared.allParticipants!
+        hostInMeetingTableViewController.tableViewDataSource = HostCoreServices.shared.allParticipants!
         hostInMeetingTableViewController.tableView.reloadData()
     }
 

@@ -72,7 +72,7 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func setupTopBar() {
-        guard let agenda = CoreServices.shared.meetingParams?.agenda else {
+        guard let agenda = HostCoreServices.shared.meetingParams?.agenda else {
             assertionFailure("No agenda found in CoreServices")
             return
         }
@@ -123,8 +123,8 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func currentSpeaker() -> Participant? {
-        let speakerOrder = CoreServices.shared.speakerOrder!
-        let allParticipants = CoreServices.shared.allParticipants!
+        let speakerOrder = ParticipantCoreServices.shared.speakerOrder!
+        let allParticipants = ParticipantCoreServices.shared.allParticipants!
         let currentSpeakerIdentifier = speakerOrder.first!
 
         for participant in allParticipants {
@@ -138,8 +138,8 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func speakingOrder() -> Int {
-        let speakerOrder = CoreServices.shared.speakerOrder!
-        let selfIdentifier = CoreServices.shared.selfParticipantIdentifier!
+        let speakerOrder = ParticipantCoreServices.shared.speakerOrder!
+        let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
         return speakerOrder.firstIndex(of: selfIdentifier)!
     }
 

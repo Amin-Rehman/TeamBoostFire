@@ -49,7 +49,7 @@ class SpeakerControllerService {
     }
 
     func setupParticipantSpeakingRecord() {
-        guard let allParticipantIdentifiers = CoreServices.shared.speakerOrder else {
+        guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
             assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
             return
         }
@@ -67,12 +67,12 @@ class SpeakerControllerService {
         stopSecondTickerTimer()
         stopSpeakerTimer()
 
-        guard var speakingOrder = CoreServices.shared.speakerOrder else {
+        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
         }
         speakingOrder = speakingOrder.circularRotate()
-        CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated()
 
         startSecondTickerTimer()
@@ -81,7 +81,7 @@ class SpeakerControllerService {
     }
 
     @objc func secondTicked() {
-        guard let speakerOrder = CoreServices.shared.speakerOrder,
+        guard let speakerOrder = HostCoreServices.shared.speakerOrder,
             let currentSpeakerIdentifier = speakerOrder.first else {
             assertionFailure("Unable to retrieve current speaker")
             return
@@ -98,12 +98,12 @@ class SpeakerControllerService {
     }
 
     private func shuffleSpeakerOrder() {
-        guard var speakingOrder = CoreServices.shared.speakerOrder else {
+        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
         }
         speakingOrder = speakingOrder.shuffled()
-        CoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
     }
 
     private func startSecondTickerTimer() {

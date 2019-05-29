@@ -10,33 +10,23 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-class CoreServices {
-    static let shared = CoreServices()
-    private var isHost: Bool
+class HostCoreServices {
+    static let shared = HostCoreServices()
+    public var speakerOrder: [String]?
 
     public private(set) var allParticipants: [Participant]?
-    public private(set) var speakerOrder: [String]?
     private(set) public var meetingIdentifier: String?
     private(set) public var meetingParams: MeetingsParams?
     private(set) public var selfParticipantIdentifier: String?
 
-    private var firebaseReferenceContainer: FirebaseReferenceContainer
-    private var firebaseObserverUtility: FirebaseObserverUtility
+    private var firebaseReferenceContainer: FirebaseReferenceContainer?
+    private var firebaseObserverUtility: FirebaseObserverUtility?
 
     private init() {
-        print("ALOG: CoreServices: Initialiser called")
-        // TODO: Fixme
-        self.firebaseReferenceContainer = FirebaseReferenceContainer(with: "foo")
-        self.firebaseObserverUtility = FirebaseObserverUtility(with: self.firebaseReferenceContainer)
-        self.isHost = false
+        print("ALOG: HostCoreServices: Initialiser called")
     }
 
-}
-
-// MARK: - Host
-extension CoreServices {
-    public func setupMeetingAsHost(with params: MeetingsParams) {
-        isHost = true
+    public func setupCore(with params: MeetingsParams) {
         meetingParams = params
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -46,21 +36,25 @@ extension CoreServices {
             meetingIdentifier = String.makeSixDigitUUID()
         }
 
-        // TODO: Remove bang!
-        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
-        firebaseReferenceContainer.meetingStateReference?.setValue("suspended")
-        firebaseReferenceContainer.speakerOrderReference?.setValue([""])
-        firebaseReferenceContainer.meetingParamsReference?.setValue("")
-        firebaseReferenceContainer.iAmDoneInterruptReference?.setValue("")
-        firebaseReferenceContainer.meetingParamsTimeReference?.setValue(params.meetingTime)
-        firebaseReferenceContainer.meetingParamsAgendaReference?.setValue(params.agenda)
-        firebaseReferenceContainer.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+        guard let meetingId = meetingIdentifier else {
+            assertionFailure("Unable to retrieve meeting identifier")
+            return
+        }
+        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingId)
 
-        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        guard let guardedFirebaseReferenceContainer = firebaseReferenceContainer else {
+            assertionFailure("guardedFirebaseReferenceContainer not properly setup")
+            return
+        }
+        firebaseObserverUtility = FirebaseObserverUtility(with: guardedFirebaseReferenceContainer)
 
-        firebaseObserverUtility.observeParticipantListChanges()
-        firebaseObserverUtility.observeSpeakerOrderDidChange()
-        firebaseObserverUtility.observeIAmDoneInterrupt()
+        firebaseReferenceContainer?.meetingStateReference?.setValue("suspended")
+        firebaseReferenceContainer?.speakerOrderReference?.setValue([""])
+        firebaseReferenceContainer?.meetingParamsReference?.setValue("")
+        firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue("")
+        firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
+        firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
+        firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
     }
 
     public func startMeeting() {
@@ -75,17 +69,16 @@ extension CoreServices {
         }
 
         updateSpeakerOrder(with: allParticipantIdentifiers)
-        firebaseReferenceContainer.meetingStateReference?.setValue("started")
+        firebaseReferenceContainer?.meetingStateReference?.setValue("started")
     }
 
     public func endMeeting() {
-        firebaseReferenceContainer.meetingStateReference?.setValue("ended")
+        firebaseReferenceContainer?.meetingStateReference?.setValue("ended")
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
-        assert(isHost, "Only Host can update speaker order")
         speakerOrder = identifiers
-        firebaseReferenceContainer.speakerOrderReference?.setValue(speakerOrder)
+        firebaseReferenceContainer?.speakerOrderReference?.setValue(speakerOrder)
 
         var updatedAllParticipants = [Participant]()
         for participant in allParticipants! {
@@ -99,29 +92,48 @@ extension CoreServices {
         allParticipants = updatedAllParticipants
     }
 
+
 }
 
-// MARK: - Participant
-extension CoreServices {
-    public func setupMeetingAsParticipant(participant: Participant, meetingCode: String) {
-        isHost = false
-        meetingIdentifier = meetingCode
-        selfParticipantIdentifier = participant.id
-        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
-        firebaseReferenceContainer.participantsReference?.child(participant.id).setValue(["name": participant.name,
-                                                               "id":participant.id])
-        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
-        firebaseObserverUtility.observeParticipantListChanges()
-        firebaseObserverUtility.observeMeetingStateDidChange()
-        firebaseObserverUtility.observeSpeakerOrderDidChange()
-        firebaseObserverUtility.observeMeetingParamsDidChange()
+
+class ParticipantCoreServices {
+    static let shared = ParticipantCoreServices()
+
+    public private(set) var allParticipants: [Participant]?
+    public private(set) var speakerOrder: [String]?
+    private(set) public var meetingIdentifier: String?
+    private(set) public var meetingParams: MeetingsParams?
+    private(set) public var selfParticipantIdentifier: String?
+
+    private var firebaseReferenceContainer: FirebaseReferenceContainer?
+    private var firebaseObserverUtility: FirebaseObserverUtility?
+
+    private init() {}
+
+    public func setupCore(with participant: Participant,
+                          meetingCode: String) {
+        print("ALOG: ParticipantCoreServices: setupCore called")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            self.meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+        } else {
+            self.meetingIdentifier = meetingCode
+        }
+        self.firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
+        firebaseReferenceContainer?.participantsReference?.child(participant.id).setValue(["name": participant.name,
+                                                                                          "id":participant.id])
+
+        guard let firebaseReferenceContainer = self.firebaseReferenceContainer else {
+            assertionFailure("fireBaseReferenceContainer unable to be initialised")
+            return
+        }
+        self.firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
     }
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
-        firebaseReferenceContainer.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
+        firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
-
 }
 
 // MARK: - String extension
