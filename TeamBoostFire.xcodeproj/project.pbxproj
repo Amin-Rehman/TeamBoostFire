@@ -11,9 +11,11 @@
 		DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */; };
+		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
+		EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
-		EB1D48B0226729FD001A754D /* CoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* CoreServices.swift */; };
+		EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* TeamBoostCore.swift */; };
 		EB1D48B222672E45001A754D /* MeetingParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48B122672E45001A754D /* MeetingParams.swift */; };
 		EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48B322672E82001A754D /* HostSetupMeetingUseCase.swift */; };
 		EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48B52267395E001A754D /* HostWaitingViewController.swift */; };
@@ -70,9 +72,11 @@
 		76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
 		EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserverUtility.swift; sourceTree = "<group>"; };
+		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
+		EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCoreServices.swift; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
-		EB1D48AF226729FD001A754D /* CoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreServices.swift; sourceTree = "<group>"; };
+		EB1D48AF226729FD001A754D /* TeamBoostCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostCore.swift; sourceTree = "<group>"; };
 		EB1D48B122672E45001A754D /* MeetingParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingParams.swift; sourceTree = "<group>"; };
 		EB1D48B322672E82001A754D /* HostSetupMeetingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingUseCase.swift; sourceTree = "<group>"; };
 		EB1D48B52267395E001A754D /* HostWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostWaitingViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +160,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EB18452E229FE69C00DFC75D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EB1D48AF226729FD001A754D /* TeamBoostCore.swift */,
+				EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */,
+				EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		EB1D48A82267260F001A754D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +242,7 @@
 		EBBB4A8A227F850900D61976 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				EB1D48AF226729FD001A754D /* CoreServices.swift */,
+				EB18452E229FE69C00DFC75D /* Core */,
 				EBBB4A88227F84A800D61976 /* SpeakerControllerService.swift */,
 				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
 				EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */,
@@ -520,6 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */,
 				EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */,
 				EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
@@ -534,6 +549,7 @@
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
 				EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */,
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
+				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
 				EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,
@@ -545,7 +561,7 @@
 				EB1FAB972268AF300037A6A5 /* HostInMeetingTableViewController.swift in Sources */,
 				EB1D48B222672E45001A754D /* MeetingParams.swift in Sources */,
 				EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */,
-				EB1D48B0226729FD001A754D /* CoreServices.swift in Sources */,
+				EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
