@@ -13,7 +13,7 @@ class HostInMeetingTableViewController: UITableViewController {
     weak var speakerControllerService: SpeakerControllerService?
 
     init() {
-        tableViewDataSource = CoreServices.shared.allParticipants ?? [Participant]()
+        tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
         super.init(style: .plain)
         self.tableView.allowsSelection = false
     }

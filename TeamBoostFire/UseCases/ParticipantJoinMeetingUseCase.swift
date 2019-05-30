@@ -11,7 +11,8 @@ import UIKit
 
 struct ParticipantJoinMeetingUseCase {
     static func perform(at viewController: UIViewController, participant: Participant, meetingCode: String) {
-        CoreServices.shared.setupMeetingAsParticipant(participant: participant, meetingCode: meetingCode)
+        ParticipantCoreServices.shared.setupCore(with: participant,
+                                                 meetingCode: meetingCode)
     }
 }
 

@@ -21,14 +21,27 @@ class ParticipantMainViewController: UIViewController {
     private var secondTimerCountForParticipant = 0
     private var secondTimerCountForMeeting = 0
 
-    private var speakerOrder = [String]()
+    private var speakerOrder: [String]?
     private var allParticipants = [Participant]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTopBar()
+        guard let guardedSpeakerOrder = ParticipantCoreServices.shared.speakerOrder else {
+            assertionFailure("Unable to load speaker order")
+            return
+        }
+        speakerOrder = guardedSpeakerOrder
+
         secondTimerCountForParticipant = 0
+        setupTopBar()
         updateSpeakingTimerLabel()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupSpeakerOrderObserver()
+        updateUIWithCurrentSpeaker()
+        startSecondTickerTimer()
     }
 
     private func startSecondTickerTimer() {
@@ -59,20 +72,13 @@ class ParticipantMainViewController: UIViewController {
         updateMeetingTimerLabel()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupSpeakerOrderObserver()
-        updateUIWithCurrentSpeaker()
-        startSecondTickerTimer()
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         stopSecondTickerTimer()
     }
 
     private func setupTopBar() {
-        guard let agenda = CoreServices.shared.meetingParams?.agenda else {
+        guard let agenda = ParticipantCoreServices.shared.meetingParams?.agenda else {
             assertionFailure("No agenda found in CoreServices")
             return
         }
@@ -80,8 +86,8 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func updateUIWithCurrentSpeaker() {
-        let selfSpeakingOrder = speakingOrder()
-        let isSpeakerSelf = selfSpeakingOrder == 0
+        let order = selfSpeakingOrder()
+        let isSpeakerSelf = order == 0
 
         if isSpeakerSelf {
             let selfSpeakerViewController = ParticipantSelfSpeakerViewController(
@@ -95,8 +101,8 @@ class ParticipantMainViewController: UIViewController {
             currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
 
             // Update self speaking order
-            let selfSpeakingOrder = speakingOrder()
-            speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
+            let order = selfSpeakingOrder()
+            speakingOrderLabel.text = "Speaking Order: \(order)"
         }
     }
 
@@ -108,6 +114,7 @@ class ParticipantMainViewController: UIViewController {
     }
 
     @objc private func speakerOrderDidChange(notification: NSNotification) {
+        speakerOrder = (notification.object as? [String]) ?? []
         secondTimerCountForParticipant = 0
         updateSpeakingTimerLabel()
         updateUIWithCurrentSpeaker()
@@ -123,9 +130,8 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func currentSpeaker() -> Participant? {
-        let speakerOrder = CoreServices.shared.speakerOrder!
-        let allParticipants = CoreServices.shared.allParticipants!
-        let currentSpeakerIdentifier = speakerOrder.first!
+        let allParticipants = ParticipantCoreServices.shared.allParticipants!
+        let currentSpeakerIdentifier = speakerOrder?.first!
 
         for participant in allParticipants {
             if participant.id == currentSpeakerIdentifier {
@@ -137,10 +143,9 @@ class ParticipantMainViewController: UIViewController {
         return nil
     }
 
-    private func speakingOrder() -> Int {
-        let speakerOrder = CoreServices.shared.speakerOrder!
-        let selfIdentifier = CoreServices.shared.selfParticipantIdentifier!
-        return speakerOrder.firstIndex(of: selfIdentifier)!
+    private func selfSpeakingOrder() -> Int {
+        let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
+        return speakerOrder!.firstIndex(of: selfIdentifier)!
     }
 
 }

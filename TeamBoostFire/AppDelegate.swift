@@ -18,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var testEnvironment = false
 
     var window: UIWindow?
-    public var coreServices: CoreServices?
+    public var hostCoreServices: HostCoreServices?
+    public var participantCoreServices: ParticipantCoreServices?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        coreServices = CoreServices.shared
+        hostCoreServices = HostCoreServices.shared
+        participantCoreServices = ParticipantCoreServices.shared
         return true
     }
 

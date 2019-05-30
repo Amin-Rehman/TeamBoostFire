@@ -25,7 +25,7 @@ class HostWaitingViewController: UIViewController {
         hostWaitingTableViewController.didMove(toParent: self)
 
         activityIndicatorView.startAnimating()
-        let meetingIdentifier = CoreServices.shared.meetingIdentifier
+        let meetingIdentifier = HostCoreServices.shared.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
         let notificationName = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
 
@@ -49,7 +49,7 @@ class HostWaitingViewController: UIViewController {
     }
 
     @IBAction func startMeetingClicked(_ sender: Any) {
-        CoreServices.shared.startMeeting()
+        HostCoreServices.shared.startMeeting()
         let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
                                                                   bundle: nil)
         self.navigationController?.pushViewController(hostMeetingViewController, animated: true)

@@ -43,10 +43,9 @@ class ParticipantSelfSpeakerViewController: UIViewController {
     }
 
     @IBAction func doneTapped(_ sender: Any) {
-        CoreServices.shared.registerParticipantIsDoneInterrupt()
+        ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
         dismiss(animated: true, completion: nil)
     }
-
 
     @objc func secondTicked() {
         secondTimerCount = secondTimerCount + 1
