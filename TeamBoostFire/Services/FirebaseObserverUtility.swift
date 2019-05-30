@@ -57,6 +57,18 @@ struct FirebaseObserverUtility {
         })
     }
 
+    public func observeCurrentSpeakerMaximumSpeakingTimeChanged() {
+        firebaseReferenceContainer.currentSpeakerMaximumSpeakingTime?.observe(DataEventType.value, with: { snapshot in
+            guard let currentParticipantMaxSpeakingTime = snapshot.value as? Int else {
+                assertionFailure("Unable to retrieve change in current participant maximum speaking time")
+                return
+            }
+            let name = Notification.Name(TeamBoostNotifications.currentParticipantMaxSpeakingTimeChanged.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: currentParticipantMaxSpeakingTime)
+        })
+    }
+
     public func observeMeetingStateDidChange() {
         firebaseReferenceContainer.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
             let meetingState = MeetingState(rawValue: snapshot.value as! String)

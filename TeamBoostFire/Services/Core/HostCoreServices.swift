@@ -45,6 +45,7 @@ class HostCoreServices: TeamBoostCore {
         firebaseReferenceContainer?.speakerOrderReference?.setValue([""])
         firebaseReferenceContainer?.meetingParamsReference?.setValue("")
         firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue("")
+        firebaseReferenceContainer?.currentSpeakerMaximumSpeakingTime?.setValue(0)
         firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
         firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)

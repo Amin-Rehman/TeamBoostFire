@@ -23,6 +23,7 @@ class ParticipantMainViewController: UIViewController {
 
     private var speakerOrder: [String]?
     private var allParticipants = [Participant]()
+    private var currentSpeakerMaxTalkTime: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,8 @@ class ParticipantMainViewController: UIViewController {
             return
         }
         speakerOrder = guardedSpeakerOrder
-
         secondTimerCountForParticipant = 0
+        currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
         setupTopBar()
         updateSpeakingTimerLabel()
     }
@@ -56,13 +57,20 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func updateSpeakingTimerLabel() {
-        let timeElapsedString = secondTimerCountForParticipant.minutesAndSecondsPrettyString()
-        speakerSpeakingTimeLabel.text = timeElapsedString
+        let speakingTimeLeft = currentSpeakerMaxTalkTime! - secondTimerCountForParticipant
+        let speakingTimeLeftString = speakingTimeLeft.minutesAndSecondsPrettyString()
+        speakerSpeakingTimeLabel.text = "Speaker Time left: \(speakingTimeLeftString)"
     }
 
     private func updateMeetingTimerLabel() {
-        let timeElapsedString = secondTimerCountForMeeting.minutesAndSecondsPrettyString()
-        meetingTimeLabel.text = timeElapsedString
+        guard let meetingTime = ParticipantCoreServices.shared.meetingParams?.meetingTime else {
+            assertionFailure("Participant cannot retrieve meeting time")
+            return
+        }
+        let meetingTimeSeconds = meetingTime * 60
+        let meetingTimeLeft = meetingTimeSeconds - secondTimerCountForMeeting
+        let meetingTimeLeftString = meetingTimeLeft.minutesAndSecondsPrettyString()
+        meetingTimeLabel.text = "Meeting Time left: \(meetingTimeLeftString)"
     }
 
     @objc func secondTicked() {
@@ -74,7 +82,7 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        stopSecondTickerTimer()
+        //stopSecondTickerTimer()
     }
 
     private func setupTopBar() {
@@ -116,9 +124,25 @@ class ParticipantMainViewController: UIViewController {
     @objc private func speakerOrderDidChange(notification: NSNotification) {
         speakerOrder = (notification.object as? [String]) ?? []
         secondTimerCountForParticipant = 0
+        currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
         updateSpeakingTimerLabel()
         updateUIWithCurrentSpeaker()
     }
+
+    private func setupCurrentSpeakerMaxTalkTimeChangedObserver() {
+        let notificationName = Notification.Name(
+            TeamBoostNotifications.currentParticipantMaxSpeakingTimeChanged.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(currentSpeakerMaxTalkTimeChanged(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func currentSpeakerMaxTalkTimeChanged(notification: NSNotification) {
+        currentSpeakerMaxTalkTime = notification.object as? Int ??
+            ParticipantCoreServices.shared.meetingParams?.maxTalkTime
+
+    }
+
 
     @IBAction func likeButtonTapped(_ sender: Any) {
     }
