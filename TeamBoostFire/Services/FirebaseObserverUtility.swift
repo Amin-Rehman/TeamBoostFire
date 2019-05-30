@@ -14,14 +14,9 @@ struct FirebaseObserverUtility {
         teamBoostCore: TeamBoostCore) {
         self.firebaseReferenceContainer = firebaseReferenceContainer
         self.teamBoostCore = teamBoostCore
-        self.observeSpeakerOrderDidChange()
-        self.observeParticipantListChanges()
-        self.observeIAmDoneInterrupt()
-        self.observeMeetingStateDidChange()
-        self.observeMeetingParamsDidChange()
     }
 
-    private func observeSpeakerOrderDidChange() {
+    public func observeSpeakerOrderDidChange() {
         firebaseReferenceContainer.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
@@ -33,7 +28,7 @@ struct FirebaseObserverUtility {
         })
     }
 
-    private func observeParticipantListChanges() {
+    public func observeParticipantListChanges() {
         firebaseReferenceContainer.participantsReference?.observe(DataEventType.value, with: { snapshot in
             let allObjects = snapshot.children.allObjects as! [DataSnapshot]
             var allParticipants =  [Participant]()
@@ -54,7 +49,7 @@ struct FirebaseObserverUtility {
         })
     }
 
-    private func observeIAmDoneInterrupt() {
+    public func observeIAmDoneInterrupt() {
         firebaseReferenceContainer.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
             let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
             NotificationCenter.default.post(name: name,
@@ -62,7 +57,7 @@ struct FirebaseObserverUtility {
         })
     }
 
-    private func observeMeetingStateDidChange() {
+    public func observeMeetingStateDidChange() {
         firebaseReferenceContainer.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
             let meetingState = MeetingState(rawValue: snapshot.value as! String)
             let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
@@ -71,7 +66,7 @@ struct FirebaseObserverUtility {
         })
     }
 
-    private func observeMeetingParamsDidChange() {
+    public func observeMeetingParamsDidChange() {
         firebaseReferenceContainer.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
             guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
                 assertionFailure("Error while retrieving agenda")
@@ -100,5 +95,4 @@ struct FirebaseObserverUtility {
                                             object: meetingParams)
         })
     }
-
 }

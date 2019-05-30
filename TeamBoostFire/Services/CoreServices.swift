@@ -62,6 +62,10 @@ class HostCoreServices: TeamBoostCore {
         firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
         firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+
+        firebaseObserverUtility?.observeParticipantListChanges()
+        firebaseObserverUtility?.observeSpeakerOrderDidChange()
+        firebaseObserverUtility?.observeIAmDoneInterrupt()
     }
 
     public func startMeeting() {
@@ -133,8 +137,13 @@ class ParticipantCoreServices: TeamBoostCore {
             assertionFailure("fireBaseReferenceContainer unable to be initialised")
             return
         }
-        self.firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer,
+
+        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer,
                                                                teamBoostCore: self)
+        firebaseObserverUtility?.observeParticipantListChanges()
+        firebaseObserverUtility?.observeMeetingStateDidChange()
+        firebaseObserverUtility?.observeSpeakerOrderDidChange()
+        firebaseObserverUtility?.observeMeetingParamsDidChange()
     }
 
     public func registerParticipantIsDoneInterrupt() {

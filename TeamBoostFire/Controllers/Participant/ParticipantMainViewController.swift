@@ -26,8 +26,9 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTopBar()
+        speakerOrder = ParticipantCoreServices.shared.speakerOrder ?? []
         secondTimerCountForParticipant = 0
+        setupTopBar()
         updateSpeakingTimerLabel()
     }
 
@@ -72,7 +73,7 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func setupTopBar() {
-        guard let agenda = HostCoreServices.shared.meetingParams?.agenda else {
+        guard let agenda = ParticipantCoreServices.shared.meetingParams?.agenda else {
             assertionFailure("No agenda found in CoreServices")
             return
         }
@@ -108,6 +109,7 @@ class ParticipantMainViewController: UIViewController {
     }
 
     @objc private func speakerOrderDidChange(notification: NSNotification) {
+        speakerOrder = (notification.object as? [String]) ?? []
         secondTimerCountForParticipant = 0
         updateSpeakingTimerLabel()
         updateUIWithCurrentSpeaker()
@@ -123,7 +125,6 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func currentSpeaker() -> Participant? {
-        let speakerOrder = ParticipantCoreServices.shared.speakerOrder!
         let allParticipants = ParticipantCoreServices.shared.allParticipants!
         let currentSpeakerIdentifier = speakerOrder.first!
 
@@ -138,7 +139,6 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func speakingOrder() -> Int {
-        let speakerOrder = ParticipantCoreServices.shared.speakerOrder!
         let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
         return speakerOrder.firstIndex(of: selfIdentifier)!
     }
