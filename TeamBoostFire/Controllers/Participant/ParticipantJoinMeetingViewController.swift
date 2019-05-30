@@ -22,6 +22,17 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardInteraction()
+        setupMeetingCodeTextFieldDelegates()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupTestEnvironmentIfNeeded()
+    }
+
+
+    private func setupKeyboardInteraction() {
         let center = NotificationCenter.default
         center.addObserver(self, selector:
             #selector(handleKeyboardAction),
@@ -36,6 +47,9 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
 
+    }
+
+    private func setupMeetingCodeTextFieldDelegates() {
         number1TextField.delegate = self
         number2TextField.delegate = self
         number3TextField.delegate = self
@@ -44,10 +58,6 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         number6TextField.delegate = self
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupTestEnvironmentIfNeeded()
-    }
 
     private func setupTestEnvironmentIfNeeded() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

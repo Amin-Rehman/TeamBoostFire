@@ -10,7 +10,7 @@ import UIKit
 
 class HostInMeetingTableViewController: UITableViewController {
     var tableViewDataSource: [Participant]
-    weak var speakerControllerService: SpeakerControllerService?
+    weak var hostControllerService: HostControllerService?
 
     init() {
         tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
@@ -49,7 +49,7 @@ class HostInMeetingTableViewController: UITableViewController {
         let participantIdentifier = cellParticipant.id
 
         cell.participantNameLabel.text = cellParticipant.name
-        if let timeSpoken = speakerControllerService?.participantSpeakingRecord[participantIdentifier] {
+        if let timeSpoken = hostControllerService?.participantSpeakingRecord[participantIdentifier] {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 

@@ -20,10 +20,10 @@ class ParticipantMainViewController: UIViewController {
     private var secondTickTimer: Timer?
     private var secondTimerCountForParticipant = 0
     private var secondTimerCountForMeeting = 0
+    private var currentSpeakerMaxTalkTime: Int?
 
     private var speakerOrder: [String]?
     private var allParticipants = [Participant]()
-    private var currentSpeakerMaxTalkTime: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()

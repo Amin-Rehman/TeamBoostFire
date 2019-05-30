@@ -23,7 +23,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     var currentSpeakerIndex = 0
     private var secondTimerCount = 0
 
-    var speakerControllerService: SpeakerControllerService?
+    var hostControllerService: HostControllerService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
             return
         }
 
-        speakerControllerService = SpeakerControllerService(
+        hostControllerService = HostControllerService(
             meetingParams: meetingParams,
             orderObserver: self)
     }
@@ -99,14 +99,14 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     private func setupChildTableViewController() {
-        assert(speakerControllerService != nil, "Speaker controller service is not instantiated")
+        assert(hostControllerService != nil, "Speaker controller service is not instantiated")
         hostInMeetingTableViewController.view.frame = childContainerView.bounds;
         hostInMeetingTableViewController.willMove(toParent: self)
         childContainerView.addSubview(hostInMeetingTableViewController.view)
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
-        hostInMeetingTableViewController.speakerControllerService = speakerControllerService
-        speakerControllerService?.speakerSecondTickObserver = hostInMeetingTableViewController
+        hostInMeetingTableViewController.hostControllerService = hostControllerService
+        hostControllerService?.speakerSecondTickObserver = hostInMeetingTableViewController
     }
 
     private func updateUIWithSpeakerOrder() {
@@ -141,7 +141,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     @IBAction func goToNextParticipantTapped(_ sender: Any) {
-        speakerControllerService?.goToNextSpeaker()
+        hostControllerService?.goToNextSpeaker()
     }
 
 }
