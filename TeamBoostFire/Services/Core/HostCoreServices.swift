@@ -25,7 +25,7 @@ class HostCoreServices: TeamBoostCore {
         if appDelegate.testEnvironment == true {
             meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
         } else {
-            meetingIdentifier = String.makeSixDigitUUID()
+            meetingIdentifier = String.makeSixDigitRandomNumbers()
         }
 
         guard let meetingId = meetingIdentifier else {
@@ -97,5 +97,14 @@ extension String {
         return shortUUID.components(separatedBy: "-").first!
     }
 
+    fileprivate static func makeSixDigitRandomNumbers() -> String {
+        let number1 = Int.random(in: 0 ..< 10)
+        let number2 = Int.random(in: 0 ..< 10)
+        let number3 = Int.random(in: 0 ..< 10)
+        let number4 = Int.random(in: 0 ..< 10)
+        let number5 = Int.random(in: 0 ..< 10)
+        let number6 = Int.random(in: 0 ..< 10)
+        return String("\(number1)\(number2)\(number3)-\(number4)\(number5)\(number6)")
+    }
 }
 
