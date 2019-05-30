@@ -81,7 +81,7 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func updateUIWithCurrentSpeaker() {
-        let selfSpeakingOrder = speakingOrder()
+        let selfSpeakingOrder = selfSpeakingOrder()
         let isSpeakerSelf = selfSpeakingOrder == 0
 
         if isSpeakerSelf {
@@ -96,7 +96,7 @@ class ParticipantMainViewController: UIViewController {
             currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
 
             // Update self speaking order
-            let selfSpeakingOrder = speakingOrder()
+            let selfSpeakingOrder = selfSpeakingOrder()
             speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
         }
     }
@@ -138,7 +138,7 @@ class ParticipantMainViewController: UIViewController {
         return nil
     }
 
-    private func speakingOrder() -> Int {
+    private func selfSpeakingOrder() -> Int {
         let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
         return speakerOrder.firstIndex(of: selfIdentifier)!
     }
