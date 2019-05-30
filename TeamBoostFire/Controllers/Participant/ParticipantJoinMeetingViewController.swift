@@ -14,6 +14,13 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var participantNameTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    @IBOutlet weak var number1TextField: UITextField!
+    @IBOutlet weak var number2TextField: UITextField!
+    @IBOutlet weak var number3TextField: UITextField!
+    @IBOutlet weak var number4TextField: UITextField!
+    @IBOutlet weak var number5TextField: UITextField!
+    @IBOutlet weak var number6TextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let center = NotificationCenter.default
@@ -29,6 +36,13 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+
+        number1TextField.delegate = self
+        number2TextField.delegate = self
+        number3TextField.delegate = self
+        number4TextField.delegate = self
+        number5TextField.delegate = self
+        number6TextField.delegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +55,26 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         if appDelegate.testEnvironment == true {
             meetingCode.text = StubMeetingVars.MeetingCode.rawValue
             participantNameTextField.text = UUID().uuidString
+        }
+
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = string
+        if currentText.count == 1 {
+            let nextTextTag = textField.tag + 1
+            let nextResponder = textField.superview?.viewWithTag(nextTextTag)
+            if nextResponder == nil {
+                textField.resignFirstResponder()
+            }
+
+            if (nextResponder != nil){
+                nextResponder?.becomeFirstResponder()
+            }
+            textField.text = string
+            return true
+        } else {
+            return false
         }
 
     }
