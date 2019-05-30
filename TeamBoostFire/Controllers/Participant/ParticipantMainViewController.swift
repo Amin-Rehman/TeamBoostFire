@@ -21,15 +21,27 @@ class ParticipantMainViewController: UIViewController {
     private var secondTimerCountForParticipant = 0
     private var secondTimerCountForMeeting = 0
 
-    private var speakerOrder = [String]()
+    private var speakerOrder: [String]?
     private var allParticipants = [Participant]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        speakerOrder = ParticipantCoreServices.shared.speakerOrder ?? []
+        guard let guardedSpeakerOrder = ParticipantCoreServices.shared.speakerOrder else {
+            assertionFailure("Unable to load speaker order")
+            return
+        }
+        speakerOrder = guardedSpeakerOrder
+
         secondTimerCountForParticipant = 0
         setupTopBar()
         updateSpeakingTimerLabel()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupSpeakerOrderObserver()
+        updateUIWithCurrentSpeaker()
+        startSecondTickerTimer()
     }
 
     private func startSecondTickerTimer() {
@@ -58,13 +70,6 @@ class ParticipantMainViewController: UIViewController {
         secondTimerCountForMeeting = secondTimerCountForMeeting + 1
         updateSpeakingTimerLabel()
         updateMeetingTimerLabel()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupSpeakerOrderObserver()
-        updateUIWithCurrentSpeaker()
-        startSecondTickerTimer()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,7 +131,7 @@ class ParticipantMainViewController: UIViewController {
 
     private func currentSpeaker() -> Participant? {
         let allParticipants = ParticipantCoreServices.shared.allParticipants!
-        let currentSpeakerIdentifier = speakerOrder.first!
+        let currentSpeakerIdentifier = speakerOrder?.first!
 
         for participant in allParticipants {
             if participant.id == currentSpeakerIdentifier {
@@ -140,7 +145,7 @@ class ParticipantMainViewController: UIViewController {
 
     private func selfSpeakingOrder() -> Int {
         let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
-        return speakerOrder.firstIndex(of: selfIdentifier)!
+        return speakerOrder!.firstIndex(of: selfIdentifier)!
     }
 
 }
