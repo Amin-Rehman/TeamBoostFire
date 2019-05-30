@@ -57,31 +57,6 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         }
     }
 
-    private func populateMeetingCodeUITextField(with string: String) {
-        if string.count != 6 {
-            assertionFailure("Invalid number of characters in the meeting code string")
-            return
-        }
-
-        let arrayString = Array(string)
-        number1TextField.text = String(arrayString[0])
-        number2TextField.text = String(arrayString[1])
-        number3TextField.text = String(arrayString[2])
-        number4TextField.text = String(arrayString[3])
-        number5TextField.text = String(arrayString[4])
-        number6TextField.text = String(arrayString[5])
-    }
-
-    private func meetingCodeFromTextFields() -> String {
-        var meetingCode = number1TextField.text ?? ""
-        meetingCode = meetingCode + (number2TextField.text ?? "")
-        meetingCode = meetingCode + (number3TextField.text ?? "")
-        meetingCode = meetingCode + "-"
-        meetingCode = meetingCode + (number4TextField.text ?? "")
-        meetingCode = meetingCode + (number5TextField.text ?? "")
-        meetingCode = meetingCode + (number6TextField.text ?? "")
-        return meetingCode
-    }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
@@ -108,10 +83,6 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         } else {
             return false
         }
-
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
     }
 
     @IBAction func joinMeetingButtonClicked(_ sender: Any) {
@@ -172,4 +143,49 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         }
     }
 
+    // MARK: - Meeting code helpers
+    private func populateMeetingCodeUITextField(with string: String) {
+        if string.count != 6 {
+            assertionFailure("Invalid number of characters in the meeting code string")
+            return
+        }
+
+        let splitableString = SplitableString(from: string)
+        number1TextField.text = splitableString.code1
+        number2TextField.text = splitableString.code2
+        number3TextField.text = splitableString.code3
+        number4TextField.text = splitableString.code4
+        number5TextField.text = splitableString.code5
+        number6TextField.text = splitableString.code6
+    }
+
+    private func meetingCodeFromTextFields() -> String {
+        var meetingCode = number1TextField.text ?? ""
+        meetingCode = meetingCode + (number2TextField.text ?? "")
+        meetingCode = meetingCode + (number3TextField.text ?? "")
+        meetingCode = meetingCode + "-"
+        meetingCode = meetingCode + (number4TextField.text ?? "")
+        meetingCode = meetingCode + (number5TextField.text ?? "")
+        meetingCode = meetingCode + (number6TextField.text ?? "")
+        return meetingCode
+    }
+}
+
+fileprivate struct SplitableString {
+    let code1: String
+    let code2: String
+    let code3: String
+    let code4: String
+    let code5: String
+    let code6: String
+
+    init(from string: String) {
+        let arrayString = Array(string)
+        self.code1 = String(arrayString[0])
+        self.code2 = String(arrayString[1])
+        self.code3 = String(arrayString[2])
+        self.code4 = String(arrayString[3])
+        self.code5 = String(arrayString[4])
+        self.code6 = String(arrayString[5])
+    }
 }
