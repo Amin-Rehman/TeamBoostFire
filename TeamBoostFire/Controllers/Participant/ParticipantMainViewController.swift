@@ -81,8 +81,8 @@ class ParticipantMainViewController: UIViewController {
     }
 
     private func updateUIWithCurrentSpeaker() {
-        let selfSpeakingOrder = selfSpeakingOrder()
-        let isSpeakerSelf = selfSpeakingOrder == 0
+        let order = selfSpeakingOrder()
+        let isSpeakerSelf = order == 0
 
         if isSpeakerSelf {
             let selfSpeakerViewController = ParticipantSelfSpeakerViewController(
@@ -96,8 +96,8 @@ class ParticipantMainViewController: UIViewController {
             currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
 
             // Update self speaking order
-            let selfSpeakingOrder = selfSpeakingOrder()
-            speakingOrderLabel.text = "Speaking Order: \(selfSpeakingOrder)"
+            let order = selfSpeakingOrder()
+            speakingOrderLabel.text = "Speaking Order: \(order)"
         }
     }
 
