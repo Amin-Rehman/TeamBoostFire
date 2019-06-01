@@ -97,8 +97,15 @@ class ParticipantMainViewController: UIViewController, ParticipantTimeUpdatable 
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
-        let allParticipants = ParticipantCoreServices.shared.allParticipants!
-        let currentSpeakerIdentifier = speakingOrder.first!
+        guard let allParticipants = ParticipantCoreServices.shared.allParticipants else {
+            assertionFailure("Unable to retrieve all participants")
+            return nil
+        }
+
+        guard let currentSpeakerIdentifier = speakingOrder.first else {
+            assertionFailure("Unable to retrieve currentSpeakerIdentifier")
+            return nil
+        }
 
         for participant in allParticipants {
             if participant.id == currentSpeakerIdentifier {
@@ -111,8 +118,10 @@ class ParticipantMainViewController: UIViewController, ParticipantTimeUpdatable 
     }
 
     private func selfSpeakingOrder(with speakerOrder: [String]) -> Int {
-        let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
-        return speakerOrder.firstIndex(of: selfIdentifier)!
+        guard let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier else {
+            fatalError("Self identifier not found for participant")
+        }
+        return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
     }
 
 }

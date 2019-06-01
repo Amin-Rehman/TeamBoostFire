@@ -32,14 +32,11 @@ class ParticipantControllerService {
         self.meetingTime = meetingParams.meetingTime * 60
         self.participantTimeUpdateable = timesUpdatedObserver
         self.currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
+        self.speakerOrder = ParticipantCoreServices.shared.speakerOrder
+
         startSecondTickerTimer()
         setupSpeakerOrderObserver()
 
-        guard let guardedSpeakerOrder = ParticipantCoreServices.shared.speakerOrder else {
-            assertionFailure("Unable to load speaker order")
-            return
-        }
-        speakerOrder = guardedSpeakerOrder
     }
 
     private func startSecondTickerTimer() {
