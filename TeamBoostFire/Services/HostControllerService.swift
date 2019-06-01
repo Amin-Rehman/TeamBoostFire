@@ -12,7 +12,7 @@ protocol SpeakerControllerSecondTickObserver: class {
     func speakerSecondTicked(participantIdentifier: String)
 }
 
-class SpeakerControllerService {
+class HostControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?

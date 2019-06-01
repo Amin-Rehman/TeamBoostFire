@@ -9,51 +9,53 @@
 import UIKit
 
 class ParticipantSelfSpeakerViewController: UIViewController {
-
     @IBOutlet weak var timerLabel: UILabel!
-    private var secondTickTimer: Timer?
-    private var secondTimerCount = 0
+
+    private weak var participantControllerService: ParticipantControllerService?
+
+    init(nibName: String,
+         participantControllerService: ParticipantControllerService) {
+        self.participantControllerService = participantControllerService
+        super.init(nibName: nibName, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        secondTimerCount = 0
+        participantControllerService?.participantTimeUpdateable = self
         updateSpeakingTimerLabel()
-        startSecondTickerTimer()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        secondTimerCount = 0
-        stopSecondTickerTimer()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
-    private func startSecondTickerTimer() {
-        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                                               selector: #selector(secondTicked),
-                                               userInfo: nil, repeats: true)
-    }
-
-    private func stopSecondTickerTimer() {
-        secondTickTimer?.invalidate()
-        secondTickTimer = nil
-    }
 
     @IBAction func doneTapped(_ sender: Any) {
         ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
         dismiss(animated: true, completion: nil)
     }
 
-    @objc func secondTicked() {
-        secondTimerCount = secondTimerCount + 1
-        updateSpeakingTimerLabel()
-    }
-
     private func updateSpeakingTimerLabel() {
-        let timeElapsedString = secondTimerCount.minutesAndSecondsPrettyString()
+        let timeElapsedString = 0.minutesAndSecondsPrettyString()
         timerLabel.text = timeElapsedString
     }
+}
+
+extension ParticipantSelfSpeakerViewController: ParticipantUpdatable {
+    func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
+        timerLabel.text = participantLeftSpeakingTime.minutesAndSecondsPrettyString()
+    }
+
+    func updateSpeakingOrder(speakingOrder: [String]) {
+        // Not implemented
+    }
+
 }

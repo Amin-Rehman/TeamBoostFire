@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParticipantMainViewController: UIViewController {
+class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
@@ -17,64 +17,18 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var currentSpeakerLabel: UILabel!
     @IBOutlet weak var speakingOrderLabel: UILabel!
 
-    private var secondTickTimer: Timer?
-    private var secondTimerCountForParticipant = 0
-    private var secondTimerCountForMeeting = 0
-
-    private var speakerOrder: [String]?
     private var allParticipants = [Participant]()
+
+    private var participantControllerService: ParticipantControllerService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let guardedSpeakerOrder = ParticipantCoreServices.shared.speakerOrder else {
-            assertionFailure("Unable to load speaker order")
-            return
-        }
-        speakerOrder = guardedSpeakerOrder
-
-        secondTimerCountForParticipant = 0
         setupTopBar()
-        updateSpeakingTimerLabel()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupSpeakerOrderObserver()
-        updateUIWithCurrentSpeaker()
-        startSecondTickerTimer()
-    }
-
-    private func startSecondTickerTimer() {
-        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                                               selector: #selector(secondTicked),
-                                               userInfo: nil, repeats: true)
-    }
-
-    private func stopSecondTickerTimer() {
-        secondTickTimer?.invalidate()
-        secondTickTimer = nil
-    }
-
-    private func updateSpeakingTimerLabel() {
-        let timeElapsedString = secondTimerCountForParticipant.minutesAndSecondsPrettyString()
-        speakerSpeakingTimeLabel.text = timeElapsedString
-    }
-
-    private func updateMeetingTimerLabel() {
-        let timeElapsedString = secondTimerCountForMeeting.minutesAndSecondsPrettyString()
-        meetingTimeLabel.text = timeElapsedString
-    }
-
-    @objc func secondTicked() {
-        secondTimerCountForParticipant = secondTimerCountForParticipant + 1
-        secondTimerCountForMeeting = secondTimerCountForMeeting + 1
-        updateSpeakingTimerLabel()
-        updateMeetingTimerLabel()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        stopSecondTickerTimer()
+        let meetingParams = ParticipantCoreServices.shared.meetingParams
+        self.participantControllerService = ParticipantControllerService(with: meetingParams!,
+                                                                         timesUpdatedObserver: self)
+        updateSpeakingTimerLabel(with: (meetingParams?.maxTalkTime)!)
+        updateMeetingTimerLabel(with: (meetingParams?.meetingTime)!)
     }
 
     private func setupTopBar() {
@@ -85,39 +39,58 @@ class ParticipantMainViewController: UIViewController {
         agendaQuestionLabel.text = agenda
     }
 
-    private func updateUIWithCurrentSpeaker() {
-        let order = selfSpeakingOrder()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        participantControllerService?.participantTimeUpdateable = self
+        super.viewDidAppear(animated)
+    }
+
+    func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
+        updateSpeakingTimerLabel(with: participantLeftSpeakingTime)
+        updateMeetingTimerLabel(with: meetingLeftTime)
+    }
+
+    func updateSpeakingOrder(speakingOrder: [String]) {
+        updateUIWithCurrentSpeaker(with: speakingOrder)
+    }
+
+    private func updateSpeakingTimerLabel(with speakingTimeLeft: Int) {
+        let speakingTimeLeftString = speakingTimeLeft.minutesAndSecondsPrettyString()
+        speakerSpeakingTimeLabel.text = "Speaker Time left: \(speakingTimeLeftString)"
+    }
+
+    private func updateMeetingTimerLabel(with meetingTimeLeft: Int) {
+        let meetingTimeLeftString = meetingTimeLeft.minutesAndSecondsPrettyString()
+        meetingTimeLabel.text = "Meeting Time left: \(meetingTimeLeftString)"
+    }
+
+    private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
+        let order = selfSpeakingOrder(with: speakingOrder)
         let isSpeakerSelf = order == 0
 
         if isSpeakerSelf {
-            let selfSpeakerViewController = ParticipantSelfSpeakerViewController(
-                nibName: "ParticipantSelfSpeakerViewController",
-                bundle: nil)
+            guard let controllerService = participantControllerService else {
+                fatalError("Unable to find controller service")
+            }
+
+            let selfSpeakerViewController =
+                ParticipantSelfSpeakerViewController(nibName: "ParticipantSelfSpeakerViewController",
+                participantControllerService: controllerService)
+
             present(selfSpeakerViewController, animated: true, completion: nil)
         } else {
             presentedViewController?.dismiss(animated: true, completion: nil)
 
-            let currentSpeakingParticipant = currentSpeaker()!
-            currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant.name)"
+            let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
+            currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant!.name)"
 
             // Update self speaking order
-            let order = selfSpeakingOrder()
+            let order = selfSpeakingOrder(with: speakingOrder)
             speakingOrderLabel.text = "Speaking Order: \(order)"
         }
-    }
-
-    private func setupSpeakerOrderObserver() {
-        let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(speakerOrderDidChange(notification:)),
-                                               name: notificationName, object: nil)
-    }
-
-    @objc private func speakerOrderDidChange(notification: NSNotification) {
-        speakerOrder = (notification.object as? [String]) ?? []
-        secondTimerCountForParticipant = 0
-        updateSpeakingTimerLabel()
-        updateUIWithCurrentSpeaker()
     }
 
     @IBAction func likeButtonTapped(_ sender: Any) {
@@ -129,9 +102,16 @@ class ParticipantMainViewController: UIViewController {
     @IBAction func callForSpeakerTapped(_ sender: Any) {
     }
 
-    private func currentSpeaker() -> Participant? {
-        let allParticipants = ParticipantCoreServices.shared.allParticipants!
-        let currentSpeakerIdentifier = speakerOrder?.first!
+    private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
+        guard let allParticipants = ParticipantCoreServices.shared.allParticipants else {
+            assertionFailure("Unable to retrieve all participants")
+            return nil
+        }
+
+        guard let currentSpeakerIdentifier = speakingOrder.first else {
+            assertionFailure("Unable to retrieve currentSpeakerIdentifier")
+            return nil
+        }
 
         for participant in allParticipants {
             if participant.id == currentSpeakerIdentifier {
@@ -143,9 +123,11 @@ class ParticipantMainViewController: UIViewController {
         return nil
     }
 
-    private func selfSpeakingOrder() -> Int {
-        let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier!
-        return speakerOrder!.firstIndex(of: selfIdentifier)!
+    private func selfSpeakingOrder(with speakerOrder: [String]) -> Int {
+        guard let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier else {
+            fatalError("Self identifier not found for participant")
+        }
+        return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
     }
 
 }
