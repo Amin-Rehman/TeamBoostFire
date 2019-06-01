@@ -49,12 +49,12 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNG-Tr-1B5">
-                    <rect key="frame" x="125" y="516" width="70" height="22"/>
+                    <rect key="frame" x="90" y="516" width="140" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="70" id="DsD-Pi-uc7"/>
+                        <constraint firstAttribute="width" constant="140" id="DsD-Pi-uc7"/>
                         <constraint firstAttribute="height" constant="22" id="kPk-cO-sQz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
