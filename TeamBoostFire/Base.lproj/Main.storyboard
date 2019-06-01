@@ -251,11 +251,11 @@
                                             <constraint firstItem="AH0-kn-1IU" firstAttribute="top" secondItem="doI-IY-xxp" secondAttribute="bottom" constant="88" id="eNv-ER-jFq"/>
                                             <constraint firstItem="Oq5-h8-4RI" firstAttribute="centerY" secondItem="1wn-1t-XCm" secondAttribute="centerY" id="gKE-Fd-4H0"/>
                                             <constraint firstItem="doI-IY-xxp" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="35" id="hG5-Of-JkE"/>
-                                            <constraint firstItem="Oq5-h8-4RI" firstAttribute="leading" secondItem="1wn-1t-XCm" secondAttribute="trailing" constant="8" id="oba-Gy-RkS"/>
+                                            <constraint firstItem="Oq5-h8-4RI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1wn-1t-XCm" secondAttribute="trailing" constant="8" id="oba-Gy-RkS"/>
                                             <constraint firstItem="m2d-5a-N6w" firstAttribute="trailing" secondItem="aDC-0F-rrt" secondAttribute="trailing" id="qcV-tR-ove"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="leading" secondItem="qoX-4I-bOd" secondAttribute="trailing" constant="8" id="sMa-rC-Xd2"/>
                                             <constraint firstItem="1FH-ch-rDX" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="20" id="sV9-4s-Tkq"/>
-                                            <constraint firstItem="qoX-4I-bOd" firstAttribute="leading" secondItem="Oq5-h8-4RI" secondAttribute="trailing" constant="8" id="uek-Pk-rXp"/>
+                                            <constraint firstItem="qoX-4I-bOd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Oq5-h8-4RI" secondAttribute="trailing" constant="8" id="uek-Pk-rXp"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="centerY" secondItem="qoX-4I-bOd" secondAttribute="centerY" id="vuJ-8I-1d0"/>
                                             <constraint firstAttribute="trailing" secondItem="doI-IY-xxp" secondAttribute="trailing" constant="16" id="yp1-E7-DW5"/>
                                         </constraints>
