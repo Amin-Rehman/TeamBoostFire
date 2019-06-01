@@ -168,7 +168,6 @@
 				EB1D48AF226729FD001A754D /* TeamBoostCore.swift */,
 				EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */,
 				EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */,
-				EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -247,6 +246,7 @@
 			children = (
 				EB18452E229FE69C00DFC75D /* Core */,
 				EBBB4A88227F84A800D61976 /* HostControllerService.swift */,
+				EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */,
 				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
 				EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */,
 			);
