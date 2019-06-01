@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,6 @@
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="speakerSpeakingTimeLabel" destination="DBh-0Q-edH" id="QmM-AH-NBz"/>
-                <outlet property="speakingOrderLabel" destination="kVu-5R-Ju0" id="Ppr-Yh-B7e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -100,22 +99,10 @@
                                 <action selector="callForSpeakerTapped:" destination="-1" eventType="touchUpInside" id="d0N-Us-aiA"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaking Order:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVu-5R-Ju0">
-                            <rect key="frame" x="4" y="4" width="312" height="22"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="22" id="h0a-e9-JRF"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="kVu-5R-Ju0" firstAttribute="top" secondItem="i43-R9-CzX" secondAttribute="top" constant="4" id="Rwe-g2-82A"/>
-                        <constraint firstItem="kVu-5R-Ju0" firstAttribute="leading" secondItem="i43-R9-CzX" secondAttribute="leading" constant="4" id="eWn-su-RV7"/>
                         <constraint firstItem="d5c-bh-dLX" firstAttribute="centerX" secondItem="i43-R9-CzX" secondAttribute="centerX" id="eys-3R-xtk"/>
-                        <constraint firstAttribute="trailing" secondItem="kVu-5R-Ju0" secondAttribute="trailing" constant="4" id="rm6-nT-t4t"/>
                         <constraint firstItem="d5c-bh-dLX" firstAttribute="centerY" secondItem="i43-R9-CzX" secondAttribute="centerY" id="yEl-Lc-zrV"/>
                     </constraints>
                 </view>
@@ -184,7 +171,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Continue" width="256" height="256"/>
-        <image name="Like" width="1000" height="856.5"/>
+        <image name="Continue" width="512" height="512"/>
+        <image name="Like" width="2000" height="1713"/>
     </resources>
 </document>

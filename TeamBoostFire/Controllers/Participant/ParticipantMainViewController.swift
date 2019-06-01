@@ -12,10 +12,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
-
     @IBOutlet weak var speakerSpeakingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
-    @IBOutlet weak var speakingOrderLabel: UILabel!
 
     private var allParticipants = [Participant]()
 
@@ -86,10 +84,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
             let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
             currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant!.name)"
-
-            // Update self speaking order
-            let order = selfSpeakingOrder(with: speakingOrder)
-            speakingOrderLabel.text = "Speaking Order: \(order)"
         }
     }
 

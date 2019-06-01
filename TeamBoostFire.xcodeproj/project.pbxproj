@@ -214,10 +214,10 @@
 		EB1D48D62268A271001A754D /* Participant */ = {
 			isa = PBXGroup;
 			children = (
-				EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */,
 				EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */,
 				EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */,
 				EB1D48CD2267D303001A754D /* ParticipantLobbyViewController.xib */,
+				EB1D48D32267DC66001A754D /* ParticipantMainViewController.xib */,
 				EB1D48D22267DC66001A754D /* ParticipantMainViewController.swift */,
 				EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */,
 				EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */,
