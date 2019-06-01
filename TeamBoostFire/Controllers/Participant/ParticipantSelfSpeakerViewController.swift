@@ -55,7 +55,7 @@ extension ParticipantSelfSpeakerViewController: ParticipantUpdatable {
     }
 
     func updateSpeakingOrder(speakingOrder: [String]) {
-        // Not implemented
+        dismiss(animated: true, completion: nil)
     }
 
 }

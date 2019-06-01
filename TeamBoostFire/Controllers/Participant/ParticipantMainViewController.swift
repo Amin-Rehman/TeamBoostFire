@@ -12,10 +12,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
-
     @IBOutlet weak var speakerSpeakingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
-    @IBOutlet weak var speakingOrderLabel: UILabel!
 
     private var allParticipants = [Participant]()
 
@@ -44,7 +42,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        participantControllerService?.participantTimeUpdateable = self
+        participantControllerService?.participantTimeUpdateable = self 
+        updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
         super.viewDidAppear(animated)
     }
 
@@ -85,11 +84,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
             presentedViewController?.dismiss(animated: true, completion: nil)
 
             let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
-            currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant!.name)"
-
-            // Update self speaking order
-            let order = selfSpeakingOrder(with: speakingOrder)
-            speakingOrderLabel.text = "Speaking Order: \(order)"
+            currentSpeakerLabel.text = "\(currentSpeakingParticipant!.name) is speaking"
         }
     }
 
