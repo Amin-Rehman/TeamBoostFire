@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParticipantMainViewController: UIViewController, ParticipantTimeUpdatable {
+class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!

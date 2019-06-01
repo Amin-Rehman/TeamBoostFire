@@ -49,7 +49,7 @@ class ParticipantSelfSpeakerViewController: UIViewController {
     }
 }
 
-extension ParticipantSelfSpeakerViewController: ParticipantTimeUpdatable {
+extension ParticipantSelfSpeakerViewController: ParticipantUpdatable {
     func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
         timerLabel.text = participantLeftSpeakingTime.minutesAndSecondsPrettyString()
     }

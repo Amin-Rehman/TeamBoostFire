@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ParticipantTimeUpdatable: class {
+protocol ParticipantUpdatable: class {
     func updateTime(participantLeftSpeakingTime: Int,
                     meetingLeftTime: Int)
     func updateSpeakingOrder(speakingOrder: [String])
@@ -24,10 +24,10 @@ class ParticipantControllerService {
     private var currentSpeakerMaxTalkTime: Int?
     private var speakerOrder: [String]?
 
-    public weak var participantTimeUpdateable: ParticipantTimeUpdatable?
+    public weak var participantTimeUpdateable: ParticipantUpdatable?
 
     init(with meetingParams: MeetingsParams,
-         timesUpdatedObserver: ParticipantTimeUpdatable) {
+         timesUpdatedObserver: ParticipantUpdatable) {
         self.meetingParams = meetingParams
         self.meetingTime = meetingParams.meetingTime * 60
         self.participantTimeUpdateable = timesUpdatedObserver
