@@ -42,7 +42,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        participantControllerService?.participantTimeUpdateable = self
+        participantControllerService?.participantTimeUpdateable = self 
+        updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
         super.viewDidAppear(animated)
     }
 
@@ -83,7 +84,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
             presentedViewController?.dismiss(animated: true, completion: nil)
 
             let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
-            currentSpeakerLabel.text = "Speaker: \(currentSpeakingParticipant!.name)"
+            currentSpeakerLabel.text = "\(currentSpeakingParticipant!.name) is speaking"
         }
     }
 

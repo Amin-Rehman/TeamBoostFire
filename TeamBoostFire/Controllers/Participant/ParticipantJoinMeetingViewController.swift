@@ -58,12 +58,11 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         number6TextField.delegate = self
     }
 
-
     private func setupTestEnvironmentIfNeeded() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.testEnvironment == true {
             populateMeetingCodeUITextField(with: StubMeetingVars.MeetingCode.rawValue)
-            participantNameTextField.text = UUID().uuidString
+            participantNameTextField.text = ParticipantJoinMeetingViewController.randomNameForTestEnvironment()
         }
     }
 
@@ -128,7 +127,6 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
                                       name: participantNameText, speakerOrder: -1)
         ParticipantCoreServices.shared.setupCore(with: participant, meetingCode: meetingCodeText)
         present(ParticipantLobbyViewController(), animated: true, completion: nil)
-
     }
 
 
@@ -178,6 +176,63 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         meetingCode = meetingCode + (number5TextField.text ?? "")
         meetingCode = meetingCode + (number6TextField.text ?? "")
         return meetingCode
+    }
+
+    private static func randomNameForTestEnvironment() -> String {
+        let names = [
+            "Sabrina",
+            "Brent",
+            "Thu",
+            "Granville",
+            "Daryl",
+            "Sommer",
+            "Shelby",
+            "Kathline",
+            "Kathrin",
+            "Tiesha",
+            "Lavada",
+            "Arvilla",
+            "Ginny",
+            "Lucius",
+            "Betsy",
+            "Kandy",
+            "Ione",
+            "Francina",
+            "Raina",
+            "Glendora",
+            "Deandra",
+            "Earl",
+            "Gladis",
+            "Sheena",
+            "Brittney",
+            "Carol",
+            "Lezlie",
+            "Santa",
+            "Anastacia",
+            "Cristin",
+            "Shelba",
+            "Jeanne",
+            "Georgeanna",
+            "Eneida",
+            "Jame",
+            "Senaida",
+            "Marcelo",
+            "Gabriela",
+            "Ouida",
+            "Shasta",
+            "Adella",
+            "Roselia",
+            "Corina",
+            "Dewey",
+            "Bryon",
+            "Devora",
+            "Afton",
+            "Lorette",
+            "Francene",
+            "Sharen"]
+
+        let index = Int(arc4random_uniform(UInt32(names.count)))
+        return names[index]
     }
 }
 

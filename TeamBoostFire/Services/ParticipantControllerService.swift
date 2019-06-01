@@ -22,7 +22,7 @@ class ParticipantControllerService {
     private var secondTimerCountForParticipant = 0
     private var secondTimerCountForMeeting = 0
     private var currentSpeakerMaxTalkTime: Int?
-    private var speakerOrder: [String]?
+    public var speakerOrder: [String]?
 
     public weak var participantTimeUpdateable: ParticipantUpdatable?
 
@@ -68,10 +68,11 @@ class ParticipantControllerService {
     }
 
     @objc private func speakerOrderDidChange(notification: NSNotification) {
-        let speakerOrder = (notification.object as? [String]) ?? []
+        let speakerOrderFromNotification = (notification.object as? [String]) ?? []
         secondTimerCountForParticipant = 0
         currentSpeakerMaxTalkTime = meetingParams.maxTalkTime
-        participantTimeUpdateable?.updateSpeakingOrder(speakingOrder: speakerOrder)
+        speakerOrder = speakerOrderFromNotification
+        participantTimeUpdateable?.updateSpeakingOrder(speakingOrder: speakerOrderFromNotification)
     }
 
     private func setupCurrentSpeakerMaxTalkTimeChangedObserver() {
