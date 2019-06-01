@@ -44,6 +44,7 @@ class ParticipantMainViewController: UIViewController, ParticipantTimeUpdatable 
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        participantControllerService?.participantTimeUpdateable = self
         super.viewDidAppear(animated)
     }
 
@@ -71,9 +72,14 @@ class ParticipantMainViewController: UIViewController, ParticipantTimeUpdatable 
         let isSpeakerSelf = order == 0
 
         if isSpeakerSelf {
-            let selfSpeakerViewController = ParticipantSelfSpeakerViewController(
-                nibName: "ParticipantSelfSpeakerViewController",
-                bundle: nil)
+            guard let controllerService = participantControllerService else {
+                fatalError("Unable to find controller service")
+            }
+
+            let selfSpeakerViewController =
+                ParticipantSelfSpeakerViewController(nibName: "ParticipantSelfSpeakerViewController",
+                participantControllerService: controllerService)
+
             present(selfSpeakerViewController, animated: true, completion: nil)
         } else {
             presentedViewController?.dismiss(animated: true, completion: nil)

@@ -24,7 +24,7 @@ class ParticipantControllerService {
     private var currentSpeakerMaxTalkTime: Int?
     private var speakerOrder: [String]?
 
-    private weak var participantTimeUpdateable: ParticipantTimeUpdatable?
+    public weak var participantTimeUpdateable: ParticipantTimeUpdatable?
 
     init(with meetingParams: MeetingsParams,
          timesUpdatedObserver: ParticipantTimeUpdatable) {
