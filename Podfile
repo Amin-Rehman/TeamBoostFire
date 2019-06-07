@@ -5,12 +5,10 @@ target 'TeamBoostFire' do
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'Charts'
 end
 
 target 'TeamBoostFireTests' do
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'Charts'
 end
