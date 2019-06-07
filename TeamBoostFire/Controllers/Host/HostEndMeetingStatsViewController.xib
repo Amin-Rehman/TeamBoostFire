@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HostEndMeetingStatsViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
+                <outlet property="pieChartView" destination="er9-S0-2VL" id="yBd-3c-igs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,10 +32,32 @@
                         <action selector="iAmDoneTapped:" destination="-1" eventType="touchUpInside" id="Bea-Ow-x4r"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er9-S0-2VL" customClass="PieChartView" customModule="Charts">
+                    <rect key="frame" x="50" y="196" width="275" height="275"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="er9-S0-2VL" secondAttribute="height" multiplier="1:1" id="ICU-dF-vKY"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is how your meeting went" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqw-6q-21T">
+                    <rect key="frame" x="20" y="70" width="335" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="av2-am-pZR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="er9-S0-2VL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4eD-Ee-0rd"/>
+                <constraint firstItem="er9-S0-2VL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="VOX-F4-MYN"/>
                 <constraint firstItem="GhX-kl-ITJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WSu-l6-fPE"/>
+                <constraint firstItem="er9-S0-2VL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="WZV-bS-kS5"/>
+                <constraint firstItem="Jqw-6q-21T" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="YzT-wH-9aN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jqw-6q-21T" secondAttribute="trailing" constant="20" id="byY-gK-dJB"/>
+                <constraint firstItem="Jqw-6q-21T" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="c3M-Cj-kKx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="GhX-kl-ITJ" secondAttribute="bottom" constant="54" id="enq-Vm-ibN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
