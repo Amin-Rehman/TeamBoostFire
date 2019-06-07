@@ -15,6 +15,9 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var maxTalkingTimeTextField: UITextField!
     @IBOutlet weak var moderationModeTextField: UITextField!
 
+    @IBAction func cancelButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

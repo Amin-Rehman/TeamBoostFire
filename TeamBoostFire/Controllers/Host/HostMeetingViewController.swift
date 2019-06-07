@@ -27,6 +27,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: true)
 
         setupSpeakerControllerService()
         setupChildTableViewController()
@@ -133,7 +134,9 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         alertController.addAction(cancelAction)
 
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            // TODO: Cancel meeting
+            let hostEndMeetingStatsViewController = HostEndMeetingStatsViewController()
+            self.navigationController?.pushViewController(hostEndMeetingStatsViewController,
+                                                          animated: true)
         }
         alertController.addAction(OKAction)
 
