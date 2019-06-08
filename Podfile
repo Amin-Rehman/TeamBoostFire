@@ -3,6 +3,8 @@
 
 project 'TeamBoostFire.xcodeproj'
 
+inhibit_all_warnings!
+
 target 'TeamBoostFire' do
   use_frameworks!
   pod 'Firebase/Core'
