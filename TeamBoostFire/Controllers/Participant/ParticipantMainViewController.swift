@@ -12,7 +12,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
-    @IBOutlet weak var speakerSpeakingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
     private var allParticipants = [Participant]()
@@ -25,7 +24,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         let meetingParams = ParticipantCoreServices.shared.meetingParams
         self.participantControllerService = ParticipantControllerService(with: meetingParams!,
                                                                          timesUpdatedObserver: self)
-        updateSpeakingTimerLabel(with: (meetingParams?.maxTalkTime)!)
         updateMeetingTimerLabel(with: (meetingParams?.meetingTime)!)
     }
 
@@ -48,17 +46,11 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
-        updateSpeakingTimerLabel(with: participantLeftSpeakingTime)
         updateMeetingTimerLabel(with: meetingLeftTime)
     }
 
     func updateSpeakingOrder(speakingOrder: [String]) {
         updateUIWithCurrentSpeaker(with: speakingOrder)
-    }
-
-    private func updateSpeakingTimerLabel(with speakingTimeLeft: Int) {
-        let speakingTimeLeftString = speakingTimeLeft.minutesAndSecondsPrettyString()
-        speakerSpeakingTimeLabel.text = "Speaker Time left: \(speakingTimeLeftString)"
     }
 
     private func updateMeetingTimerLabel(with meetingTimeLeft: Int) {

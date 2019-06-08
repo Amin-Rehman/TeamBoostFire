@@ -24,6 +24,9 @@ class HostEndMeetingStatsViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true,
                                                           animated: true)
 
+        pieChartView.holeRadiusPercent = 0.10
+        pieChartView.transparentCircleRadiusPercent = 0.20
+
         populateLabelAndDescription()
         populateColourPalette()
         populatePieChart()
@@ -61,16 +64,16 @@ class HostEndMeetingStatsViewController: UIViewController {
             return
         }
 
-        pieChartView.chartDescription?.text = "Participant Speaking Times"
+        pieChartView.chartDescription?.text = "Participant % Speaking Times"
         pieChartView.chartDescription?.font = NSUIFont(name: "HelveticaNeue", size: 12.0)!
-        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue", size: 13.0)
+        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue-Bold", size: 16.0)
         pieChartView.legend.font = NSUIFont(name: "HelveticaNeue", size: 10.0)!
         pieChartView.usePercentValuesEnabled = true
 
         let speakingTimes = meetingStats.participantSpeakingRecords
         speakingTimes.forEach { (arg0) in
             let (key, value) = arg0
-            let dataEntry = PieChartDataEntry(value: Double(value), label: key, icon: nil, data: "nice!" as AnyObject)
+            let dataEntry = PieChartDataEntry(value: Double(value), label: key)
             speakingTimesDataEntries.append(dataEntry)
         }
 
