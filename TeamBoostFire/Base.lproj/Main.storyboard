@@ -13,7 +13,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="vb9-wr-P9t">
             <objects>
-                <viewController title="Welcome View Controller" id="H6K-V0-4wR" sceneMemberID="viewController">
+                <viewController title="Welcome View Controller" id="H6K-V0-4wR" customClass="WelcomeViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F4m-wl-fpi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
