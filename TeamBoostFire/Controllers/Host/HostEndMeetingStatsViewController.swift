@@ -10,32 +10,69 @@ import UIKit
 import Charts
 
 class HostEndMeetingStatsViewController: UIViewController {
+
+    var pieChartColourPalette = [UIColor]()
+
     @IBOutlet weak var pieChartView: PieChartView!
+    var speakingTimesDataEntries = [PieChartDataEntry]()
 
-    var iosDataEntry = PieChartDataEntry(value: 0)
-    var macDataEntry = PieChartDataEntry(value: 0)
-    var macDataEntry2 = PieChartDataEntry(value: 0)
-
-    var numberOfDownloadsDataEntries = [PieChartDataEntry]()
+    @IBOutlet weak var meetingAgendaLabel: UILabel!
+    @IBOutlet weak var meetingDescriptionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true,
                                                           animated: true)
 
+        populateLabelAndDescription()
+        populateColourPalette()
+        populatePieChart()
+    }
+
+    func populateLabelAndDescription() {
+        guard let meetingStatistics = HostCoreServices.shared.meetingStatistics else {
+            assertionFailure("Unable to retrieve meeting statistics")
+            return
+        }
+        meetingAgendaLabel.text = meetingStatistics.agenda
+        meetingDescriptionLabel.text = "Your meeting had \(meetingStatistics.numberOfParticipants) participants and lasted \(meetingStatistics.meetingLength.minutesAndSecondsPrettyString()) minutes"
+    }
+
+    func populateColourPalette() {
+
+        pieChartColourPalette = [
+            UIColor.blue,
+            UIColor.brown,
+            UIColor.cyan,
+            UIColor.darkGray,
+            UIColor.green,
+            UIColor.magenta,
+            UIColor.orange,
+            UIColor.purple,
+            UIColor.red,
+            UIColor(red: 64/255, green: 92/255, blue: 117/255, alpha: 1.0)
+            // 320D6D
+        ]
+    }
+
+    func populatePieChart() {
+        guard let meetingStats = HostCoreServices.shared.meetingStatistics else {
+            assertionFailure("Meeting statistics not found in HostCoreServices")
+            return
+        }
+
         pieChartView.chartDescription?.text = "Participant Speaking Times"
-        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue", size: 16.0)
+        pieChartView.chartDescription?.font = NSUIFont(name: "HelveticaNeue", size: 12.0)!
+        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue", size: 13.0)
+        pieChartView.legend.font = NSUIFont(name: "HelveticaNeue", size: 10.0)!
+        pieChartView.usePercentValuesEnabled = true
 
-        iosDataEntry.value = 30
-        iosDataEntry.label = "Participant 1"
-
-        macDataEntry.value = 20
-        macDataEntry.label = "Participant 2"
-
-        macDataEntry2.value = 50
-        macDataEntry2.label = "Participant 3"
-
-        numberOfDownloadsDataEntries = [iosDataEntry, macDataEntry,macDataEntry2]
+        let speakingTimes = meetingStats.participantSpeakingRecords
+        speakingTimes.forEach { (arg0) in
+            let (key, value) = arg0
+            let dataEntry = PieChartDataEntry(value: Double(value), label: key, icon: nil, data: "nice!" as AnyObject)
+            speakingTimesDataEntries.append(dataEntry)
+        }
 
         updateChartData()
     }
@@ -46,21 +83,10 @@ class HostEndMeetingStatsViewController: UIViewController {
     }
 
     func updateChartData() {
-        let chartDataSet = PieChartDataSet(values: numberOfDownloadsDataEntries, label: nil)
+        let chartDataSet = PieChartDataSet(values: speakingTimesDataEntries, label: nil)
         let chartData = PieChartData(dataSet: chartDataSet)
-        var colors = [UIColor]()
-        for _ in 0..<chartDataSet.count {
-            let red = Double(arc4random_uniform(256))
-            let green = Double(arc4random_uniform(256))
-            let blue = Double(arc4random_uniform(256))
 
-            let color = UIColor(red: CGFloat(red/255),
-                                green: CGFloat(green/255),
-                                blue: CGFloat(blue/255), alpha: 1)
-            colors.append(color)
-        }
-
-        chartDataSet.colors = colors
+        chartDataSet.colors = pieChartColourPalette
         pieChartView.data = chartData
 
     }

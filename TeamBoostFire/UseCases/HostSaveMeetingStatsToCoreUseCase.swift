@@ -28,8 +28,11 @@ struct HostSaveMeetingStatsToCoreUseCase {
         var participantSpeakingRecordWithName = [String: Int]()
         for participant in allParticipants {
             let participantSpeakingTime = participantSpeakingRecordWithId[participant.id]
-            participantSpeakingRecordWithName[participant.name] = participantSpeakingTime
+            if participantSpeakingTime != 0 {
+                participantSpeakingRecordWithName[participant.name] = participantSpeakingTime
+            }
         }
+
         HostCoreServices.shared.meetingStatistics = MeetingStats(
             agenda: meetingAgenda,
             meetingLength: meetingLengthSeconds,
