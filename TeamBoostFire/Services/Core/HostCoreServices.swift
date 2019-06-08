@@ -10,6 +10,8 @@ class HostCoreServices: TeamBoostCore {
     var allParticipants: [Participant]?
     var meetingParams: MeetingsParams?
 
+    var meetingStatistics: MeetingStats?
+
     static let shared = HostCoreServices()
 
     private(set) public var meetingIdentifier: String?

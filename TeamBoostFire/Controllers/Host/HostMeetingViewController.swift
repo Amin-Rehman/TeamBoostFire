@@ -21,7 +21,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
     var currentSpeakerIndex = 0
-    private var secondTimerCount = 0
+    private var activeMeetingTimeSeconds = 0
 
     var hostControllerService: HostControllerService?
 
@@ -55,12 +55,12 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     }
 
     @objc func secondTicked() {
-        secondTimerCount = secondTimerCount + 1
-        let timeElapsedString = secondTimerCount.minutesAndSecondsPrettyString()
+        activeMeetingTimeSeconds = activeMeetingTimeSeconds + 1
+        let timeElapsedString = activeMeetingTimeSeconds.minutesAndSecondsPrettyString()
         let timeElapsedRatioString = timeElapsedString + "/" + totalMeetingTimeString
         timeElapsedLabel?.text = timeElapsedRatioString
 
-        let progressRatio = Float(secondTimerCount) / Float(totalMeetingTimeInSeconds)
+        let progressRatio = Float(activeMeetingTimeSeconds) / Float(totalMeetingTimeInSeconds)
         timeElapsedProgressView.progress = progressRatio
     }
 
@@ -133,7 +133,10 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         }
         alertController.addAction(cancelAction)
 
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
+            HostSaveMeetingStatsToCoreUseCase.perform(meetingLengthSeconds: self.activeMeetingTimeSeconds,
+                                                      hostControllerService: self.hostControllerService)
+
             let hostEndMeetingStatsViewController = HostEndMeetingStatsViewController()
             self.navigationController?.pushViewController(hostEndMeetingStatsViewController,
                                                           animated: true)
@@ -142,6 +145,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
         present(alertController, animated: true)
     }
+
 
     @IBAction func goToNextParticipantTapped(_ sender: Any) {
         hostControllerService?.goToNextSpeaker()
