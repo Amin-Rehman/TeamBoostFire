@@ -20,12 +20,35 @@ class HostCoreServices: TeamBoostCore {
 
     private init() {}
 
+    public func injectFakeParticipantsForTestModeIfNeeded() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            firebaseReferenceContainer?.participantsReference?.setValue(nil)
+
+            let participantOneId = UUID().uuidString
+            firebaseReferenceContainer?.participantsReference?
+                .child(participantOneId).setValue(["name": "Jon Snow",
+                                                   "id": participantOneId])
+
+            let participantTwoId = UUID().uuidString
+            firebaseReferenceContainer?.participantsReference?
+                .child(participantTwoId).setValue(["name": "Ned Stark",
+                                                   "id": participantTwoId])
+
+            let participantThreeId = UUID().uuidString
+            firebaseReferenceContainer?.participantsReference?
+                .child(participantThreeId).setValue(["name": "Cersei Lannister",
+                                                   "id": participantThreeId])
+        }
+    }
+
     public func setupCore(with params: MeetingsParams) {
         meetingParams = params
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.testEnvironment == true {
             meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+
         } else {
             meetingIdentifier = String.makeSixDigitRandomNumbers()
         }
@@ -51,6 +74,8 @@ class HostCoreServices: TeamBoostCore {
         firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
         firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+
+        injectFakeParticipantsForTestModeIfNeeded()
 
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()
