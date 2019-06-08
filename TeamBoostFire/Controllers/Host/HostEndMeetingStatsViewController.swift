@@ -24,6 +24,9 @@ class HostEndMeetingStatsViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true,
                                                           animated: true)
 
+        pieChartView.animate(xAxisDuration: 2.0,
+                             yAxisDuration: 2.0,
+                             easingOption: .easeInSine)
         pieChartView.holeRadiusPercent = 0.10
         pieChartView.transparentCircleRadiusPercent = 0.20
 
@@ -89,6 +92,7 @@ class HostEndMeetingStatsViewController: UIViewController {
         let chartDataSet = PieChartDataSet(values: speakingTimesDataEntries, label: nil)
         let chartData = PieChartData(dataSet: chartDataSet)
 
+        // ChartColorTemplates.vordiplom()
         chartDataSet.colors = pieChartColourPalette
         pieChartView.data = chartData
 
