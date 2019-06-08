@@ -408,7 +408,6 @@
                             <constraint firstItem="J30-bB-V1G" firstAttribute="top" secondItem="DnO-16-9rG" secondAttribute="top" id="Mau-f9-Uuc"/>
                             <constraint firstItem="J30-bB-V1G" firstAttribute="width" secondItem="DnO-16-9rG" secondAttribute="width" id="OSJ-Lo-s52"/>
                             <constraint firstAttribute="bottom" secondItem="J30-bB-V1G" secondAttribute="bottom" id="XDn-50-ITr"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="J30-bB-V1G" secondAttribute="bottom" id="XHn-Cu-JlI"/>
                             <constraint firstAttribute="trailing" secondItem="J30-bB-V1G" secondAttribute="trailing" id="YU7-MF-rUD"/>
                             <constraint firstItem="J30-bB-V1G" firstAttribute="centerX" secondItem="DnO-16-9rG" secondAttribute="centerX" id="wws-zV-vHD"/>
                         </constraints>
