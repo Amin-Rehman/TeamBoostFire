@@ -47,6 +47,7 @@
 		EBBB4A89227F84A800D61976 /* HostControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* HostControllerService.swift */; };
 		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
 		EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */; };
+		EBC679E922ABEF1A00C9705D /* MeetingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC679E822ABEF1A00C9705D /* MeetingStats.swift */; };
 		EBDC014E22AB061D006910A0 /* HostEndMeetingStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */; };
 		EBDC014F22AB061D006910A0 /* HostEndMeetingStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */; };
 		EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF347802278C20B008A6154 /* ArrayRotation.swift */; };
@@ -113,6 +114,7 @@
 		EBBB4A88227F84A800D61976 /* HostControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostControllerService.swift; sourceTree = "<group>"; };
 		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
 		EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyStringTests.swift; sourceTree = "<group>"; };
+		EBC679E822ABEF1A00C9705D /* MeetingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStats.swift; sourceTree = "<group>"; };
 		EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEndMeetingStatsViewController.swift; sourceTree = "<group>"; };
 		EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostEndMeetingStatsViewController.xib; sourceTree = "<group>"; };
 		EBF347802278C20B008A6154 /* ArrayRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayRotation.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				EB1D48B122672E45001A754D /* MeetingParams.swift */,
 				EB1D48C222675827001A754D /* Participant.swift */,
 				EB1D48D02267DA3F001A754D /* MeetingState.swift */,
+				EBC679E822ABEF1A00C9705D /* MeetingStats.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
 				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
+				EBC679E922ABEF1A00C9705D /* MeetingStats.swift in Sources */,
 				EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */,
 				EB1D48CA2267CB07001A754D /* HostMeetingViewController.swift in Sources */,
 				EB1D48D12267DA3F001A754D /* MeetingState.swift in Sources */,
