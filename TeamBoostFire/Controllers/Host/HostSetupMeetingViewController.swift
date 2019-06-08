@@ -46,6 +46,7 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
             agendaQuestionTextField.text = StubMeetingVars.MeetingAgenda.rawValue
             meetingTimeTextField.text = StubMeetingVars.MeetingTime.rawValue
             maxTalkingTimeTextField.text = StubMeetingVars.MaxTalkTime.rawValue
+
         }
     }
 
@@ -76,6 +77,8 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
                                            maxTalkTime: Int(maxTalkingTime)!,
                                            moderationMode: nil)
         HostSetupMeetingUseCase.perform(at: self, meetingParams: meetingParams)
+
+        
 
     }
 
