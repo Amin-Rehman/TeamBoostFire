@@ -45,6 +45,8 @@
 		EBBB4A89227F84A800D61976 /* HostControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* HostControllerService.swift */; };
 		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
 		EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */; };
+		EBDC014E22AB061D006910A0 /* HostEndMeetingStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */; };
+		EBDC014F22AB061D006910A0 /* HostEndMeetingStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */; };
 		EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF347802278C20B008A6154 /* ArrayRotation.swift */; };
 		EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
@@ -107,6 +109,8 @@
 		EBBB4A88227F84A800D61976 /* HostControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostControllerService.swift; sourceTree = "<group>"; };
 		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
 		EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyStringTests.swift; sourceTree = "<group>"; };
+		EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEndMeetingStatsViewController.swift; sourceTree = "<group>"; };
+		EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostEndMeetingStatsViewController.xib; sourceTree = "<group>"; };
 		EBF347802278C20B008A6154 /* ArrayRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayRotation.swift; sourceTree = "<group>"; };
 		EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostFireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireTests.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */,
 				EB1FAB952268AF300037A6A5 /* HostInMeetingTableViewController.swift */,
 				EB1FAB962268AF300037A6A5 /* HostInMeetingTableViewController.xib */,
+				EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */,
+				EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */,
 			);
 			path = Host;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 			files = (
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,
+				EBDC014F22AB061D006910A0 /* HostEndMeetingStatsViewController.xib in Resources */,
 				EBBB4A87227B501600D61976 /* ParticipantSelfSpeakerViewController.xib in Resources */,
 				EB1FAB982268AF300037A6A5 /* HostInMeetingTableViewController.xib in Resources */,
 				EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */,
@@ -434,6 +441,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -442,6 +450,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -482,6 +491,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -490,6 +500,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -547,6 +558,7 @@
 				EB1D48D12267DA3F001A754D /* MeetingState.swift in Sources */,
 				EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */,
 				EBFF147E2279ABD6006F218F /* StubMeeting.swift in Sources */,
+				EBDC014E22AB061D006910A0 /* HostEndMeetingStatsViewController.swift in Sources */,
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
 				EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
@@ -615,7 +627,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostFireTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamBoostFire.app/TeamBoostFire";
 			};
@@ -637,7 +649,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostFireTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamBoostFire.app/TeamBoostFire";
 			};
