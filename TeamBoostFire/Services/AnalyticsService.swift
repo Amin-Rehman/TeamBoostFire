@@ -23,6 +23,6 @@ class AnalyticsService {
     }
 
     public func hostMeetingEnded() {
-        mixpanel.track("host_meeting_started")
+        mixpanel.track("host_meeting_ended")
     }
 }
