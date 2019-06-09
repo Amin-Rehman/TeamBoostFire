@@ -10,8 +10,31 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var versionLabel: UILabel!
+
+    func makeAppVersionString() -> String {
+        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String else {
+                return ""
+        }
+        return "TeamBoost v" + appVersion + "(" + buildNumber + ")"
+    }
+
+    func populateVersionLabel() {
+        let versionString = makeAppVersionString()
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let currentlyInTestMode = appDelegate.testEnvironment
+        if currentlyInTestMode {
+            versionLabel.text = versionString + "- Test mode"
+        } else {
+            versionLabel.text = versionString
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateVersionLabel()
     }
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
@@ -23,11 +46,10 @@ class WelcomeViewController: UIViewController {
     func toggleTestMode() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let currentlyInTestMode = appDelegate.testEnvironment
-        if currentlyInTestMode {
-            appDelegate.testEnvironment = false
-        } else {
-            appDelegate.testEnvironment = true
-        }
+        let toggledCurrentMode = !currentlyInTestMode
+
+        UserDefaults.standard.setValue(toggledCurrentMode, forKey: testModeKey)
+        appDelegate.testEnvironment = toggledCurrentMode
 
         if let popOverView = Bundle.main.loadNibNamed("PopoverView", owner: self, options: nil)?.first as? UIView {
             popOverView.alpha = 0.0;
@@ -44,6 +66,7 @@ class WelcomeViewController: UIViewController {
                     popOverView.alpha = 0.0
                 }, completion: { _ in
                     popOverView.removeFromSuperview()
+                    self.populateVersionLabel()
                 })
             }
         }

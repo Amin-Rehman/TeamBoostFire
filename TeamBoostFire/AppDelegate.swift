@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+let testModeKey = "TestModeKey"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -22,9 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setupAppTestModeFromUserDefaultsIfNeeded()
         hostCoreServices = HostCoreServices.shared
         participantCoreServices = ParticipantCoreServices.shared
         return true
+    }
+
+    func setupAppTestModeFromUserDefaultsIfNeeded() {
+        let isTestModeEnabledAlready = UserDefaults.standard.value(forKey: testModeKey) as? Bool == true
+        self.testEnvironment = isTestModeEnabledAlready
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

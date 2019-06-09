@@ -69,7 +69,9 @@ class HostEndMeetingStatsViewController: UIViewController {
 
         pieChartView.chartDescription?.text = "Participant % Speaking Times"
         pieChartView.chartDescription?.font = NSUIFont(name: "HelveticaNeue", size: 12.0)!
-        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue-Bold", size: 16.0)
+        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue-Bold", size: 18.0)
+        pieChartView.entryLabelColor = NSUIColor.black
+
         pieChartView.legend.font = NSUIFont(name: "HelveticaNeue", size: 10.0)!
         pieChartView.usePercentValuesEnabled = true
 
@@ -91,10 +93,7 @@ class HostEndMeetingStatsViewController: UIViewController {
     func updateChartData() {
         let chartDataSet = PieChartDataSet(values: speakingTimesDataEntries, label: nil)
         let chartData = PieChartData(dataSet: chartDataSet)
-
-        // ChartColorTemplates.vordiplom()
-        chartDataSet.colors = pieChartColourPalette
+        chartDataSet.colors = ChartColorTemplates.colorful().shuffled()
         pieChartView.data = chartData
-
     }
 }

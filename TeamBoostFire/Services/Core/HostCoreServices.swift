@@ -20,28 +20,6 @@ class HostCoreServices: TeamBoostCore {
 
     private init() {}
 
-    public func injectFakeParticipantsForTestModeIfNeeded() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if appDelegate.testEnvironment == true {
-            firebaseReferenceContainer?.participantsReference?.setValue(nil)
-
-            let participantOneId = UUID().uuidString
-            firebaseReferenceContainer?.participantsReference?
-                .child(participantOneId).setValue(["name": "Jon Snow",
-                                                   "id": participantOneId])
-
-            let participantTwoId = UUID().uuidString
-            firebaseReferenceContainer?.participantsReference?
-                .child(participantTwoId).setValue(["name": "Ned Stark",
-                                                   "id": participantTwoId])
-
-            let participantThreeId = UUID().uuidString
-            firebaseReferenceContainer?.participantsReference?
-                .child(participantThreeId).setValue(["name": "Cersei Lannister",
-                                                   "id": participantThreeId])
-        }
-    }
-
     public func setupCore(with params: MeetingsParams) {
         meetingParams = params
 
@@ -75,11 +53,11 @@ class HostCoreServices: TeamBoostCore {
         firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
 
-        injectFakeParticipantsForTestModeIfNeeded()
-
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()
         firebaseObserverUtility?.observeIAmDoneInterrupt()
+
+        injectFakeParticipantsForTestModeIfNeeded()
     }
 
     public func startMeeting() {
@@ -115,6 +93,32 @@ class HostCoreServices: TeamBoostCore {
         }
 
         allParticipants = updatedAllParticipants
+    }
+}
+
+
+extension HostCoreServices {
+    public func injectFakeParticipantsForTestModeIfNeeded() {
+        self.firebaseReferenceContainer?.participantsReference?.setValue(nil)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if appDelegate.testEnvironment == true {
+                let participantOneId = UUID().uuidString
+                self.firebaseReferenceContainer?.participantsReference?
+                    .child(participantOneId).setValue(["name": "Jon Snow",
+                                                       "id": participantOneId])
+
+                let participantTwoId = UUID().uuidString
+                self.firebaseReferenceContainer?.participantsReference?
+                    .child(participantTwoId).setValue(["name": "Ned Stark",
+                                                       "id": participantTwoId])
+
+                let participantThreeId = UUID().uuidString
+                self.firebaseReferenceContainer?.participantsReference?
+                    .child(participantThreeId).setValue(["name": "Cersei Lannister",
+                                                         "id": participantThreeId])
+            }
+        }
     }
 }
 

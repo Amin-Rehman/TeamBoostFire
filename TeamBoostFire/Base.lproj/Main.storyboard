@@ -75,6 +75,15 @@
                                     <segue destination="hv1-QO-Hvr" kind="show" id="2ey-pD-z9f"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
+                                <rect key="frame" x="24" y="621" width="327" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="7Xg-w1-2on"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -85,12 +94,15 @@
                             <constraint firstItem="9hC-3j-DXK" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="HVe-ty-hMG"/>
                             <constraint firstItem="9hC-3j-DXK" firstAttribute="top" secondItem="bCh-9H-cwG" secondAttribute="top" constant="20" id="L7O-Xq-kUQ"/>
                             <constraint firstItem="fb6-04-tVQ" firstAttribute="top" secondItem="FWW-vH-5cu" secondAttribute="bottom" constant="8" symbolic="YES" id="QmH-og-Ivk"/>
+                            <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="lxq-vK-MaZ" secondAttribute="trailing" constant="24" id="SNX-i1-1fQ"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerY" secondItem="F4m-wl-fpi" secondAttribute="centerY" id="Swr-yb-qZk"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djS-Gj-zgs" secondAttribute="trailing" id="Vqf-sS-hWs"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="top" secondItem="fb6-04-tVQ" secondAttribute="bottom" constant="24" id="XPf-iC-wme"/>
                             <constraint firstItem="FWW-vH-5cu" firstAttribute="top" secondItem="9hC-3j-DXK" secondAttribute="bottom" constant="20" id="e0R-fR-dZp"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="HPi-sE-qBO" secondAttribute="trailing" constant="20" id="fFj-w4-aa2"/>
                             <constraint firstItem="fb6-04-tVQ" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="hVR-H9-YIC"/>
+                            <constraint firstItem="lxq-vK-MaZ" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="jnp-jq-YNM"/>
+                            <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="24" id="mig-bA-Jql"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="phz-9A-9Hd"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="top" secondItem="Rr2-jW-cUL" secondAttribute="bottom" constant="28" id="qWm-xw-UuU"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="qgk-fU-w5j"/>
@@ -100,6 +112,9 @@
                         <viewLayoutGuide key="safeArea" id="bCh-9H-cwG"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qpw-fF-wlf"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="lxq-vK-MaZ" id="HFc-EE-Ics"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yX4-mm-0kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
