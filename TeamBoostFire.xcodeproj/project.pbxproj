@@ -14,6 +14,7 @@
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
 		EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */; };
 		EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */; };
+		EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
 		EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* TeamBoostCore.swift */; };
@@ -82,6 +83,7 @@
 		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
 		EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCoreServices.swift; sourceTree = "<group>"; };
 		EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantControllerService.swift; sourceTree = "<group>"; };
+		EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AF226729FD001A754D /* TeamBoostCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostCore.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */,
 				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
 				EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */,
+				EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -465,6 +469,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -583,6 +588,7 @@
 				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
 				EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
+				EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,
 				EB1FAB9A22777B3C0037A6A5 /* TableKeys.swift in Sources */,
 				EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */,

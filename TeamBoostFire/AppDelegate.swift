@@ -21,13 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     public var hostCoreServices: HostCoreServices?
     public var participantCoreServices: ParticipantCoreServices?
+    public var analyticsServices: AnalyticsService?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupAppTestModeFromUserDefaultsIfNeeded()
+        setupSingletonServices()
+
+        return true
+    }
+
+    func setupSingletonServices() {
         hostCoreServices = HostCoreServices.shared
         participantCoreServices = ParticipantCoreServices.shared
-        return true
+        analyticsServices = AnalyticsService.shared
     }
 
     func setupAppTestModeFromUserDefaultsIfNeeded() {

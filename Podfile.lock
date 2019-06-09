@@ -56,6 +56,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.2.0):
     - GoogleUtilities/Logger
   - leveldb-library (1.20)
+  - Mixpanel (3.4.7)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Charts (from `https://github.com/danielgindi/Charts.git`, commit `deae18583b7e82e44c9a0e37514d07d81de20fb9`)
   - Firebase/Core
   - Firebase/Database
+  - Mixpanel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -78,6 +80,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - leveldb-library
+    - Mixpanel
     - nanopb
 
 EXTERNAL SOURCES:
@@ -101,8 +104,9 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: a7b9abb18a752620d200d3152209c7385128dfb5
+PODFILE CHECKSUM: 4f3692eb5360a7c220283fe84a70337cd0cac0b2
 
 COCOAPODS: 1.5.3

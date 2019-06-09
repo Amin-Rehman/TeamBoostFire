@@ -49,6 +49,7 @@ class HostWaitingViewController: UIViewController {
     }
 
     @IBAction func startMeetingClicked(_ sender: Any) {
+        AnalyticsService.shared.hostMeetingStarted()
         HostCoreServices.shared.startMeeting()
         let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
                                                                   bundle: nil)
