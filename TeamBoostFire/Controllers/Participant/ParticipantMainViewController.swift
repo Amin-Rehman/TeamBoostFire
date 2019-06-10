@@ -20,11 +20,19 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true,
+                                                     animated: true)
         setupTopBar()
         let meetingParams = ParticipantCoreServices.shared.meetingParams
         self.participantControllerService = ParticipantControllerService(with: meetingParams!,
                                                                          timesUpdatedObserver: self)
         updateMeetingTimerLabel(with: (meetingParams?.meetingTime)!)
+
+        let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(meetingStateDidChange(notification:)),
+                                               name: notificationName, object: nil)
+
     }
 
     private func setupTopBar() {
@@ -80,12 +88,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         }
     }
 
-    @IBAction func likeButtonTapped(_ sender: Any) {
-    }
-
-    @IBAction func continueButtonTapped(_ sender: Any) {
-    }
-
     @IBAction func callForSpeakerTapped(_ sender: Any) {
     }
 
@@ -117,4 +119,12 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
     }
 
+
+    @objc private func meetingStateDidChange(notification: NSNotification) {
+        let meetingState = notification.object as! MeetingState
+        if meetingState == .ended {
+            navigationController?.pushViewController(ParticipantMeetingEndedViewController(),
+                                                                           animated: true)
+        }
+    }
 }

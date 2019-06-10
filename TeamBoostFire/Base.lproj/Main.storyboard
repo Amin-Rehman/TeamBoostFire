@@ -72,10 +72,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="Participant"/>
                                 <connections>
-                                    <segue destination="hv1-QO-Hvr" kind="show" id="2ey-pD-z9f"/>
+                                    <segue destination="ZP7-eZ-Chl" kind="show" id="rWa-8b-gUY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
                                 <rect key="frame" x="24" y="621" width="327" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="7Xg-w1-2on"/>
@@ -296,6 +296,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t3g-ic-raV"/>
                     </view>
+                    <navigationItem key="navigationItem" id="eb2-Hu-flY"/>
                     <connections>
                         <outlet property="number1TextField" destination="AH0-kn-1IU" id="1pC-Zb-ZuU"/>
                         <outlet property="number2TextField" destination="fDX-gw-hzt" id="GCu-te-ERY"/>
@@ -309,7 +310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-cE-HiS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="1004.3478260869566"/>
+            <point key="canvasLocation" x="1511.2" y="1004.3478260869566"/>
         </scene>
         <!--Set Up Meeting-->
         <scene sceneID="LyT-9o-8SZ">
@@ -466,6 +467,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vS0-5w-ASK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1720.289855072464" y="150.66964285714286"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="c6G-fn-8f9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZP7-eZ-Chl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JuC-zd-3GD">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hv1-QO-Hvr" kind="relationship" relationship="rootViewController" id="fSw-Ga-ty2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNL-3R-mcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="1004.3478260869566"/>
         </scene>
     </scenes>
     <resources>

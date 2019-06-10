@@ -126,7 +126,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let participant = Participant(id: participantIdentifier,
                                       name: participantNameText, speakerOrder: -1)
         ParticipantCoreServices.shared.setupCore(with: participant, meetingCode: meetingCodeText)
-        present(ParticipantLobbyViewController(), animated: true, completion: nil)
+        navigationController?.pushViewController(ParticipantLobbyViewController(), animated: true)
     }
 
 
