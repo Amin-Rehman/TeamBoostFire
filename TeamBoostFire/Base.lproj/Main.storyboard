@@ -222,17 +222,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UX-y1-rcV">
-                                                <rect key="frame" x="142.5" y="329" width="90" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="WxE-Wy-2iJ"/>
-                                                    <constraint firstAttribute="height" constant="30" id="rUS-i3-eTH"/>
-                                                </constraints>
-                                                <state key="normal" title="Join Meeting"/>
-                                                <connections>
-                                                    <action selector="joinMeetingButtonClicked:" destination="hv1-QO-Hvr" eventType="touchUpInside" id="HHf-h7-749"/>
-                                                </connections>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your meeting code:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FH-ch-rDX">
                                                 <rect key="frame" x="20" y="106" width="335" height="24"/>
                                                 <constraints>
@@ -242,13 +231,19 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrm-Ho-8Zn" userLabel="TransitionButtonContainer">
+                                                <rect key="frame" x="0.0" y="319" width="375" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="eSj-K1-rXL"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Oq5-h8-4RI" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="2cU-Sz-EC8"/>
                                             <constraint firstItem="aDC-0F-rrt" firstAttribute="leading" secondItem="AH0-kn-1IU" secondAttribute="leading" id="3A4-ce-S3a"/>
                                             <constraint firstItem="aDC-0F-rrt" firstAttribute="top" secondItem="AH0-kn-1IU" secondAttribute="bottom" constant="30" id="3Q5-en-KKe"/>
-                                            <constraint firstItem="9UX-y1-rcV" firstAttribute="centerX" secondItem="fct-yF-gmn" secondAttribute="centerX" id="3Vh-CP-EwN"/>
                                             <constraint firstItem="Oq5-h8-4RI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1wn-1t-XCm" secondAttribute="trailing" constant="8" id="4eP-DY-g8s"/>
                                             <constraint firstItem="1wn-1t-XCm" firstAttribute="leading" secondItem="fDX-gw-hzt" secondAttribute="trailing" constant="8" id="50n-Bx-4Tq"/>
                                             <constraint firstItem="fDX-gw-hzt" firstAttribute="leading" secondItem="AH0-kn-1IU" secondAttribute="trailing" constant="10" id="80b-CW-P45"/>
@@ -257,18 +252,20 @@
                                             <constraint firstItem="m2d-5a-N6w" firstAttribute="bottom" secondItem="AH0-kn-1IU" secondAttribute="bottom" id="EEX-tz-1eW"/>
                                             <constraint firstItem="1wn-1t-XCm" firstAttribute="centerY" secondItem="fDX-gw-hzt" secondAttribute="centerY" id="HTa-EZ-bhU"/>
                                             <constraint firstItem="qoX-4I-bOd" firstAttribute="top" secondItem="Oq5-h8-4RI" secondAttribute="top" id="JKW-Ab-Wcv"/>
+                                            <constraint firstItem="nrm-Ho-8Zn" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" id="KnG-T8-Q6l"/>
                                             <constraint firstItem="1FH-ch-rDX" firstAttribute="top" secondItem="doI-IY-xxp" secondAttribute="bottom" constant="25" id="N0O-th-vfy"/>
                                             <constraint firstItem="qoX-4I-bOd" firstAttribute="bottom" secondItem="Oq5-h8-4RI" secondAttribute="bottom" id="QzK-iJ-nbR"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="leading" secondItem="qoX-4I-bOd" secondAttribute="trailing" constant="8" id="R1S-E5-zGs"/>
                                             <constraint firstItem="doI-IY-xxp" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="16" id="Rbl-y6-MVg"/>
                                             <constraint firstItem="fDX-gw-hzt" firstAttribute="centerY" secondItem="AH0-kn-1IU" secondAttribute="centerY" id="SQY-Qn-ogl"/>
                                             <constraint firstItem="qoX-4I-bOd" firstAttribute="centerY" secondItem="1wn-1t-XCm" secondAttribute="centerY" id="TSJ-7R-ITf"/>
-                                            <constraint firstItem="9UX-y1-rcV" firstAttribute="top" secondItem="aDC-0F-rrt" secondAttribute="bottom" constant="60" id="ULI-uE-UDD"/>
                                             <constraint firstAttribute="trailing" secondItem="1FH-ch-rDX" secondAttribute="trailing" constant="20" id="ZSv-3p-fvZ"/>
+                                            <constraint firstItem="nrm-Ho-8Zn" firstAttribute="top" secondItem="aDC-0F-rrt" secondAttribute="bottom" constant="50" id="Zmr-fx-MTr"/>
                                             <constraint firstItem="m2d-5a-N6w" firstAttribute="top" secondItem="AH0-kn-1IU" secondAttribute="top" id="bTt-Fe-4AB"/>
                                             <constraint firstItem="AH0-kn-1IU" firstAttribute="top" secondItem="doI-IY-xxp" secondAttribute="bottom" constant="88" id="eNv-ER-jFq"/>
                                             <constraint firstItem="Oq5-h8-4RI" firstAttribute="centerY" secondItem="1wn-1t-XCm" secondAttribute="centerY" id="gKE-Fd-4H0"/>
                                             <constraint firstItem="doI-IY-xxp" firstAttribute="top" secondItem="fct-yF-gmn" secondAttribute="top" constant="60" id="hG5-Of-JkE"/>
+                                            <constraint firstAttribute="trailing" secondItem="nrm-Ho-8Zn" secondAttribute="trailing" id="mFQ-nN-hZ9"/>
                                             <constraint firstItem="m2d-5a-N6w" firstAttribute="trailing" secondItem="aDC-0F-rrt" secondAttribute="trailing" id="qcV-tR-ove"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="leading" secondItem="qoX-4I-bOd" secondAttribute="trailing" constant="8" id="sMa-rC-Xd2"/>
                                             <constraint firstItem="1FH-ch-rDX" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="20" id="sV9-4s-Tkq"/>
@@ -306,6 +303,7 @@
                         <outlet property="number6TextField" destination="m2d-5a-N6w" id="icw-cd-0xk"/>
                         <outlet property="participantNameTextField" destination="aDC-0F-rrt" id="hTN-R6-x3J"/>
                         <outlet property="scrollView" destination="GuZ-FJ-YgS" id="3kj-mD-OaI"/>
+                        <outlet property="transitionButtonContainer" destination="nrm-Ho-8Zn" id="Itw-Yb-kOY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Xb-cE-HiS" userLabel="First Responder" sceneMemberID="firstResponder"/>

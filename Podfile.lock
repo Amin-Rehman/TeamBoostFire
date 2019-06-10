@@ -63,6 +63,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - TransitionButton (0.5.2)
 
 DEPENDENCIES:
   - Charts (from `https://github.com/danielgindi/Charts.git`, commit `deae18583b7e82e44c9a0e37514d07d81de20fb9`)
@@ -70,6 +71,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Mixpanel
+  - TransitionButton
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -85,6 +87,7 @@ SPEC REPOS:
     - leveldb-library
     - Mixpanel
     - nanopb
+    - TransitionButton
 
 EXTERNAL SOURCES:
   Charts:
@@ -110,7 +113,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
 
-PODFILE CHECKSUM: 620a6f978005614870bb691078bbaa740ab9f791
+PODFILE CHECKSUM: c8da02980e9df7f3682f68e5ed7cd190ccf5f6b2
 
 COCOAPODS: 1.5.3

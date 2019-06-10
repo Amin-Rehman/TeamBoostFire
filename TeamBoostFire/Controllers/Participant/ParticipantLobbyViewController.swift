@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import TransitionButton
 
-class ParticipantLobbyViewController: UIViewController {
+class ParticipantLobbyViewController: CustomTransitionViewController {
 
     @IBOutlet weak var lobbyImageView: UIImageView!
 
