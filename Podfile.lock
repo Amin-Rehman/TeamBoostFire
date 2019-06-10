@@ -2,6 +2,7 @@ PODS:
   - Charts (3.2.2):
     - Charts/Core (= 3.2.2)
   - Charts/Core (3.2.2)
+  - Cosmos (19.0.3)
   - Firebase/Core (6.2.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.0.1)
@@ -65,12 +66,14 @@ PODS:
 
 DEPENDENCIES:
   - Charts (from `https://github.com/danielgindi/Charts.git`, commit `deae18583b7e82e44c9a0e37514d07d81de20fb9`)
+  - Cosmos (~> 19.0)
   - Firebase/Core
   - Firebase/Database
   - Mixpanel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Cosmos
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuthInterop
@@ -95,6 +98,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
   Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
   FirebaseAnalytics: 629301c2b9925f3537d4093a17a72751ae5b7084
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -107,6 +111,6 @@ SPEC CHECKSUMS:
   Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: 4f3692eb5360a7c220283fe84a70337cd0cac0b2
+PODFILE CHECKSUM: 620a6f978005614870bb691078bbaa740ab9f791
 
 COCOAPODS: 1.5.3
