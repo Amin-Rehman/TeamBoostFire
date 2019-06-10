@@ -25,8 +25,15 @@ class ParticipantSelfSpeakerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         participantControllerService?.participantTimeUpdateable = self
         updateSpeakingTimerLabel()
+
+        let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(meetingStateDidChange(notification:)),
+                                               name: notificationName, object: nil)
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,5 +64,13 @@ extension ParticipantSelfSpeakerViewController: ParticipantUpdatable {
     func updateSpeakingOrder(speakingOrder: [String]) {
         dismiss(animated: true, completion: nil)
     }
+
+    @objc private func meetingStateDidChange(notification: NSNotification) {
+        let meetingState = notification.object as! MeetingState
+        if meetingState == .ended {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
 
 }

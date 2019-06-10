@@ -16,4 +16,9 @@ class ParticipantMeetingEndedViewController: UIViewController {
                                                      animated: true)
     }
 
+    @IBAction func finishTapped(_ sender: Any) {
+        navigationController?.dismiss(animated: true,
+                                      completion: nil)
+    }
+
 }
