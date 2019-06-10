@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import TransitionButton
 
-class ParticipantLobbyViewController: UIViewController {
+class ParticipantLobbyViewController: CustomTransitionViewController {
 
     @IBOutlet weak var lobbyImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true,
+                                                     animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,8 +34,8 @@ class ParticipantLobbyViewController: UIViewController {
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .started {
-            dismiss(animated: false, completion: nil)
-            presentingViewController?.present(ParticipantMainViewController(), animated: true, completion: nil)
+            navigationController?.pushViewController(ParticipantMainViewController(),
+                                                     animated: true)
         }
     }
 

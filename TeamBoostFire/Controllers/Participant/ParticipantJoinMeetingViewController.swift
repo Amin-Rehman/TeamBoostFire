@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import TransitionButton
 
 class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var participantNameTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var transitionButtonContainer: UIView!
+    var transitionButton: TransitionButton?
 
     @IBOutlet weak var number1TextField: UITextField!
     @IBOutlet weak var number2TextField: UITextField!
@@ -20,10 +23,48 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var number5TextField: UITextField!
     @IBOutlet weak var number6TextField: UITextField!
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupKeyboardInteraction()
         setupMeetingCodeTextFieldDelegates()
+
+        let transitionButtonWidth = CGFloat(200.0)
+        let parentViewWidth = transitionButtonContainer.frame.width
+        let xOffset = (parentViewWidth - transitionButtonWidth) / 2
+
+        transitionButton =  TransitionButton(frame: CGRect(x: xOffset, y: 0,
+                                                           width: transitionButtonWidth,
+                                                           height: 40))
+        transitionButtonContainer.addSubview(transitionButton!)
+
+        transitionButton!.backgroundColor = UIColor(red: 0.220000,
+                                                    green: 0.330000,
+                                                    blue: 0.530000,
+                                                    alpha: 1.0)
+        transitionButton!.setTitle("Join Meeting", for: .normal)
+        transitionButton!.cornerRadius = 20
+        transitionButton!.spinnerColor = .white
+        transitionButton!.addTarget(self, action: #selector(transitionButtonAction(_:)), for: .touchUpInside)
+    }
+
+    @IBAction func transitionButtonAction(_ button: TransitionButton) {
+        button.startAnimation() // 2: Then start the animation when the user tap the button
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            // A small sleep just to show the animation ;) 
+            sleep(2)
+            DispatchQueue.main.async(execute: { () -> Void in
+                // 4: Stop the animation, here you have three options for the `animationStyle` property:
+                // .expand: useful when the task has been compeletd successfully and you want to expand the button and transit to another view controller in the completion callback
+                // .shake: when you want to reflect to the user that the task did not complete successfly
+                // .normal
+                button.stopAnimation(animationStyle: .expand, completion: {
+                    self.joinMeeting()
+                })
+            })
+        })
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,7 +135,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         }
     }
 
-    @IBAction func joinMeetingButtonClicked(_ sender: Any) {
+    public func joinMeeting() {
         let meetingCodeText = meetingCodeFromTextFields()
         if meetingCodeText.count == 0 {
             let alertController = UIAlertController(title: "Incomplete data",
@@ -126,7 +167,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let participant = Participant(id: participantIdentifier,
                                       name: participantNameText, speakerOrder: -1)
         ParticipantCoreServices.shared.setupCore(with: participant, meetingCode: meetingCodeText)
-        present(ParticipantLobbyViewController(), animated: true, completion: nil)
+        navigationController?.pushViewController(ParticipantLobbyViewController(), animated: false)
     }
 
 

@@ -135,7 +135,9 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
         let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
             AnalyticsService.shared.hostMeetingEnded()
+            HostCoreServices.shared.endMeeting()
 
+            self.hostControllerService?.endMeeting()
             HostSaveMeetingStatsToCoreUseCase.perform(meetingLengthSeconds: self.activeMeetingTimeSeconds,
                                                       hostControllerService: self.hostControllerService)
 

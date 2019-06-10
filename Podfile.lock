@@ -2,6 +2,7 @@ PODS:
   - Charts (3.2.2):
     - Charts/Core (= 3.2.2)
   - Charts/Core (3.2.2)
+  - Cosmos (19.0.3)
   - Firebase/Core (6.2.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.0.1)
@@ -62,15 +63,19 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - TransitionButton (0.5.2)
 
 DEPENDENCIES:
   - Charts (from `https://github.com/danielgindi/Charts.git`, commit `deae18583b7e82e44c9a0e37514d07d81de20fb9`)
+  - Cosmos (~> 19.0)
   - Firebase/Core
   - Firebase/Database
   - Mixpanel
+  - TransitionButton
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Cosmos
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuthInterop
@@ -82,6 +87,7 @@ SPEC REPOS:
     - leveldb-library
     - Mixpanel
     - nanopb
+    - TransitionButton
 
 EXTERNAL SOURCES:
   Charts:
@@ -95,6 +101,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
   Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
   FirebaseAnalytics: 629301c2b9925f3537d4093a17a72751ae5b7084
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -106,7 +113,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Mixpanel: 696e0a1c7f2685aa06bb23829b7a58ab7203d6c7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
 
-PODFILE CHECKSUM: 4f3692eb5360a7c220283fe84a70337cd0cac0b2
+PODFILE CHECKSUM: c8da02980e9df7f3682f68e5ed7cd190ccf5f6b2
 
 COCOAPODS: 1.5.3

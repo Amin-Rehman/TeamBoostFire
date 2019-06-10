@@ -129,5 +129,9 @@ class HostControllerService {
         speakerTimer = nil
     }
 
+    public func endMeeting() {
+        stopSecondTickerTimer()
+        stopSpeakerTimer()
+    }
 }
 

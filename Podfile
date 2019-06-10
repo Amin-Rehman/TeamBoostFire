@@ -11,6 +11,8 @@ target 'TeamBoostFire' do
   pod 'Firebase/Database'
   pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :commit => 'deae18583b7e82e44c9a0e37514d07d81de20fb9'
   pod 'Mixpanel'
+  pod 'Cosmos', '~> 19.0'
+  pod 'TransitionButton'
 end
 
 target 'TeamBoostFireTests' do

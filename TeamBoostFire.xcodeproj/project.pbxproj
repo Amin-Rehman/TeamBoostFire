@@ -15,6 +15,8 @@
 		EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */; };
 		EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */; };
 		EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */; };
+		EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDFB22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift */; };
+		EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1AFDFC22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
 		EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* TeamBoostCore.swift */; };
@@ -84,6 +86,8 @@
 		EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCoreServices.swift; sourceTree = "<group>"; };
 		EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantControllerService.swift; sourceTree = "<group>"; };
 		EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		EB1AFDFB22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantMeetingEndedViewController.swift; sourceTree = "<group>"; };
+		EB1AFDFC22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantMeetingEndedViewController.xib; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AF226729FD001A754D /* TeamBoostCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostCore.swift; sourceTree = "<group>"; };
@@ -239,6 +243,8 @@
 				EB1D48D22267DC66001A754D /* ParticipantMainViewController.swift */,
 				EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */,
 				EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */,
+				EB1AFDFB22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift */,
+				EB1AFDFC22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib */,
 			);
 			path = Participant;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
+				EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */,
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,
 				EBDC014F22AB061D006910A0 /* HostEndMeetingStatsViewController.xib in Resources */,
 				EBBB4A87227B501600D61976 /* ParticipantSelfSpeakerViewController.xib in Resources */,
@@ -458,8 +465,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TeamBoostFire/Pods-TeamBoostFire-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/TransitionButton/TransitionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -468,8 +477,10 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -587,6 +598,7 @@
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
 				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
 				EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */,
+				EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
 				EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,
