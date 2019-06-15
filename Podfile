@@ -6,6 +6,7 @@ project 'TeamBoostFire.xcodeproj'
 inhibit_all_warnings!
 
 target 'TeamBoostFire' do
+  platform :ios, '11.0'
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Database'
@@ -16,6 +17,7 @@ target 'TeamBoostFire' do
 end
 
 target 'TeamBoostFireTests' do
+  platform :ios, '11.0'
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Database'

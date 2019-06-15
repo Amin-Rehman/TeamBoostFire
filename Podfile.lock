@@ -100,7 +100,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/danielgindi/Charts.git
 
 SPEC CHECKSUMS:
-  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
+  Charts: c981df1981d73066e855ac0a2af370d861e5f30c
   Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
   Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
   FirebaseAnalytics: 629301c2b9925f3537d4093a17a72751ae5b7084
@@ -115,6 +115,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
 
-PODFILE CHECKSUM: c8da02980e9df7f3682f68e5ed7cd190ccf5f6b2
+PODFILE CHECKSUM: 85f6a9cbd8c1a768ae76ece8b07e8c48f31a6771
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.2

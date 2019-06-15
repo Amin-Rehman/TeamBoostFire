@@ -21,7 +21,6 @@ struct FirebaseReferenceContainer {
     private(set) var meetingParamsAgendaReference: DatabaseReference?
 
     init(with meetingIdentifier: String) {
-        FirebaseApp.configure()
         self.databaseRef = Database.database().reference()
         self.meetingReference = self.databaseRef?.child(meetingIdentifier)
         self.meetingStateReference = self.meetingReference?.referenceOfChild(with: .MeetingState)

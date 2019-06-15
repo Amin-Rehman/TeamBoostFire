@@ -2,13 +2,17 @@ import Foundation
 
 protocol SpeakerControllerOrderObserver: class {
     /**
-     Method to indicate that the speaker order has changed and the observer can fetch the new order from CoreServices
+     Method to indicate that the speaker order has changed and the observer can fetch the new
+     order from CoreServices
      */
     func speakingOrderUpdated()
 }
 
 
 protocol SpeakerControllerSecondTickObserver: class {
+    /**
+     Indicate that the speaking time for a particular participant changed
+     */
     func speakerSecondTicked(participantIdentifier: String)
 }
 
