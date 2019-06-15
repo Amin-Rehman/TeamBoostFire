@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
         setupAppTestModeFromUserDefaultsIfNeeded()
         setupSingletonServices()
 
@@ -33,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupSingletonServices() {
+        FirebaseApp.configure()
         hostCoreServices = HostCoreServices.shared
         participantCoreServices = ParticipantCoreServices.shared
         analyticsServices = AnalyticsService.shared
