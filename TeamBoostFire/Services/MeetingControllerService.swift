@@ -16,16 +16,14 @@ protocol SpeakerControllerSecondTickObserver: class {
     func speakerSecondTicked(participantIdentifier: String)
 }
 
-class HostControllerService {
+class MeetingControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
-    weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
-
-    var speakerTimer: Timer?
-    var secondTickTimer: Timer?
-
+    private var speakerTimer: Timer?
+    private var secondTickTimer: Timer?
 
     public private(set) var participantSpeakingRecord = [String: Int]()
+    public weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver) {
@@ -41,6 +39,18 @@ class HostControllerService {
         setupParticipantIsDoneInterrupt()
     }
 
+    // MARK: - Public API(s)
+    public func goToNextSpeaker() {
+        rotateSpeakerOrder()
+    }
+
+    public func endMeeting() {
+        stopSecondTickerTimer()
+        stopSpeakerTimer()
+    }
+
+    // MARK: - Private API(s)
+
     private func setupParticipantIsDoneInterrupt() {
         let notificationName = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
         NotificationCenter.default.addObserver(self,
@@ -52,7 +62,7 @@ class HostControllerService {
         rotateSpeakerOrder()
     }
 
-    func setupParticipantSpeakingRecord() {
+    private func setupParticipantSpeakingRecord() {
         guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
             assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
             return
@@ -63,11 +73,7 @@ class HostControllerService {
         }
     }
 
-    public func goToNextSpeaker() {
-        rotateSpeakerOrder()
-    }
-
-    @objc func rotateSpeakerOrder() {
+    @objc private func rotateSpeakerOrder() {
         stopSecondTickerTimer()
         stopSpeakerTimer()
 
@@ -84,7 +90,7 @@ class HostControllerService {
 
     }
 
-    @objc func secondTicked() {
+    @objc private func secondTicked() {
         guard let speakerOrder = HostCoreServices.shared.speakerOrder,
             let currentSpeakerIdentifier = speakerOrder.first else {
             assertionFailure("Unable to retrieve current speaker")
@@ -131,11 +137,6 @@ class HostControllerService {
     private func stopSpeakerTimer() {
         speakerTimer?.invalidate()
         speakerTimer = nil
-    }
-
-    public func endMeeting() {
-        stopSecondTickerTimer()
-        stopSpeakerTimer()
     }
 }
 

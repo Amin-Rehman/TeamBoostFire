@@ -10,7 +10,7 @@ import UIKit
 
 class HostInMeetingTableViewController: UITableViewController {
     var tableViewDataSource: [Participant]
-    weak var hostControllerService: HostControllerService?
+    weak var hostControllerService: MeetingControllerService?
 
     init() {
         tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()

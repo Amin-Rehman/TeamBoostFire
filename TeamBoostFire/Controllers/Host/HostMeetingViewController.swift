@@ -23,7 +23,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
     var currentSpeakerIndex = 0
     private var activeMeetingTimeSeconds = 0
 
-    var hostControllerService: HostControllerService?
+    var hostControllerService: MeetingControllerService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
             return
         }
 
-        hostControllerService = HostControllerService(
+        hostControllerService = MeetingControllerService(
             meetingParams: meetingParams,
             orderObserver: self)
     }
