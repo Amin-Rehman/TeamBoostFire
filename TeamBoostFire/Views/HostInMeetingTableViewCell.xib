@@ -20,20 +20,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Participant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yH-uh-rNF">
-                        <rect key="frame" x="20" y="11" width="415" height="24"/>
+                        <rect key="frame" x="20" y="11" width="160.5" height="24"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedCircle" translatesAutoresizingMaskIntoConstraints="NO" id="gnX-70-yTe">
-                        <rect key="frame" x="459" y="20" width="36" height="36"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="36" id="1i1-ce-xjH"/>
-                            <constraint firstAttribute="height" constant="36" id="bxw-w7-Ot6"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KdI-yR-oDi">
-                        <rect key="frame" x="447" y="26" width="60" height="24"/>
+                        <rect key="frame" x="451.5" y="26" width="60" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="2Vc-vn-RI0"/>
                             <constraint firstAttribute="width" constant="60" id="3q9-ls-6M2"/>
@@ -43,37 +36,41 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0W-Tx-fTd">
-                        <rect key="frame" x="20" y="43" width="415" height="24.5"/>
+                        <rect key="frame" x="20" y="43" width="160.5" height="24.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkJ-SU-n0t" userLabel="LottieCircle" customClass="AnimationView" customModule="Lottie">
+                        <rect key="frame" x="451.5" y="8" width="59.5" height="59.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="kkJ-SU-n0t" secondAttribute="height" multiplier="1:1" id="We3-aL-Phc"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="kkJ-SU-n0t" secondAttribute="bottom" constant="8" id="1II-AZ-QsA"/>
                     <constraint firstItem="a0W-Tx-fTd" firstAttribute="trailing" secondItem="0yH-uh-rNF" secondAttribute="trailing" id="3WR-Kp-TZY"/>
                     <constraint firstItem="a0W-Tx-fTd" firstAttribute="top" secondItem="0yH-uh-rNF" secondAttribute="bottom" constant="8" id="4Gs-ST-yaK"/>
                     <constraint firstItem="0yH-uh-rNF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DsH-mf-pX2"/>
+                    <constraint firstAttribute="trailing" secondItem="kkJ-SU-n0t" secondAttribute="trailing" constant="8" id="GJy-LS-qj3"/>
+                    <constraint firstItem="kkJ-SU-n0t" firstAttribute="centerX" secondItem="KdI-yR-oDi" secondAttribute="centerX" id="JbP-ky-zAF"/>
                     <constraint firstAttribute="bottom" secondItem="a0W-Tx-fTd" secondAttribute="bottom" constant="8" id="Jl0-zw-cn6"/>
-                    <constraint firstItem="gnX-70-yTe" firstAttribute="centerX" secondItem="KdI-yR-oDi" secondAttribute="centerX" id="KI3-yw-9pB"/>
-                    <constraint firstItem="gnX-70-yTe" firstAttribute="centerY" secondItem="KdI-yR-oDi" secondAttribute="centerY" id="MTr-5G-gsR"/>
-                    <constraint firstItem="gnX-70-yTe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QWX-dI-vGi"/>
-                    <constraint firstItem="gnX-70-yTe" firstAttribute="leading" secondItem="0yH-uh-rNF" secondAttribute="trailing" constant="24" id="WhN-vX-h51"/>
                     <constraint firstItem="a0W-Tx-fTd" firstAttribute="leading" secondItem="0yH-uh-rNF" secondAttribute="leading" id="X3F-Nq-wDb"/>
+                    <constraint firstItem="kkJ-SU-n0t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="mFN-cY-fi4"/>
+                    <constraint firstItem="kkJ-SU-n0t" firstAttribute="centerY" secondItem="KdI-yR-oDi" secondAttribute="centerY" id="mqt-cg-LNp"/>
                     <constraint firstItem="0yH-uh-rNF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="qI0-xb-I4v"/>
-                    <constraint firstAttribute="trailing" secondItem="gnX-70-yTe" secondAttribute="trailing" constant="24" id="t64-iU-jea"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="circleAnimationView" destination="kkJ-SU-n0t" id="7vZ-0C-jhB"/>
                 <outlet property="orderLabel" destination="KdI-yR-oDi" id="Gpa-6z-UNG"/>
                 <outlet property="participantNameLabel" destination="0yH-uh-rNF" id="GQz-3e-B6a"/>
-                <outlet property="redCircleImage" destination="gnX-70-yTe" id="RmU-KH-ucD"/>
                 <outlet property="speakingTimeLabel" destination="a0W-Tx-fTd" id="7SS-Wb-TEj"/>
             </connections>
             <point key="canvasLocation" x="226.81159420289856" y="119.19642857142857"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="RedCircle" width="50" height="50"/>
-    </resources>
 </document>

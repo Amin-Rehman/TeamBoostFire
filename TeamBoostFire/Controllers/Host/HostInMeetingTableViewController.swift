@@ -57,8 +57,9 @@ class HostInMeetingTableViewController: UITableViewController {
 
         let isCurrentSpeaker = (cellParticipant.speakerOrder == 0)
         if isCurrentSpeaker {
-            showAndAnimateRedCircle(for: cell)
             cell.orderLabel.isHidden = true
+            showAndAnimateRedCircle(for: cell)
+
         } else {
             hideRedAnimatingCircle(for: cell)
             showSpeakingOrderIfNeeded(for: cell, speakingOrder: speakerOrder)
@@ -68,15 +69,11 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
-        UIView.animate(withDuration: 1.0, delay: 0, options: [.curveEaseInOut], animations: {
-            cell.redCircleImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }, completion: nil)
-        cell.redCircleImage.isHidden = false
+        cell.startCircleAnimation()
     }
 
     private func hideRedAnimatingCircle(for cell: HostInMeetingTableViewCell) {
-        cell.redCircleImage.transform = .identity
-        cell.redCircleImage.isHidden = true
+        cell.stopCircleAnimation()
     }
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
@@ -93,12 +90,21 @@ class HostInMeetingTableViewController: UITableViewController {
 
 extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver {
     func speakerSecondTicked(participantIdentifier: String) {
-        guard let index = tableViewDataSource.firstIndex(where: { $0.id == participantIdentifier }) else {
+        guard let index = tableViewDataSource.firstIndex(
+            where: { $0.id == participantIdentifier }) else {
             assertionFailure("Unable to find participant in the table view datasource")
             return
         }
 
         let indexPath = IndexPath(row: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .none)
+        //tableView.reloadRows(at: [indexPath], with: .none)
+        let cell = tableView.cellForRow(at: indexPath) as! HostInMeetingTableViewCell
+        let cellParticipant = tableViewDataSource[indexPath.row]
+        let participantIdentifier = cellParticipant.id
+
+        if let timeSpoken = hostControllerService?.participantSpeakingRecord[participantIdentifier] {
+            cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
+        }
+
     }
 }

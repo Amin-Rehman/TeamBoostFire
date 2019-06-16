@@ -14,6 +14,7 @@ target 'TeamBoostFire' do
   pod 'Mixpanel'
   pod 'Cosmos', '~> 19.0'
   pod 'TransitionButton'
+  pod 'lottie-ios'
 end
 
 target 'TeamBoostFireTests' do
