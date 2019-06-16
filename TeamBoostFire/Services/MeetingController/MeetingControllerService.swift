@@ -16,19 +16,34 @@ protocol SpeakerControllerSecondTickObserver: class {
     func speakerSecondTicked(participantIdentifier: String)
 }
 
+enum MeetingMode {
+    case Uniform
+    case AutoModerated
+}
+
+typealias ParticipantId = String
+typealias SpeakingTime = Int
+
+typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
+
 class MeetingControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private var speakerTimer: Timer?
     private var secondTickTimer: Timer?
+    private let meetingMode: MeetingMode
 
-    public private(set) var participantSpeakingRecord = [String: Int]()
+    public private(set) var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     public weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
 
+    private var numberOfTimesMovingToNextSpeaker = 1
+
     init(meetingParams: MeetingsParams,
-         orderObserver: SpeakerControllerOrderObserver) {
+         orderObserver: SpeakerControllerOrderObserver,
+         meetingMode: MeetingMode = .Uniform) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
+        self.meetingMode = meetingMode
 
         setupParticipantSpeakingRecord()
         shuffleSpeakerOrder()
@@ -41,7 +56,15 @@ class MeetingControllerService {
 
     // MARK: - Public API(s)
     public func goToNextSpeaker() {
-        rotateSpeakerOrder()
+        numberOfTimesMovingToNextSpeaker = numberOfTimesMovingToNextSpeaker + 1
+
+        switch meetingMode {
+        case .Uniform:
+            rotateSpeakerOrder()
+        case .AutoModerated:
+            assertionFailure("Not implemented")
+        }
+
     }
 
     public func endMeeting() {
@@ -69,7 +92,7 @@ class MeetingControllerService {
         }
 
         for identifiers in allParticipantIdentifiers {
-            participantSpeakingRecord[identifiers] = 0
+            participantTotalSpeakingRecord[identifiers] = 0
         }
     }
 
@@ -97,13 +120,13 @@ class MeetingControllerService {
             return
         }
 
-        guard var speakerTime = participantSpeakingRecord[currentSpeakerIdentifier] else {
+        guard var speakerTime = participantTotalSpeakingRecord[currentSpeakerIdentifier] else {
             assertionFailure("Unable to retrieve speaker time")
             return
         }
 
         speakerTime = speakerTime + 1
-        participantSpeakingRecord[currentSpeakerIdentifier] = speakerTime
+        participantTotalSpeakingRecord[currentSpeakerIdentifier] = speakerTime
         speakerSecondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 

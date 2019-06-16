@@ -49,7 +49,7 @@ class HostInMeetingTableViewController: UITableViewController {
         let participantIdentifier = cellParticipant.id
 
         cell.participantNameLabel.text = cellParticipant.name
-        if let timeSpoken = hostControllerService?.participantSpeakingRecord[participantIdentifier] {
+        if let timeSpoken = hostControllerService?.participantTotalSpeakingRecord[participantIdentifier] {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
@@ -102,7 +102,7 @@ extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver 
         let cellParticipant = tableViewDataSource[indexPath.row]
         let participantIdentifier = cellParticipant.id
 
-        if let timeSpoken = hostControllerService?.participantSpeakingRecord[participantIdentifier] {
+        if let timeSpoken = hostControllerService?.participantTotalSpeakingRecord[participantIdentifier] {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 

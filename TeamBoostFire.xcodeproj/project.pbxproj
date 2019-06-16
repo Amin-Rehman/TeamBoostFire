@@ -11,6 +11,7 @@
 		DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */; };
 		EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */ = {isa = PBXBuildFile; fileRef = EB0AAFB122B6369A0017A358 /* lottie_circle.json */; };
 		EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = EB0AAFB322B644A60017A358 /* lottie_spinner.json */; };
+		EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */; };
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
@@ -84,6 +85,7 @@
 		76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB0AAFB122B6369A0017A358 /* lottie_circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_circle.json; sourceTree = "<group>"; };
 		EB0AAFB322B644A60017A358 /* lottie_spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_spinner.json; sourceTree = "<group>"; };
+		EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingOrderEvaluator.swift; sourceTree = "<group>"; };
 		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
 		EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserverUtility.swift; sourceTree = "<group>"; };
 		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
@@ -193,6 +195,15 @@
 			path = LottieAnimations;
 			sourceTree = "<group>";
 		};
+		EB0AAFB822B6ED960017A358 /* MeetingController */ = {
+			isa = PBXGroup;
+			children = (
+				EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */,
+				EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */,
+			);
+			path = MeetingController;
+			sourceTree = "<group>";
+		};
 		EB18452E229FE69C00DFC75D /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				EB18452E229FE69C00DFC75D /* Core */,
-				EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */,
+				EB0AAFB822B6ED960017A358 /* MeetingController */,
 				EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */,
 				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
 				EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */,
@@ -588,6 +599,7 @@
 				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
 				EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */,
 				EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */,
+				EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
 				EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,
