@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Lottie
 
 class HostWaitingViewController: UIViewController {
     @IBOutlet weak var meetingCodeLabel: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var childContainerView: UIView!
+    @IBOutlet weak var spinnerView: AnimationView!
 
     var hostWaitingTableViewController = HostWaitingTableViewController()
 
@@ -24,7 +25,8 @@ class HostWaitingViewController: UIViewController {
         self.addChild(hostWaitingTableViewController)
         hostWaitingTableViewController.didMove(toParent: self)
 
-        activityIndicatorView.startAnimating()
+        loadLottieSpinner()
+
         let meetingIdentifier = HostCoreServices.shared.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
         let notificationName = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
@@ -33,6 +35,12 @@ class HostWaitingViewController: UIViewController {
                                                selector: #selector(participantsListChanged(notification:)),
         name: notificationName, object: nil)
 
+    }
+
+    private func loadLottieSpinner() {
+        spinnerView.animation = Animation.named("lottie_spinner")
+        spinnerView.loopMode = .loop
+        spinnerView.play()
     }
 
     @objc private func participantsListChanged(notification: NSNotification){

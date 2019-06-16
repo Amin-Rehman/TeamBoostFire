@@ -10,6 +10,7 @@
 		271A8C1FDC01D84560074987 /* Pods_TeamBoostFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6636C804E2430BA83BAA878 /* Pods_TeamBoostFire.framework */; };
 		DEB828E39FAC5A26AAAB134D /* Pods_TeamBoostFireTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */; };
 		EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */ = {isa = PBXBuildFile; fileRef = EB0AAFB122B6369A0017A358 /* lottie_circle.json */; };
+		EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = EB0AAFB322B644A60017A358 /* lottie_spinner.json */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */; };
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
@@ -82,6 +83,7 @@
 		60FF2B45E7013C2921BC785A /* Pods_TeamBoostFireTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamBoostFireTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76FA4DB3EEFE974B4EB822DB /* Pods-TeamBoostFireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamBoostFireTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamBoostFireTests/Pods-TeamBoostFireTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB0AAFB122B6369A0017A358 /* lottie_circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_circle.json; sourceTree = "<group>"; };
+		EB0AAFB322B644A60017A358 /* lottie_spinner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_spinner.json; sourceTree = "<group>"; };
 		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
 		EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserverUtility.swift; sourceTree = "<group>"; };
 		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EB0AAFB322B644A60017A358 /* lottie_spinner.json */,
 				EB0AAFB122B6369A0017A358 /* lottie_circle.json */,
 			);
 			path = LottieAnimations;
@@ -445,6 +448,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */,
 				EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */,
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */,
