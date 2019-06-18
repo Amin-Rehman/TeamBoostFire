@@ -8,22 +8,22 @@
 
 import UIKit
 import TransitionButton
+import Lottie
 
 class ParticipantLobbyViewController: CustomTransitionViewController {
-
-    @IBOutlet weak var lobbyImageView: UIImageView!
+    @IBOutlet weak var lottieParticipantWaitingAnimationView: AnimationView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
+        let animation = Animation.named("lottie_participant_waiting")
+        lottieParticipantWaitingAnimationView.animation = animation
+        lottieParticipantWaitingAnimationView.loopMode = .loop
+        lottieParticipantWaitingAnimationView.play()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
-            self.lobbyImageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }, completion: nil)
-
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),

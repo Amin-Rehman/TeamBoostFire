@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParticipantLobbyViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
-                <outlet property="lobbyImageView" destination="XRn-CP-AXJ" id="50P-Js-hah"/>
+                <outlet property="lottieParticipantWaitingAnimationView" destination="sGE-7f-du6" id="UNk-Yt-xhr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,12 +30,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LobbyWait" translatesAutoresizingMaskIntoConstraints="NO" id="XRn-CP-AXJ">
-                    <rect key="frame" x="64" y="161" width="192" height="192"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="XRn-CP-AXJ" secondAttribute="height" multiplier="1:1" id="Ved-j2-Zld"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will be redirected automatically when the meeting starts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZu-tK-lf9">
                     <rect key="frame" x="32" y="434" width="256" height="80"/>
                     <constraints>
@@ -45,25 +39,28 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGE-7f-du6" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="50.5" y="161" width="219" height="219"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="sGE-7f-du6" secondAttribute="height" multiplier="1:1" id="eNB-tb-YgF"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="XRn-CP-AXJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="1LY-qH-aIf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kZu-tK-lf9" secondAttribute="trailing" constant="32" id="5cw-bw-qwC"/>
+                <constraint firstItem="sGE-7f-du6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8SC-bk-E1T"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aXA-2K-hTx" secondAttribute="trailing" constant="32" id="Hib-nK-Ece"/>
-                <constraint firstItem="kZu-tK-lf9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XRn-CP-AXJ" secondAttribute="bottom" constant="80" id="OWI-2N-2ZH"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XRn-CP-AXJ" secondAttribute="trailing" constant="64" id="dJl-Tq-7Ph"/>
+                <constraint firstItem="kZu-tK-lf9" firstAttribute="top" secondItem="sGE-7f-du6" secondAttribute="bottom" constant="54" id="amQ-kW-BR4"/>
                 <constraint firstItem="aXA-2K-hTx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="gVX-to-aWm"/>
+                <constraint firstItem="sGE-7f-du6" firstAttribute="top" secondItem="aXA-2K-hTx" secondAttribute="bottom" constant="54" id="qJl-jO-LG9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kZu-tK-lf9" secondAttribute="bottom" constant="54" id="tcL-gh-jd6"/>
                 <constraint firstItem="aXA-2K-hTx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="tha-fH-sdy"/>
-                <constraint firstItem="XRn-CP-AXJ" firstAttribute="top" secondItem="aXA-2K-hTx" secondAttribute="bottom" constant="54" id="u1Z-Rg-HWE"/>
                 <constraint firstItem="kZu-tK-lf9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="yGC-uA-eba"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </view>
     </objects>
-    <resources>
-        <image name="LobbyWait" width="128" height="128"/>
-    </resources>
 </document>

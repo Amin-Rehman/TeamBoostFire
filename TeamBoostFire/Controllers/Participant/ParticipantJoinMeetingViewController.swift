@@ -28,10 +28,12 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         super.viewDidLoad()
         setupKeyboardInteraction()
         setupMeetingCodeTextFieldDelegates()
+    }
 
+    private func setupTransitionButton() {
         let transitionButtonWidth = CGFloat(200.0)
         let parentViewWidth = transitionButtonContainer.frame.width
-        let xOffset = (parentViewWidth - transitionButtonWidth) / 2
+        let xOffset = (parentViewWidth - transitionButtonWidth) / 2.0
 
         transitionButton =  TransitionButton(frame: CGRect(x: xOffset, y: 0,
                                                            width: transitionButtonWidth,
@@ -69,6 +71,7 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setupTransitionButton()
         setupTestEnvironmentIfNeeded()
     }
 
