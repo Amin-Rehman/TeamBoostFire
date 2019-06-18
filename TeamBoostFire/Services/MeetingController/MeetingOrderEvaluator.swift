@@ -55,8 +55,35 @@ struct MeetingOrderEvaluator {
                 return adjustedRoundMeetingRecord
 
             } else {
-                assertionFailure("Not implemented")
-                return nil
+                var adjustedRoundMeetingRecord = [SpeakerRecord]()
+
+                for (index, meetingRecord) in sortedMeetingRecords.enumerated(){
+                    if (index == 0) {
+                        let adjustedSpeakingTime = Double(maxTalkingTime) +
+                            ceil((Double(maxTalkingTime) * 0.5))
+                        adjustedRoundMeetingRecord.append(
+                            SpeakerRecord(participantId: meetingRecord.participantId,
+                                          speakingTime: SpeakingTime(adjustedSpeakingTime)))
+                    } else if (index == 1) {
+                        let adjustedSpeakingTime = Double(maxTalkingTime) +
+                            ceil((Double(maxTalkingTime) * 0.35))
+                        adjustedRoundMeetingRecord.append(
+                            SpeakerRecord(participantId: meetingRecord.participantId,
+                                          speakingTime: SpeakingTime(adjustedSpeakingTime)))
+                    } else if (index == 2) {
+                        let adjustedSpeakingTime = Double(maxTalkingTime) +
+                            ceil((Double(maxTalkingTime) * 0.20))
+                        adjustedRoundMeetingRecord.append(
+                            SpeakerRecord(participantId: meetingRecord.participantId,
+                                          speakingTime: SpeakingTime(adjustedSpeakingTime)))
+                    } else {
+                        adjustedRoundMeetingRecord.append(
+                            SpeakerRecord(participantId: meetingRecord.participantId,
+                                          speakingTime: maxTalkingTime))
+                    }
+
+                }
+                return adjustedRoundMeetingRecord
             }
     }
 }
