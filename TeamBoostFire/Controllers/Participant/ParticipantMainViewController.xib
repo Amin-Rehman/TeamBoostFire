@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
+                <outlet property="lottieAnimationView" destination="FQk-k9-IqA" id="L4v-ks-zjj"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -75,11 +76,17 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k90-Bb-deB" userLabel="ThumbsUpButton">
                                             <rect key="frame" x="0.0" y="4" width="136" height="103"/>
-                                            <state key="normal" title="Button" image="ReactionThumbsUp"/>
+                                            <state key="normal" image="ReactionThumbsUp"/>
+                                            <connections>
+                                                <action selector="likeTapped:" destination="-1" eventType="touchUpInside" id="Cfm-4T-PgG"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoP-Pk-Fu8" userLabel="ClapButton">
                                             <rect key="frame" x="144" y="0.0" width="136" height="111"/>
-                                            <state key="normal" title="Button" image="ReactionClap"/>
+                                            <state key="normal" image="ReactionClap"/>
+                                            <connections>
+                                                <action selector="clapTapped:" destination="-1" eventType="touchUpInside" id="m5y-Ie-fz8"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -92,21 +99,34 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cW7-Hw-d0W" userLabel="IdeaButton">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="111"/>
-                                            <state key="normal" title="Button" image="ReactionIdea"/>
+                                            <state key="normal" image="ReactionIdea"/>
+                                            <connections>
+                                                <action selector="ideaTapped:" destination="-1" eventType="touchUpInside" id="g6M-Ih-qC4"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2n-OI-TaN" userLabel="ThinkingButton">
                                             <rect key="frame" x="140" y="0.0" width="140" height="111"/>
-                                            <state key="normal" title="Button" image="ReactionThinking"/>
+                                            <state key="normal" image="ReactionThinking"/>
+                                            <connections>
+                                                <action selector="thinkingTapped:" destination="-1" eventType="touchUpInside" id="7cn-bM-6rq"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
                             </subviews>
                         </stackView>
+                        <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQk-k9-IqA" userLabel="LottieView" customClass="AnimationView" customModule="Lottie">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="232"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="FQk-k9-IqA" firstAttribute="top" secondItem="LOU-aK-u0d" secondAttribute="top" id="SEG-u0-5zr"/>
+                        <constraint firstAttribute="bottom" secondItem="FQk-k9-IqA" secondAttribute="bottom" id="c2Q-M9-PeF"/>
                         <constraint firstItem="n87-n4-wwk" firstAttribute="top" secondItem="LOU-aK-u0d" secondAttribute="top" constant="10" id="cLk-6u-sOS"/>
                         <constraint firstAttribute="bottom" secondItem="n87-n4-wwk" secondAttribute="bottom" id="e9b-vt-lZi"/>
+                        <constraint firstItem="FQk-k9-IqA" firstAttribute="leading" secondItem="LOU-aK-u0d" secondAttribute="leading" id="eYx-15-GSf"/>
+                        <constraint firstAttribute="trailing" secondItem="FQk-k9-IqA" secondAttribute="trailing" id="gEU-tV-cHG"/>
                         <constraint firstItem="n87-n4-wwk" firstAttribute="leading" secondItem="LOU-aK-u0d" secondAttribute="leading" constant="10" id="qvn-pj-2Lm"/>
                         <constraint firstAttribute="trailing" secondItem="n87-n4-wwk" secondAttribute="trailing" constant="10" id="s6g-cY-85j"/>
                     </constraints>
@@ -159,9 +179,9 @@
         </view>
     </objects>
     <resources>
-        <image name="ReactionClap" width="320" height="320"/>
-        <image name="ReactionIdea" width="320" height="320"/>
-        <image name="ReactionThinking" width="320" height="320"/>
-        <image name="ReactionThumbsUp" width="320" height="320"/>
+        <image name="ReactionClap" width="160" height="160"/>
+        <image name="ReactionIdea" width="160" height="160"/>
+        <image name="ReactionThinking" width="160" height="160"/>
+        <image name="ReactionThumbsUp" width="160" height="160"/>
     </resources>
 </document>

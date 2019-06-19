@@ -7,16 +7,54 @@
 //
 
 import UIKit
+import Lottie
 
 class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
+    @IBOutlet weak var lottieAnimationView: AnimationView!
 
     private var allParticipants = [Participant]()
 
     private var participantControllerService: ParticipantControllerService?
+
+    @IBAction func likeTapped(_ sender: Any) {
+        let animation = Animation.named("lottie_participant_reaction")
+        lottieAnimationView.animation = animation
+        lottieAnimationView.alpha = 1.0
+        lottieAnimationView.play { _ in
+            self.lottieAnimationView.alpha = 0.0
+        }
+    }
+
+    @IBAction func clapTapped(_ sender: Any) {
+        let animation = Animation.named("lottie_participant_reaction")
+        lottieAnimationView.animation = animation
+        lottieAnimationView.alpha = 1.0
+        lottieAnimationView.play { _ in
+            self.lottieAnimationView.alpha = 0.0
+        }
+    }
+    @IBAction func ideaTapped(_ sender: Any) {
+        let animation = Animation.named("lottie_participant_bulb")
+        lottieAnimationView.animation = animation
+        lottieAnimationView.alpha = 1.0
+        lottieAnimationView.play { _ in
+            self.lottieAnimationView.alpha = 0.0
+        }
+    }
+
+    @IBAction func thinkingTapped(_ sender: Any) {
+        let animation = Animation.named("lottie_participant_bulb")
+        lottieAnimationView.animation = animation
+        lottieAnimationView.alpha = 1.0
+        lottieAnimationView.play { _ in
+            self.lottieAnimationView.alpha = 0.0
+        }
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +70,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
-
     }
 
     private func setupTopBar() {
