@@ -78,6 +78,9 @@ class HostInMeetingTableViewController: UITableViewController {
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
                                            speakingOrder:Int) {
+        if (HostCoreServices.shared.meetingParams?.moderationMode == MeetingMode.AutoModerated) {
+            return
+        }
         let nextSpeakersToShow = 3
         if speakingOrder <= nextSpeakersToShow {
             cell.orderLabel.text = String(speakingOrder)
