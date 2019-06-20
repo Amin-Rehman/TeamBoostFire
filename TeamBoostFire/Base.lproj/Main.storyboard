@@ -412,7 +412,7 @@
                                             <constraint firstItem="aDI-Ec-AQO" firstAttribute="trailing" secondItem="kcc-fM-NrG" secondAttribute="trailing" id="uwx-YQ-m1Q"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter some details about your meeting ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucp-D0-NZp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter some details about your meeting ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucp-D0-NZp">
                                         <rect key="frame" x="47" y="30" width="281" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="csh-3Z-cJ8"/>

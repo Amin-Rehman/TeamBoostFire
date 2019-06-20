@@ -175,6 +175,8 @@ class MeetingControllerService {
                     participantTotalSpeakingRecord: participantTotalSpeakingRecord,
                     maxTalkingTime: meetingParams.maxTalkTime)!
 
+                print("participantSpeakingRecordPerRound: \(participantSpeakingRecordPerRound)")
+
                 var newSpeakingOrder = [String]()
                 participantSpeakingRecordPerRound.forEach { (speakerRecord) in
                     newSpeakingOrder.append(speakerRecord.participantId)
