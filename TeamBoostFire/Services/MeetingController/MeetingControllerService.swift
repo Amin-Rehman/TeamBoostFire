@@ -16,11 +16,6 @@ protocol SpeakerControllerSecondTickObserver: class {
     func speakerSecondTicked(participantIdentifier: String)
 }
 
-enum MeetingMode {
-    case Uniform
-    case AutoModerated
-}
-
 typealias ParticipantId = String
 typealias SpeakingTime = Int
 
@@ -33,10 +28,13 @@ class MeetingControllerService {
     private var secondTickTimer: Timer?
     private let meetingMode: MeetingMode
 
+    // To be updated for every round if speaking time needs to be adjusted
+    private var participantSpeakingRecordPerRound = [SpeakerRecord]()
+
     public private(set) var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     public weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
 
-    private var numberOfTimesMovingToNextSpeaker = 1
+    private var indexForParticipantRoundSpeakingTime = 0
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
@@ -51,7 +49,7 @@ class MeetingControllerService {
             shuffleSpeakerOrder()
         }
 
-        startSpeakerTimer()
+        startSpeakerTimerForCurrentRound()
         // First second gets missed so brute force the first secondTicked
         secondTicked()
         startSecondTickerTimer()
@@ -59,21 +57,21 @@ class MeetingControllerService {
     }
 
     // MARK: - Public API(s)
-    public func goToNextSpeaker() {
-        numberOfTimesMovingToNextSpeaker = numberOfTimesMovingToNextSpeaker + 1
+    @objc public func goToNextSpeaker() {
 
         switch meetingMode {
         case .Uniform:
             rotateSpeakerOrder()
         case .AutoModerated:
-            assertionFailure("Not implemented")
+            indexForParticipantRoundSpeakingTime = indexForParticipantRoundSpeakingTime + 1
+            rotateSpeakerOrder()
         }
 
     }
 
     public func endMeeting() {
         stopSecondTickerTimer()
-        stopSpeakerTimer()
+        stopSpeakerRoundTimer()
     }
 
     // MARK: - Private API(s)
@@ -86,7 +84,7 @@ class MeetingControllerService {
     }
 
     @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
-        rotateSpeakerOrder()
+        goToNextSpeaker()
     }
 
     private func setupParticipantSpeakingRecord() {
@@ -98,11 +96,17 @@ class MeetingControllerService {
         for identifiers in allParticipantIdentifiers {
             participantTotalSpeakingRecord[identifiers] = 0
         }
+
+        // Start off with some defaults
+        allParticipantIdentifiers.forEach { identifier in
+            participantSpeakingRecordPerRound.append(SpeakerRecord(participantId: identifier,
+                                                                   speakingTime: meetingParams.maxTalkTime))
+        }
     }
 
     @objc private func rotateSpeakerOrder() {
         stopSecondTickerTimer()
-        stopSpeakerTimer()
+        stopSpeakerRoundTimer()
 
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
@@ -113,7 +117,7 @@ class MeetingControllerService {
         orderObserver?.speakingOrderUpdated()
 
         startSecondTickerTimer()
-        startSpeakerTimer()
+        startSpeakerTimerForCurrentRound()
 
     }
 
@@ -155,13 +159,39 @@ class MeetingControllerService {
     }
 
     // MARK :- Speaker timer
-    private func startSpeakerTimer() {
-        speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
-                                            selector: #selector(rotateSpeakerOrder),
-                                            userInfo: nil, repeats: false)
+    private func startSpeakerTimerForCurrentRound() {
+
+        switch meetingMode {
+        case .Uniform:
+            speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
+                                                selector: #selector(goToNextSpeaker),
+                                                userInfo: nil, repeats: false)
+        case .AutoModerated:
+            let isNewRound = indexForParticipantRoundSpeakingTime == (participantSpeakingRecordPerRound.count - 1)
+
+            if isNewRound {
+                indexForParticipantRoundSpeakingTime = 0
+                participantSpeakingRecordPerRound = MeetingOrderEvaluator.evaluateOrder(
+                    participantTotalSpeakingRecord: participantTotalSpeakingRecord,
+                    maxTalkingTime: meetingParams.maxTalkTime)!
+
+                var newSpeakingOrder = [String]()
+                participantSpeakingRecordPerRound.forEach { (speakerRecord) in
+                    newSpeakingOrder.append(speakerRecord.participantId)
+                }
+                HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)
+                orderObserver?.speakingOrderUpdated()
+            }
+
+            speakerTimer = Timer.scheduledTimer(timeInterval:
+                Double(participantSpeakingRecordPerRound[indexForParticipantRoundSpeakingTime].speakingTime),
+                                                target: self,
+                                                selector: #selector(goToNextSpeaker),
+                                                userInfo: nil, repeats: false)
+        }
     }
 
-    private func stopSpeakerTimer() {
+    private func stopSpeakerRoundTimer() {
         speakerTimer?.invalidate()
         speakerTimer = nil
     }

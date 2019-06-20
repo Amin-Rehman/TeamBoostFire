@@ -13,7 +13,8 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var agendaQuestionTextField: UITextField!
     @IBOutlet weak var meetingTimeTextField: UITextField!
     @IBOutlet weak var maxTalkingTimeTextField: UITextField!
-    @IBOutlet weak var moderationModeTextField: UITextField!
+    @IBOutlet weak var moderationSwitch: UISwitch!
+
 
     @IBAction func cancelButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -72,13 +73,20 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
+        var moderationMode: MeetingMode
+
+        if moderationSwitch.isOn  {
+            moderationMode = .AutoModerated
+        } else {
+            moderationMode = .Uniform
+        }
+
         let meetingParams = MeetingsParams(agenda: agendaQuestion,
                                            meetingTime: Int(meetingTime)!,
                                            maxTalkTime: Int(maxTalkingTime)!,
-                                           moderationMode: nil)
+                                           moderationMode: moderationMode)
         HostSetupMeetingUseCase.perform(at: self, meetingParams: meetingParams)
 
-        
 
     }
 

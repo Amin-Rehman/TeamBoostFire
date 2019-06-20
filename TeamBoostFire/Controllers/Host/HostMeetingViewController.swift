@@ -86,7 +86,8 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
 
         hostControllerService = MeetingControllerService(
             meetingParams: meetingParams,
-            orderObserver: self)
+            orderObserver: self,
+            meetingMode: meetingParams.moderationMode!)
     }
 
     private func setupAgendaQuestion() {

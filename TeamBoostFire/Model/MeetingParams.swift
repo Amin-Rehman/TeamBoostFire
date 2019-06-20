@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum ModerationMode {
-    case Moderated
-    case Unmoderated
+enum MeetingMode {
+    case Uniform
+    case AutoModerated
 }
 
 struct MeetingsParams {
     let agenda: String
     let meetingTime: Int
     let maxTalkTime: Int
-    let moderationMode: ModerationMode?
+    let moderationMode: MeetingMode?
 }
