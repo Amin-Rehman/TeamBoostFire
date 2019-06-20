@@ -167,7 +167,7 @@ class MeetingControllerService {
                                                 selector: #selector(goToNextSpeaker),
                                                 userInfo: nil, repeats: false)
         case .AutoModerated:
-            let isNewRound = indexForParticipantRoundSpeakingTime == (participantSpeakingRecordPerRound.count - 1)
+            let isNewRound = indexForParticipantRoundSpeakingTime == participantSpeakingRecordPerRound.count
 
             if isNewRound {
                 indexForParticipantRoundSpeakingTime = 0
