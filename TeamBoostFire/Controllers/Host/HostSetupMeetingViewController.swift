@@ -8,12 +8,24 @@
 
 import UIKit
 
+enum ModerationStateLabel: String {
+    case AutoModerated = "Auto Moderated"
+    case Uniform = "Unmoderated"
+}
+
+enum ModerationDescriptionText: String {
+    case AutoModerated = "The app recommends who speaks and for how long based on their total participation in the meeting"
+    case Uniform = "Everyone is given the same amount of time to speak and in the same order"
+}
+
 class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var agendaQuestionTextField: UITextField!
     @IBOutlet weak var meetingTimeTextField: UITextField!
     @IBOutlet weak var maxTalkingTimeTextField: UITextField!
     @IBOutlet weak var moderationSwitch: UISwitch!
+    @IBOutlet weak var moderationStateLabel: UILabel!
+    @IBOutlet weak var moderationDescriptionLabel: UILabel!
 
 
     @IBAction func cancelButtonClicked(_ sender: Any) {
@@ -35,6 +47,17 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+        refreshModerationState()
+    }
+
+    private func refreshModerationState() {
+        if moderationSwitch.isOn {
+            moderationStateLabel.text = ModerationStateLabel.AutoModerated.rawValue
+            moderationDescriptionLabel.text = ModerationDescriptionText.AutoModerated.rawValue
+        } else {
+            moderationStateLabel.text = ModerationStateLabel.Uniform.rawValue
+            moderationDescriptionLabel.text = ModerationDescriptionText.Uniform.rawValue
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -111,6 +134,7 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-
-
+    @IBAction func switchToggled(_ sender: Any) {
+        refreshModerationState()
+    }
 }
