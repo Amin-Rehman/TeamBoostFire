@@ -30,6 +30,10 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         setupMeetingCodeTextFieldDelegates()
     }
 
+    @IBAction func cancelTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     private func setupTransitionButton() {
         let transitionButtonWidth = CGFloat(200.0)
         let parentViewWidth = transitionButtonContainer.frame.width

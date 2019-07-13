@@ -15,6 +15,7 @@ target 'TeamBoostFire' do
   pod 'Cosmos', '~> 19.0'
   pod 'TransitionButton'
   pod 'lottie-ios'
+  pod 'SimpleRoundedButton'
 end
 
 target 'TeamBoostFireTests' do
