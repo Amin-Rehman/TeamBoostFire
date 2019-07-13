@@ -396,13 +396,32 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-cV-94m">
-                                                <rect key="frame" x="144" y="418" width="32" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-cV-94m" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
+                                                <rect key="frame" x="100" y="398" width="120" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="X00-Nh-Pkl"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="azg-Mh-Cze"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="azg-Mh-Cze"/>
                                                 </constraints>
-                                                <state key="normal" title="Next"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundDefaultColor">
+                                                        <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundHighlightedColor">
+                                                        <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="17"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="nextButtonTapped:" destination="VVg-16-JcS" eventType="touchUpInside" id="4gW-Og-lZo"/>
                                                 </connections>
@@ -423,8 +442,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-ue-44a">
-                                                <rect key="frame" x="24" y="353" width="272" height="57"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
+                                                <rect key="frame" x="24" y="353" width="272" height="37"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -451,7 +470,7 @@
                                             <constraint firstItem="kcc-fM-NrG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a28-yJ-j15" secondAttribute="leading" id="ihg-vu-6eA"/>
                                             <constraint firstItem="Kcv-cV-94m" firstAttribute="top" secondItem="6Oj-ue-44a" secondAttribute="bottom" constant="8" id="n9H-PS-9Qy"/>
                                             <constraint firstItem="a28-yJ-j15" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kyU-bV-xmB" secondAttribute="leading" id="nWV-SD-Erq"/>
-                                            <constraint firstAttribute="bottom" secondItem="Kcv-cV-94m" secondAttribute="bottom" constant="120" id="pg8-zg-JNa"/>
+                                            <constraint firstAttribute="bottom" secondItem="Kcv-cV-94m" secondAttribute="bottom" constant="140" id="pg8-zg-JNa"/>
                                             <constraint firstAttribute="trailing" secondItem="kcc-fM-NrG" secondAttribute="trailing" constant="24" id="tz0-mg-Fiv"/>
                                             <constraint firstItem="aDI-Ec-AQO" firstAttribute="trailing" secondItem="kcc-fM-NrG" secondAttribute="trailing" id="uwx-YQ-m1Q"/>
                                         </constraints>

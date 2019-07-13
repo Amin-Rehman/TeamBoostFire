@@ -59,14 +59,33 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="vUu-cv-myx"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sq6-PA-8SI">
-                    <rect key="frame" x="57" y="666" width="300" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sq6-PA-8SI" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
+                    <rect key="frame" x="117" y="666" width="180" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Dz1-BF-bab"/>
-                        <constraint firstAttribute="width" constant="300" id="mfo-Pl-YGD"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="mfo-Pl-YGD"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="Start Meeting"/>
+                    <state key="normal" title="Start Meeting">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="18"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundDefaultColor">
+                            <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundHighlightedColor">
+                            <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="startMeetingClicked:" destination="-1" eventType="touchUpInside" id="a7V-VK-cXF"/>
                     </connections>
