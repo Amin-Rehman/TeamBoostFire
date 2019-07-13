@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H6K-V0-4wR">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,68 +15,68 @@
             <objects>
                 <viewController title="Welcome View Controller" id="H6K-V0-4wR" customClass="WelcomeViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F4m-wl-fpi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TeamBoostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-3j-DXK" userLabel="TeamBoost Logo">
-                                <rect key="frame" x="108.5" y="40" width="158" height="158"/>
+                                <rect key="frame" x="106" y="40" width="108.5" height="108.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9hC-3j-DXK" secondAttribute="height" multiplier="1:1" id="hgd-uD-am4"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWW-vH-5cu">
-                                <rect key="frame" x="142" y="218" width="91" height="21"/>
+                                <rect key="frame" x="114.5" y="168.5" width="91" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="KVR-K7-9ph"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="X3g-lW-IXN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb6-04-tVQ">
-                                <rect key="frame" x="87.5" y="247" width="200" height="40"/>
+                                <rect key="frame" x="60" y="197.5" width="200" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="NYa-Ao-zH4"/>
                                     <constraint firstAttribute="height" constant="40" id="ROd-b2-PZ1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How would you like to join the meeting?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djS-Gj-zgs">
-                                <rect key="frame" x="24" y="311" width="327" height="45"/>
+                                <rect key="frame" x="24" y="261.5" width="272" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="NPc-i4-V4b"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rr2-jW-cUL">
-                                <rect key="frame" x="20" y="396" width="335" height="44"/>
+                                <rect key="frame" x="20" y="346.5" width="280" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="vcW-8b-iN1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="Moderator"/>
                                 <connections>
                                     <segue destination="DeQ-jS-gLT" kind="show" id="fuk-cM-Ctc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPi-sE-qBO">
-                                <rect key="frame" x="20" y="468" width="335" height="44"/>
+                                <rect key="frame" x="20" y="418.5" width="280" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="tTM-kt-Oss"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="Participant"/>
                                 <connections>
                                     <segue destination="ZP7-eZ-Chl" kind="show" id="rWa-8b-gUY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
-                                <rect key="frame" x="24" y="621" width="327" height="22"/>
+                                <rect key="frame" x="24" y="522" width="272" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="7Xg-w1-2on"/>
                                 </constraints>
@@ -98,6 +98,7 @@
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerY" secondItem="F4m-wl-fpi" secondAttribute="centerY" id="Swr-yb-qZk"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djS-Gj-zgs" secondAttribute="trailing" id="Vqf-sS-hWs"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="top" secondItem="fb6-04-tVQ" secondAttribute="bottom" constant="24" id="XPf-iC-wme"/>
+                            <constraint firstItem="djS-Gj-zgs" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="cMC-kg-ED7"/>
                             <constraint firstItem="FWW-vH-5cu" firstAttribute="top" secondItem="9hC-3j-DXK" secondAttribute="bottom" constant="20" id="e0R-fR-dZp"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="HPi-sE-qBO" secondAttribute="trailing" constant="20" id="fFj-w4-aa2"/>
                             <constraint firstItem="fb6-04-tVQ" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="hVR-H9-YIC"/>
@@ -105,7 +106,6 @@
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="24" id="mig-bA-Jql"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="phz-9A-9Hd"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="top" secondItem="Rr2-jW-cUL" secondAttribute="bottom" constant="28" id="qWm-xw-UuU"/>
-                            <constraint firstItem="djS-Gj-zgs" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="qgk-fU-w5j"/>
                             <constraint firstItem="FWW-vH-5cu" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="r1T-W4-eEH"/>
                             <constraint firstItem="Rr2-jW-cUL" firstAttribute="top" secondItem="djS-Gj-zgs" secondAttribute="bottom" constant="40" id="ziF-nG-TyE"/>
                         </constraints>
@@ -125,26 +125,26 @@
             <objects>
                 <viewController title="Join Meeting" id="hv1-QO-Hvr" customClass="ParticipantJoinMeetingViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3aP-Px-AuJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GuZ-FJ-YgS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fct-yF-gmn" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which meeting would you like to join?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doI-IY-xxp">
-                                                <rect key="frame" x="16" y="60" width="343" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which meeting would you like to join?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doI-IY-xxp">
+                                                <rect key="frame" x="24" y="60" width="272" height="48"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="egz-kb-Cez"/>
+                                                    <constraint firstAttribute="height" constant="48" id="egz-kb-Cez"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AH0-kn-1IU" userLabel="Number1">
-                                                <rect key="frame" x="37.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="10" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="Bg9-Hs-qUB"/>
                                                     <constraint firstAttribute="height" constant="40" id="Sgy-G5-iqA"/>
@@ -155,7 +155,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDX-gw-hzt" userLabel="Number2">
-                                                <rect key="frame" x="87.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="60" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="ax8-HP-CGh"/>
                                                     <constraint firstAttribute="width" constant="40" id="eW3-8s-ph8"/>
@@ -165,7 +165,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1wn-1t-XCm" userLabel="Number3">
-                                                <rect key="frame" x="135.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="108" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="hS7-xX-vkK"/>
                                                     <constraint firstAttribute="height" constant="40" id="jCe-dK-wW0"/>
@@ -175,7 +175,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq5-h8-4RI">
-                                                <rect key="frame" x="183.5" y="169" width="8" height="40"/>
+                                                <rect key="frame" x="156" y="196" width="8" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="8" id="FhE-Ie-YYr"/>
                                                 </constraints>
@@ -184,7 +184,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoX-4I-bOd" userLabel="Number4">
-                                                <rect key="frame" x="199.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="172" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Hon-Ik-buw"/>
                                                     <constraint firstAttribute="width" constant="40" id="r9q-4N-vu6"/>
@@ -194,7 +194,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9El-vE-DRs" userLabel="Number5">
-                                                <rect key="frame" x="247.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="220" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="1yH-iD-fjX"/>
                                                     <constraint firstAttribute="width" constant="40" id="2r0-2V-GyV"/>
@@ -204,7 +204,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m2d-5a-N6w" userLabel="Number6">
-                                                <rect key="frame" x="295.5" y="169" width="40" height="40"/>
+                                                <rect key="frame" x="268" y="196" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="B6c-in-WtE"/>
                                                     <constraint firstAttribute="height" constant="40" id="ZWr-gr-eGu"/>
@@ -214,25 +214,25 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDC-0F-rrt">
-                                                <rect key="frame" x="37.5" y="239" width="298" height="30"/>
+                                                <rect key="frame" x="10" y="266" width="298" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="qjA-Hh-NVV"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your meeting code:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FH-ch-rDX">
-                                                <rect key="frame" x="20" y="106" width="335" height="24"/>
+                                                <rect key="frame" x="20" y="133" width="280" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="oCm-LI-Sgp"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrm-Ho-8Zn" userLabel="TransitionButtonContainer">
-                                                <rect key="frame" x="0.0" y="319" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="346" width="320" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="eSj-K1-rXL"/>
@@ -256,7 +256,7 @@
                                             <constraint firstItem="1FH-ch-rDX" firstAttribute="top" secondItem="doI-IY-xxp" secondAttribute="bottom" constant="25" id="N0O-th-vfy"/>
                                             <constraint firstItem="qoX-4I-bOd" firstAttribute="bottom" secondItem="Oq5-h8-4RI" secondAttribute="bottom" id="QzK-iJ-nbR"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="leading" secondItem="qoX-4I-bOd" secondAttribute="trailing" constant="8" id="R1S-E5-zGs"/>
-                                            <constraint firstItem="doI-IY-xxp" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="16" id="Rbl-y6-MVg"/>
+                                            <constraint firstItem="doI-IY-xxp" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="24" id="Rbl-y6-MVg"/>
                                             <constraint firstItem="fDX-gw-hzt" firstAttribute="centerY" secondItem="AH0-kn-1IU" secondAttribute="centerY" id="SQY-Qn-ogl"/>
                                             <constraint firstItem="qoX-4I-bOd" firstAttribute="centerY" secondItem="1wn-1t-XCm" secondAttribute="centerY" id="TSJ-7R-ITf"/>
                                             <constraint firstAttribute="trailing" secondItem="1FH-ch-rDX" secondAttribute="trailing" constant="20" id="ZSv-3p-fvZ"/>
@@ -270,7 +270,7 @@
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="leading" secondItem="qoX-4I-bOd" secondAttribute="trailing" constant="8" id="sMa-rC-Xd2"/>
                                             <constraint firstItem="1FH-ch-rDX" firstAttribute="leading" secondItem="fct-yF-gmn" secondAttribute="leading" constant="20" id="sV9-4s-Tkq"/>
                                             <constraint firstItem="9El-vE-DRs" firstAttribute="centerY" secondItem="qoX-4I-bOd" secondAttribute="centerY" id="vuJ-8I-1d0"/>
-                                            <constraint firstAttribute="trailing" secondItem="doI-IY-xxp" secondAttribute="trailing" constant="16" id="yp1-E7-DW5"/>
+                                            <constraint firstAttribute="trailing" secondItem="doI-IY-xxp" secondAttribute="trailing" constant="24" id="yp1-E7-DW5"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -315,45 +315,45 @@
             <objects>
                 <viewController title="Set Up Meeting" id="VVg-16-JcS" customClass="HostSetupMeetingViewController" customModule="TeamBoostFire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DnO-16-9rG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J30-bB-V1G">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyU-bV-xmB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Agenda Question" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a28-yJ-j15">
-                                                <rect key="frame" x="24" y="80" width="327" height="30"/>
+                                                <rect key="frame" x="24" y="90" width="272" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="7nw-LC-rYA"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="wMW-Cb-Dx0"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meeting time (minutes)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-fM-NrG">
-                                                <rect key="frame" x="24" y="142" width="327" height="30"/>
+                                                <rect key="frame" x="24" y="152" width="272" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1Zv-pG-psV"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max talking time (seconds)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDI-Ec-AQO">
-                                                <rect key="frame" x="24" y="204" width="327" height="30"/>
+                                                <rect key="frame" x="24" y="214" width="272" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="oHu-4W-cLq"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-cV-94m">
-                                                <rect key="frame" x="171.5" y="517" width="32" height="30"/>
+                                                <rect key="frame" x="144" y="418" width="32" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="X00-Nh-Pkl"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="azg-Mh-Cze"/>
@@ -364,23 +364,23 @@
                                                 </connections>
                                             </button>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eR1-jR-qvL">
-                                                <rect key="frame" x="163" y="258" width="51" height="31"/>
+                                                <rect key="frame" x="135.5" y="268" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="switchToggled:" destination="VVg-16-JcS" eventType="valueChanged" id="RJq-LW-oAD"/>
                                                 </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AutoModerated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BU1-VN-6Yg">
-                                                <rect key="frame" x="24" y="313" width="327" height="22"/>
+                                                <rect key="frame" x="24" y="323" width="272" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="v9P-wU-Blm"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Description Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-ue-44a">
-                                                <rect key="frame" x="24" y="343" width="327" height="166"/>
-                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Description Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-ue-44a">
+                                                <rect key="frame" x="24" y="353" width="272" height="57"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -396,7 +396,7 @@
                                             <constraint firstItem="6Oj-ue-44a" firstAttribute="leading" secondItem="kyU-bV-xmB" secondAttribute="leading" constant="24" id="IPC-RX-4dF"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a28-yJ-j15" secondAttribute="trailing" id="Qw5-Q1-afZ"/>
                                             <constraint firstItem="BU1-VN-6Yg" firstAttribute="top" secondItem="eR1-jR-qvL" secondAttribute="bottom" constant="24" id="SOZ-wU-hIU"/>
-                                            <constraint firstItem="a28-yJ-j15" firstAttribute="top" secondItem="kyU-bV-xmB" secondAttribute="top" constant="80" id="Smt-Cz-MXz"/>
+                                            <constraint firstItem="a28-yJ-j15" firstAttribute="top" secondItem="kyU-bV-xmB" secondAttribute="top" constant="90" id="Smt-Cz-MXz"/>
                                             <constraint firstItem="kcc-fM-NrG" firstAttribute="leading" secondItem="kyU-bV-xmB" secondAttribute="leading" constant="24" id="YNA-1R-c4u"/>
                                             <constraint firstAttribute="trailing" secondItem="6Oj-ue-44a" secondAttribute="trailing" constant="24" id="ZnB-FX-hFW"/>
                                             <constraint firstItem="6Oj-ue-44a" firstAttribute="top" secondItem="BU1-VN-6Yg" secondAttribute="bottom" constant="8" id="bm3-22-Ifr"/>
@@ -413,22 +413,24 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter some details about your meeting ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucp-D0-NZp">
-                                        <rect key="frame" x="47" y="30" width="281" height="44"/>
+                                        <rect key="frame" x="24" y="30" width="272" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="csh-3Z-cJ8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ucp-D0-NZp" firstAttribute="leading" secondItem="J30-bB-V1G" secondAttribute="leading" constant="24" id="2dM-Mq-dxB"/>
                                     <constraint firstItem="ucp-D0-NZp" firstAttribute="top" secondItem="J30-bB-V1G" secondAttribute="top" constant="30" id="BT5-F4-fun"/>
                                     <constraint firstItem="ucp-D0-NZp" firstAttribute="centerX" secondItem="J30-bB-V1G" secondAttribute="centerX" id="DVC-Wz-VED"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="top" secondItem="J30-bB-V1G" secondAttribute="top" id="LA2-dy-pmN"/>
                                     <constraint firstAttribute="trailing" secondItem="kyU-bV-xmB" secondAttribute="trailing" id="S8e-62-bht"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="centerY" secondItem="J30-bB-V1G" secondAttribute="centerY" id="d1Z-sX-O0U"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="leading" secondItem="J30-bB-V1G" secondAttribute="leading" id="hPo-0u-J7J"/>
+                                    <constraint firstAttribute="trailing" secondItem="ucp-D0-NZp" secondAttribute="trailing" constant="24" id="lJ2-6R-P4b"/>
                                     <constraint firstItem="kyU-bV-xmB" firstAttribute="centerX" secondItem="J30-bB-V1G" secondAttribute="centerX" id="nnG-Ly-m3r"/>
                                     <constraint firstAttribute="bottom" secondItem="kyU-bV-xmB" secondAttribute="bottom" id="nop-Fd-kmf"/>
                                 </constraints>
@@ -474,7 +476,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DeQ-jS-gLT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PF6-q9-7Bn">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -484,7 +486,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vS0-5w-ASK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1720.289855072464" y="150.66964285714286"/>
+            <point key="canvasLocation" x="1322" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c6G-fn-8f9">
@@ -492,7 +494,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZP7-eZ-Chl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JuC-zd-3GD">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
