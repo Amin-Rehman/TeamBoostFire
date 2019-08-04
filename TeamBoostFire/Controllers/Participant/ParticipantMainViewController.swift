@@ -15,6 +15,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
     @IBOutlet weak var lottieAnimationView: AnimationView!
+    @IBOutlet weak var gameControllerView: UIView!
 
     private var allParticipants = [Participant]()
 

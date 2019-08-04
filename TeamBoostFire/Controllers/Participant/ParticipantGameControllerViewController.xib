@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParticipantGameControllerViewController" customModule="TeamBoostFire" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JI3-oq-RHn">
+                    <rect key="frame" x="143.5" y="384.5" width="127" height="127"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="JI3-oq-RHn" secondAttribute="height" multiplier="1:1" id="uZT-u4-XGZ"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="Square"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-fg-bhQ">
+                    <rect key="frame" x="143.5" y="249" width="127" height="127.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Mqn-fg-bhQ" secondAttribute="height" multiplier="1:1" id="Ads-ZT-kPn"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="TriangleUp"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNj-8z-G9N">
+                    <rect key="frame" x="278.5" y="384.5" width="127.5" height="127"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="NNj-8z-G9N" secondAttribute="height" multiplier="1:1" id="UwG-2R-2nn"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="TriangleRight"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NNj-8z-G9N" firstAttribute="leading" secondItem="JI3-oq-RHn" secondAttribute="trailing" constant="8" id="BUv-RW-m90"/>
+                <constraint firstItem="NNj-8z-G9N" firstAttribute="top" secondItem="JI3-oq-RHn" secondAttribute="top" id="DdO-Fm-47E"/>
+                <constraint firstItem="NNj-8z-G9N" firstAttribute="bottom" secondItem="JI3-oq-RHn" secondAttribute="bottom" id="DxR-Pc-5xt"/>
+                <constraint firstItem="JI3-oq-RHn" firstAttribute="top" secondItem="Mqn-fg-bhQ" secondAttribute="bottom" constant="8" id="XFH-4Y-MDP"/>
+                <constraint firstItem="JI3-oq-RHn" firstAttribute="trailing" secondItem="Mqn-fg-bhQ" secondAttribute="trailing" id="kKp-P5-UGY"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NNj-8z-G9N" secondAttribute="trailing" constant="8" id="lDh-zk-dgc"/>
+                <constraint firstItem="JI3-oq-RHn" firstAttribute="leading" secondItem="Mqn-fg-bhQ" secondAttribute="leading" id="lf5-uS-mDY"/>
+                <constraint firstItem="Mqn-fg-bhQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ob6-9x-g7E"/>
+                <constraint firstItem="JI3-oq-RHn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="un1-Ut-6fG"/>
+                <constraint firstItem="JI3-oq-RHn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="woY-Mx-hxb"/>
+                <constraint firstItem="NNj-8z-G9N" firstAttribute="centerY" secondItem="JI3-oq-RHn" secondAttribute="centerY" id="yZY-mF-Aqd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Square" width="160" height="160"/>
+        <image name="TriangleRight" width="102" height="115"/>
+        <image name="TriangleUp" width="115" height="102"/>
+    </resources>
+</document>

@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +14,7 @@
             <connections>
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
-                <outlet property="lottieAnimationView" destination="FQk-k9-IqA" id="L4v-ks-zjj"/>
+                <outlet property="gameControllerView" destination="MvN-D2-jod" id="KLT-MH-e8d"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -65,111 +64,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOU-aK-u0d" userLabel="StackContainer">
-                    <rect key="frame" x="10" y="208" width="300" height="232"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="n87-n4-wwk" userLabel="VerticalStack">
-                            <rect key="frame" x="10" y="10" width="280" height="222"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8db-WQ-LaK" userLabel="HorizontalStack1">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="111"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k90-Bb-deB" userLabel="ThumbsUpButton">
-                                            <rect key="frame" x="0.0" y="4" width="136" height="103"/>
-                                            <state key="normal" image="ReactionThumbsUp"/>
-                                            <connections>
-                                                <action selector="likeTapped:" destination="-1" eventType="touchUpInside" id="Cfm-4T-PgG"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoP-Pk-Fu8" userLabel="ClapButton">
-                                            <rect key="frame" x="144" y="0.0" width="136" height="111"/>
-                                            <state key="normal" image="ReactionClap"/>
-                                            <connections>
-                                                <action selector="clapTapped:" destination="-1" eventType="touchUpInside" id="m5y-Ie-fz8"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="k90-Bb-deB" secondAttribute="bottom" constant="4" id="0ef-yQ-8hi"/>
-                                        <constraint firstItem="k90-Bb-deB" firstAttribute="top" secondItem="8db-WQ-LaK" secondAttribute="top" constant="4" id="NJh-SG-OTd"/>
-                                    </constraints>
-                                </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vMf-sT-ktM" userLabel="HorizontalStack2">
-                                    <rect key="frame" x="0.0" y="111" width="280" height="111"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cW7-Hw-d0W" userLabel="IdeaButton">
-                                            <rect key="frame" x="0.0" y="0.0" width="140" height="111"/>
-                                            <state key="normal" image="ReactionIdea"/>
-                                            <connections>
-                                                <action selector="ideaTapped:" destination="-1" eventType="touchUpInside" id="g6M-Ih-qC4"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2n-OI-TaN" userLabel="ThinkingButton">
-                                            <rect key="frame" x="140" y="0.0" width="140" height="111"/>
-                                            <state key="normal" image="ReactionThinking"/>
-                                            <connections>
-                                                <action selector="thinkingTapped:" destination="-1" eventType="touchUpInside" id="7cn-bM-6rq"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </stackView>
-                            </subviews>
-                        </stackView>
-                        <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQk-k9-IqA" userLabel="LottieView" customClass="AnimationView" customModule="Lottie">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="232"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="FQk-k9-IqA" firstAttribute="top" secondItem="LOU-aK-u0d" secondAttribute="top" id="SEG-u0-5zr"/>
-                        <constraint firstAttribute="bottom" secondItem="FQk-k9-IqA" secondAttribute="bottom" id="c2Q-M9-PeF"/>
-                        <constraint firstItem="n87-n4-wwk" firstAttribute="top" secondItem="LOU-aK-u0d" secondAttribute="top" constant="10" id="cLk-6u-sOS"/>
-                        <constraint firstAttribute="bottom" secondItem="n87-n4-wwk" secondAttribute="bottom" id="e9b-vt-lZi"/>
-                        <constraint firstItem="FQk-k9-IqA" firstAttribute="leading" secondItem="LOU-aK-u0d" secondAttribute="leading" id="eYx-15-GSf"/>
-                        <constraint firstAttribute="trailing" secondItem="FQk-k9-IqA" secondAttribute="trailing" id="gEU-tV-cHG"/>
-                        <constraint firstItem="n87-n4-wwk" firstAttribute="leading" secondItem="LOU-aK-u0d" secondAttribute="leading" constant="10" id="qvn-pj-2Lm"/>
-                        <constraint firstAttribute="trailing" secondItem="n87-n4-wwk" secondAttribute="trailing" constant="10" id="s6g-cY-85j"/>
-                    </constraints>
-                </view>
-                <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i43-R9-CzX" userLabel="BottomView">
-                    <rect key="frame" x="0.0" y="452" width="320" height="116"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5c-bh-dLX">
-                            <rect key="frame" x="85" y="41" width="150" height="34"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="34" id="8TN-3R-6P3"/>
-                                <constraint firstAttribute="width" constant="150" id="axd-IX-DBp"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <state key="normal" title="Call For Speaker">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="callForSpeakerTapped:" destination="-1" eventType="touchUpInside" id="d0N-Us-aiA"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="d5c-bh-dLX" firstAttribute="centerX" secondItem="i43-R9-CzX" secondAttribute="centerX" id="eys-3R-xtk"/>
-                        <constraint firstItem="d5c-bh-dLX" firstAttribute="centerY" secondItem="i43-R9-CzX" secondAttribute="centerY" id="yEl-Lc-zrV"/>
-                    </constraints>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvN-D2-jod" userLabel="GameControllerView">
+                    <rect key="frame" x="0.0" y="202" width="320" height="366"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="i43-R9-CzX" secondAttribute="bottom" id="2dF-3t-GUO"/>
-                <constraint firstItem="i43-R9-CzX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5Yr-fu-W2t"/>
+                <constraint firstItem="MvN-D2-jod" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3kx-xp-bxX"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6yc-yM-BJB"/>
-                <constraint firstItem="LOU-aK-u0d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="8VE-5N-nYK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LKp-eu-meq" secondAttribute="trailing" constant="12" id="9Sm-94-G3r"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="9qB-x0-oKJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MvN-D2-jod" secondAttribute="trailing" id="Cnv-B8-6ei"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i43-R9-CzX" secondAttribute="trailing" id="Flm-LN-amv"/>
-                <constraint firstAttribute="trailing" secondItem="LOU-aK-u0d" secondAttribute="trailing" constant="10" id="Ogh-T7-v8v"/>
-                <constraint firstItem="i43-R9-CzX" firstAttribute="height" secondItem="N4J-H2-OAP" secondAttribute="height" id="RbZ-jA-bM2"/>
-                <constraint firstItem="LOU-aK-u0d" firstAttribute="top" secondItem="LKp-eu-meq" secondAttribute="bottom" constant="10" id="hFd-1l-zcx"/>
-                <constraint firstItem="i43-R9-CzX" firstAttribute="top" secondItem="LOU-aK-u0d" secondAttribute="bottom" constant="12" id="nMt-sd-5Dj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MvN-D2-jod" secondAttribute="bottom" id="OI3-VI-uWb"/>
+                <constraint firstItem="MvN-D2-jod" firstAttribute="top" secondItem="LKp-eu-meq" secondAttribute="bottom" constant="4" id="XUk-ta-wDW"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z6h-Uc-2gY"/>
@@ -178,10 +87,4 @@
             <point key="canvasLocation" x="131.25" y="153.16901408450704"/>
         </view>
     </objects>
-    <resources>
-        <image name="ReactionClap" width="160" height="160"/>
-        <image name="ReactionIdea" width="160" height="160"/>
-        <image name="ReactionThinking" width="160" height="160"/>
-        <image name="ReactionThumbsUp" width="160" height="160"/>
-    </resources>
 </document>
