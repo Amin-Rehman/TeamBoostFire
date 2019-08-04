@@ -18,6 +18,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     @IBOutlet weak var gameControllerView: UIView!
 
     private var allParticipants = [Participant]()
+    var participantGameControllerViewController = ParticipantGameControllerViewController()
 
     private var participantControllerService: ParticipantControllerService?
 
@@ -57,8 +58,17 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     }
 
+    private func addGameController() {
+        participantGameControllerViewController.view.frame = gameControllerView.bounds;
+        participantGameControllerViewController.willMove(toParent: self)
+        gameControllerView.addSubview(participantGameControllerViewController.view)
+        self.addChild(participantGameControllerViewController)
+        participantGameControllerViewController.didMove(toParent: self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        addGameController()
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
         setupTopBar()
