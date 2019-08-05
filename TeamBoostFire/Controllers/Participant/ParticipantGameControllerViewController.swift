@@ -12,6 +12,10 @@ class ParticipantGameControllerViewController: UIViewController {
 
     @IBOutlet weak var agreeLabel: UILabel!
     @IBOutlet weak var disagreeLabel: UILabel!
+    @IBOutlet weak var rightArrowButton: UIButton!
+    @IBOutlet weak var downArrowButton: UIButton!
+    @IBOutlet weak var upArrowButton: UIButton!
+    @IBOutlet weak var leftArrowButton: UIButton!
 
     override func viewDidLoad() {
         agreeLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
@@ -38,16 +42,30 @@ class ParticipantGameControllerViewController: UIViewController {
 
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
-            print("Swipe Right")
-        }
-        else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
-            print("Swipe Left")
-        }
-        else if gesture.direction == UISwipeGestureRecognizer.Direction.up {
-            print("Swipe Up")
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.autoreverse], animations: {
+                self.rightArrowButton.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+            }, completion: {_ in
+                self.rightArrowButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            })
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.autoreverse], animations: {
+                self.leftArrowButton.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+            }, completion: {_ in
+                self.leftArrowButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            })
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.up {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.autoreverse], animations: {
+                self.upArrowButton.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+            }, completion: {_ in
+                self.upArrowButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            })
         }
         else if gesture.direction == UISwipeGestureRecognizer.Direction.down {
-            print("Swipe Down")
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: [.autoreverse], animations: {
+                self.downArrowButton.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+            }, completion: {_ in
+                self.downArrowButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            })
         }
     }
 }
