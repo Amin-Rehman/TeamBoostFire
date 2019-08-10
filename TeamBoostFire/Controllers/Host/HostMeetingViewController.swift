@@ -8,8 +8,7 @@
 
 import UIKit
 
-class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserver {
-
+class HostMeetingViewController: UIViewController {
     @IBOutlet weak var childContainerView: UIView!
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var timeElapsedLabel: UILabel!
@@ -120,10 +119,6 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         super.viewDidDisappear(animated)
     }
 
-    func speakingOrderUpdated() {
-        updateUIWithSpeakerOrder()
-    }
-
     @IBAction func endMeetingTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "End Meeting",
                                                 message: "Would you like to end meeting?",
@@ -156,4 +151,14 @@ class HostMeetingViewController: UIViewController, SpeakerControllerOrderObserve
         hostControllerService?.goToNextSpeaker()
     }
 
+}
+
+extension HostMeetingViewController: SpeakerControllerOrderObserver {
+    func totalSpeakingTimeUpdated(totalSpeakingRecord: [ParticipantId : SpeakingTime]) {
+        print(totalSpeakingRecord)
+    }
+
+    func speakingOrderUpdated() {
+        updateUIWithSpeakerOrder()
+    }
 }

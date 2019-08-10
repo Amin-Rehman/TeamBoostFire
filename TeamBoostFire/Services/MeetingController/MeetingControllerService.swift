@@ -6,6 +6,12 @@ protocol SpeakerControllerOrderObserver: class {
      order from CoreServices
      */
     func speakingOrderUpdated()
+
+    /**
+     Method to indicate that the total speaking time has updated so that we can update the cells
+     in the host meeting view controller.
+     */
+    func totalSpeakingTimeUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
 }
 
 
@@ -115,6 +121,7 @@ class MeetingControllerService {
         speakingOrder = speakingOrder.circularRotate()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated()
+        orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
 
         startSecondTickerTimer()
         startSpeakerTimerForCurrentRound()
@@ -166,6 +173,7 @@ class MeetingControllerService {
             speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
                                                 selector: #selector(goToNextSpeaker),
                                                 userInfo: nil, repeats: false)
+            orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
         case .AutoModerated:
             let isNewRound = indexForParticipantRoundSpeakingTime == participantSpeakingRecordPerRound.count
 
@@ -183,6 +191,7 @@ class MeetingControllerService {
                 }
                 HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)
                 orderObserver?.speakingOrderUpdated()
+                orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
             }
 
             speakerTimer = Timer.scheduledTimer(timeInterval:
