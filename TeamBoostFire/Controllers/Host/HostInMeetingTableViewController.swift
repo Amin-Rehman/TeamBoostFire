@@ -9,6 +9,11 @@
 import UIKit
 
 class HostInMeetingTableViewController: UITableViewController {
+    /**
+     Map used to update the UIView width to indicate the progress view.
+     This progress view indicates the % of time the user spoke in the Host Meeting View Cell
+     */
+    var participantIdSpeakingFactorMap =  [ParticipantId : SpeakingFactor]()
     var tableViewDataSource: [Participant]
     weak var hostControllerService: MeetingControllerService?
 
@@ -65,8 +70,28 @@ class HostInMeetingTableViewController: UITableViewController {
             showSpeakingOrderIfNeeded(for: cell, speakingOrder: speakerOrder)
         }
 
+        // Update progressViewFactor
+        let evenCellColor = UIColor(red: 0.75,
+                                    green: 0.92,
+                                    blue: 0.99,
+                                    alpha: 1.0)
+
+        let oddCellColor = UIColor(red: 0.86,
+                                   green: 0.86,
+                                   blue: 0.86,
+                                   alpha: 1.0)
+
+        let participantSpeakingFactor = participantIdSpeakingFactorMap[participantIdentifier]
+        if participantSpeakingFactor != nil {
+            let color = indexPath.row % 2 == 0 ? evenCellColor : oddCellColor
+            cell.updateProgress(to: participantSpeakingFactor!, color: color)
+        } else {
+            cell.updateProgress(to: 0.0, color: UIColor.clear)
+        }
+
         return cell
     }
+
 
     private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
         cell.startCircleAnimation()

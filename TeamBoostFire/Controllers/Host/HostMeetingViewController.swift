@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias SpeakingFactor = Float
+
 class HostMeetingViewController: UIViewController {
     @IBOutlet weak var childContainerView: UIView!
     @IBOutlet weak var agendaQuestionLabel: UILabel!
@@ -154,11 +156,36 @@ class HostMeetingViewController: UIViewController {
 }
 
 extension HostMeetingViewController: SpeakerControllerOrderObserver {
-    func totalSpeakingTimeUpdated(totalSpeakingRecord: [ParticipantId : SpeakingTime]) {
-        print(totalSpeakingRecord)
+
+    /**
+     Get speaking factor from the total speaking record
+     Use to calculate the progress view in the cell view
+     */
+    private func mapToSpeakingFactor(from totalSpeakingRecord: [ParticipantId : SpeakingTime])
+        -> [ParticipantId : SpeakingFactor] {
+
+            // Add up all the speaking times
+            let allSpeakingTimesArray = Array(totalSpeakingRecord.values)
+            let totalSpeakingTime = allSpeakingTimesArray.reduce(0, +)
+
+
+            let allParticipantIds = Array(totalSpeakingRecord.keys)
+            var participantIdSpeakingFactors = [ParticipantId : SpeakingFactor]()
+
+            for participantId in allParticipantIds {
+               let participantSpeakingTime = totalSpeakingRecord[participantId]
+                let participantSpeakingFactor = Float(participantSpeakingTime!) / Float(totalSpeakingTime)
+                participantIdSpeakingFactors[participantId] = participantSpeakingFactor
+            }
+
+            return participantIdSpeakingFactors
+
     }
 
-    func speakingOrderUpdated() {
+    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId : SpeakingTime]) {
+        // Update speaking factor in HostInMeetingTableViewController
+        hostInMeetingTableViewController.participantIdSpeakingFactorMap =
+            mapToSpeakingFactor(from: totalSpeakingRecord)
         updateUIWithSpeakerOrder()
     }
 }

@@ -19,6 +19,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="519" height="75.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giO-Fe-QrP" userLabel="ProgressView">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="75.5"/>
+                        <color key="backgroundColor" red="1" green="0.5409764051" blue="0.84731429820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="YRm-r1-Lqc"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Participant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yH-uh-rNF">
                         <rect key="frame" x="20" y="11" width="160.5" height="24"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
@@ -55,19 +65,26 @@
                     <constraint firstItem="a0W-Tx-fTd" firstAttribute="top" secondItem="0yH-uh-rNF" secondAttribute="bottom" constant="8" id="4Gs-ST-yaK"/>
                     <constraint firstItem="0yH-uh-rNF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DsH-mf-pX2"/>
                     <constraint firstAttribute="trailing" secondItem="kkJ-SU-n0t" secondAttribute="trailing" constant="8" id="GJy-LS-qj3"/>
+                    <constraint firstItem="giO-Fe-QrP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="How-4x-ZcB"/>
                     <constraint firstItem="kkJ-SU-n0t" firstAttribute="centerX" secondItem="KdI-yR-oDi" secondAttribute="centerX" id="JbP-ky-zAF"/>
                     <constraint firstAttribute="bottom" secondItem="a0W-Tx-fTd" secondAttribute="bottom" constant="8" id="Jl0-zw-cn6"/>
                     <constraint firstItem="a0W-Tx-fTd" firstAttribute="leading" secondItem="0yH-uh-rNF" secondAttribute="leading" id="X3F-Nq-wDb"/>
+                    <constraint firstAttribute="bottom" secondItem="giO-Fe-QrP" secondAttribute="bottom" id="dvn-vX-2fR"/>
                     <constraint firstItem="kkJ-SU-n0t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="mFN-cY-fi4"/>
                     <constraint firstItem="kkJ-SU-n0t" firstAttribute="centerY" secondItem="KdI-yR-oDi" secondAttribute="centerY" id="mqt-cg-LNp"/>
                     <constraint firstItem="0yH-uh-rNF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="qI0-xb-I4v"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="giO-Fe-QrP" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" id="hzO-1T-s9r"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="circleAnimationView" destination="kkJ-SU-n0t" id="7vZ-0C-jhB"/>
                 <outlet property="orderLabel" destination="KdI-yR-oDi" id="Gpa-6z-UNG"/>
                 <outlet property="participantNameLabel" destination="0yH-uh-rNF" id="GQz-3e-B6a"/>
+                <outlet property="progressBackgroundView" destination="giO-Fe-QrP" id="qTK-AG-GDJ"/>
+                <outlet property="progressViewWidthContraint" destination="YRm-r1-Lqc" id="u9M-A3-WdB"/>
                 <outlet property="speakingTimeLabel" destination="a0W-Tx-fTd" id="7SS-Wb-TEj"/>
             </connections>
             <point key="canvasLocation" x="226.81159420289856" y="119.19642857142857"/>

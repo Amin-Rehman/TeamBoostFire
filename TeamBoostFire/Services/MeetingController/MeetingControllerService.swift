@@ -4,14 +4,10 @@ protocol SpeakerControllerOrderObserver: class {
     /**
      Method to indicate that the speaker order has changed and the observer can fetch the new
      order from CoreServices
-     */
-    func speakingOrderUpdated()
 
-    /**
-     Method to indicate that the total speaking time has updated so that we can update the cells
-     in the host meeting view controller.
+     Pass in the total speaking time that the observer can use; for example to update the progress view in the cell
      */
-    func totalSpeakingTimeUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
+    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
 }
 
 
@@ -120,8 +116,7 @@ class MeetingControllerService {
         }
         speakingOrder = speakingOrder.circularRotate()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-        orderObserver?.speakingOrderUpdated()
-        orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
+        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
 
         startSecondTickerTimer()
         startSpeakerTimerForCurrentRound()
@@ -173,7 +168,6 @@ class MeetingControllerService {
             speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
                                                 selector: #selector(goToNextSpeaker),
                                                 userInfo: nil, repeats: false)
-            orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
         case .AutoModerated:
             let isNewRound = indexForParticipantRoundSpeakingTime == participantSpeakingRecordPerRound.count
 
@@ -190,8 +184,7 @@ class MeetingControllerService {
                     newSpeakingOrder.append(speakerRecord.participantId)
                 }
                 HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)
-                orderObserver?.speakingOrderUpdated()
-                orderObserver?.totalSpeakingTimeUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
+                orderObserver?.speakingOrderUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
             }
 
             speakerTimer = Timer.scheduledTimer(timeInterval:
