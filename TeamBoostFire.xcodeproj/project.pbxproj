@@ -56,6 +56,10 @@
 		EB6CE8BA2309B9E7002D3189 /* swipe-right.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8B92309B9E6002D3189 /* swipe-right.json */; };
 		EB6CE8BC2309BA1F002D3189 /* swipe-up.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8BB2309BA1F002D3189 /* swipe-up.json */; };
 		EB6CE8BE2309BA37002D3189 /* swipe-down.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8BD2309BA37002D3189 /* swipe-down.json */; };
+		EB6CE8C22309C439002D3189 /* agree.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C02309C439002D3189 /* agree.json */; };
+		EB6CE8C32309C439002D3189 /* disagree.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C12309C439002D3189 /* disagree.json */; };
+		EB6CE8C52309C472002D3189 /* celebrate.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C42309C472002D3189 /* celebrate.json */; };
+		EB6CE8C72309C4E7002D3189 /* curious.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C62309C4E7002D3189 /* curious.json */; };
 		EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */; };
 		EB9C1A4822ABBBD20048CBD0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */; };
 		EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */; };
@@ -143,6 +147,10 @@
 		EB6CE8B92309B9E6002D3189 /* swipe-right.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-right.json"; sourceTree = "<group>"; };
 		EB6CE8BB2309BA1F002D3189 /* swipe-up.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-up.json"; sourceTree = "<group>"; };
 		EB6CE8BD2309BA37002D3189 /* swipe-down.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-down.json"; sourceTree = "<group>"; };
+		EB6CE8C02309C439002D3189 /* agree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = agree.json; sourceTree = "<group>"; };
+		EB6CE8C12309C439002D3189 /* disagree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = disagree.json; sourceTree = "<group>"; };
+		EB6CE8C42309C472002D3189 /* celebrate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = celebrate.json; sourceTree = "<group>"; };
+		EB6CE8C62309C4E7002D3189 /* curious.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curious.json; sourceTree = "<group>"; };
 		EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_waiting.json; sourceTree = "<group>"; };
 		EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EB6CE8BF2309C39C002D3189 /* Reactions */,
 				EB6CE8B42309B953002D3189 /* ReactionGestures */,
 				EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */,
 				EBD3C5A822BA8C4F00EBD4FD /* lottie_participant_reaction.json */,
@@ -335,6 +344,17 @@
 				EB6CE8B72309B99F002D3189 /* double-tap.json */,
 			);
 			path = ReactionGestures;
+			sourceTree = "<group>";
+		};
+		EB6CE8BF2309C39C002D3189 /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				EB6CE8C62309C4E7002D3189 /* curious.json */,
+				EB6CE8C42309C472002D3189 /* celebrate.json */,
+				EB6CE8C02309C439002D3189 /* agree.json */,
+				EB6CE8C12309C439002D3189 /* disagree.json */,
+			);
+			path = Reactions;
 			sourceTree = "<group>";
 		};
 		EBBB4A8A227F850900D61976 /* Services */ = {
@@ -511,6 +531,7 @@
 				EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */,
 				EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */,
 				EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */,
+				EB6CE8C52309C472002D3189 /* celebrate.json in Resources */,
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */,
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,
@@ -520,6 +541,7 @@
 				EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */,
 				EB6CE8BE2309BA37002D3189 /* swipe-down.json in Resources */,
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
+				EB6CE8C22309C439002D3189 /* agree.json in Resources */,
 				EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */,
 				EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */,
 				EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */,
@@ -530,9 +552,11 @@
 				EB1D48CF2267D303001A754D /* ParticipantLobbyViewController.xib in Resources */,
 				EBFCA68222668E050047CD75 /* GoogleService-Info.plist in Resources */,
 				EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */,
+				EB6CE8C32309C439002D3189 /* disagree.json in Resources */,
 				EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */,
 				EB6CE8BA2309B9E7002D3189 /* swipe-right.json in Resources */,
 				EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */,
+				EB6CE8C72309C4E7002D3189 /* curious.json in Resources */,
 				EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,66 +14,13 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
-    @IBOutlet weak var lottieAnimationView: AnimationView!
     @IBOutlet weak var gameControllerView: UIView!
-
+    @IBOutlet weak var fullScreenAnimaionView: AnimationView!
+    
     private var allParticipants = [Participant]()
     var participantGameControllerViewController = ParticipantGameControllerViewController()
     var participantReactionViewController = ParticipantReactionViewController()
-
     private var participantControllerService: ParticipantControllerService?
-
-    @IBAction func likeTapped(_ sender: Any) {
-        let animation = Animation.named("lottie_participant_reaction")
-        lottieAnimationView.animation = animation
-        lottieAnimationView.alpha = 1.0
-        lottieAnimationView.play { _ in
-            self.lottieAnimationView.alpha = 0.0
-        }
-    }
-
-    @IBAction func clapTapped(_ sender: Any) {
-        let animation = Animation.named("lottie_participant_reaction")
-        lottieAnimationView.animation = animation
-        lottieAnimationView.alpha = 1.0
-        lottieAnimationView.play { _ in
-            self.lottieAnimationView.alpha = 0.0
-        }
-    }
-    @IBAction func ideaTapped(_ sender: Any) {
-        let animation = Animation.named("lottie_participant_bulb")
-        lottieAnimationView.animation = animation
-        lottieAnimationView.alpha = 1.0
-        lottieAnimationView.play { _ in
-            self.lottieAnimationView.alpha = 0.0
-        }
-    }
-
-    @IBAction func thinkingTapped(_ sender: Any) {
-        let animation = Animation.named("lottie_participant_bulb")
-        lottieAnimationView.animation = animation
-        lottieAnimationView.alpha = 1.0
-        lottieAnimationView.play { _ in
-            self.lottieAnimationView.alpha = 0.0
-        }
-
-    }
-
-    private func addGameController() {
-
-        participantReactionViewController.view.frame = gameControllerView.bounds;
-        participantReactionViewController.willMove(toParent: self)
-        gameControllerView.addSubview(participantReactionViewController.view)
-        self.addChild(participantReactionViewController)
-        participantReactionViewController.didMove(toParent: self)
-
-
-        // participantGameControllerViewController.view.frame = gameControllerView.bounds;
-        // participantGameControllerViewController.willMove(toParent: self)
-        // gameControllerView.addSubview(participantGameControllerViewController.view)
-        // self.addChild(participantGameControllerViewController)
-        // participantGameControllerViewController.didMove(toParent: self)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +37,53 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
+        registerReactionGestures()
+    }
+
+    private func registerReactionGestures() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
+
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            playFullScreenAnimation(name: "agree")
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            playFullScreenAnimation(name: "disagree")
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.up {
+            playFullScreenAnimation(name: "celebrate")
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.down {
+            playFullScreenAnimation(name: "curious")
+        }
+    }
+
+    private func playFullScreenAnimation(name: String) {
+        fullScreenAnimaionView.isHidden = false
+        fullScreenAnimaionView.animation = Animation.named(name)
+        fullScreenAnimaionView.play { _ in
+            self.fullScreenAnimaionView.isHidden = true
+        }
+    }
+
+    private func addGameController() {
+        participantReactionViewController.view.frame = gameControllerView.bounds;
+        participantReactionViewController.willMove(toParent: self)
+        gameControllerView.addSubview(participantReactionViewController.view)
+        self.addChild(participantReactionViewController)
+        participantReactionViewController.didMove(toParent: self)
     }
 
     private func setupTopBar() {
@@ -143,9 +137,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
             let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
             currentSpeakerLabel.text = "\(currentSpeakingParticipant!.name) is speaking"
         }
-    }
-
-    @IBAction func callForSpeakerTapped(_ sender: Any) {
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
