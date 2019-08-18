@@ -18,14 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TeamBoostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9hC-3j-DXK" userLabel="TeamBoost Logo">
-                                <rect key="frame" x="106" y="40" width="108.5" height="108.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="9hC-3j-DXK" secondAttribute="height" multiplier="1:1" id="hgd-uD-am4"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWW-vH-5cu">
-                                <rect key="frame" x="114.5" y="168.5" width="91" height="21"/>
+                                <rect key="frame" x="114.5" y="194" width="91" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="KVR-K7-9ph"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="X3g-lW-IXN"/>
@@ -35,17 +29,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb6-04-tVQ">
-                                <rect key="frame" x="60" y="197.5" width="200" height="40"/>
+                                <rect key="frame" x="60" y="223" width="200" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="NYa-Ao-zH4"/>
-                                    <constraint firstAttribute="height" constant="40" id="ROd-b2-PZ1"/>
+                                    <constraint firstAttribute="height" constant="26" id="ROd-b2-PZ1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How would you like to join the meeting?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djS-Gj-zgs">
-                                <rect key="frame" x="24" y="261.5" width="272" height="45"/>
+                                <rect key="frame" x="24" y="273" width="272" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="NPc-i4-V4b"/>
                                 </constraints>
@@ -54,13 +48,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rr2-jW-cUL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="80" y="346.5" width="160" height="38"/>
+                                <rect key="frame" x="80" y="368" width="160" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="WTd-QR-COk"/>
                                     <constraint firstAttribute="height" constant="38" id="vcW-8b-iN1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <state key="normal" title="Moderator">
+                                <state key="normal" title="I am moderating">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -85,13 +79,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPi-sE-qBO" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="80" y="412.5" width="160" height="38"/>
+                                <rect key="frame" x="80" y="434" width="160" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="0um-6q-UDb"/>
                                     <constraint firstAttribute="height" constant="38" id="tTM-kt-Oss"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <state key="normal" title="Participant">
+                                <state key="normal" title="I am participating">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -124,33 +118,44 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT8-Dg-NrX" userLabel="BrainstormAnimationView" customClass="AnimationView" customModule="Lottie">
+                                <rect key="frame" x="86" y="32" width="148" height="148"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bT8-Dg-NrX" secondAttribute="height" multiplier="1:1" id="cmW-t2-Bwu"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="brain_storm"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="3UU-FX-Fhs"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="centerX" secondItem="Rr2-jW-cUL" secondAttribute="centerX" id="CJs-95-afc"/>
-                            <constraint firstItem="9hC-3j-DXK" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="HVe-ty-hMG"/>
-                            <constraint firstItem="9hC-3j-DXK" firstAttribute="top" secondItem="bCh-9H-cwG" secondAttribute="top" constant="20" id="L7O-Xq-kUQ"/>
+                            <constraint firstItem="lxq-vK-MaZ" firstAttribute="top" secondItem="HPi-sE-qBO" secondAttribute="bottom" constant="50" id="G1O-hs-A4O"/>
+                            <constraint firstItem="bT8-Dg-NrX" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="JCE-cW-KSS"/>
+                            <constraint firstItem="Rr2-jW-cUL" firstAttribute="top" secondItem="djS-Gj-zgs" secondAttribute="bottom" constant="50" id="Mly-oh-xTc"/>
                             <constraint firstItem="fb6-04-tVQ" firstAttribute="top" secondItem="FWW-vH-5cu" secondAttribute="bottom" constant="8" symbolic="YES" id="QmH-og-Ivk"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="lxq-vK-MaZ" secondAttribute="trailing" constant="24" id="SNX-i1-1fQ"/>
-                            <constraint firstItem="djS-Gj-zgs" firstAttribute="centerY" secondItem="F4m-wl-fpi" secondAttribute="centerY" id="Swr-yb-qZk"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djS-Gj-zgs" secondAttribute="trailing" id="Vqf-sS-hWs"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="top" secondItem="fb6-04-tVQ" secondAttribute="bottom" constant="24" id="XPf-iC-wme"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="cMC-kg-ED7"/>
-                            <constraint firstItem="FWW-vH-5cu" firstAttribute="top" secondItem="9hC-3j-DXK" secondAttribute="bottom" constant="20" id="e0R-fR-dZp"/>
                             <constraint firstItem="fb6-04-tVQ" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="hVR-H9-YIC"/>
                             <constraint firstItem="lxq-vK-MaZ" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="jnp-jq-YNM"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="24" id="mig-bA-Jql"/>
                             <constraint firstItem="djS-Gj-zgs" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="phz-9A-9Hd"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="top" secondItem="Rr2-jW-cUL" secondAttribute="bottom" constant="28" id="qWm-xw-UuU"/>
+                            <constraint firstItem="FWW-vH-5cu" firstAttribute="top" secondItem="bT8-Dg-NrX" secondAttribute="bottom" constant="14" id="qfp-0B-FEP"/>
+                            <constraint firstItem="bT8-Dg-NrX" firstAttribute="top" secondItem="bCh-9H-cwG" secondAttribute="top" constant="12" id="qsJ-AN-9ok"/>
                             <constraint firstItem="FWW-vH-5cu" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="r1T-W4-eEH"/>
                             <constraint firstItem="Rr2-jW-cUL" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="z87-N2-LGs"/>
-                            <constraint firstItem="Rr2-jW-cUL" firstAttribute="top" secondItem="djS-Gj-zgs" secondAttribute="bottom" constant="40" id="ziF-nG-TyE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bCh-9H-cwG"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qpw-fF-wlf"/>
                     <connections>
+                        <outlet property="brainStormAnimationView" destination="bT8-Dg-NrX" id="yKf-xr-UqL"/>
                         <outlet property="versionLabel" destination="lxq-vK-MaZ" id="HFc-EE-Ics"/>
                     </connections>
                 </viewController>
@@ -570,7 +575,4 @@
             <point key="canvasLocation" x="572" y="1004.3478260869566"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="TeamBoostLogo" width="512" height="512"/>
-    </resources>
 </document>

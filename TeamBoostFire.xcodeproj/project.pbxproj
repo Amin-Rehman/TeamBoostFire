@@ -60,6 +60,7 @@
 		EB6CE8C32309C439002D3189 /* disagree.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C12309C439002D3189 /* disagree.json */; };
 		EB6CE8C52309C472002D3189 /* celebrate.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C42309C472002D3189 /* celebrate.json */; };
 		EB6CE8C72309C4E7002D3189 /* curious.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C62309C4E7002D3189 /* curious.json */; };
+		EB6CE8C92309D053002D3189 /* brain_storm.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C82309D053002D3189 /* brain_storm.json */; };
 		EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */; };
 		EB9C1A4822ABBBD20048CBD0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */; };
 		EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */; };
@@ -151,6 +152,7 @@
 		EB6CE8C12309C439002D3189 /* disagree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = disagree.json; sourceTree = "<group>"; };
 		EB6CE8C42309C472002D3189 /* celebrate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = celebrate.json; sourceTree = "<group>"; };
 		EB6CE8C62309C4E7002D3189 /* curious.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curious.json; sourceTree = "<group>"; };
+		EB6CE8C82309D053002D3189 /* brain_storm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_storm.json; sourceTree = "<group>"; };
 		EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_waiting.json; sourceTree = "<group>"; };
 		EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EB6CE8C82309D053002D3189 /* brain_storm.json */,
 				EB6CE8BF2309C39C002D3189 /* Reactions */,
 				EB6CE8B42309B953002D3189 /* ReactionGestures */,
 				EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */,
@@ -540,6 +543,7 @@
 				EB1FAB982268AF300037A6A5 /* HostInMeetingTableViewController.xib in Resources */,
 				EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */,
 				EB6CE8BE2309BA37002D3189 /* swipe-down.json in Resources */,
+				EB6CE8C92309D053002D3189 /* brain_storm.json in Resources */,
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
 				EB6CE8C22309C439002D3189 /* agree.json in Resources */,
 				EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */,
