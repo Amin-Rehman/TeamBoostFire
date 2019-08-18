@@ -38,6 +38,9 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         populateVersionLabel()
         brainStormAnimationView.loopMode = .loop
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         brainStormAnimationView.play()
     }
 
