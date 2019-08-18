@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Lottie
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var brainStormAnimationView: AnimationView!
     @IBOutlet weak var versionLabel: UILabel!
 
     func makeAppVersionString() -> String {
@@ -35,6 +37,8 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateVersionLabel()
+        brainStormAnimationView.loopMode = .loop
+        brainStormAnimationView.play()
     }
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {

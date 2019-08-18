@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
+                <outlet property="fullScreenAnimaionView" destination="cqF-Mb-nr7" id="rws-H5-XbK"/>
                 <outlet property="gameControllerView" destination="MvN-D2-jod" id="KLT-MH-e8d"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,7 +44,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="ZM5-Jk-zhF" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" constant="56" id="00K-Uz-dep"/>
                         <constraint firstItem="CoP-On-ROX" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" constant="18" id="6nb-Rd-aUY"/>
@@ -68,16 +69,23 @@
                     <rect key="frame" x="0.0" y="202" width="320" height="366"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqF-Mb-nr7" userLabel="FullScreenAnimationView" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="MvN-D2-jod" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3kx-xp-bxX"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6yc-yM-BJB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cqF-Mb-nr7" secondAttribute="trailing" id="9Gj-b3-sKb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LKp-eu-meq" secondAttribute="trailing" constant="12" id="9Sm-94-G3r"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="9qB-x0-oKJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cqF-Mb-nr7" secondAttribute="bottom" id="9tR-ub-ftg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MvN-D2-jod" secondAttribute="trailing" id="Cnv-B8-6ei"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
+                <constraint firstItem="cqF-Mb-nr7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ns0-5a-hFB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MvN-D2-jod" secondAttribute="bottom" id="OI3-VI-uWb"/>
+                <constraint firstItem="cqF-Mb-nr7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Uph-aT-RsL"/>
                 <constraint firstItem="MvN-D2-jod" firstAttribute="top" secondItem="LKp-eu-meq" secondAttribute="bottom" constant="4" id="XUk-ta-wDW"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
