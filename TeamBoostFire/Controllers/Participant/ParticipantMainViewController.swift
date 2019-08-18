@@ -16,6 +16,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     @IBOutlet weak var currentSpeakerLabel: UILabel!
     @IBOutlet weak var gameControllerView: UIView!
     @IBOutlet weak var fullScreenAnimaionView: AnimationView!
+
+    private var selfSpeakerViewController: ParticipantSelfSpeakerViewController?
     
     private var allParticipants = [Participant]()
     var participantGameControllerViewController = ParticipantGameControllerViewController()
@@ -71,10 +73,12 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     private func playFullScreenAnimation(name: String) {
-        fullScreenAnimaionView.isHidden = false
-        fullScreenAnimaionView.animation = Animation.named(name)
-        fullScreenAnimaionView.play { _ in
-            self.fullScreenAnimaionView.isHidden = true
+        if !fullScreenAnimaionView.isAnimationPlaying {
+            fullScreenAnimaionView.isHidden = false
+            fullScreenAnimaionView.animation = Animation.named(name)
+            fullScreenAnimaionView.play { _ in
+                self.fullScreenAnimaionView.isHidden = true
+            }
         }
     }
 
@@ -121,18 +125,26 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         let order = selfSpeakingOrder(with: speakingOrder)
         let isSpeakerSelf = order == 0
 
-        if isSpeakerSelf {
+        let isSelfSpeakerViewControllerBeingPresented = selfSpeakerViewController?.isBeingPresented ?? false
+        let isSelfSpeakerViewControllerNotBeingPresented = !isSelfSpeakerViewControllerBeingPresented
+
+        if isSpeakerSelf && isSelfSpeakerViewControllerNotBeingPresented {
             guard let controllerService = participantControllerService else {
                 fatalError("Unable to find controller service")
             }
 
-            let selfSpeakerViewController =
+            selfSpeakerViewController =
                 ParticipantSelfSpeakerViewController(nibName: "ParticipantSelfSpeakerViewController",
                 participantControllerService: controllerService)
 
-            present(selfSpeakerViewController, animated: true, completion: nil)
+            guard let selfSpeakerVC = selfSpeakerViewController else {
+                return
+            }
+            present(selfSpeakerVC, animated: true, completion: nil)
+
         } else {
-            presentedViewController?.dismiss(animated: true, completion: nil)
+            selfSpeakerViewController?.dismiss(animated: true, completion: nil)
+            selfSpeakerViewController = nil
 
             let currentSpeakingParticipant = currentSpeaker(with: speakingOrder)
             currentSpeakerLabel.text = "\(currentSpeakingParticipant!.name) is speaking"
