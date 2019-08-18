@@ -19,6 +19,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 
     private var allParticipants = [Participant]()
     var participantGameControllerViewController = ParticipantGameControllerViewController()
+    var participantReactionViewController = ParticipantReactionViewController()
 
     private var participantControllerService: ParticipantControllerService?
 
@@ -59,11 +60,19 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     private func addGameController() {
-        participantGameControllerViewController.view.frame = gameControllerView.bounds;
-        participantGameControllerViewController.willMove(toParent: self)
-        gameControllerView.addSubview(participantGameControllerViewController.view)
-        self.addChild(participantGameControllerViewController)
-        participantGameControllerViewController.didMove(toParent: self)
+
+        participantReactionViewController.view.frame = gameControllerView.bounds;
+        participantReactionViewController.willMove(toParent: self)
+        gameControllerView.addSubview(participantReactionViewController.view)
+        self.addChild(participantReactionViewController)
+        participantReactionViewController.didMove(toParent: self)
+
+
+        // participantGameControllerViewController.view.frame = gameControllerView.bounds;
+        // participantGameControllerViewController.willMove(toParent: self)
+        // gameControllerView.addSubview(participantGameControllerViewController.view)
+        // self.addChild(participantGameControllerViewController)
+        // participantGameControllerViewController.didMove(toParent: self)
     }
 
     override func viewDidLoad() {
