@@ -44,7 +44,7 @@ class HostCoreServices: TeamBoostCore {
         firebaseObserverUtility = FirebaseObserverUtility(with: guardedFirebaseReferenceContainer,
                                                           teamBoostCore: self)
 
-        firebaseReferenceContainer?.meetingStateReference?.setValue("suspended")
+        firebaseReferenceContainer?.meetingStateReference?.setValue(CoreMeetingState.MeetingSuspended.state())
         firebaseReferenceContainer?.speakerOrderReference?.setValue([""])
         firebaseReferenceContainer?.meetingParamsReference?.setValue("")
         firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue("")
@@ -72,11 +72,11 @@ class HostCoreServices: TeamBoostCore {
         }
 
         updateSpeakerOrder(with: allParticipantIdentifiers)
-        firebaseReferenceContainer?.meetingStateReference?.setValue("started")
+        firebaseReferenceContainer?.meetingStateReference?.setValue(CoreMeetingState.MeetingStarted.state())
     }
 
     public func endMeeting() {
-        firebaseReferenceContainer?.meetingStateReference?.setValue("ended")
+        firebaseReferenceContainer?.meetingStateReference?.setValue(CoreMeetingState.MeetingEnded.state())
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {

@@ -51,4 +51,20 @@ class ParticipantCoreServices: TeamBoostCore {
 
         firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
+
+
+    public func testModeStartMeeting() {
+        let isTestModeEnabled = UserDefaults.standard.value(forKey: testModeKey) as? Bool == true
+        
+        // if the test mode is enabled, only then start the meeting from the participant view
+        // this should not be enabled for production.
+        if isTestModeEnabled {
+            firebaseReferenceContainer?.meetingStateReference?.setValue(CoreMeetingState.MeetingSuspended.state())
+            return
+        }
+
+        assertionFailure("Unable to start meeting from participant view unless its in Test Mode.")
+
+
+    }
 }

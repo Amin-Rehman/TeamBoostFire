@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-let testModeKey = "TestModeKey"
+public let testModeKey = "TestModeKey"
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
