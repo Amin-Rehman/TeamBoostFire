@@ -1,9 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
 project 'TeamBoostFire.xcodeproj'
 
-inhibit_all_warnings!
 
 target 'TeamBoostFire' do
   platform :ios, '11.0'
