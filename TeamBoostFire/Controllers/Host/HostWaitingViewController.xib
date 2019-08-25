@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please ask participants to join via the following code:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7J-rX-ggi">
-                    <rect key="frame" x="71" y="230" width="272" height="60"/>
+                    <rect key="frame" x="71" y="180" width="272" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="BuH-IM-7Px"/>
                         <constraint firstAttribute="width" constant="272" id="Zfr-P0-vA0"/>
@@ -44,7 +43,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOT-cW-Mx4">
-                    <rect key="frame" x="20" y="298" width="374" height="36"/>
+                    <rect key="frame" x="20" y="248" width="374" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="bLL-Vs-ukN"/>
                     </constraints>
@@ -53,7 +52,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFD-jr-vAI" userLabel="Table View Area">
-                    <rect key="frame" x="20" y="354" width="374" height="290"/>
+                    <rect key="frame" x="20" y="304" width="374" height="340"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="vUu-cv-myx"/>
@@ -91,10 +90,10 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvr-Sg-QKh" userLabel="LottieSpinner" customClass="AnimationView" customModule="Lottie">
-                    <rect key="frame" x="132" y="76" width="150" height="150"/>
+                    <rect key="frame" x="132" y="76" width="150" height="100"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="Wtp-Ot-4EV"/>
+                        <constraint firstAttribute="height" constant="100" id="Wtp-Ot-4EV"/>
                         <constraint firstAttribute="width" constant="150" id="iCa-G2-AkQ"/>
                     </constraints>
                 </view>
