@@ -18,7 +18,7 @@ struct HostSaveMeetingStatsToCoreUseCase {
             return
         }
         let meetingAgenda = controllerService.meetingParams.agenda
-        let participantSpeakingRecordWithId = controllerService.participantTotalSpeakingRecord
+        let participantSpeakingRecordWithId = controllerService.storage.participantTotalSpeakingRecord
 
         guard let allParticipants = HostCoreServices.shared.allParticipants else {
             assertionFailure("Unable to return al participant from Core: HostSaveMeetingStatsToCoreUseCase")

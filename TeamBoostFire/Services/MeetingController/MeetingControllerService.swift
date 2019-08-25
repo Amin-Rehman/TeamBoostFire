@@ -21,7 +21,7 @@ protocol SpeakerControllerSecondTickObserver: class {
 typealias ParticipantId = String
 typealias SpeakingTime = Int
 
-typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
+
 
 class MeetingControllerService {
     let meetingParams: MeetingsParams
@@ -30,13 +30,19 @@ class MeetingControllerService {
     private var secondTickTimer: Timer?
     private let meetingMode: MeetingMode
 
-    // To be updated for every round if speaking time needs to be adjusted
-    private var participantSpeakingRecordPerRound = [SpeakerRecord]()
-
-    public private(set) var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     public weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
-
     private var indexForParticipantRoundSpeakingTime = 0
+
+    public lazy var storage: MeetingControllerStorage = {
+
+        guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
+            assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
+            return MeetingControllerStorage(with: [], maxTalkTime: 0)
+        }
+        let controllerStorage = MeetingControllerStorage(with: allParticipantIdentifiers,
+                                                         maxTalkTime: meetingParams.maxTalkTime)
+        return controllerStorage
+    }()
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
@@ -44,8 +50,6 @@ class MeetingControllerService {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
         self.meetingMode = meetingMode
-
-        setupParticipantSpeakingRecord()
 
         if meetingMode == .AutoModerated {
             shuffleSpeakerOrder()
@@ -89,22 +93,6 @@ class MeetingControllerService {
         goToNextSpeaker()
     }
 
-    private func setupParticipantSpeakingRecord() {
-        guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
-            assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
-            return
-        }
-
-        for identifiers in allParticipantIdentifiers {
-            participantTotalSpeakingRecord[identifiers] = 0
-        }
-
-        // Start off with some defaults
-        allParticipantIdentifiers.forEach { identifier in
-            participantSpeakingRecordPerRound.append(SpeakerRecord(participantId: identifier,
-                                                                   speakingTime: meetingParams.maxTalkTime))
-        }
-    }
 
     @objc private func rotateSpeakerOrder() {
         stopSecondTickerTimer()
@@ -116,7 +104,7 @@ class MeetingControllerService {
         }
         speakingOrder = speakingOrder.circularRotate()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
+        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
 
         startSecondTickerTimer()
         startSpeakerTimerForCurrentRound()
@@ -130,13 +118,13 @@ class MeetingControllerService {
             return
         }
 
-        guard var speakerTime = participantTotalSpeakingRecord[currentSpeakerIdentifier] else {
+        guard var speakerTime = storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] else {
             assertionFailure("Unable to retrieve speaker time")
             return
         }
 
         speakerTime = speakerTime + 1
-        participantTotalSpeakingRecord[currentSpeakerIdentifier] = speakerTime
+        storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] = speakerTime
         speakerSecondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 
@@ -169,26 +157,26 @@ class MeetingControllerService {
                                                 selector: #selector(goToNextSpeaker),
                                                 userInfo: nil, repeats: false)
         case .AutoModerated:
-            let isNewRound = indexForParticipantRoundSpeakingTime == participantSpeakingRecordPerRound.count
+            let isNewRound = indexForParticipantRoundSpeakingTime == storage.participantSpeakingRecordPerRound.count
 
             if isNewRound {
                 indexForParticipantRoundSpeakingTime = 0
-                participantSpeakingRecordPerRound = MeetingOrderEvaluator.evaluateOrder(
-                    participantTotalSpeakingRecord: participantTotalSpeakingRecord,
+                storage.participantSpeakingRecordPerRound = MeetingOrderEvaluator.evaluateOrder(
+                    participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
                     maxTalkingTime: meetingParams.maxTalkTime)!
 
-                print("participantSpeakingRecordPerRound: \(participantSpeakingRecordPerRound)")
 
                 var newSpeakingOrder = [String]()
-                participantSpeakingRecordPerRound.forEach { (speakerRecord) in
+                storage.participantSpeakingRecordPerRound.forEach { (speakerRecord) in
                     newSpeakingOrder.append(speakerRecord.participantId)
                 }
                 HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)
-                orderObserver?.speakingOrderUpdated(totalSpeakingRecord: participantTotalSpeakingRecord)
+                orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
             }
 
-            speakerTimer = Timer.scheduledTimer(timeInterval:
-                Double(participantSpeakingRecordPerRound[indexForParticipantRoundSpeakingTime].speakingTime),
+            speakerTimer = Timer.scheduledTimer(
+                timeInterval:
+                Double(storage.participantSpeakingRecordPerRound[indexForParticipantRoundSpeakingTime].speakingTime),
                                                 target: self,
                                                 selector: #selector(goToNextSpeaker),
                                                 userInfo: nil, repeats: false)
