@@ -109,7 +109,8 @@ class HostMeetingViewController: UIViewController {
         self.addChild(hostInMeetingTableViewController)
         hostInMeetingTableViewController.didMove(toParent: self)
         hostInMeetingTableViewController.hostControllerService = hostControllerService
-        hostControllerService?.speakerSecondTickObserver = hostInMeetingTableViewController
+        // FIXME
+        hostControllerService?.meetingControllerSecondTicker.secondTickObserver = hostInMeetingTableViewController
     }
 
     private func updateUIWithSpeakerOrder() {

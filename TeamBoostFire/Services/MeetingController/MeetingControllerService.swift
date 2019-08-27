@@ -10,27 +10,16 @@ protocol SpeakerControllerOrderObserver: class {
     func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
 }
 
-
-protocol SpeakerControllerSecondTickObserver: class {
-    /**
-     Indicate that the speaking time for a particular participant changed
-     */
-    func speakerSecondTicked(participantIdentifier: String)
-}
-
 typealias ParticipantId = String
 typealias SpeakingTime = Int
-
 
 
 class MeetingControllerService {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private var speakerTimer: Timer?
-    private var secondTickTimer: Timer?
     private let meetingMode: MeetingMode
 
-    public weak var speakerSecondTickObserver: SpeakerControllerSecondTickObserver?
     private var indexForParticipantRoundSpeakingTime = 0
 
     public lazy var storage: MeetingControllerStorage = {
@@ -44,6 +33,11 @@ class MeetingControllerService {
         return controllerStorage
     }()
 
+    public lazy var meetingControllerSecondTicker: MeetingControllerSecondTicker = {
+        // FIXME
+        return MeetingControllerSecondTicker(with: self.storage)
+    }()
+
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
          meetingMode: MeetingMode = .Uniform) {
@@ -55,10 +49,8 @@ class MeetingControllerService {
             shuffleSpeakerOrder()
         }
 
+        self.meetingControllerSecondTicker.startSecondTickerTimer()
         startSpeakerTimerForCurrentRound()
-        // First second gets missed so brute force the first secondTicked
-        secondTicked()
-        startSecondTickerTimer()
         setupParticipantIsDoneInterrupt()
     }
 
@@ -76,7 +68,7 @@ class MeetingControllerService {
     }
 
     public func endMeeting() {
-        stopSecondTickerTimer()
+        self.meetingControllerSecondTicker.stopSecondTickerTimer()
         stopSpeakerRoundTimer()
     }
 
@@ -95,7 +87,7 @@ class MeetingControllerService {
 
 
     @objc private func rotateSpeakerOrder() {
-        stopSecondTickerTimer()
+        self.meetingControllerSecondTicker.stopSecondTickerTimer()
         stopSpeakerRoundTimer()
 
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
@@ -106,26 +98,9 @@ class MeetingControllerService {
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
 
-        startSecondTickerTimer()
+        self.meetingControllerSecondTicker.startSecondTickerTimer()
         startSpeakerTimerForCurrentRound()
 
-    }
-
-    @objc private func secondTicked() {
-        guard let speakerOrder = HostCoreServices.shared.speakerOrder,
-            let currentSpeakerIdentifier = speakerOrder.first else {
-            assertionFailure("Unable to retrieve current speaker")
-            return
-        }
-
-        guard var speakerTime = storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] else {
-            assertionFailure("Unable to retrieve speaker time")
-            return
-        }
-
-        speakerTime = speakerTime + 1
-        storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] = speakerTime
-        speakerSecondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 
     private func shuffleSpeakerOrder() {
@@ -135,17 +110,6 @@ class MeetingControllerService {
         }
         speakingOrder = speakingOrder.shuffled()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-    }
-
-    private func startSecondTickerTimer() {
-        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                                               selector: #selector(secondTicked),
-                                               userInfo: nil, repeats: true)
-    }
-
-    private func stopSecondTickerTimer() {
-        secondTickTimer?.invalidate()
-        secondTickTimer = nil
     }
 
     // MARK :- Speaker timer
@@ -167,7 +131,7 @@ class MeetingControllerService {
 
 
                 var newSpeakingOrder = [String]()
-                storage.participantSpeakingRecordPerRound.forEach { (speakerRecord) in
+                storage.participantSpeakingRecordPerRound.forEach { speakerRecord in
                     newSpeakingOrder.append(speakerRecord.participantId)
                 }
                 HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)

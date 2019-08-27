@@ -11,7 +11,7 @@ import Foundation
 typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
 
 
-struct MeetingControllerStorage {
+class MeetingControllerStorage {
 
     // To be updated for every round if speaking time needs to be adjusted
     public var participantSpeakingRecordPerRound = [SpeakerRecord]()

@@ -14,6 +14,7 @@
 		EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */; };
 		EB0AAFBC22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AAFBB22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift */; };
 		EB0AEB972313289500FC384B /* MeetingControllerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */; };
+		EB0AEC04231522A200FC384B /* MeetingControllerSettingTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEC03231522A200FC384B /* MeetingControllerSettingTicker.swift */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */; };
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
@@ -107,6 +108,7 @@
 		EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingOrderEvaluator.swift; sourceTree = "<group>"; };
 		EB0AAFBB22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingOrderEvalutatorTests.swift; sourceTree = "<group>"; };
 		EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerStorage.swift; sourceTree = "<group>"; };
+		EB0AEC03231522A200FC384B /* MeetingControllerSettingTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerSettingTicker.swift; sourceTree = "<group>"; };
 		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
 		EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserverUtility.swift; sourceTree = "<group>"; };
 		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */,
 				EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */,
 				EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */,
+				EB0AEC03231522A200FC384B /* MeetingControllerSettingTicker.swift */,
 			);
 			path = MeetingController;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */,
 				EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
+				EB0AEC04231522A200FC384B /* MeetingControllerSettingTicker.swift in Sources */,
 				EBC679EB22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift in Sources */,
 				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
 				EBC679E922ABEF1A00C9705D /* MeetingStats.swift in Sources */,
