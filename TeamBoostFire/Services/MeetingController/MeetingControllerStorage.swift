@@ -10,12 +10,19 @@ import Foundation
 
 typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
 
-
 class MeetingControllerStorage {
 
     // To be updated for every round if speaking time needs to be adjusted
-    public var participantSpeakingRecordPerRound = [SpeakerRecord]()
-    public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
+    private(set) public var participantSpeakingRecordPerRound = [SpeakerRecord]()
+    private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
+
+    public var speakingRecord: [String] {
+        var newSpeakingOrder = [String]()
+        participantSpeakingRecordPerRound.forEach { speakerRecord in
+            newSpeakingOrder.append(speakerRecord.participantId)
+        }
+        return newSpeakingOrder
+    }
 
     init(with participantIds: [ParticipantId],
          maxTalkTime: Int) {
@@ -25,6 +32,16 @@ class MeetingControllerStorage {
                 SpeakerRecord(participantId: identifier,
                               speakingTime: maxTalkTime))
         }
-
     }
+
+    // MARK:- Accessors
+    func updateSpeakingRecordForCurrentRound(speakingRecord: [SpeakerRecord]) {
+        participantSpeakingRecordPerRound = speakingRecord
+    }
+
+    func updateTotalSpeakingTime(for participantId: String,
+                                 newTime: Int) {
+        participantTotalSpeakingRecord[participantId] = newTime
+    }
+
 }

@@ -8,13 +8,6 @@
 
 import Foundation
 
-protocol SpeakerControllerSecondTickObserver: class {
-    /**
-     Indicate that the second ticked for a particular speaker
-     */
-    func speakerSecondTicked(participantIdentifier: String)
-}
-
 
 class MeetingControllerSecondTicker {
     weak public var secondTickObserver: SpeakerControllerSecondTickObserver?
@@ -40,7 +33,7 @@ class MeetingControllerSecondTicker {
         }
 
         speakerTime = speakerTime + 1
-        storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] = speakerTime
+        storage.updateTotalSpeakingTime(for: currentSpeakerIdentifier, newTime: speakerTime)
         secondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 

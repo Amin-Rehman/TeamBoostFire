@@ -1,18 +1,7 @@
 import Foundation
 
-protocol SpeakerControllerOrderObserver: class {
-    /**
-     Method to indicate that the speaker order has changed and the observer can fetch the new
-     order from CoreServices
-
-     Pass in the total speaking time that the observer can use; for example to update the progress view in the cell
-     */
-    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
-}
-
 typealias ParticipantId = String
 typealias SpeakingTime = Int
-
 
 class MeetingControllerService {
     let meetingParams: MeetingsParams
@@ -125,16 +114,12 @@ class MeetingControllerService {
 
             if isNewRound {
                 indexForParticipantRoundSpeakingTime = 0
-                storage.participantSpeakingRecordPerRound = MeetingOrderEvaluator.evaluateOrder(
+                let speakingRecordForNewRound = MeetingOrderEvaluator.evaluateOrder(
                     participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
                     maxTalkingTime: meetingParams.maxTalkTime)!
+                storage.updateSpeakingRecordForCurrentRound(speakingRecord: speakingRecordForNewRound)
 
-
-                var newSpeakingOrder = [String]()
-                storage.participantSpeakingRecordPerRound.forEach { speakerRecord in
-                    newSpeakingOrder.append(speakerRecord.participantId)
-                }
-                HostCoreServices.shared.updateSpeakerOrder(with: newSpeakingOrder)
+                HostCoreServices.shared.updateSpeakerOrder(with: storage.speakingRecord)
                 orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
             }
 
