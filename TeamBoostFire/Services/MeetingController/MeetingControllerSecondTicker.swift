@@ -15,8 +15,8 @@ class MeetingControllerSecondTicker {
     private var secondTickTimer: Timer?
 
     init(with storage: MeetingControllerStorage) {
-        self.storage = storage
         // First second seems to get missed, so brute force it
+        self.storage = storage
         secondTicked()
     }
 
@@ -38,6 +38,7 @@ class MeetingControllerSecondTicker {
     }
 
     public func startSecondTickerTimer() {
+
         secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
                                                selector: #selector(secondTicked),
                                                userInfo: nil, repeats: true)

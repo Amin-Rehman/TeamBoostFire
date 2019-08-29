@@ -3,10 +3,9 @@ import Foundation
 typealias ParticipantId = String
 typealias SpeakingTime = Int
 
-class MeetingControllerService {
+class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
-    private var speakerTimer: Timer?
     private let meetingMode: MeetingMode
 
     private var indexForParticipantRoundSpeakingTime = 0
@@ -23,8 +22,13 @@ class MeetingControllerService {
     }()
 
     public lazy var meetingControllerSecondTicker: MeetingControllerSecondTicker = {
-        // FIXME
         return MeetingControllerSecondTicker(with: self.storage)
+    }()
+
+    public lazy var meetingControllerCurrentRoundTicker: MeetingControllerCurrentRoundTicker = {
+        return MeetingControllerCurrentRoundTicker(with: self.storage,
+                                                   meetingMode: self.meetingMode,
+                                                   observer: self)
     }()
 
     init(meetingParams: MeetingsParams,
@@ -44,7 +48,7 @@ class MeetingControllerService {
     }
 
     // MARK: - Public API(s)
-    @objc public func goToNextSpeaker() {
+    @objc public func currentRoundIsComplete() {
 
         switch meetingMode {
         case .Uniform:
@@ -53,6 +57,10 @@ class MeetingControllerService {
             indexForParticipantRoundSpeakingTime = indexForParticipantRoundSpeakingTime + 1
             rotateSpeakerOrder()
         }
+
+    }
+
+    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime]) {
 
     }
 
@@ -71,7 +79,7 @@ class MeetingControllerService {
     }
 
     @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
-        goToNextSpeaker()
+        currentRoundIsComplete()
     }
 
 
@@ -107,7 +115,7 @@ class MeetingControllerService {
         switch meetingMode {
         case .Uniform:
             speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
-                                                selector: #selector(goToNextSpeaker),
+                                                selector: #selector(currentRoundIsComplete),
                                                 userInfo: nil, repeats: false)
         case .AutoModerated:
             let isNewRound = indexForParticipantRoundSpeakingTime == storage.participantSpeakingRecordPerRound.count
@@ -127,7 +135,7 @@ class MeetingControllerService {
                 timeInterval:
                 Double(storage.participantSpeakingRecordPerRound[indexForParticipantRoundSpeakingTime].speakingTime),
                                                 target: self,
-                                                selector: #selector(goToNextSpeaker),
+                                                selector: #selector(currentRoundIsComplete),
                                                 userInfo: nil, repeats: false)
         }
     }
