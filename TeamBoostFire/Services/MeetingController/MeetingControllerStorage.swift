@@ -35,7 +35,7 @@ class MeetingControllerStorage {
     }
 
     // MARK:- Accessors
-    func updateSpeakingRecordForCurrentRound(speakingRecord: [SpeakerRecord]) {
+    func updateSpeakingRecordPerRound(speakingRecord: [SpeakerRecord]) {
         participantSpeakingRecordPerRound = speakingRecord
     }
 

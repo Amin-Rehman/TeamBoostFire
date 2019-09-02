@@ -9,8 +9,7 @@
 import Foundation
 
 @objc protocol MeetingControllerCurrentRoundTickerObserver: class {
-    @objc func currentRoundIsComplete()
-    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
+    @objc func speakerIsDone()
 }
 
 class MeetingControllerCurrentSpeakerTicker {
@@ -37,28 +36,29 @@ class MeetingControllerCurrentSpeakerTicker {
         switch meetingMode {
         case .Uniform:
             speakerTimer = Timer.scheduledTimer(timeInterval: Double(maxTalkTime), target: self,
-                                              selector: #selector(observer?.currentRoundIsComplete),
+                                              selector: #selector(observer?.speakerIsDone),
                                                 userInfo: nil, repeats: false)
+            
         case .AutoModerated:
             // FIXME: Maybe use total number of participants as a parameter
             let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
 
             if isNewRound {
                 iterationInCurrentRound = 0
-                let speakingRecordForNewRound = MeetingOrderEvaluator.evaluateOrder(
+
+                let speakingRecordsForNewRound = MeetingOrderEvaluator.evaluateOrder(
                     participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
                     maxTalkingTime: maxTalkTime)!
-                storage.updateSpeakingRecordForCurrentRound(speakingRecord: speakingRecordForNewRound)
 
+                storage.updateSpeakingRecordPerRound(speakingRecord: speakingRecordsForNewRound)
                 HostCoreServices.shared.updateSpeakerOrder(with: storage.speakingRecord)
-                observer?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
             }
 
             speakerTimer = Timer.scheduledTimer(
                 timeInterval:
                 Double(storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime),
                 target: self,
-                selector: #selector(observer?.currentRoundIsComplete),
+                selector: #selector(observer?.speakerIsDone),
                 userInfo: nil, repeats: false)
         }
     }

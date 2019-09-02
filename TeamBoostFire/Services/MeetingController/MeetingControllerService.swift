@@ -8,8 +8,6 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     weak var orderObserver: SpeakerControllerOrderObserver?
     private let meetingMode: MeetingMode
 
-    private var indexForParticipantRoundSpeakingTime = 0
-
     public lazy var storage: MeetingControllerStorage = {
 
         guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
@@ -49,18 +47,19 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     }
 
     // MARK: - Public API(s)
-    @objc public func currentRoundIsComplete() {
-        switch meetingMode {
-        case .Uniform:
-            rotateSpeakerOrder()
-        case .AutoModerated:
-            indexForParticipantRoundSpeakingTime = indexForParticipantRoundSpeakingTime + 1
-            rotateSpeakerOrder()
+    @objc public func speakerIsDone() {
+        meetingControllerSecondTicker.stop()
+        meetingControllerCurrentRoundTicker.stop()
+
+        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
+            assertionFailure("No speaker order available in CoreServices")
+            return
         }
+        speakingOrder = speakingOrder.circularRotate()
+        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
 
-    }
-
-    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime]) {
+        meetingControllerSecondTicker.start()
+        meetingControllerCurrentRoundTicker.start()
 
     }
 
@@ -79,26 +78,9 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     }
 
     @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
-        currentRoundIsComplete()
+        speakerIsDone()
     }
 
-
-    @objc private func rotateSpeakerOrder() {
-        meetingControllerSecondTicker.stop()
-        meetingControllerCurrentRoundTicker.stop()
-
-        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
-            assertionFailure("No speaker order available in CoreServices")
-            return
-        }
-        speakingOrder = speakingOrder.circularRotate()
-        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
-
-        meetingControllerSecondTicker.start()
-        meetingControllerCurrentRoundTicker.start()
-
-    }
 
     private func shuffleSpeakerOrder() {
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {

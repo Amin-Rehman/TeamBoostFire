@@ -151,7 +151,7 @@ class HostMeetingViewController: UIViewController {
 
 
     @IBAction func goToNextParticipantTapped(_ sender: Any) {
-        hostControllerService?.currentRoundIsComplete()
+        hostControllerService?.speakerIsDone()
     }
 
 }
