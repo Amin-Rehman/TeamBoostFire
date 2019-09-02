@@ -20,7 +20,7 @@ class MeetingControllerCurrentRoundTicker {
     var roundTimer: Timer?
     let maxTalkTime: Int
 
-    private var numberOfRounds = 0
+    private var iterationInCurrentRound = 0
 
     init(with storage: MeetingControllerStorage,
          meetingMode: MeetingMode,
@@ -34,7 +34,6 @@ class MeetingControllerCurrentRoundTicker {
     }
 
     public func start() {
-
         switch meetingMode {
         case .Uniform:
             roundTimer = Timer.scheduledTimer(timeInterval: Double(maxTalkTime), target: self,
@@ -42,10 +41,10 @@ class MeetingControllerCurrentRoundTicker {
                                                 userInfo: nil, repeats: false)
         case .AutoModerated:
             // FIXME: Maybe use total number of participants as a parameter
-            let isNewRound = numberOfRounds == storage.participantSpeakingRecordPerRound.count
+            let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
 
             if isNewRound {
-                numberOfRounds = 0
+                iterationInCurrentRound = 0
                 let speakingRecordForNewRound = MeetingOrderEvaluator.evaluateOrder(
                     participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
                     maxTalkingTime: maxTalkTime)!
@@ -57,7 +56,7 @@ class MeetingControllerCurrentRoundTicker {
 
             roundTimer = Timer.scheduledTimer(
                 timeInterval:
-                Double(storage.participantSpeakingRecordPerRou  nd[indexForParticipantRoundSpeakingTime].speakingTime),
+                Double(storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime),
                 target: self,
                 selector: #selector(observer?.currentRoundIsComplete),
                 userInfo: nil, repeats: false)
@@ -65,6 +64,7 @@ class MeetingControllerCurrentRoundTicker {
     }
 
     public func stop() {
-
+        roundTimer?.invalidate()
+        roundTimer = nil
     }
 }

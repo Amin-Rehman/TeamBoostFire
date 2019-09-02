@@ -37,14 +37,14 @@ class MeetingControllerSecondTicker {
         secondTickObserver?.speakerSecondTicked(participantIdentifier: currentSpeakerIdentifier)
     }
 
-    public func startSecondTickerTimer() {
+    public func start() {
 
         secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
                                                selector: #selector(secondTicked),
                                                userInfo: nil, repeats: true)
     }
 
-    public func stopSecondTickerTimer() {
+    public func stop() {
         secondTickTimer?.invalidate()
         secondTickTimer = nil
     }

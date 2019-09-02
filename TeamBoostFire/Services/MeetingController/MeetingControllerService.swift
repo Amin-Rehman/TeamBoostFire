@@ -28,6 +28,7 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     public lazy var meetingControllerCurrentRoundTicker: MeetingControllerCurrentRoundTicker = {
         return MeetingControllerCurrentRoundTicker(with: self.storage,
                                                    meetingMode: self.meetingMode,
+                                                   maxTalkTime: self.meetingParams.maxTalkTime,
                                                    observer: self)
     }()
 
@@ -42,8 +43,8 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
             shuffleSpeakerOrder()
         }
 
-        self.meetingControllerSecondTicker.startSecondTickerTimer()
-        startSpeakerTimerForCurrentRound()
+        meetingControllerSecondTicker.start()
+        meetingControllerCurrentRoundTicker.start()
         setupParticipantIsDoneInterrupt()
     }
 
@@ -65,8 +66,8 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     }
 
     public func endMeeting() {
-        self.meetingControllerSecondTicker.stopSecondTickerTimer()
-        stopSpeakerRoundTimer()
+        meetingControllerSecondTicker.stop()
+        meetingControllerCurrentRoundTicker.stop()
     }
 
     // MARK: - Private API(s)
@@ -84,8 +85,8 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
 
 
     @objc private func rotateSpeakerOrder() {
-        self.meetingControllerSecondTicker.stopSecondTickerTimer()
-        stopSpeakerRoundTimer()
+        meetingControllerSecondTicker.stop()
+        meetingControllerCurrentRoundTicker.stop()
 
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
@@ -95,8 +96,8 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
 
-        self.meetingControllerSecondTicker.startSecondTickerTimer()
-        startSpeakerTimerForCurrentRound()
+        meetingControllerSecondTicker.start()
+        meetingControllerCurrentRoundTicker.start()
 
     }
 
@@ -107,42 +108,6 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         }
         speakingOrder = speakingOrder.shuffled()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-    }
-
-    // MARK :- Speaker timer
-    private func startSpeakerTimerForCurrentRound() {
-
-        switch meetingMode {
-        case .Uniform:
-            speakerTimer = Timer.scheduledTimer(timeInterval: Double(meetingParams.maxTalkTime), target: self,
-                                                selector: #selector(currentRoundIsComplete),
-                                                userInfo: nil, repeats: false)
-        case .AutoModerated:
-            let isNewRound = indexForParticipantRoundSpeakingTime == storage.participantSpeakingRecordPerRound.count
-
-            if isNewRound {
-                indexForParticipantRoundSpeakingTime = 0
-                let speakingRecordForNewRound = MeetingOrderEvaluator.evaluateOrder(
-                    participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
-                    maxTalkingTime: meetingParams.maxTalkTime)!
-                storage.updateSpeakingRecordForCurrentRound(speakingRecord: speakingRecordForNewRound)
-
-                HostCoreServices.shared.updateSpeakerOrder(with: storage.speakingRecord)
-                orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
-            }
-
-            speakerTimer = Timer.scheduledTimer(
-                timeInterval:
-                Double(storage.participantSpeakingRecordPerRound[indexForParticipantRoundSpeakingTime].speakingTime),
-                                                target: self,
-                                                selector: #selector(currentRoundIsComplete),
-                                                userInfo: nil, repeats: false)
-        }
-    }
-
-    private func stopSpeakerRoundTimer() {
-        speakerTimer?.invalidate()
-        speakerTimer = nil
     }
 }
 
