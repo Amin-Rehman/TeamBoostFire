@@ -23,11 +23,12 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         return MeetingControllerSecondTicker(with: self.storage)
     }()
 
-    public lazy var meetingControllerCurrentRoundTicker: MeetingControllerCurrentSpeakerTicker = {
+    public lazy var meetingControllerCurrentSpeakerTicker: MeetingControllerCurrentSpeakerTicker = {
+        let speakerTickerTimerController = TeamBoostTimerController()
         return MeetingControllerCurrentSpeakerTicker(with: self.storage,
                                                    meetingMode: self.meetingMode,
                                                    maxTalkTime: self.meetingParams.maxTalkTime,
-                                                   observer: self)
+                                                   observer: self, timerController: speakerTickerTimerController)
     }()
 
     init(meetingParams: MeetingsParams,
@@ -42,14 +43,14 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         }
 
         meetingControllerSecondTicker.start()
-        meetingControllerCurrentRoundTicker.start()
+        meetingControllerCurrentSpeakerTicker.start()
         setupParticipantIsDoneInterrupt()
     }
 
     // MARK: - Public API(s)
     @objc public func speakerIsDone() {
         meetingControllerSecondTicker.stop()
-        meetingControllerCurrentRoundTicker.stop()
+        meetingControllerCurrentSpeakerTicker.stop()
 
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
@@ -57,15 +58,16 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         }
         speakingOrder = speakingOrder.circularRotate()
         HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
-
+        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
+        
         meetingControllerSecondTicker.start()
-        meetingControllerCurrentRoundTicker.start()
+        meetingControllerCurrentSpeakerTicker.start()
 
     }
 
     public func endMeeting() {
         meetingControllerSecondTicker.stop()
-        meetingControllerCurrentRoundTicker.stop()
+        meetingControllerCurrentSpeakerTicker.stop()
     }
 
     // MARK: - Private API(s)
@@ -80,7 +82,6 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
         speakerIsDone()
     }
-
 
     private func shuffleSpeakerOrder() {
         guard var speakingOrder = HostCoreServices.shared.speakerOrder else {

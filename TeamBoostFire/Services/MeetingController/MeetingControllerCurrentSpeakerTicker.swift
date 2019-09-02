@@ -12,33 +12,39 @@ import Foundation
     @objc func speakerIsDone()
 }
 
-class MeetingControllerCurrentSpeakerTicker {
+class MeetingControllerCurrentSpeakerTicker: TimerControllerObserver {
+
     let storage: MeetingControllerStorage
     let meetingMode: MeetingMode
     weak var observer: MeetingControllerCurrentRoundTickerObserver?
-    var speakerTimer: Timer?
     let maxTalkTime: Int
+    let timerController: TimerController
 
     private var iterationInCurrentRound = 0
 
     init(with storage: MeetingControllerStorage,
          meetingMode: MeetingMode,
          maxTalkTime: Int,
-         observer: MeetingControllerCurrentRoundTickerObserver) {
+         observer: MeetingControllerCurrentRoundTickerObserver,
+         timerController: TimerController) {
         self.storage = storage
         self.meetingMode = meetingMode
         self.observer = observer
-        self.speakerTimer = nil
         self.maxTalkTime = maxTalkTime
+        self.timerController = timerController
+        self.timerController.observer = self
     }
+
+    func notifyTimerIsDone() {
+        observer?.speakerIsDone()
+    }
+
 
     public func start() {
         switch meetingMode {
         case .Uniform:
-            speakerTimer = Timer.scheduledTimer(timeInterval: Double(maxTalkTime), target: self,
-                                              selector: #selector(observer?.speakerIsDone),
-                                                userInfo: nil, repeats: false)
-            
+            timerController.start(with: Double(maxTalkTime))
+
         case .AutoModerated:
             // FIXME: Maybe use total number of participants as a parameter
             let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
@@ -54,17 +60,12 @@ class MeetingControllerCurrentSpeakerTicker {
                 HostCoreServices.shared.updateSpeakerOrder(with: storage.speakingRecord)
             }
 
-            speakerTimer = Timer.scheduledTimer(
-                timeInterval:
-                Double(storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime),
-                target: self,
-                selector: #selector(observer?.speakerIsDone),
-                userInfo: nil, repeats: false)
+            let currentSpeakingTime = storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime
+            timerController.start(with: Double(currentSpeakingTime))
         }
     }
 
     public func stop() {
-        speakerTimer?.invalidate()
-        speakerTimer = nil
+        timerController.stop()
     }
 }

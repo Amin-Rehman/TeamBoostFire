@@ -65,6 +65,7 @@
 		EB6CE8C72309C4E7002D3189 /* curious.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C62309C4E7002D3189 /* curious.json */; };
 		EB6CE8C92309D053002D3189 /* brain_storm.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C82309D053002D3189 /* brain_storm.json */; };
 		EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */; };
+		EB7F8804231D73E60012A3EF /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F8803231D73E60012A3EF /* TimerController.swift */; };
 		EB9C1A4822ABBBD20048CBD0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */; };
 		EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */; };
 		EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */; };
@@ -161,6 +162,7 @@
 		EB6CE8C62309C4E7002D3189 /* curious.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curious.json; sourceTree = "<group>"; };
 		EB6CE8C82309D053002D3189 /* brain_storm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_storm.json; sourceTree = "<group>"; };
 		EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_waiting.json; sourceTree = "<group>"; };
+		EB7F8803231D73E60012A3EF /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
 		EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantSelfSpeakerViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		EB0AAFB822B6ED960017A358 /* MeetingController */ = {
 			isa = PBXGroup;
 			children = (
+				EB7F8802231D739F0012A3EF /* Timer */,
 				EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */,
 				EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */,
 				EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */,
@@ -370,6 +373,14 @@
 				EB6CE8C12309C439002D3189 /* disagree.json */,
 			);
 			path = Reactions;
+			sourceTree = "<group>";
+		};
+		EB7F8802231D739F0012A3EF /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F8803231D73E60012A3EF /* TimerController.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		EBBB4A8A227F850900D61976 /* Services */ = {
@@ -717,6 +728,7 @@
 				EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */,
 				EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */,
 				EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */,
+				EB7F8804231D73E60012A3EF /* TimerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
