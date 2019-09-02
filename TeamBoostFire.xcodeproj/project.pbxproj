@@ -80,7 +80,7 @@
 		EBDC014F22AB061D006910A0 /* HostEndMeetingStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBDC014D22AB061D006910A0 /* HostEndMeetingStatsViewController.xib */; };
 		EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF347802278C20B008A6154 /* ArrayRotation.swift */; };
 		EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */; };
-		EBF38F702317B0B000CA610C /* MeetingControllerCurrentRoundTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentRoundTicker.swift */; };
+		EBF38F702317B0B000CA610C /* MeetingControllerCurrentSpeakerTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentSpeakerTicker.swift */; };
 		EBFCA67022668D2E0047CD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */; };
 		EBFCA67522668D2E0047CD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67322668D2E0047CD75 /* Main.storyboard */; };
 		EBFCA67722668D2F0047CD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFCA67622668D2F0047CD75 /* Assets.xcassets */; };
@@ -178,7 +178,7 @@
 		EBF3479B2278E69E008A6154 /* TeamBoostFireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostFireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireTests.swift; sourceTree = "<group>"; };
 		EBF3479F2278E69E008A6154 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentRoundTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerCurrentRoundTicker.swift; sourceTree = "<group>"; };
+		EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentSpeakerTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerCurrentSpeakerTicker.swift; sourceTree = "<group>"; };
 		EBFCA66C22668D2E0047CD75 /* TeamBoostFire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamBoostFire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFCA66F22668D2E0047CD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBFCA67422668D2E0047CD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -251,9 +251,9 @@
 				EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */,
 				EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */,
 				EB0AAFB922B6EFAA0017A358 /* MeetingOrderEvaluator.swift */,
-				EB0AEC03231522A200FC384B /* MeetingControllerSecondTicker.swift */,
 				EB0AEC2C23165DA400FC384B /* SpeakerControllerContracts.swift */,
-				EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentRoundTicker.swift */,
+				EB0AEC03231522A200FC384B /* MeetingControllerSecondTicker.swift */,
+				EBF38F6F2317B0B000CA610C /* MeetingControllerCurrentSpeakerTicker.swift */,
 			);
 			path = MeetingController;
 			sourceTree = "<group>";
@@ -677,7 +677,7 @@
 			files = (
 				EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */,
 				EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */,
-				EBF38F702317B0B000CA610C /* MeetingControllerCurrentRoundTicker.swift in Sources */,
+				EBF38F702317B0B000CA610C /* MeetingControllerCurrentSpeakerTicker.swift in Sources */,
 				EB1D48BC226740BA001A754D /* HostWaitingTableViewCell.swift in Sources */,
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
 				EB0AEC04231522A200FC384B /* MeetingControllerSecondTicker.swift in Sources */,

@@ -13,11 +13,11 @@ import Foundation
     func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime])
 }
 
-class MeetingControllerCurrentRoundTicker {
+class MeetingControllerCurrentSpeakerTicker {
     let storage: MeetingControllerStorage
     let meetingMode: MeetingMode
     weak var observer: MeetingControllerCurrentRoundTickerObserver?
-    var roundTimer: Timer?
+    var speakerTimer: Timer?
     let maxTalkTime: Int
 
     private var iterationInCurrentRound = 0
@@ -29,14 +29,14 @@ class MeetingControllerCurrentRoundTicker {
         self.storage = storage
         self.meetingMode = meetingMode
         self.observer = observer
-        self.roundTimer = nil
+        self.speakerTimer = nil
         self.maxTalkTime = maxTalkTime
     }
 
     public func start() {
         switch meetingMode {
         case .Uniform:
-            roundTimer = Timer.scheduledTimer(timeInterval: Double(maxTalkTime), target: self,
+            speakerTimer = Timer.scheduledTimer(timeInterval: Double(maxTalkTime), target: self,
                                               selector: #selector(observer?.currentRoundIsComplete),
                                                 userInfo: nil, repeats: false)
         case .AutoModerated:
@@ -54,7 +54,7 @@ class MeetingControllerCurrentRoundTicker {
                 observer?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
             }
 
-            roundTimer = Timer.scheduledTimer(
+            speakerTimer = Timer.scheduledTimer(
                 timeInterval:
                 Double(storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime),
                 target: self,
@@ -64,7 +64,7 @@ class MeetingControllerCurrentRoundTicker {
     }
 
     public func stop() {
-        roundTimer?.invalidate()
-        roundTimer = nil
+        speakerTimer?.invalidate()
+        speakerTimer = nil
     }
 }

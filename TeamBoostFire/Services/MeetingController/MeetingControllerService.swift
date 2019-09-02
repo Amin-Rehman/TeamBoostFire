@@ -25,8 +25,8 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         return MeetingControllerSecondTicker(with: self.storage)
     }()
 
-    public lazy var meetingControllerCurrentRoundTicker: MeetingControllerCurrentRoundTicker = {
-        return MeetingControllerCurrentRoundTicker(with: self.storage,
+    public lazy var meetingControllerCurrentRoundTicker: MeetingControllerCurrentSpeakerTicker = {
+        return MeetingControllerCurrentSpeakerTicker(with: self.storage,
                                                    meetingMode: self.meetingMode,
                                                    maxTalkTime: self.meetingParams.maxTalkTime,
                                                    observer: self)
@@ -50,7 +50,6 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
 
     // MARK: - Public API(s)
     @objc public func currentRoundIsComplete() {
-
         switch meetingMode {
         case .Uniform:
             rotateSpeakerOrder()
