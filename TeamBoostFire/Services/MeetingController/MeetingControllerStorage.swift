@@ -10,6 +10,7 @@ import Foundation
 
 typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
 
+// This storage class contains the total speaking time in the meeting and the speaking time per record
 class MeetingControllerStorage {
 
     // To be updated for every round if speaking time needs to be adjusted
@@ -35,8 +36,9 @@ class MeetingControllerStorage {
     }
 
     // MARK:- Accessors
-    func updateSpeakingRecordPerRound(speakingRecord: [SpeakerRecord]) {
-        participantSpeakingRecordPerRound = speakingRecord
+    func updateSpeakingRecordPerRound(speakerRecord: [SpeakerRecord]) {
+        participantSpeakingRecordPerRound = speakerRecord
+        HostCoreServices.shared.updateSpeakerOrder(with: self.speakingRecord)
     }
 
     func updateTotalSpeakingTime(for participantId: String,

@@ -68,6 +68,7 @@
 		EB7F8804231D73E60012A3EF /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F8803231D73E60012A3EF /* TimerController.swift */; };
 		EB9C1A4822ABBBD20048CBD0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */; };
 		EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */; };
+		EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */; };
 		EBBB4A86227B501600D61976 /* ParticipantSelfSpeakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */; };
 		EBBB4A87227B501600D61976 /* ParticipantSelfSpeakerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */; };
 		EBBB4A89227F84A800D61976 /* MeetingControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */; };
@@ -165,6 +166,7 @@
 		EB7F8803231D73E60012A3EF /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
+		EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPreferableTests.swift; sourceTree = "<group>"; };
 		EBBB4A84227B501600D61976 /* ParticipantSelfSpeakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantSelfSpeakerViewController.swift; sourceTree = "<group>"; };
 		EBBB4A85227B501600D61976 /* ParticipantSelfSpeakerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantSelfSpeakerViewController.xib; sourceTree = "<group>"; };
 		EBBB4A88227F84A800D61976 /* MeetingControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerService.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				EBF3479F2278E69E008A6154 /* Info.plist */,
 				EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */,
 				EB0AAFBB22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift */,
+				EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */,
 			);
 			path = TeamBoostFireTests;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 			files = (
 				EB0AAFBC22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift in Sources */,
 				EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */,
+				EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */,
 				EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -770,7 +774,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFireTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -792,7 +796,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFireTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

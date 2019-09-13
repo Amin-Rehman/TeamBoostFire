@@ -8,9 +8,14 @@
 
 import Foundation
 
-struct SpeakerRecord {
+public struct SpeakerRecord: Equatable {
     let participantId: ParticipantId
     let speakingTime: SpeakingTime
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.participantId == rhs.participantId && lhs.speakingTime == rhs.speakingTime
+    }
+
 }
 
 struct MeetingOrderEvaluator {

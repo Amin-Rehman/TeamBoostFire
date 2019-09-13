@@ -56,6 +56,7 @@ class HostWaitingViewController: UIViewController {
 
     }
 
+    // MARK: - Actions
     @IBAction func startMeetingClicked(_ sender: Any) {
         AnalyticsService.shared.hostMeetingStarted()
         HostCoreServices.shared.startMeeting()
@@ -63,4 +64,9 @@ class HostWaitingViewController: UIViewController {
                                                                   bundle: nil)
         self.navigationController?.pushViewController(hostMeetingViewController, animated: true)
     }
+
+
+    @IBAction func addParticipantManuallyClicked(_ sender: Any) {
+    }
+
 }

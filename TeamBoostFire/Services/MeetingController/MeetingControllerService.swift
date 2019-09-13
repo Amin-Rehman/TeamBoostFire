@@ -1,6 +1,6 @@
 import Foundation
 
-typealias ParticipantId = String
+public typealias ParticipantId = String
 typealias SpeakingTime = Int
 
 class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {

@@ -179,7 +179,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
     }
 
-
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .ended {

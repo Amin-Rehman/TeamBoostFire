@@ -20,7 +20,8 @@ class HostInMeetingTableViewController: UITableViewController {
     init() {
         tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
         super.init(style: .plain)
-        self.tableView.allowsSelection = false
+        self.tableView.allowsSelection = true
+        self.tableView.allowsMultipleSelection = false
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,7 +35,6 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -92,7 +92,13 @@ class HostInMeetingTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("ALOG: indexPath tapped: \(indexPath)");
+    }
+}
 
+// MARK: - Private Helpers
+extension HostInMeetingTableViewController {
     private func showAndAnimateRedCircle(for cell: HostInMeetingTableViewCell) {
         cell.startCircleAnimation()
     }
@@ -116,6 +122,8 @@ class HostInMeetingTableViewController: UITableViewController {
         }
     }
 }
+
+// MARK: - SpeakerControllerSecondTickObserver Delegate methods
 
 extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver {
     func speakerSecondTicked(participantIdentifier: String) {
