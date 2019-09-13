@@ -70,6 +70,14 @@ class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
         meetingControllerCurrentSpeakerTicker.stop()
     }
 
+    public func forceSpeakerChange(participantId: String) {
+        do {
+            try meetingControllerCurrentSpeakerTicker.forceRestartRound(preferParticipantId: participantId)
+        } catch {
+            assertionFailure("Force switching participant failed: \(error)")
+        }
+    }
+
     // MARK: - Private API(s)
 
     private func setupParticipantIsDoneInterrupt() {

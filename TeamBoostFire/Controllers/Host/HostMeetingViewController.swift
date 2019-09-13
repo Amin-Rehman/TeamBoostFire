@@ -114,8 +114,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func updateUIWithSpeakerOrder() {
-        hostInMeetingTableViewController.tableViewDataSource = HostCoreServices.shared.allParticipants!
-        hostInMeetingTableViewController.tableView.reloadData()
+        hostInMeetingTableViewController.updateTableViewWithSpeakerOrder()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -157,12 +156,20 @@ class HostMeetingViewController: UIViewController {
 }
 
 extension HostMeetingViewController: SpeakerControllerOrderObserver {
+    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId : SpeakingTime]) {
+        // Update speaking factor in HostInMeetingTableViewController
+        hostInMeetingTableViewController.participantIdSpeakingFactorMap =
+            SpeakerFactorable.mapToSpeakingFactor(from: totalSpeakingRecord)
+        updateUIWithSpeakerOrder()
+    }
+}
 
+struct SpeakerFactorable {
     /**
      Get speaking factor from the total speaking record
      Use to calculate the progress view in the cell view
      */
-    private func mapToSpeakingFactor(from totalSpeakingRecord: [ParticipantId : SpeakingTime])
+    public static func mapToSpeakingFactor(from totalSpeakingRecord: [ParticipantId : SpeakingTime])
         -> [ParticipantId : SpeakingFactor] {
 
             // Add up all the speaking times
@@ -183,10 +190,4 @@ extension HostMeetingViewController: SpeakerControllerOrderObserver {
 
     }
 
-    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId : SpeakingTime]) {
-        // Update speaking factor in HostInMeetingTableViewController
-        hostInMeetingTableViewController.participantIdSpeakingFactorMap =
-            mapToSpeakingFactor(from: totalSpeakingRecord)
-        updateUIWithSpeakerOrder()
-    }
 }

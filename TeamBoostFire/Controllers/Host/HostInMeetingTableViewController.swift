@@ -24,6 +24,11 @@ class HostInMeetingTableViewController: UITableViewController {
         self.tableView.allowsMultipleSelection = false
     }
 
+    public func updateTableViewWithSpeakerOrder() {
+        tableViewDataSource = HostCoreServices.shared.allParticipants!
+        tableView.reloadData()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -93,7 +98,12 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("ALOG: indexPath tapped: \(indexPath)");
+        let participantId = tableViewDataSource[indexPath.row].id
+        hostControllerService?.forceSpeakerChange(participantId: participantId)
+
+        let totalSpeakingTimeMap = hostControllerService?.storage.participantTotalSpeakingRecord
+        participantIdSpeakingFactorMap = SpeakerFactorable.mapToSpeakingFactor(from: totalSpeakingTimeMap!)
+        updateTableViewWithSpeakerOrder()
     }
 }
 
@@ -124,7 +134,6 @@ extension HostInMeetingTableViewController {
 }
 
 // MARK: - SpeakerControllerSecondTickObserver Delegate methods
-
 extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver {
     func speakerSecondTicked(participantIdentifier: String) {
         guard let index = tableViewDataSource.firstIndex(
@@ -143,5 +152,11 @@ extension HostInMeetingTableViewController: SpeakerControllerSecondTickObserver 
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
+    }
+}
+
+extension HostInMeetingTableViewController: ParticipantSelectableProtocol {
+    func selectedParticipant(participantId: String) {
+        hostControllerService?.forceSpeakerChange(participantId: participantId)
     }
 }

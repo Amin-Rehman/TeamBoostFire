@@ -17,6 +17,10 @@ protocol ProgressViewUpdatable {
     func updateProgress(to widthFactor: Float, color: UIColor);
 }
 
+protocol ParticipantSelectableProtocol {
+    func selectedParticipant(participantId: String)
+}
+
 class HostInMeetingTableViewCell: UITableViewCell {
     @IBOutlet weak var participantNameLabel: UILabel!
     @IBOutlet weak var orderLabel: UILabel!
