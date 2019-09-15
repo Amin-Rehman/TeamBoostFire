@@ -11,22 +11,8 @@ import UIKit
 class ParticipantSelfSpeakerViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
 
-    private weak var participantControllerService: ParticipantControllerService?
-
-    init(nibName: String,
-         participantControllerService: ParticipantControllerService) {
-        self.participantControllerService = participantControllerService
-        super.init(nibName: nibName, bundle: nil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        participantControllerService?.participantTimeUpdateable = self
         updateSpeakingTimerLabel()
 
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
@@ -35,15 +21,6 @@ class ParticipantSelfSpeakerViewController: UIViewController {
                                                name: notificationName, object: nil)
 
     }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
 
     @IBAction func doneTapped(_ sender: Any) {
         ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
@@ -71,6 +48,4 @@ extension ParticipantSelfSpeakerViewController: ParticipantUpdatable {
             dismiss(animated: true, completion: nil)
         }
     }
-
-
 }

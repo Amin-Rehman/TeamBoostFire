@@ -47,8 +47,6 @@ class ParticipantCoreServices: TeamBoostCore {
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
-
-
         firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
 }
