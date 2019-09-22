@@ -153,7 +153,7 @@ extension ParticipantMainViewController {
             let selfSpeakerVC = ParticipantSelfSpeakerViewController(
                 nibName: "ParticipantSelfSpeakerViewController",
                 bundle: nil)
-
+            selfSpeakerVC.modalPresentationStyle = .overFullScreen
             present(selfSpeakerVC, animated: true, completion: {
                 print("ALOG: Self Participant View presented")
                 self.selfSpeakerViewController = selfSpeakerVC
