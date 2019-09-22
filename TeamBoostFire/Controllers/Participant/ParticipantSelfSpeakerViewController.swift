@@ -24,7 +24,7 @@ class ParticipantSelfSpeakerViewController: UIViewController {
 
     @IBAction func doneTapped(_ sender: Any) {
         ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
     }
 
     private func updateSpeakingTimerLabel() {
