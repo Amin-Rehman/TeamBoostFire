@@ -25,12 +25,11 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
-        setupTopBar()
         let meetingParams = ParticipantCoreServices.shared.meetingParams
         self.participantControllerService = ParticipantControllerService(with: meetingParams!,
                                                                          timesUpdatedObserver: self)
         updateMeetingTimerLabel(with: (meetingParams?.meetingTime)!)
-        
+        setupTopBar()
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
@@ -38,6 +37,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     private func setupTopBar() {
+        assert(self.participantControllerService != nil)
         guard let agenda = self.participantControllerService?.meetingParams.agenda else {
             assertionFailure("No agenda found in CoreServices")
             return
