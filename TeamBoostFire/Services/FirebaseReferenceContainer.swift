@@ -16,6 +16,8 @@ struct FirebaseReferenceContainer {
     private(set) var meetingParamsReference: DatabaseReference?
     private(set) var iAmDoneInterruptReference: DatabaseReference?
     private(set) var currentSpeakerMaximumSpeakingTime: DatabaseReference?
+    private(set) var callToSpeakerQueueReference: DatabaseReference?
+
     private(set) var meetingParamsTimeReference: DatabaseReference?
     private(set) var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private(set) var meetingParamsAgendaReference: DatabaseReference?
@@ -33,6 +35,7 @@ struct FirebaseReferenceContainer {
         self.meetingParamsTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         self.meetingParamsAgendaReference = self.meetingParamsReference?.referenceOfChild(with: .Agenda)
         self.meetingParamsMaxTalkingTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
+        self.callToSpeakerQueueReference = self.meetingReference?.referenceOfChild(with: .CallToSpeakerQueue)
     }
 }
 

@@ -52,6 +52,7 @@ class HostCoreServices: TeamBoostCore {
         firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
         firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
         firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+        firebaseReferenceContainer?.callToSpeakerQueueReference?.setValue([""])
 
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()
@@ -59,7 +60,7 @@ class HostCoreServices: TeamBoostCore {
 
         injectFakeParticipantsForTestModeIfNeeded()
     }
-
+    
     public func startMeeting() {
         var allParticipantIdentifiers = [String]()
         guard let allParticipantsGuarded = allParticipants else {

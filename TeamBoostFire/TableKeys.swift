@@ -21,5 +21,9 @@ enum TableKeys: String {
      Maximum allowed speaking time for the current speaker
      */
     case CurrentSpeakerMaxSpeakingTime = "current_speaker_speaking_time"
+    /*
+     Call to speaker Queue
+     */
+    case CallToSpeakerQueue = "call_to_speaker_queue"
 }
 
