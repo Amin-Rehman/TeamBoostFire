@@ -24,7 +24,7 @@ class HostMeetingViewController: UIViewController {
     var currentSpeakerIndex = 0
     private var activeMeetingTimeSeconds = 0
 
-    var hostControllerService: MeetingControllerService?
+    var hostControllerService: HostMeetingControllerService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +85,7 @@ class HostMeetingViewController: UIViewController {
             return
         }
 
-        hostControllerService = MeetingControllerService(
+        hostControllerService = HostMeetingControllerService(
             meetingParams: meetingParams,
             orderObserver: self,
             meetingMode: meetingParams.moderationMode!)

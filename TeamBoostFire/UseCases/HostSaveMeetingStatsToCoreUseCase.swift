@@ -12,7 +12,7 @@ import Foundation
  Save statistics of the meeting to Host Core Services
  */
 struct HostSaveMeetingStatsToCoreUseCase {
-    static func perform(meetingLengthSeconds: Int, hostControllerService: MeetingControllerService?) {
+    static func perform(meetingLengthSeconds: Int, hostControllerService: HostMeetingControllerService?) {
         guard let controllerService = hostControllerService else {
             assertionFailure("Unable to retrieve host controller service for HostSaveMeetingStatsToCoreUseCase")
             return

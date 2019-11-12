@@ -3,7 +3,7 @@ import Foundation
 public typealias ParticipantId = String
 typealias SpeakingTime = Int
 
-class MeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
+class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver {
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private let meetingMode: MeetingMode

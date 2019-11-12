@@ -15,7 +15,7 @@ class HostInMeetingTableViewController: UITableViewController {
      */
     var participantIdSpeakingFactorMap =  [ParticipantId : SpeakingFactor]()
     var tableViewDataSource: [Participant]
-    weak var hostControllerService: MeetingControllerService?
+    weak var hostControllerService: HostMeetingControllerService?
 
     init() {
         tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
