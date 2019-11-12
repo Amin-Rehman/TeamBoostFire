@@ -26,6 +26,14 @@ class ParticipantControllerService {
 
     public weak var participantTimeUpdateable: ParticipantUpdatable?
 
+    private(set) public var allParticipants: [Participant]?  = {
+        return ParticipantCoreServices.shared.allParticipants
+    }()
+
+    private(set) public var selfIdentifier: String?  = {
+        return ParticipantCoreServices.shared.selfParticipantIdentifier
+    }()
+
     init(with meetingParams: MeetingsParams,
          timesUpdatedObserver: ParticipantUpdatable) {
         self.meetingParams = meetingParams
@@ -89,8 +97,6 @@ class ParticipantControllerService {
         // TODO: Implement this
 
     }
-
-
 
 
 }

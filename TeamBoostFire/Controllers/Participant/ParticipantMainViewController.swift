@@ -9,31 +9,20 @@
 import UIKit
 import Lottie
 
-@objc protocol ViewControllerReactable {
-    func addParticipantReactionViewController()
-    func registerReactionGestures()
-    @objc func handleGesture(gesture: UISwipeGestureRecognizer)
-    func playFullScreenAnimation(name: String)
-}
-
 class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
-    @IBOutlet weak var gameControllerView: UIView!
-    @IBOutlet weak var fullScreenAnimaionView: AnimationView!
-    
+
     private weak var selfSpeakerViewController: ParticipantSelfSpeakerViewController?
     
     private var allParticipants = [Participant]()
-    var participantGameControllerViewController = ParticipantGameControllerViewController()
     var participantReactionViewController = ParticipantReactionViewController()
     private var participantControllerService: ParticipantControllerService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addParticipantReactionViewController()
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
         setupTopBar()
@@ -46,11 +35,10 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
-        registerReactionGestures()
     }
 
     private func setupTopBar() {
-        guard let agenda = ParticipantCoreServices.shared.meetingParams?.agenda else {
+        guard let agenda = self.participantControllerService?.meetingParams.agenda else {
             assertionFailure("No agenda found in CoreServices")
             return
         }
@@ -73,60 +61,17 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
                                                      animated: true)
         }
     }
+
+
+    @IBAction func likeButtonTapped(_ sender: Any) {
+        // TODO: Implement
+    }
+
+    @IBAction func callSpeakerTapped(_ sender: Any) {
+
+    }
 }
 
-// MARK: - ViewControllerReactable
-extension ParticipantMainViewController: ViewControllerReactable {
-
-    internal func registerReactionGestures() {
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeLeft.direction = .left
-        self.view.addGestureRecognizer(swipeLeft)
-
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
-
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeUp.direction = .up
-        self.view.addGestureRecognizer(swipeUp)
-
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeDown.direction = .down
-        self.view.addGestureRecognizer(swipeDown)
-    }
-
-    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
-        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
-            playFullScreenAnimation(name: "agree")
-        } else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
-            playFullScreenAnimation(name: "disagree")
-        } else if gesture.direction == UISwipeGestureRecognizer.Direction.up {
-            playFullScreenAnimation(name: "celebrate")
-        } else if gesture.direction == UISwipeGestureRecognizer.Direction.down {
-            playFullScreenAnimation(name: "curious")
-        }
-    }
-
-    internal func playFullScreenAnimation(name: String) {
-        if !fullScreenAnimaionView.isAnimationPlaying {
-            fullScreenAnimaionView.isHidden = false
-            fullScreenAnimaionView.animation = Animation.named(name)
-            fullScreenAnimaionView.play { _ in
-                self.fullScreenAnimaionView.isHidden = true
-            }
-        }
-    }
-
-    internal func addParticipantReactionViewController() {
-        participantReactionViewController.view.frame = gameControllerView.bounds;
-        participantReactionViewController.willMove(toParent: self)
-        gameControllerView.addSubview(participantReactionViewController.view)
-        self.addChild(participantReactionViewController)
-        participantReactionViewController.didMove(toParent: self)
-    }
-
-}
 
 // MARK: - ParticipantMainViewController UI Updates
 extension ParticipantMainViewController {
@@ -171,7 +116,7 @@ extension ParticipantMainViewController {
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
-        guard let allParticipants = ParticipantCoreServices.shared.allParticipants else {
+        guard let allParticipants = self.participantControllerService?.allParticipants else {
             assertionFailure("Unable to retrieve all participants")
             return nil
         }
@@ -192,7 +137,7 @@ extension ParticipantMainViewController {
     }
 
     private func selfSpeakingOrder(with speakerOrder: [String]) -> Int {
-        guard let selfIdentifier = ParticipantCoreServices.shared.selfParticipantIdentifier else {
+        guard let selfIdentifier = self.participantControllerService?.selfIdentifier else {
             fatalError("Self identifier not found for participant")
         }
         return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
