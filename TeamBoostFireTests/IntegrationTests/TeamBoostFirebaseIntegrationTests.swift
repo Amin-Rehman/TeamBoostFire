@@ -8,9 +8,6 @@
 
 import XCTest
 @testable import TeamBoostFire
-import Firebase
-import FirebaseDatabase
-
 
 class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
@@ -37,7 +34,8 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         hostCoreServices.setupCore(with: meetingParams)
         let meetingIdentifier = hostCoreServices.meetingIdentifier!
-        
+        print(meetingIdentifier)
+
         // Make (3) Participants join the meeting
 
 //        // Setup Participant 1
