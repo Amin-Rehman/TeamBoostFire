@@ -13,10 +13,43 @@ struct HostSetupMeetingUseCase {
     static func perform(at viewController: UIViewController,
                         meetingParams: MeetingsParams) {
         let coreServices = HostCoreServices.shared
-        coreServices.setupCore(with: meetingParams)
+
+        var meetingIdentifier: String
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+        } else {
+            meetingIdentifier = String.makeSixDigitRandomNumbers()
+        }
+
+        let firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier)
+        let firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+
+        coreServices.setupCore(
+            with: meetingParams,
+            referenceContainer: firebaseReferenceContainer,
+            observerUtility: firebaseObserverUtility,
+            meetingIdentifier: meetingIdentifier)
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
     }
+}
 
+// MARK: - String extension
+extension String {
+    fileprivate static func makeSixDigitUUID() -> String {
+        let shortUUID = UUID().uuidString.lowercased()
+        return shortUUID.components(separatedBy: "-").first!
+    }
+
+    fileprivate static func makeSixDigitRandomNumbers() -> String {
+        let number1 = Int.random(in: 0 ..< 10)
+        let number2 = Int.random(in: 0 ..< 10)
+        let number3 = Int.random(in: 0 ..< 10)
+        let number4 = Int.random(in: 0 ..< 10)
+        let number5 = Int.random(in: 0 ..< 10)
+        let number6 = Int.random(in: 0 ..< 10)
+        return String("\(number1)\(number2)\(number3)-\(number4)\(number5)\(number6)")
+    }
 }
 

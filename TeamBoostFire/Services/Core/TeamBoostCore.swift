@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TeamBoostCore: class {
+public protocol TeamBoostCore: class {
     var speakerOrder: [String]? { get set }
     var allParticipants: [Participant]? { get set }
     var meetingParams: MeetingsParams? { get set }

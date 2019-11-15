@@ -13,7 +13,7 @@ enum MeetingMode {
     case AutoModerated
 }
 
-struct MeetingsParams {
+public struct MeetingsParams {
     let agenda: String
     let meetingTime: Int
     let maxTalkTime: Int

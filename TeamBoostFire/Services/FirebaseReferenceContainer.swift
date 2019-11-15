@@ -4,7 +4,15 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-protocol ReferenceHolding {
+public protocol ReferenceHolding {
+    func setupDefaultValues(with params: MeetingsParams)
+    func setReferenceForMeetingStarted()
+    func setReferenceForMeetingEnded()
+    func setReferenceForSpeakerOrder(speakingOrder: [String])
+
+    // TODO: Just test mode - to be removed
+    func testModeSetReferenceForNoParticipants()
+    func testModeSetReferenceForFakeParticipants()
 }
 
 /**
@@ -40,6 +48,54 @@ struct FirebaseReferenceContainer: ReferenceHolding {
         self.meetingParamsMaxTalkingTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
         self.callToSpeakerQueueReference = self.meetingReference?.referenceOfChild(with: .CallToSpeakerQueue)
     }
+
+    func setupDefaultValues(with params: MeetingsParams) {
+        meetingStateReference?.setValue("suspended")
+        speakerOrderReference?.setValue([""])
+        meetingParamsReference?.setValue("")
+        iAmDoneInterruptReference?.setValue("")
+        currentSpeakerMaximumSpeakingTime?.setValue(0)
+        meetingParamsTimeReference?.setValue(params.meetingTime)
+        meetingParamsAgendaReference?.setValue(params.agenda)
+        meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
+        callToSpeakerQueueReference?.setValue([""])
+    }
+
+    func setReferenceForSpeakerOrder(speakingOrder: [String]) {
+        speakerOrderReference?.setValue(speakingOrder)
+    }
+
+    func setReferenceForMeetingStarted() {
+        meetingStateReference?.setValue("started")
+    }
+
+    func setReferenceForMeetingEnded() {
+        meetingStateReference?.setValue("ended")
+    }
+
+    // Test Mode
+    func testModeSetReferenceForFakeParticipants() {
+        let participantOneId = UUID().uuidString
+        participantsReference?
+            .child(participantOneId).setValue(["name": "Jon Snow",
+                                               "id": participantOneId])
+
+        let participantTwoId = UUID().uuidString
+        participantsReference?
+            .child(participantTwoId).setValue(["name": "Ned Stark",
+                                               "id": participantTwoId])
+
+        let participantThreeId = UUID().uuidString
+        participantsReference?
+            .child(participantThreeId).setValue(["name": "Cersei Lannister",
+                                                 "id": participantThreeId])
+    }
+
+    func testModeSetReferenceForNoParticipants() {
+        participantsReference?.setValue(nil)
+    }
+
+
 }
 
 extension DatabaseReference {

@@ -6,22 +6,26 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-protocol ReferenceObserving {
+public protocol ReferenceObserving {
     func observeSpeakerOrderDidChange()
     func observeParticipantListChanges()
     func observeIAmDoneInterrupt()
     func observeCurrentSpeakerMaximumSpeakingTimeChanged()
     func observeMeetingStateDidChange()
     func observeMeetingParamsDidChange()
+    mutating func setObserver(teamBoostCore: TeamBoostCore)
 }
 
 struct FirebaseObserverUtility: ReferenceObserving {
+
     let firebaseReferenceContainer: FirebaseReferenceContainer
     weak var teamBoostCore: TeamBoostCore?
     
-    init(with firebaseReferenceContainer: FirebaseReferenceContainer,
-        teamBoostCore: TeamBoostCore) {
-        self.firebaseReferenceContainer = firebaseReferenceContainer
+    init(with firebaseReferenceContainer: ReferenceHolding) {
+        self.firebaseReferenceContainer = firebaseReferenceContainer as! FirebaseReferenceContainer
+    }
+
+    public mutating func setObserver(teamBoostCore: TeamBoostCore) {
         self.teamBoostCore = teamBoostCore
     }
 

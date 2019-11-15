@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Participant {
+public struct Participant {
     let id: String
     let name: String
     var speakerOrder: Int

@@ -76,6 +76,8 @@
 		EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */; };
 		EBC679E922ABEF1A00C9705D /* MeetingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC679E822ABEF1A00C9705D /* MeetingStats.swift */; };
 		EBC679EB22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC679EA22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift */; };
+		EBC77BE6237F5CB800EA24BB /* FakeReferenceHolding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC77BE5237F5CB700EA24BB /* FakeReferenceHolding.swift */; };
+		EBC77BE8237F5D0B00EA24BB /* FakeReferenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC77BE7237F5D0B00EA24BB /* FakeReferenceObserver.swift */; };
 		EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD3C5A822BA8C4F00EBD4FD /* lottie_participant_reaction.json */; };
 		EBD3C5AB22BA90C600EBD4FD /* lottie_participant_bulb.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */; };
 		EBDC014E22AB061D006910A0 /* HostEndMeetingStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */; };
@@ -174,6 +176,8 @@
 		EBBB4A8D228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyStringTests.swift; sourceTree = "<group>"; };
 		EBC679E822ABEF1A00C9705D /* MeetingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStats.swift; sourceTree = "<group>"; };
 		EBC679EA22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSaveMeetingStatsToCoreUseCase.swift; sourceTree = "<group>"; };
+		EBC77BE5237F5CB700EA24BB /* FakeReferenceHolding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeReferenceHolding.swift; sourceTree = "<group>"; };
+		EBC77BE7237F5D0B00EA24BB /* FakeReferenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeReferenceObserver.swift; sourceTree = "<group>"; };
 		EBD3C5A822BA8C4F00EBD4FD /* lottie_participant_reaction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_reaction.json; sourceTree = "<group>"; };
 		EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_bulb.json; sourceTree = "<group>"; };
 		EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEndMeetingStatsViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */,
+				EBC77BE5237F5CB700EA24BB /* FakeReferenceHolding.swift */,
+				EBC77BE7237F5D0B00EA24BB /* FakeReferenceObserver.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -697,6 +703,8 @@
 			files = (
 				EB0AAFBC22B7718A0017A358 /* MeetingOrderEvalutatorTests.swift in Sources */,
 				EBBB4A8E228194E100D61976 /* MinutesAndSecondsPrettyStringTests.swift in Sources */,
+				EBC77BE6237F5CB800EA24BB /* FakeReferenceHolding.swift in Sources */,
+				EBC77BE8237F5D0B00EA24BB /* FakeReferenceObserver.swift in Sources */,
 				EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */,
 				EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */,
 				EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */,

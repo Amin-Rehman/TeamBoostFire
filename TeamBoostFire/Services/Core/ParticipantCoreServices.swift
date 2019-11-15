@@ -37,8 +37,9 @@ class ParticipantCoreServices: TeamBoostCore {
             return
         }
 
-        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer,
-                                                          teamBoostCore: self)
+        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        firebaseObserverUtility?.setObserver(teamBoostCore: self)
+        
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeMeetingStateDidChange()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()

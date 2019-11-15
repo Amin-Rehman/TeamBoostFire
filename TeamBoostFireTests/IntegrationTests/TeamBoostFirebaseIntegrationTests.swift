@@ -15,8 +15,6 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
-
-        FirebaseApp.configure()
     }
 
     override func tearDown() {
@@ -31,11 +29,10 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            maxTalkTime: 10,
                                            moderationMode: .AutoModerated)
 
-
-        hostCoreServices.setupCore(with: meetingParams)
-        let meetingIdentifier = hostCoreServices.meetingIdentifier!
-        print(meetingIdentifier)
-
+        hostCoreServices.setupCore(with: meetingParams,
+                                   referenceContainer: FakeReferenceHolding(),
+                                   observerUtility: FakeReferenceObserver(),
+                                   meetingIdentifier: "meetingId")
         // Make (3) Participants join the meeting
 
 //        // Setup Participant 1

@@ -9,50 +9,26 @@ class HostCoreServices: TeamBoostCore {
     var speakerOrder: [String]?
     var allParticipants: [Participant]?
     var meetingParams: MeetingsParams?
-
     var meetingStatistics: MeetingStats?
+    private(set) public var meetingIdentifier: String?
 
     static let shared = HostCoreServices()
 
-    private(set) public var meetingIdentifier: String?
-    private var firebaseReferenceContainer: FirebaseReferenceContainer?
-    private var firebaseObserverUtility: FirebaseObserverUtility?
+    private var firebaseReferenceContainer: ReferenceHolding?
+    private var firebaseObserverUtility: ReferenceObserving?
 
     private init() {}
 
-    public func setupCore(with params: MeetingsParams) {
+    public func setupCore(with params: MeetingsParams,
+                          referenceContainer: ReferenceHolding,
+                          observerUtility: ReferenceObserving,
+                          meetingIdentifier: String) {
         meetingParams = params
+        firebaseReferenceContainer = referenceContainer
+        firebaseObserverUtility = observerUtility
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if appDelegate.testEnvironment == true {
-            meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
-
-        } else {
-            meetingIdentifier = String.makeSixDigitRandomNumbers()
-        }
-
-        guard let meetingId = meetingIdentifier else {
-            assertionFailure("Unable to retrieve meeting identifier")
-            return
-        }
-        firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingId)
-
-        guard let guardedFirebaseReferenceContainer = firebaseReferenceContainer else {
-            assertionFailure("guardedFirebaseReferenceContainer not properly setup")
-            return
-        }
-        firebaseObserverUtility = FirebaseObserverUtility(with: guardedFirebaseReferenceContainer,
-                                                          teamBoostCore: self)
-
-        firebaseReferenceContainer?.meetingStateReference?.setValue("suspended")
-        firebaseReferenceContainer?.speakerOrderReference?.setValue([""])
-        firebaseReferenceContainer?.meetingParamsReference?.setValue("")
-        firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue("")
-        firebaseReferenceContainer?.currentSpeakerMaximumSpeakingTime?.setValue(0)
-        firebaseReferenceContainer?.meetingParamsTimeReference?.setValue(params.meetingTime)
-        firebaseReferenceContainer?.meetingParamsAgendaReference?.setValue(params.agenda)
-        firebaseReferenceContainer?.meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
-        firebaseReferenceContainer?.callToSpeakerQueueReference?.setValue([""])
+        firebaseObserverUtility?.setObserver(teamBoostCore: self)
+        firebaseReferenceContainer?.setupDefaultValues(with: meetingParams!)
 
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()
@@ -73,16 +49,16 @@ class HostCoreServices: TeamBoostCore {
         }
 
         updateSpeakerOrder(with: allParticipantIdentifiers)
-        firebaseReferenceContainer?.meetingStateReference?.setValue("started")
+        firebaseReferenceContainer?.setReferenceForMeetingStarted()
     }
 
     public func endMeeting() {
-        firebaseReferenceContainer?.meetingStateReference?.setValue("ended")
+        firebaseReferenceContainer?.setReferenceForMeetingEnded()
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
         speakerOrder = identifiers
-        firebaseReferenceContainer?.speakerOrderReference?.setValue(speakerOrder)
+        firebaseReferenceContainer?.setReferenceForSpeakerOrder(speakingOrder: speakerOrder!)
 
         var updatedAllParticipants = [Participant]()
         for participant in allParticipants! {
@@ -97,47 +73,14 @@ class HostCoreServices: TeamBoostCore {
     }
 }
 
-
 extension HostCoreServices {
     public func injectFakeParticipantsForTestModeIfNeeded() {
-        self.firebaseReferenceContainer?.participantsReference?.setValue(nil)
+        firebaseReferenceContainer?.testModeSetReferenceForNoParticipants()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if appDelegate.testEnvironment == true {
-                let participantOneId = UUID().uuidString
-                self.firebaseReferenceContainer?.participantsReference?
-                    .child(participantOneId).setValue(["name": "Jon Snow",
-                                                       "id": participantOneId])
-
-                let participantTwoId = UUID().uuidString
-                self.firebaseReferenceContainer?.participantsReference?
-                    .child(participantTwoId).setValue(["name": "Ned Stark",
-                                                       "id": participantTwoId])
-
-                let participantThreeId = UUID().uuidString
-                self.firebaseReferenceContainer?.participantsReference?
-                    .child(participantThreeId).setValue(["name": "Cersei Lannister",
-                                                         "id": participantThreeId])
+                self.firebaseReferenceContainer?.testModeSetReferenceForFakeParticipants()
             }
         }
     }
 }
-
-// MARK: - String extension
-extension String {
-    fileprivate static func makeSixDigitUUID() -> String {
-        let shortUUID = UUID().uuidString.lowercased()
-        return shortUUID.components(separatedBy: "-").first!
-    }
-
-    fileprivate static func makeSixDigitRandomNumbers() -> String {
-        let number1 = Int.random(in: 0 ..< 10)
-        let number2 = Int.random(in: 0 ..< 10)
-        let number3 = Int.random(in: 0 ..< 10)
-        let number4 = Int.random(in: 0 ..< 10)
-        let number5 = Int.random(in: 0 ..< 10)
-        let number6 = Int.random(in: 0 ..< 10)
-        return String("\(number1)\(number2)\(number3)-\(number4)\(number5)\(number6)")
-    }
-}
-
