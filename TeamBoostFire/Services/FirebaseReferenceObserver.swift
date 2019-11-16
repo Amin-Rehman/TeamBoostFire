@@ -1,5 +1,5 @@
 //
-//  FirebaseObserverUtility.swift
+//  FirebaseReferenceObserver.swift
 //
 
 import Foundation
@@ -16,12 +16,12 @@ public protocol ReferenceObserving {
     mutating func setObserver(teamBoostCore: TeamBoostCore)
 }
 
-struct FirebaseObserverUtility: ReferenceObserving {
+struct FirebaseReferenceObserver: ReferenceObserving {
     let firebaseReferenceHolder: FirebaseReferenceHolder
     weak var teamBoostCore: TeamBoostCore?
     
-    init(with firebaseReferenceHolder: ReferenceHolding) {
-        self.firebaseReferenceHolder = firebaseReferenceHolder as! FirebaseReferenceHolder
+    init(with firebaseReferenceHolder: FirebaseReferenceHolder) {
+        self.firebaseReferenceHolder = firebaseReferenceHolder
     }
 
     public mutating func setObserver(teamBoostCore: TeamBoostCore) {

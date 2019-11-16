@@ -23,12 +23,12 @@ struct HostSetupMeetingUseCase {
         }
 
         let firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier)
-        let firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceHolder)
+        let firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
 
         coreServices.setupCore(
             with: meetingParams,
             referenceContainer: firebaseReferenceHolder,
-            observerUtility: firebaseObserverUtility,
+            observerUtility: firebaseReferenceObserver,
             meetingIdentifier: meetingIdentifier)
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)

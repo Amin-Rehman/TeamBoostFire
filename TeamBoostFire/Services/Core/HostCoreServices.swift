@@ -15,7 +15,7 @@ class HostCoreServices: TeamBoostCore {
     static let shared = HostCoreServices()
 
     private var firebaseReferenceHolder: ReferenceHolding?
-    private var firebaseObserverUtility: ReferenceObserving?
+    private var firebaseReferenceObserver: ReferenceObserving?
 
     private init() {}
 
@@ -25,14 +25,14 @@ class HostCoreServices: TeamBoostCore {
                           meetingIdentifier: String) {
         meetingParams = params
         firebaseReferenceHolder = referenceContainer
-        firebaseObserverUtility = observerUtility
+        firebaseReferenceObserver = observerUtility
 
-        firebaseObserverUtility?.setObserver(teamBoostCore: self)
+        firebaseReferenceObserver?.setObserver(teamBoostCore: self)
         firebaseReferenceHolder?.setupDefaultValues(with: meetingParams!)
 
-        firebaseObserverUtility?.observeParticipantListChanges()
-        firebaseObserverUtility?.observeSpeakerOrderDidChange()
-        firebaseObserverUtility?.observeIAmDoneInterrupt()
+        firebaseReferenceObserver?.observeParticipantListChanges()
+        firebaseReferenceObserver?.observeSpeakerOrderDidChange()
+        firebaseReferenceObserver?.observeIAmDoneInterrupt()
 
         injectFakeParticipantsForTestModeIfNeeded()
     }

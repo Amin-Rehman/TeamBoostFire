@@ -16,8 +16,8 @@
 		EB0AEB972313289500FC384B /* MeetingControllerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */; };
 		EB0AEC04231522A200FC384B /* MeetingControllerSecondTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEC03231522A200FC384B /* MeetingControllerSecondTicker.swift */; };
 		EB0AEC2D23165DA400FC384B /* SpeakerControllerContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEC2C23165DA400FC384B /* SpeakerControllerContracts.swift */; };
-		EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */; };
-		EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */; };
+		EB1844F5229AA00F00DFC75D /* FirebaseReferenceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */; };
+		EB1844F7229C93F000DFC75D /* FirebaseReferenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */; };
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
 		EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */; };
 		EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */; };
@@ -116,8 +116,8 @@
 		EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerStorage.swift; sourceTree = "<group>"; };
 		EB0AEC03231522A200FC384B /* MeetingControllerSecondTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingControllerSecondTicker.swift; sourceTree = "<group>"; };
 		EB0AEC2C23165DA400FC384B /* SpeakerControllerContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerControllerContracts.swift; sourceTree = "<group>"; };
-		EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceContainer.swift; sourceTree = "<group>"; };
-		EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseObserverUtility.swift; sourceTree = "<group>"; };
+		EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceHolder.swift; sourceTree = "<group>"; };
+		EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceObserver.swift; sourceTree = "<group>"; };
 		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
 		EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCoreServices.swift; sourceTree = "<group>"; };
 		EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantControllerService.swift; sourceTree = "<group>"; };
@@ -412,8 +412,8 @@
 				EB18452E229FE69C00DFC75D /* Core */,
 				EB0AAFB822B6ED960017A358 /* HostMeetingController */,
 				EB212371237B55A500090D24 /* ParticipantMeetingController */,
-				EB1844F4229AA00F00DFC75D /* FirebaseReferenceContainer.swift */,
-				EB1844F6229C93F000DFC75D /* FirebaseObserverUtility.swift */,
+				EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */,
+				EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */,
 				EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */,
 			);
 			path = Services;
@@ -748,8 +748,8 @@
 				EB1FAB9A22777B3C0037A6A5 /* TableKeys.swift in Sources */,
 				EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */,
 				EBBB4A89227F84A800D61976 /* HostMeetingControllerService.swift in Sources */,
-				EB1844F5229AA00F00DFC75D /* FirebaseReferenceContainer.swift in Sources */,
-				EB1844F7229C93F000DFC75D /* FirebaseObserverUtility.swift in Sources */,
+				EB1844F5229AA00F00DFC75D /* FirebaseReferenceHolder.swift in Sources */,
+				EB1844F7229C93F000DFC75D /* FirebaseReferenceObserver.swift in Sources */,
 				EB1FAB972268AF300037A6A5 /* HostInMeetingTableViewController.swift in Sources */,
 				EB0AEB972313289500FC384B /* MeetingControllerStorage.swift in Sources */,
 				EB1D48B222672E45001A754D /* MeetingParams.swift in Sources */,

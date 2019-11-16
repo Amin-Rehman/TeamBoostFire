@@ -14,7 +14,7 @@ class ParticipantCoreServices: TeamBoostCore {
     private(set) public var selfParticipantIdentifier: String?
 
     private var firebaseReferenceHolder: FirebaseReferenceHolder?
-    private var firebaseObserverUtility: FirebaseObserverUtility?
+    private var firebaseReferenceObserver: FirebaseReferenceObserver?
 
     private init() {}
 
@@ -29,21 +29,22 @@ class ParticipantCoreServices: TeamBoostCore {
         }
         selfParticipantIdentifier = participant.id
         self.firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier!)
-        firebaseReferenceHolder?.participantsReference?.child(participant.id).setValue(["name": participant.name,
-                                                                                           "id":participant.id])
+        firebaseReferenceHolder?.participantsReference?.child(participant.id).setValue(
+            ["name": participant.name,
+             "id":participant.id])
 
         guard let firebaseReferenceHolder = self.firebaseReferenceHolder else {
             assertionFailure("fireBaseReferenceContainer unable to be initialised")
             return
         }
 
-        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceHolder)
-        firebaseObserverUtility?.setObserver(teamBoostCore: self)
+        firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
+        firebaseReferenceObserver?.setObserver(teamBoostCore: self)
         
-        firebaseObserverUtility?.observeParticipantListChanges()
-        firebaseObserverUtility?.observeMeetingStateDidChange()
-        firebaseObserverUtility?.observeSpeakerOrderDidChange()
-        firebaseObserverUtility?.observeMeetingParamsDidChange()
+        firebaseReferenceObserver?.observeParticipantListChanges()
+        firebaseReferenceObserver?.observeMeetingStateDidChange()
+        firebaseReferenceObserver?.observeSpeakerOrderDidChange()
+        firebaseReferenceObserver?.observeMeetingParamsDidChange()
     }
 
     public func registerParticipantIsDoneInterrupt() {
