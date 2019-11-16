@@ -13,7 +13,7 @@ class ParticipantCoreServices: TeamBoostCore {
     private(set) public var meetingIdentifier: String?
     private(set) public var selfParticipantIdentifier: String?
 
-    private var firebaseReferenceContainer: FirebaseReferenceContainer?
+    private var firebaseReferenceHolder: FirebaseReferenceHolder?
     private var firebaseObserverUtility: FirebaseObserverUtility?
 
     private init() {}
@@ -28,16 +28,16 @@ class ParticipantCoreServices: TeamBoostCore {
             self.meetingIdentifier = meetingCode
         }
         selfParticipantIdentifier = participant.id
-        self.firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier!)
-        firebaseReferenceContainer?.participantsReference?.child(participant.id).setValue(["name": participant.name,
+        self.firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier!)
+        firebaseReferenceHolder?.participantsReference?.child(participant.id).setValue(["name": participant.name,
                                                                                            "id":participant.id])
 
-        guard let firebaseReferenceContainer = self.firebaseReferenceContainer else {
+        guard let firebaseReferenceHolder = self.firebaseReferenceHolder else {
             assertionFailure("fireBaseReferenceContainer unable to be initialised")
             return
         }
 
-        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceHolder)
         firebaseObserverUtility?.setObserver(teamBoostCore: self)
         
         firebaseObserverUtility?.observeParticipantListChanges()
@@ -48,6 +48,6 @@ class ParticipantCoreServices: TeamBoostCore {
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
-        firebaseReferenceContainer?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
+        firebaseReferenceHolder?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
 }

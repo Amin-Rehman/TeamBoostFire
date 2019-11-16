@@ -17,12 +17,11 @@ public protocol ReferenceObserving {
 }
 
 struct FirebaseObserverUtility: ReferenceObserving {
-
-    let firebaseReferenceContainer: FirebaseReferenceContainer
+    let firebaseReferenceHolder: FirebaseReferenceHolder
     weak var teamBoostCore: TeamBoostCore?
     
-    init(with firebaseReferenceContainer: ReferenceHolding) {
-        self.firebaseReferenceContainer = firebaseReferenceContainer as! FirebaseReferenceContainer
+    init(with firebaseReferenceHolder: ReferenceHolding) {
+        self.firebaseReferenceHolder = firebaseReferenceHolder as! FirebaseReferenceHolder
     }
 
     public mutating func setObserver(teamBoostCore: TeamBoostCore) {
@@ -30,7 +29,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeSpeakerOrderDidChange() {
-        firebaseReferenceContainer.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
             }
@@ -42,7 +41,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeParticipantListChanges() {
-        firebaseReferenceContainer.participantsReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.participantsReference?.observe(DataEventType.value, with: { snapshot in
             let allObjects = snapshot.children.allObjects as! [DataSnapshot]
             var allParticipants =  [Participant]()
             for object in allObjects {
@@ -63,7 +62,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeIAmDoneInterrupt() {
-        firebaseReferenceContainer.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
             let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: nil)
@@ -71,7 +70,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeCurrentSpeakerMaximumSpeakingTimeChanged() {
-        firebaseReferenceContainer.currentSpeakerMaximumSpeakingTime?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.currentSpeakerMaximumSpeakingTime?.observe(DataEventType.value, with: { snapshot in
             guard let currentParticipantMaxSpeakingTime = snapshot.value as? Int else {
                 assertionFailure("Unable to retrieve change in current participant maximum speaking time")
                 return
@@ -83,7 +82,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeMeetingStateDidChange() {
-        firebaseReferenceContainer.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
             let meetingState = MeetingState(rawValue: snapshot.value as! String)
             let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
             NotificationCenter.default.post(name: name,
@@ -92,7 +91,7 @@ struct FirebaseObserverUtility: ReferenceObserving {
     }
 
     public func observeMeetingParamsDidChange() {
-        firebaseReferenceContainer.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
             guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
                 assertionFailure("Error while retrieving agenda")
                 return

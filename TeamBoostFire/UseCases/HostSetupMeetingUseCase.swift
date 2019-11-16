@@ -22,12 +22,12 @@ struct HostSetupMeetingUseCase {
             meetingIdentifier = String.makeSixDigitRandomNumbers()
         }
 
-        let firebaseReferenceContainer = FirebaseReferenceContainer(with: meetingIdentifier)
-        let firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceContainer)
+        let firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier)
+        let firebaseObserverUtility = FirebaseObserverUtility(with: firebaseReferenceHolder)
 
         coreServices.setupCore(
             with: meetingParams,
-            referenceContainer: firebaseReferenceContainer,
+            referenceContainer: firebaseReferenceHolder,
             observerUtility: firebaseObserverUtility,
             meetingIdentifier: meetingIdentifier)
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)

@@ -14,7 +14,7 @@ class HostCoreServices: TeamBoostCore {
 
     static let shared = HostCoreServices()
 
-    private var firebaseReferenceContainer: ReferenceHolding?
+    private var firebaseReferenceHolder: ReferenceHolding?
     private var firebaseObserverUtility: ReferenceObserving?
 
     private init() {}
@@ -24,11 +24,11 @@ class HostCoreServices: TeamBoostCore {
                           observerUtility: ReferenceObserving,
                           meetingIdentifier: String) {
         meetingParams = params
-        firebaseReferenceContainer = referenceContainer
+        firebaseReferenceHolder = referenceContainer
         firebaseObserverUtility = observerUtility
 
         firebaseObserverUtility?.setObserver(teamBoostCore: self)
-        firebaseReferenceContainer?.setupDefaultValues(with: meetingParams!)
+        firebaseReferenceHolder?.setupDefaultValues(with: meetingParams!)
 
         firebaseObserverUtility?.observeParticipantListChanges()
         firebaseObserverUtility?.observeSpeakerOrderDidChange()
@@ -49,16 +49,16 @@ class HostCoreServices: TeamBoostCore {
         }
 
         updateSpeakerOrder(with: allParticipantIdentifiers)
-        firebaseReferenceContainer?.setReferenceForMeetingStarted()
+        firebaseReferenceHolder?.setReferenceForMeetingStarted()
     }
 
     public func endMeeting() {
-        firebaseReferenceContainer?.setReferenceForMeetingEnded()
+        firebaseReferenceHolder?.setReferenceForMeetingEnded()
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
         speakerOrder = identifiers
-        firebaseReferenceContainer?.setReferenceForSpeakerOrder(speakingOrder: speakerOrder!)
+        firebaseReferenceHolder?.setReferenceForSpeakerOrder(speakingOrder: speakerOrder!)
 
         var updatedAllParticipants = [Participant]()
         for participant in allParticipants! {
@@ -75,11 +75,11 @@ class HostCoreServices: TeamBoostCore {
 
 extension HostCoreServices {
     public func injectFakeParticipantsForTestModeIfNeeded() {
-        firebaseReferenceContainer?.testModeSetReferenceForNoParticipants()
+        firebaseReferenceHolder?.testModeSetReferenceForNoParticipants()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if appDelegate.testEnvironment == true {
-                self.firebaseReferenceContainer?.testModeSetReferenceForFakeParticipants()
+                self.firebaseReferenceHolder?.testModeSetReferenceForFakeParticipants()
             }
         }
     }

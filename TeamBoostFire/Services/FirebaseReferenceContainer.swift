@@ -18,7 +18,7 @@ public protocol ReferenceHolding {
 /**
  A container which holds references to all the keys in the Firebase database
  */
-struct FirebaseReferenceContainer: ReferenceHolding {
+struct FirebaseReferenceHolder: ReferenceHolding {
     private(set) var databaseRef: DatabaseReference?
     private(set) var meetingReference: DatabaseReference?
     private(set) var meetingStateReference: DatabaseReference?
