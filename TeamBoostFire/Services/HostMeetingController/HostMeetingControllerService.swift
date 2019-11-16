@@ -7,20 +7,23 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private let meetingMode: MeetingMode
+    private let coreServices: HostCoreServices
 
     public lazy var storage: MeetingControllerStorage = {
 
-        guard let allParticipantIdentifiers = HostCoreServices.shared.speakerOrder else {
+        guard let allParticipantIdentifiers = coreServices.speakerOrder else {
             assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
-            return MeetingControllerStorage(with: [], maxTalkTime: 0)
+            return MeetingControllerStorage(with: [], maxTalkTime: 0,
+                                            coreServices: coreServices)
         }
         let controllerStorage = MeetingControllerStorage(with: allParticipantIdentifiers,
-                                                         maxTalkTime: meetingParams.maxTalkTime)
+                                                         maxTalkTime: meetingParams.maxTalkTime, coreServices: coreServices)
         return controllerStorage
     }()
 
     public lazy var meetingControllerSecondTicker: MeetingControllerSecondTicker = {
-        return MeetingControllerSecondTicker(with: self.storage)
+        return MeetingControllerSecondTicker(with: self.storage,
+                                             coreServices: coreServices)
     }()
 
     public lazy var meetingControllerCurrentSpeakerTicker: MeetingControllerCurrentSpeakerTicker = {
@@ -33,10 +36,12 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
-         meetingMode: MeetingMode = .Uniform) {
+         meetingMode: MeetingMode = .Uniform,
+         coreServices: HostCoreServices) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
         self.meetingMode = meetingMode
+        self.coreServices = coreServices
 
         if meetingMode == .AutoModerated {
             shuffleSpeakerOrder()
@@ -52,12 +57,12 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         meetingControllerSecondTicker.stop()
         meetingControllerCurrentSpeakerTicker.stop()
 
-        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
+        guard var speakingOrder = coreServices.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
         }
         speakingOrder = speakingOrder.circularRotate()
-        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+        coreServices.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
         
         meetingControllerSecondTicker.start()
@@ -92,12 +97,12 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     }
 
     private func shuffleSpeakerOrder() {
-        guard var speakingOrder = HostCoreServices.shared.speakerOrder else {
+        guard var speakingOrder = coreServices.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
         }
         speakingOrder = speakingOrder.shuffled()
-        HostCoreServices.shared.updateSpeakerOrder(with: speakingOrder)
+        coreServices.updateSpeakerOrder(with: speakingOrder)
     }
 }
 

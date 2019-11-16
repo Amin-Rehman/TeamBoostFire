@@ -88,7 +88,8 @@ class HostMeetingViewController: UIViewController {
         hostControllerService = HostMeetingControllerService(
             meetingParams: meetingParams,
             orderObserver: self,
-            meetingMode: meetingParams.moderationMode!)
+            meetingMode: meetingParams.moderationMode!,
+            coreServices: HostCoreServices.shared)
     }
 
     private func setupAgendaQuestion() {

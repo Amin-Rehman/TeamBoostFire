@@ -16,6 +16,7 @@ class MeetingControllerStorage {
     // To be updated for every round if speaking time needs to be adjusted
     private(set) public var participantSpeakingRecordPerRound = [SpeakerRecord]()
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
+    private let coreServices: HostCoreServices
 
     public var speakingRecord: [String] {
         var newSpeakingOrder = [String]()
@@ -26,7 +27,9 @@ class MeetingControllerStorage {
     }
 
     init(with participantIds: [ParticipantId],
-         maxTalkTime: Int) {
+         maxTalkTime: Int,
+         coreServices: HostCoreServices) {
+        self.coreServices = coreServices
         participantIds.forEach { identifier in
             participantTotalSpeakingRecord[identifier] = 0
             participantSpeakingRecordPerRound.append(
@@ -38,7 +41,7 @@ class MeetingControllerStorage {
     // MARK:- Accessors
     func updateSpeakingRecordPerRound(speakerRecord: [SpeakerRecord]) {
         participantSpeakingRecordPerRound = speakerRecord
-        HostCoreServices.shared.updateSpeakerOrder(with: self.speakingRecord)
+        coreServices.updateSpeakerOrder(with: self.speakingRecord)
     }
 
     func updateTotalSpeakingTime(for participantId: String,
