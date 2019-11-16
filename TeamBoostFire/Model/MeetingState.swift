@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MeetingState: String {
+public enum MeetingState: String {
     case suspended
     case started
     case ended

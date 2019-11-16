@@ -10,13 +10,55 @@ public protocol ReferenceObserving {
     func observeSpeakerOrderDidChange()
     func observeParticipantListChanges()
     func observeIAmDoneInterrupt()
-    func observeCurrentSpeakerMaximumSpeakingTimeChanged()
     func observeMeetingStateDidChange()
     func observeMeetingParamsDidChange()
+
+    func handleSpeakerOrderDidChange(speakerOrder: [String])
+    func handleParticipantListDidChange(participantList: [Participant])
+    func handleIAmDoneInterrupt()
+    func handleMeetingStateDidChange(meetingState: MeetingState)
+    func handleMeetingParamsDidChange(meetingParams: MeetingsParams)
+
+
     mutating func setObserver(teamBoostCore: TeamBoostCore)
 }
 
 struct FirebaseReferenceObserver: ReferenceObserving {
+    func handleMeetingParamsDidChange(meetingParams: MeetingsParams) {
+        self.teamBoostCore?.meetingParams = meetingParams
+
+        let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
+        NotificationCenter.default.post(name: name,
+                                        object: meetingParams)
+    }
+    
+
+    func handleSpeakerOrderDidChange(speakerOrder: [String]) {
+        self.teamBoostCore?.speakerOrder = speakerOrder
+        let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+        NotificationCenter.default.post(name: name,
+                                        object: speakerOrder)
+    }
+
+    func handleParticipantListDidChange(participantList: [Participant]) {
+        self.teamBoostCore?.allParticipants = participantList
+        let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
+        NotificationCenter.default.post(name: name,
+                                        object: participantList)
+    }
+
+    func handleIAmDoneInterrupt() {
+        let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
+        NotificationCenter.default.post(name: name,
+                                        object: nil)
+    }
+
+    func handleMeetingStateDidChange(meetingState: MeetingState) {
+        let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+        NotificationCenter.default.post(name: name,
+                                        object: meetingState)
+    }
+
     let firebaseReferenceHolder: FirebaseReferenceHolder
     weak var teamBoostCore: TeamBoostCore?
     
@@ -33,10 +75,7 @@ struct FirebaseReferenceObserver: ReferenceObserving {
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
             }
-            self.teamBoostCore?.speakerOrder = speakerOrder
-            let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: speakerOrder)
+            self.handleSpeakerOrderDidChange(speakerOrder: speakerOrder)
         })
     }
 
@@ -54,39 +93,24 @@ struct FirebaseReferenceObserver: ReferenceObserving {
                 allParticipants.append(participant)
             }
 
-            self.teamBoostCore?.allParticipants = allParticipants
-            let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: allParticipants)
+            self.handleParticipantListDidChange(participantList: allParticipants)
+
         })
     }
 
     public func observeIAmDoneInterrupt() {
         firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
-            let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: nil)
-        })
-    }
-
-    public func observeCurrentSpeakerMaximumSpeakingTimeChanged() {
-        firebaseReferenceHolder.currentSpeakerMaximumSpeakingTime?.observe(DataEventType.value, with: { snapshot in
-            guard let currentParticipantMaxSpeakingTime = snapshot.value as? Int else {
-                assertionFailure("Unable to retrieve change in current participant maximum speaking time")
-                return
-            }
-            let name = Notification.Name(TeamBoostNotifications.currentParticipantMaxSpeakingTimeChanged.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: currentParticipantMaxSpeakingTime)
+            self.handleIAmDoneInterrupt()
         })
     }
 
     public func observeMeetingStateDidChange() {
         firebaseReferenceHolder.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
-            let meetingState = MeetingState(rawValue: snapshot.value as! String)
-            let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: meetingState)
+            guard let meetingState = MeetingState(rawValue: snapshot.value as! String) else {
+                assertionFailure("Error retrieving meeting state")
+                return
+            }
+            self.handleMeetingStateDidChange(meetingState: meetingState)
         })
     }
 
@@ -102,7 +126,8 @@ struct FirebaseReferenceObserver: ReferenceObserving {
                 return
             }
 
-            guard let maxTalkTime = snapshot.childSnapshot(forPath: TableKeys.MaxTalkTime.rawValue).value as? Int else {
+            guard let maxTalkTime = snapshot.childSnapshot(
+                forPath: TableKeys.MaxTalkTime.rawValue).value as? Int else {
                 assertionFailure("Error while retrieving max talk time")
                 return
             }
@@ -111,12 +136,7 @@ struct FirebaseReferenceObserver: ReferenceObserving {
                                                 meetingTime: meetingTime,
                                                 maxTalkTime: maxTalkTime,
                                                 moderationMode: nil)
-
-            self.teamBoostCore?.meetingParams = meetingParams
-
-            let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: meetingParams)
+            self.handleMeetingParamsDidChange(meetingParams: meetingParams)
         })
     }
 }
