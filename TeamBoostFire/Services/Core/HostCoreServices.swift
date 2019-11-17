@@ -20,21 +20,45 @@ class HostCoreServices: TeamBoostCore {
     private init() {}
 
     public func setupCore(with params: MeetingsParams,
-                          referenceContainer: ReferenceHolding,
-                          observerUtility: ReferenceObserving,
+                          referenceHolder: ReferenceHolding,
+                          referenceObserver: ReferenceObserving,
                           meetingIdentifier: String) {
         meetingParams = params
-        firebaseReferenceHolder = referenceContainer
-        firebaseReferenceObserver = observerUtility
-
-        firebaseReferenceObserver?.setObserver(teamBoostCore: self)
+        firebaseReferenceHolder = referenceHolder
+        firebaseReferenceObserver = referenceObserver
         firebaseReferenceHolder?.setupDefaultValues(with: meetingParams!)
-
-        firebaseReferenceObserver?.observeParticipantListChanges()
-        firebaseReferenceObserver?.observeSpeakerOrderDidChange()
-        firebaseReferenceObserver?.observeIAmDoneInterrupt()
+        setupObservers()
 
         injectFakeParticipantsForTestModeIfNeeded()
+    }
+
+    private func setupObservers() {
+        firebaseReferenceObserver?.observeParticipantListChanges(subscriber: { allParticipants in
+            self.allParticipants = allParticipants
+
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: allParticipants)
+            }
+        })
+        firebaseReferenceObserver?.observeSpeakerOrderDidChange(subscriber: { speakerOrder in
+            self.speakerOrder = speakerOrder
+
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: speakerOrder)
+            }
+        })
+
+        firebaseReferenceObserver?.observeIAmDoneInterrupt(subscriber: {
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: nil)
+            }
+        })
     }
     
     public func startMeeting() {

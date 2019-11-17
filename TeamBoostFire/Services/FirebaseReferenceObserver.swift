@@ -7,79 +7,31 @@ import Firebase
 import FirebaseDatabase
 
 public protocol ReferenceObserving {
-    func observeSpeakerOrderDidChange()
-    func observeParticipantListChanges()
-    func observeIAmDoneInterrupt()
-    func observeMeetingStateDidChange()
-    func observeMeetingParamsDidChange()
-
-    func handleSpeakerOrderDidChange(speakerOrder: [String])
-    func handleParticipantListDidChange(participantList: [Participant])
-    func handleIAmDoneInterrupt()
-    func handleMeetingStateDidChange(meetingState: MeetingState)
-    func handleMeetingParamsDidChange(meetingParams: MeetingsParams)
-
-
-    mutating func setObserver(teamBoostCore: TeamBoostCore)
+    func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void)
+    func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void)
+    func observeIAmDoneInterrupt(subscriber: @escaping () -> Void)
+    func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
+    func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
 }
 
 struct FirebaseReferenceObserver: ReferenceObserving {
-    func handleMeetingParamsDidChange(meetingParams: MeetingsParams) {
-        self.teamBoostCore?.meetingParams = meetingParams
-
-        let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
-        NotificationCenter.default.post(name: name,
-                                        object: meetingParams)
-    }
-    
-
-    func handleSpeakerOrderDidChange(speakerOrder: [String]) {
-        self.teamBoostCore?.speakerOrder = speakerOrder
-        let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
-        NotificationCenter.default.post(name: name,
-                                        object: speakerOrder)
-    }
-
-    func handleParticipantListDidChange(participantList: [Participant]) {
-        self.teamBoostCore?.allParticipants = participantList
-        let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
-        NotificationCenter.default.post(name: name,
-                                        object: participantList)
-    }
-
-    func handleIAmDoneInterrupt() {
-        let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
-        NotificationCenter.default.post(name: name,
-                                        object: nil)
-    }
-
-    func handleMeetingStateDidChange(meetingState: MeetingState) {
-        let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
-        NotificationCenter.default.post(name: name,
-                                        object: meetingState)
-    }
 
     let firebaseReferenceHolder: FirebaseReferenceHolder
-    weak var teamBoostCore: TeamBoostCore?
-    
+
     init(with firebaseReferenceHolder: FirebaseReferenceHolder) {
         self.firebaseReferenceHolder = firebaseReferenceHolder
     }
 
-    public mutating func setObserver(teamBoostCore: TeamBoostCore) {
-        self.teamBoostCore = teamBoostCore
-    }
-
-    public func observeSpeakerOrderDidChange() {
+    public func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void) {
         firebaseReferenceHolder.speakerOrderReference?.observe(DataEventType.value, with: { snapshot in
             guard let speakerOrder = snapshot.value as? [String] else {
                 return
             }
-            self.handleSpeakerOrderDidChange(speakerOrder: speakerOrder)
+            subscriber(speakerOrder)
         })
     }
 
-    public func observeParticipantListChanges() {
+    public func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void) {
         firebaseReferenceHolder.participantsReference?.observe(DataEventType.value, with: { snapshot in
             let allObjects = snapshot.children.allObjects as! [DataSnapshot]
             var allParticipants =  [Participant]()
@@ -92,29 +44,27 @@ struct FirebaseReferenceObserver: ReferenceObserving {
                                               speakerOrder: -1)
                 allParticipants.append(participant)
             }
-
-            self.handleParticipantListDidChange(participantList: allParticipants)
-
+            subscriber(allParticipants)
         })
     }
 
-    public func observeIAmDoneInterrupt() {
+    public func observeIAmDoneInterrupt(subscriber: @escaping () -> Void) {
         firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
-            self.handleIAmDoneInterrupt()
+            subscriber()
         })
     }
 
-    public func observeMeetingStateDidChange() {
+    public func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void) {
         firebaseReferenceHolder.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
             guard let meetingState = MeetingState(rawValue: snapshot.value as! String) else {
                 assertionFailure("Error retrieving meeting state")
                 return
             }
-            self.handleMeetingStateDidChange(meetingState: meetingState)
+            subscriber(meetingState)
         })
     }
 
-    public func observeMeetingParamsDidChange() {
+    public func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void) {
         firebaseReferenceHolder.meetingParamsReference?.observe(DataEventType.value, with: { snapshot in
             guard let agenda = snapshot.childSnapshot(forPath: TableKeys.Agenda.rawValue).value as? String else {
                 assertionFailure("Error while retrieving agenda")
@@ -136,7 +86,8 @@ struct FirebaseReferenceObserver: ReferenceObserving {
                                                 meetingTime: meetingTime,
                                                 maxTalkTime: maxTalkTime,
                                                 moderationMode: nil)
-            self.handleMeetingParamsDidChange(meetingParams: meetingParams)
+
+            subscriber(meetingParams)
         })
     }
 }

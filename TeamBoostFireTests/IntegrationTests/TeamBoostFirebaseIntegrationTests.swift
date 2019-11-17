@@ -30,8 +30,8 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         hostCoreServices.setupCore(with: meetingParams,
-                                   referenceContainer: FakeReferenceHolding(),
-                                   observerUtility: FakeReferenceObserver(),
+                                   referenceHolder: FakeReferenceHolding(),
+                                   referenceObserver: FakeReferenceObserver(),
                                    meetingIdentifier: "meetingId")
         // Make (3) Participants join the meeting
 

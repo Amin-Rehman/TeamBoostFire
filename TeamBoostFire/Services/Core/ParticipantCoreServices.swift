@@ -39,12 +39,74 @@ class ParticipantCoreServices: TeamBoostCore {
         }
 
         firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
-        firebaseReferenceObserver?.setObserver(teamBoostCore: self)
-        
-        firebaseReferenceObserver?.observeParticipantListChanges()
-        firebaseReferenceObserver?.observeMeetingStateDidChange()
-        firebaseReferenceObserver?.observeSpeakerOrderDidChange()
-        firebaseReferenceObserver?.observeMeetingParamsDidChange()
+
+        setupObservers()
+    }
+
+    private func setupObservers() {
+        firebaseReferenceObserver?.observeParticipantListChanges(subscriber: { allParticipants in
+            self.allParticipants = allParticipants
+        })
+
+        firebaseReferenceObserver?.observeMeetingStateDidChange(subscriber: {
+            meetingState in
+
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: meetingState)
+            }
+        })
+
+        firebaseReferenceObserver?.observeSpeakerOrderDidChange(subscriber: { speakerOrder in
+            self.speakerOrder = speakerOrder
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: speakerOrder)
+            }
+        })
+
+        firebaseReferenceObserver?.observeMeetingParamsDidChange(subscriber: { meetingParams in
+            self.meetingParams = meetingParams
+
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: meetingParams)
+            }
+        })
+
+        firebaseReferenceObserver?.observeParticipantListChanges(subscriber: { allParticipants in
+            self.allParticipants = allParticipants
+        })
+
+        firebaseReferenceObserver?.observeMeetingStateDidChange(subscriber: {
+            meetingState in
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: meetingState)
+            }
+        })
+
+        firebaseReferenceObserver?.observeSpeakerOrderDidChange(subscriber: { speakerOrder in
+            self.speakerOrder = speakerOrder
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: speakerOrder)
+            }
+        })
+
+        firebaseReferenceObserver?.observeMeetingParamsDidChange(subscriber: { meetingParams in
+            self.meetingParams = meetingParams
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.meetingParamsDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: meetingParams)
+            }
+        })
     }
 
     public func registerParticipantIsDoneInterrupt() {

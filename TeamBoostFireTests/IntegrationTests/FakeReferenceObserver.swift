@@ -10,24 +10,19 @@ import Foundation
 import TeamBoostFire
 
 struct FakeReferenceObserver: ReferenceObserving {
-    func observeSpeakerOrderDidChange() {
+    func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void) {
     }
 
-    func observeParticipantListChanges() {
+    func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void) {
     }
 
-    func observeIAmDoneInterrupt() {
+    func observeIAmDoneInterrupt(subscriber: @escaping () -> Void) {
     }
 
-    func observeCurrentSpeakerMaximumSpeakingTimeChanged() {
+    func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void) {
     }
 
-    func observeMeetingStateDidChange() {
+    func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void) {
     }
 
-    func observeMeetingParamsDidChange() {
-    }
-
-    mutating func setObserver(teamBoostCore: TeamBoostCore) {
-    }
 }
