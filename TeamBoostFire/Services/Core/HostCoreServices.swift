@@ -23,6 +23,7 @@ class HostCoreServices: TeamBoostCore {
                           referenceHolder: ReferenceHolding,
                           referenceObserver: ReferenceObserving,
                           meetingIdentifier: String) {
+        self.meetingIdentifier = meetingIdentifier
         meetingParams = params
         firebaseReferenceHolder = referenceHolder
         firebaseReferenceObserver = referenceObserver

@@ -24,7 +24,6 @@ struct HostSetupMeetingUseCase {
 
         let firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier)
         let firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
-
         coreServices.setupCore(
             with: meetingParams,
             referenceHolder: firebaseReferenceHolder,
@@ -32,6 +31,13 @@ struct HostSetupMeetingUseCase {
             meetingIdentifier: meetingIdentifier)
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
+
+        DispatchQueue.main.async {
+            let name = Notification.Name(TeamBoostNotifications.meetingCodeDidChange.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: meetingIdentifier)
+        }
+
     }
 }
 
