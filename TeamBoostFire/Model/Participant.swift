@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Participant {
+public struct Participant: Equatable {
     let id: String
     let name: String
     var speakerOrder: Int

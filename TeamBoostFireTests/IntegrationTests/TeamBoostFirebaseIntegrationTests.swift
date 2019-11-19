@@ -9,6 +9,14 @@
 import XCTest
 @testable import TeamBoostFire
 
+class FakeSpeakerOrderObserver: SpeakerControllerOrderObserver
+{
+    var speakingRecord: [ParticipantId: SpeakingTime]?
+    func speakingOrderUpdated(totalSpeakingRecord: [ParticipantId: SpeakingTime]) {
+        self.speakingRecord = totalSpeakingRecord
+    }
+}
+
 class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
     override func setUp() {
@@ -29,40 +37,101 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            maxTalkTime: 10,
                                            moderationMode: .AutoModerated)
 
+        let fakeReferenceObserver = FakeReferenceObserver()
+
         hostCoreServices.setupCore(with: meetingParams,
                                    referenceHolder: FakeReferenceHolding(),
-                                   referenceObserver: FakeReferenceObserver(),
+                                   referenceObserver: fakeReferenceObserver,
                                    meetingIdentifier: "meetingId")
-        // Make (3) Participants join the meeting
 
-//        // Setup Participant 1
-//        let participant1 = Participant(id: "partipant1Id",
-//                                       name: "partipant1Name",
-//                                       speakerOrder: -1)
-//        let participantCoreServices1 = ParticipantCoreServices.shared
-//        participantCoreServices1.setupCore(with: participant1,
-//                                           meetingCode: meetingIdentifier)
-//
-//        // Setup Participant 2
-//        let participant2 = Participant(id: "partipant2Id",
-//                                       name: "partipant2Name",
-//                                       speakerOrder: -1)
-//
-//        let participantCoreServices2 = ParticipantCoreServices.shared
-//        participantCoreServices2.setupCore(with: participant2,
-//                                           meetingCode: meetingIdentifier)
-//
-//        // Setup Participant 3
-//        let participant3 = Participant(id: "partipant3Id",
-//                                       name: "partipant3Name",
-//                                       speakerOrder: -1)
-//
-//        let participantCoreServices3 = ParticipantCoreServices.shared
-//        participantCoreServices3.setupCore(with: participant3,
-//                                           meetingCode: meetingIdentifier)
-//
-//
-//        hostCoreServices.startMeeting()
+        XCTAssertEqual(hostCoreServices.meetingIdentifier, "meetingId")
+        let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
+        let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
+        let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
+
+        let allParticipants = [participant1, participant2, participant3]
+        // Fake call this block
+        // In the real world , the firebase callback will call this block
+        fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
+        XCTAssertEqual(hostCoreServices.allParticipants, allParticipants)
+
+    }
+
+    func testSimpleMeetingWithOneRound() {
+        let totalMeetingTime = 12
+        let maxAllowedTalkTime = 4
+        // Setup the meeting on the host side
+        let meetingParams = MeetingsParams(agenda: "Foo Agenda",
+                                           meetingTime: totalMeetingTime,
+                                           maxTalkTime: maxAllowedTalkTime,
+                                           moderationMode: .AutoModerated)
+
+        let fakeReferenceObserver = FakeReferenceObserver()
+        let fakeSpeakerOrderObserver = FakeSpeakerOrderObserver()
+
+        let hostCoreServices = HostCoreServices.shared
+        hostCoreServices.setupCore(with: meetingParams,
+                                   referenceHolder: FakeReferenceHolding(),
+                                   referenceObserver: fakeReferenceObserver,
+                                   meetingIdentifier: "meetingId")
+
+        XCTAssertEqual(hostCoreServices.meetingIdentifier, "meetingId")
+        let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
+        let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
+        let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
+
+        let allParticipants = [participant1, participant2, participant3]
+        // Fake call this block
+        // In the real world , the firebase callback will call this block
+        fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
+        XCTAssertEqual(hostCoreServices.allParticipants, allParticipants)
+
+        let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
+            let coreService = item as! HostCoreServices
+            return coreService.speakerOrder!.count == 3 &&
+                coreService.speakerOrder?[0] == "id1"
+        }
+
+        let expectation = self.expectation(for: speakingOrderPredicate,
+                                           evaluatedWith: hostCoreServices,
+                                           handler: nil)
+
+        hostCoreServices.startMeeting()
+        // Initialising it simply starts the timers
+        let hostMeetingControllerService = HostMeetingControllerService(meetingParams: meetingParams,
+                                         orderObserver: fakeSpeakerOrderObserver,
+                                         meetingMode: .AutoModerated,
+                                     coreServices: hostCoreServices)
+
+        // Verify that the participants are added to the meeting
+        self.wait(for: [expectation], timeout: 2.0)
+
+        // After 4 seconds the speaker should switch
+        let firstSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
+            let coreService = item as! HostCoreServices
+            return coreService.speakerOrder?[0] == "id2"
+        }
+
+        let firstSpeakerSwitchExpectation = self.expectation(for: firstSpeakerSwitchPredicate,
+                                           evaluatedWith: hostCoreServices,
+                                           handler: nil)
+
+        self.wait(for: [firstSpeakerSwitchExpectation], timeout: 5.0)
+
+        // Then the speaker should change again
+        let secondSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
+            let coreService = item as! HostCoreServices
+            return coreService.speakerOrder?[0] == "id3"
+        }
+
+        let secondSpeakerSwitchExpectation = self.expectation(for: secondSpeakerSwitchPredicate,
+                                           evaluatedWith: hostCoreServices,
+                                           handler: nil)
+
+        self.wait(for: [secondSpeakerSwitchExpectation], timeout: 5.0)
+
+        // To silence the warning
+        _ = hostMeetingControllerService
     }
 
 }

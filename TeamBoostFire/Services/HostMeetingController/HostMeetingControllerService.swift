@@ -44,7 +44,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         self.coreServices = coreServices
 
         if meetingMode == .AutoModerated {
-            shuffleSpeakerOrder()
+            // shuffleSpeakerOrder()
         }
 
         meetingControllerSecondTicker.start()

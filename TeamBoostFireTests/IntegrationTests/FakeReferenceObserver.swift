@@ -9,11 +9,18 @@
 import Foundation
 import TeamBoostFire
 
-struct FakeReferenceObserver: ReferenceObserving {
+
+class FakeReferenceObserver: ReferenceObserving {
+    // MARK: -
+    public var participantListChangedSubscriber:(([Participant]) -> Void)?
+
+    // MARK: -
+
     func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void) {
     }
 
     func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void) {
+        participantListChangedSubscriber = subscriber
     }
 
     func observeIAmDoneInterrupt(subscriber: @escaping () -> Void) {

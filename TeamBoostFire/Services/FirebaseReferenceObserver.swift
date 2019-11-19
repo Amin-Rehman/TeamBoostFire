@@ -12,6 +12,8 @@ public protocol ReferenceObserving {
     func observeIAmDoneInterrupt(subscriber: @escaping () -> Void)
     func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
+
+
 }
 
 struct FirebaseReferenceObserver: ReferenceObserving {
