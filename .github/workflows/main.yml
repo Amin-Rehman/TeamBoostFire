@@ -20,8 +20,8 @@ jobs:
 
     - name: Test
       uses: ty0x2333/cocoapods-action@master
-
       with:
+        additional_lint_params: --private
         lint: false
         workspace: TeamBoostFire.xcworkspace
         scheme: TeamBoostFireTests
