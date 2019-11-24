@@ -61,7 +61,7 @@ class MeetingControllerCurrentSpeakerTicker: TimerControllerObserver {
                 }
 
             }
-            startTheCurrentRound()
+            startTheCurrentSpeakingSession()
         }
         
         iterationInCurrentRound += 1
@@ -82,7 +82,7 @@ class MeetingControllerCurrentSpeakerTicker: TimerControllerObserver {
                                                                   originalSpeakingRecord: speakingRecordsForNewRound)
 
         storage.updateSpeakingRecordPerRound(speakerRecord: adjustedSpeakingRecord)
-        startTheCurrentRound()
+        startTheCurrentSpeakingSession()
     }
 }
 
@@ -97,7 +97,7 @@ extension MeetingControllerCurrentSpeakerTicker {
         return speakingRecordsForNewRound
     }
 
-    private func startTheCurrentRound() {
+    private func startTheCurrentSpeakingSession() {
         let currentSpeakingTime = storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime
         timerController.start(with: Double(currentSpeakingTime))
     }

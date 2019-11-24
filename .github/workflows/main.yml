@@ -25,5 +25,4 @@ jobs:
         lint: false
         workspace: TeamBoostFire.xcworkspace
         scheme: TeamBoostFireTests
-        test: true
-        
+        additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0'
