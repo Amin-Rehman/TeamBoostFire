@@ -50,8 +50,16 @@ class MeetingControllerCurrentSpeakerTicker: TimerControllerObserver {
             let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
 
             if isNewRound {
+                print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
                 let speakingRecordsForNewRound = makeNewRoundRecord()
                 storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
+
+                DispatchQueue.main.async {
+                    let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
+                    NotificationCenter.default.post(name: name,
+                                                    object: nil)
+                }
+
             }
             startTheCurrentRound()
         }

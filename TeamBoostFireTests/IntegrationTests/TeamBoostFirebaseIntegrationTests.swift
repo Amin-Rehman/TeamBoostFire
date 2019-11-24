@@ -206,7 +206,6 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            evaluatedWith: hostCoreServices,
                                            handler: nil)
 
-        // TODO: async wait
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
             fakeReferenceObserver.iAmDoneInterruptSubscriber!()
         }
@@ -223,13 +222,29 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            evaluatedWith: hostCoreServices,
                                            handler: nil)
 
-        // Give one second of extra cushion
-        self.wait(for: [thirdSpeakerSwitchExpectation], timeout: 11.0)
 
-        // 4: Observe what is the speaking record
-        let speakingRecord = hostMeetingControllerService.storage.participantSpeakingRecordPerRound
-        print(speakingRecord as? Any!)
+        // 5: Wait for third participant to finish speaking and new round app notification
+        let notificationName = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
+        let notificationExpectation =
+            self.expectation(forNotification: notificationName,
+                             object: nil, handler: nil)
 
+        self.wait(for: [thirdSpeakerSwitchExpectation, notificationExpectation], timeout: 15.0)
+
+
+        _ = hostMeetingControllerService
+
+        //6: Observer fake speaker order for the updated order.
+//        let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
+//            let coreService = item as! HostCoreServices
+//            return coreService.speakerOrder?[0] == "id2"
+//        }
+//
+//        let speakerOrderExpectation = self.expectation(for: newRoundSpeakerOrderPredicate,
+//                                           evaluatedWith: hostCoreServices,
+//                                           handler: nil)
+//
+//        self.wait(for: [speakerOrderExpectation], timeout: 1.0)
 
     }
 
