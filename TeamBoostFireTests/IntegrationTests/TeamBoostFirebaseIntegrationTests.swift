@@ -134,6 +134,11 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         _ = hostMeetingControllerService
     }
 
+    /**
+     A test with three participants with max allowed time of 10 seconds
+     The second participant only speaks for 4 seconds then says I am done.
+     We wait for the round to complete after which we verify the speaking order of the new round
+     */
     func testSimpleMeetingWithRoundsWhereParticipantGetsDone() {
         let totalMeetingTime = 60
         let maxAllowedTalkTime = 10
@@ -222,8 +227,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            evaluatedWith: hostCoreServices,
                                            handler: nil)
 
-
-        // 5: Wait for third participant to finish speaking and new round app notification
+        // 4: Wait for third participant to finish speaking and new round app notification
         let notificationName = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
         let notificationExpectation =
             self.expectation(forNotification: notificationName,
@@ -231,20 +235,20 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         self.wait(for: [thirdSpeakerSwitchExpectation, notificationExpectation], timeout: 15.0)
 
+        //5: Observe order in Core Service and check that the first speaker is id2 because she spoke the least
+        let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
+            let coreService = item as! HostCoreServices
+            return coreService.speakerOrder?[0] == "id2"
+        }
 
+        let speakerOrderExpectation = self.expectation(for: newRoundSpeakerOrderPredicate,
+                                           evaluatedWith: hostCoreServices,
+                                           handler: nil)
+
+        self.wait(for: [speakerOrderExpectation], timeout: 2.0)
+
+        // TODO: Keep this to hold a strong reference to controller service
         _ = hostMeetingControllerService
-
-        //6: Observer fake speaker order for the updated order.
-//        let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-//            let coreService = item as! HostCoreServices
-//            return coreService.speakerOrder?[0] == "id2"
-//        }
-//
-//        let speakerOrderExpectation = self.expectation(for: newRoundSpeakerOrderPredicate,
-//                                           evaluatedWith: hostCoreServices,
-//                                           handler: nil)
-//
-//        self.wait(for: [speakerOrderExpectation], timeout: 1.0)
 
     }
 

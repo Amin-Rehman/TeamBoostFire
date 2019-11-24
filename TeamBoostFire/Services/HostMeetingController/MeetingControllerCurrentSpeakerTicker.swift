@@ -63,6 +63,8 @@ class MeetingControllerCurrentSpeakerTicker: TimerControllerObserver {
             }
             startTheCurrentRound()
         }
+        
+        iterationInCurrentRound += 1
     }
 
     public func stop() {
