@@ -9,6 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run: |
+        pod repo update
+        pod install      
     - name: CocoaPods Action
       uses: ty0x2333/cocoapods-action@0.2.0
       with:
@@ -16,7 +20,3 @@ jobs:
         workspace: TeamBoostFire.xcworkspace
         # Shared scheme
         scheme: TeamBoostFireTests
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
