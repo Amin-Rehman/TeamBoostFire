@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: xcodebuild -workspace TeamBoostFire.xcworkspace -scheme TeamBoostFire build
+      run: xcodebuild -workspace TeamBoostFire.xcworkspace -scheme TeamBoostFire build -allowProvisioningUpdates
 #    - name: Run tests
 #      run: swift test -v
