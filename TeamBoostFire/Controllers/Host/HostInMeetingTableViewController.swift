@@ -22,9 +22,14 @@ class HostInMeetingTableViewController: UITableViewController {
         super.init(style: .plain)
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
+
+        let notificationName = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateTableViewWithSpeakerOrder),
+                                               name: notificationName, object: nil)
     }
 
-    public func updateTableViewWithSpeakerOrder() {
+    @objc public func updateTableViewWithSpeakerOrder() {
         tableViewDataSource = HostCoreServices.shared.allParticipants!
         tableView.reloadData()
     }
@@ -63,9 +68,10 @@ class HostInMeetingTableViewController: UITableViewController {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
+        let currentSpeakerIdentifier = HostCoreServices.shared.speakerOrder?[0]
         let speakerOrder = cellParticipant.speakerOrder
 
-        let isCurrentSpeaker = (cellParticipant.speakerOrder == 0)
+        let isCurrentSpeaker = participantIdentifier == currentSpeakerIdentifier
         if isCurrentSpeaker {
             cell.orderLabel.isHidden = true
             showAndAnimateRedCircle(for: cell)
@@ -74,6 +80,8 @@ class HostInMeetingTableViewController: UITableViewController {
             hideRedAnimatingCircle(for: cell)
             showSpeakingOrderIfNeeded(for: cell, speakingOrder: speakerOrder)
         }
+
+
 
         // Update progressViewFactor
         let evenCellColor = UIColor(red: 0.75,
@@ -93,6 +101,7 @@ class HostInMeetingTableViewController: UITableViewController {
         } else {
             cell.updateProgress(to: 0.0, color: UIColor.clear)
         }
+
 
         return cell
     }
