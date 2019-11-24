@@ -22,7 +22,8 @@ jobs:
       uses: ty0x2333/cocoapods-action@master
 
       with:
+        lint: false
         workspace: TeamBoostFire.xcworkspace
         scheme: TeamBoostFireTests
-        test: false
-        lint: false
+        test: true
+        
