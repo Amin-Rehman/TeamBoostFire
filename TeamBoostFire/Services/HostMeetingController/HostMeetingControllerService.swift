@@ -92,7 +92,8 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
                                                name: notificationName, object: nil)
     }
 
-    @objc private func participantIsDoneInterrupt(notification: NSNotification) {        
+    @objc private func participantIsDoneInterrupt(notification: NSNotification) {
+        print("ALOG: HostMeetingControllerService: participantIsDoneInterrupt")
         speakerIsDone()
     }
 

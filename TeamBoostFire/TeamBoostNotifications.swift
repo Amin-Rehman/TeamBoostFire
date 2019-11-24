@@ -17,3 +17,7 @@ enum TeamBoostNotifications: String {
     case participantIsDoneInterrupt = "ParticipantIsDoneInterrupt"
     case currentParticipantMaxSpeakingTimeChanged = "CurrentParticipantMaxSpeakingTimeChanged"
 }
+
+public enum AppNotifications: String {
+    case newMeetingRoundStarted = "NewMeetingRoundStarted"
+}
