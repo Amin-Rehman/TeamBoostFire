@@ -21,7 +21,7 @@ public struct SpeakerRecord: Equatable {
 struct MeetingOrderEvaluator {
     static func evaluateOrder(participantTotalSpeakingRecord: ParticipantSpeakingRecord,
                               maxTalkingTime: SpeakingTime)
-        -> [SpeakerRecord]? {
+        -> [SpeakerRecord] {
             // TODO: Sort First
             // Then evaluate the speaking order
 
@@ -90,5 +90,21 @@ struct MeetingOrderEvaluator {
                 }
                 return adjustedRoundMeetingRecord
             }
+    }
+
+    static func makeSpeakerRecord(originalSpeakerRecord: [SpeakerRecord],
+                                  callToSpeakerQueue: [ParticipantId]) -> [SpeakerRecord] {
+
+        let preferredSpeakingRecords = originalSpeakerRecord.filter { (speakerRecord) -> Bool in
+            callToSpeakerQueue.contains(speakerRecord.participantId)
+        }
+
+        let nonPreferredSpeakingRecords = originalSpeakerRecord.filter { (speakerRecord) -> Bool in
+            !callToSpeakerQueue.contains(speakerRecord.participantId)
+        }
+
+        let adjustedSpeakingRecord = preferredSpeakingRecords + nonPreferredSpeakingRecords
+        return adjustedSpeakingRecord
+
     }
 }

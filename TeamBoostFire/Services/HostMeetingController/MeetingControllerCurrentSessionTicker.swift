@@ -41,30 +41,43 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
 
 
     public func start() {
-        switch meetingMode {
-        case .Uniform:
-            timerController.start(with: Double(maxTalkTime))
+        let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
+        let callToSpeakerQueue = self.storage.callToSpeakerQueue
 
-        case .AutoModerated:
-            // FIXME: Maybe use total number of participants as a parameter
-            let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
+        if callToSpeakerQueue.count > 0 {
+            // Reset the round
+            iterationInCurrentRound = 0
+            let speakingRecord = makeNewRoundRecord()
 
-            if isNewRound {
-                print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
-                let speakingRecordsForNewRound = makeNewRoundRecord()
-                storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
+            let adjustedSpeakingRecord = MeetingOrderEvaluator.makeSpeakerRecord(
+                originalSpeakerRecord: speakingRecord,
+                callToSpeakerQueue: callToSpeakerQueue)
 
-                DispatchQueue.main.async {
-                    let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
-                    NotificationCenter.default.post(name: name,
-                                                    object: nil)
-                }
+            storage.updateSpeakingRecordPerRound(speakerRecord: adjustedSpeakingRecord)
+            // Perform preference here
+            fireNewSpeakingRoundStartedNotification()
+            self.storage.clearCallToSpeakerQueue()
 
-            }
-            startTheCurrentSpeakingSession()
+        } else if isNewRound {
+            print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
+            iterationInCurrentRound = 0
+
+            // For every round re-evaluate the meeting record for that round
+            let speakingRecordsForNewRound = makeNewRoundRecord()
+            storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
+            fireNewSpeakingRoundStartedNotification()
         }
-        
+
+        startTheCurrentSpeakingSession()
         iterationInCurrentRound += 1
+    }
+
+    private func fireNewSpeakingRoundStartedNotification() {
+        DispatchQueue.main.async {
+            let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: nil)
+        }
     }
 
     public func stop() {
@@ -89,12 +102,22 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
 // MARK: Private Helpers
 extension MeetingControllerCurrentSessionTicker {
     private func makeNewRoundRecord() -> [SpeakerRecord] {
-        iterationInCurrentRound = 0
-
-        let speakingRecordsForNewRound = MeetingOrderEvaluator.evaluateOrder(
-            participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
-            maxTalkingTime: maxTalkTime)!
-        return speakingRecordsForNewRound
+        switch meetingMode {
+        case .AutoModerated:
+            let speakingRecordsForNewRound = MeetingOrderEvaluator.evaluateOrder(
+                participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
+                maxTalkingTime: maxTalkTime)
+            return speakingRecordsForNewRound
+        case .Uniform:
+            var speakingRecord = [SpeakerRecord]()
+            // TODO: Remove force wrap
+            let allParticipants = self.storage.coreServices.allParticipants!
+            for participant in allParticipants {
+                let speakerRecord = SpeakerRecord(participantId: participant.id , speakingTime: self.maxTalkTime)
+                speakingRecord.append(speakerRecord)
+            }
+            return speakingRecord
+        }
     }
 
     private func startTheCurrentSpeakingSession() {

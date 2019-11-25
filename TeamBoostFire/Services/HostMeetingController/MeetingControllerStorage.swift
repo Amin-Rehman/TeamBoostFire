@@ -16,7 +16,7 @@ class MeetingControllerStorage {
     // To be updated for every round if speaking time needs to be adjusted
     private(set) public var participantSpeakingRecordPerRound = [SpeakerRecord]()
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
-    private let coreServices: HostCoreServices
+    public let coreServices: HostCoreServices
 
     private(set) public var callToSpeakerQueue = [ParticipantId]()
 
