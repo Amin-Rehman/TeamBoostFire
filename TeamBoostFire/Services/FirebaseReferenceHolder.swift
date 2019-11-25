@@ -27,7 +27,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
     private(set) var meetingParamsReference: DatabaseReference?
     private(set) var iAmDoneInterruptReference: DatabaseReference?
     private(set) var currentSpeakerMaximumSpeakingTime: DatabaseReference?
-    private(set) var callToSpeakerQueueReference: DatabaseReference?
+    private(set) var callToSpeakerReference: DatabaseReference?
 
     private(set) var meetingParamsTimeReference: DatabaseReference?
     private(set) var meetingParamsMaxTalkingTimeReference: DatabaseReference?
@@ -46,7 +46,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
         self.meetingParamsTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MeetingTime)
         self.meetingParamsAgendaReference = self.meetingParamsReference?.referenceOfChild(with: .Agenda)
         self.meetingParamsMaxTalkingTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
-        self.callToSpeakerQueueReference = self.meetingReference?.referenceOfChild(with: .CallToSpeakerQueue)
+        self.callToSpeakerReference = self.meetingReference?.referenceOfChild(with: .CallToSpeakerInterrupt)
     }
 
     func setupDefaultValues(with params: MeetingsParams) {
@@ -58,7 +58,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
         meetingParamsTimeReference?.setValue(params.meetingTime)
         meetingParamsAgendaReference?.setValue(params.agenda)
         meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
-        callToSpeakerQueueReference?.setValue([""])
+        callToSpeakerReference?.setValue("")
     }
 
     func setReferenceForSpeakerOrder(speakingOrder: [String]) {

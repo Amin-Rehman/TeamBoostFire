@@ -26,9 +26,9 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
                                              coreServices: coreServices)
     }()
 
-    public lazy var meetingControllerCurrentSpeakerTicker: MeetingControllerCurrentSpeakerTicker = {
+    public lazy var meetingControllerCurrentSessionTicker: MeetingControllerCurrentSessionTicker = {
         let speakerTickerTimerController = TeamBoostTimerController()
-        return MeetingControllerCurrentSpeakerTicker(with: self.storage,
+        return MeetingControllerCurrentSessionTicker(with: self.storage,
                                                    meetingMode: self.meetingMode,
                                                    maxTalkTime: self.meetingParams.maxTalkTime,
                                                    observer: self, timerController: speakerTickerTimerController)
@@ -48,14 +48,15 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         }
 
         meetingControllerSecondTicker.start()
-        meetingControllerCurrentSpeakerTicker.start()
-        setupParticipantIsDoneInterrupt()
+        meetingControllerCurrentSessionTicker.start()
+        setupParticipantIsDoneNotificationObserver()
+        setupCallToSpeakerNotificationObserver()
     }
 
     // MARK: - Public API(s)
     @objc public func speakerIsDone() {
         meetingControllerSecondTicker.stop()
-        meetingControllerCurrentSpeakerTicker.stop()
+        meetingControllerCurrentSessionTicker.stop()
 
         guard var speakingOrder = coreServices.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
@@ -66,18 +67,18 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
         
         meetingControllerSecondTicker.start()
-        meetingControllerCurrentSpeakerTicker.start()
+        meetingControllerCurrentSessionTicker.start()
 
     }
 
     public func endMeeting() {
         meetingControllerSecondTicker.stop()
-        meetingControllerCurrentSpeakerTicker.stop()
+        meetingControllerCurrentSessionTicker.stop()
     }
 
     public func forceSpeakerChange(participantId: String) {
         do {
-            try meetingControllerCurrentSpeakerTicker.forceRestartRound(preferParticipantId: participantId)
+            try meetingControllerCurrentSessionTicker.forceRestartRound(preferParticipantId: participantId)
         } catch {
             assertionFailure("Force switching participant failed: \(error)")
         }
@@ -85,16 +86,40 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
 
     // MARK: - Private API(s)
 
-    private func setupParticipantIsDoneInterrupt() {
+    private func setupParticipantIsDoneNotificationObserver() {
         let notificationName = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(participantIsDoneInterrupt(notification:)),
+                                               selector: #selector(participantIsDone(notification:)),
                                                name: notificationName, object: nil)
     }
 
-    @objc private func participantIsDoneInterrupt(notification: NSNotification) {
+    @objc private func participantIsDone(notification: NSNotification) {
         print("ALOG: HostMeetingControllerService: participantIsDoneInterrupt")
         speakerIsDone()
+    }
+
+    private func setupCallToSpeakerNotificationObserver() {
+        let notificationName = Notification.Name(TeamBoostNotifications.callToSpeakerDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(callToSpeaker(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func callToSpeaker(notification: NSNotification) {
+        guard let callToSpeakerWithUniqueId = notification.object as? String else {
+            assertionFailure("No call to speaker id available in the payload")
+            return
+        }
+
+        // Split call to speaker with '_' to retrieve the userId
+        guard let callToSpeakerId = callToSpeakerWithUniqueId.components(
+            separatedBy: CharacterSet(charactersIn: "_")).first else {
+                assertionFailure("Unable to retrieve call to speaker Id")
+                return
+        }
+
+        print("ALOG: HostMeetingControllerService: callToSpeaker")
+        self.storage.appendSpeakerToCallToSpeakerQueue(participantId: callToSpeakerId)
     }
 
     private func shuffleSpeakerOrder() {

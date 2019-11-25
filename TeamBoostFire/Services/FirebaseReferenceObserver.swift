@@ -12,11 +12,20 @@ public protocol ReferenceObserving {
     func observeIAmDoneInterrupt(subscriber: @escaping () -> Void)
     func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
-
-
+    func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void)
 }
 
 struct FirebaseReferenceObserver: ReferenceObserving {
+    func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void) {
+        firebaseReferenceHolder.callToSpeakerReference?.observe(DataEventType.value, with: { snapshot in
+            guard let callToSpeakerWithUniqueId = snapshot.value as? String else {
+                assertionFailure("Error retrieving call to speaker Id with Unique Id")
+                return
+            }
+            subscriber(callToSpeakerWithUniqueId)
+        })
+    }
+
 
     let firebaseReferenceHolder: FirebaseReferenceHolder
 

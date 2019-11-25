@@ -14,6 +14,7 @@ class FakeReferenceObserver: ReferenceObserving {
     // MARK: -
     public var participantListChangedSubscriber:(([Participant]) -> Void)?
     public var iAmDoneInterruptSubscriber:(() -> Void)?
+    public var callToSpeakerDidChange:((String) -> Void)?
 
     // MARK: -
 
@@ -34,4 +35,7 @@ class FakeReferenceObserver: ReferenceObserving {
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void) {
     }
 
+    func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void) {
+        callToSpeakerDidChange = subscriber
+    }
 }
