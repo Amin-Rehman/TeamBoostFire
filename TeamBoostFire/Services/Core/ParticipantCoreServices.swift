@@ -113,4 +113,14 @@ class ParticipantCoreServices: TeamBoostCore {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
         firebaseReferenceHolder?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
     }
+
+    public func registerCallToSpeaker() {
+        guard let callToSpeakerValue = selfParticipantIdentifier else {
+            assertionFailure("Unable to register call to speaker value")
+            return
+        }
+
+        let uuid = UUID().uuidString
+        firebaseReferenceHolder?.callToSpeakerReference?.setValue(callToSpeakerValue + "_" + uuid)
+    }
 }

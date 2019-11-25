@@ -68,7 +68,7 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 
     @IBAction func callSpeakerTapped(_ sender: Any) {
-
+        ParticipantCoreServices.shared.registerCallToSpeaker()
     }
 }
 
