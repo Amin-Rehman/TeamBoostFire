@@ -42,13 +42,12 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
 
     public func start() {
         let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
+        let callToSpeakerQueue = self.storage.callToSpeakerQueue
 
-        if self.storage.callToSpeakerQueue.count > 0 {
+        if callToSpeakerQueue.count > 0 {
             // Reset the round
             iterationInCurrentRound = 0
-
-//            let callToSpeakerQueue = self.storage.callToSpeakerQueue
-//            let speakingRecord = makeNewRoundRecord()
+            let speakingRecord = makeNewRoundRecord()
 
             // Perform preference here
 
@@ -99,7 +98,7 @@ extension MeetingControllerCurrentSessionTicker {
         case .AutoModerated:
             let speakingRecordsForNewRound = MeetingOrderEvaluator.evaluateOrder(
                 participantTotalSpeakingRecord: storage.participantTotalSpeakingRecord,
-                maxTalkingTime: maxTalkTime)!
+                maxTalkingTime: maxTalkTime)
             return speakingRecordsForNewRound
         case .Uniform:
             var speakingRecord = [SpeakerRecord]()
