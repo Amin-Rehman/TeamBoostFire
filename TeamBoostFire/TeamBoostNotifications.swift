@@ -16,6 +16,7 @@ enum TeamBoostNotifications: String {
     case speakerOrderDidChange = "SpeakerOrderDidChange"
     case participantIsDoneInterrupt = "ParticipantIsDoneInterrupt"
     case currentParticipantMaxSpeakingTimeChanged = "CurrentParticipantMaxSpeakingTimeChanged"
+    case callToSpeakerDidChange = "callToSpeakerDidChange"
 }
 
 public enum AppNotifications: String {

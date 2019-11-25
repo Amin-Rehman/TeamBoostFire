@@ -24,6 +24,6 @@ enum TableKeys: String {
     /*
      Call to speaker Queue
      */
-    case CallToSpeakerQueue = "call_to_speaker_queue"
+    case CallToSpeakerInterrupt = "call_to_speaker_interrupt"
 }
 

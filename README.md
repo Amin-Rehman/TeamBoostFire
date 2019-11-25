@@ -6,7 +6,7 @@ TeamBoost with Firebase implementation
 ```
 {
   "123456" : {
-    "call_to_speaker_queue" : [ "" ],
+    "call_to_speaker_interrupt" : "",
     "current_speaker_speaking_time" : 0,
     "i_am_done_interrupt" : 5.9528858132653E8,
     "meeting_params" : {

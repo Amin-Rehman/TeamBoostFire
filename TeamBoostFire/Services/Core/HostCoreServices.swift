@@ -60,6 +60,14 @@ class HostCoreServices: TeamBoostCore {
                                                 object: nil)
             }
         })
+
+        firebaseReferenceObserver?.observeCallToSpeakerDidChange(subscriber: { callToSpeakerId in
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.callToSpeakerDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: callToSpeakerId)
+            }
+        })
     }
     
     public func startMeeting() {

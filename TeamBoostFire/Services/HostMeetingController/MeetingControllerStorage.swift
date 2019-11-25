@@ -18,6 +18,8 @@ class MeetingControllerStorage {
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     private let coreServices: HostCoreServices
 
+    private(set) public var callToSpeakerQueue = [ParticipantId]()
+
     public var speakingRecord: [String] {
         var newSpeakingOrder = [String]()
         participantSpeakingRecordPerRound.forEach { speakerRecord in
@@ -49,4 +51,12 @@ class MeetingControllerStorage {
         participantTotalSpeakingRecord[participantId] = newTime
     }
 
+    // MARK: - Call to Speaker
+    func appendSpeakerToCallToSpeakerQueue(participantId: ParticipantId) {
+        self.callToSpeakerQueue.append(participantId)
+    }
+
+    func clearCallToSpeakerQueue() {
+        self.callToSpeakerQueue = [ParticipantId]()
+    }
 }
