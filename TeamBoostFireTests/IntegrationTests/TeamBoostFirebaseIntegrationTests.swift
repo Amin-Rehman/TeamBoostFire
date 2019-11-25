@@ -348,7 +348,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         self.wait(for: [thirdSpeakerSwitchExpectation], timeout: 11.0)
 
-        //5: Observe order in Core Service and check that the first speaker is id2 because she spoke the least
+        //5: Observe order in Core Service , it should not change
         let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
             let coreService = item as! HostCoreServices
             return coreService.speakerOrder?[0] == "id1"
@@ -360,8 +360,15 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         self.wait(for: [speakerOrderExpectation], timeout: 2.0)
 
-        // TODO: Keep this to hold a strong reference to controller service
-        _ = hostMeetingControllerService
+        let speakingRecordPerRound = hostMeetingControllerService.storage.participantSpeakingRecordPerRound
+        XCTAssertEqual(speakingRecordPerRound[0].participantId, "id1")
+        XCTAssertEqual(speakingRecordPerRound[0].speakingTime, 10)
+
+        XCTAssertEqual(speakingRecordPerRound[1].participantId, "id2")
+        XCTAssertEqual(speakingRecordPerRound[1].speakingTime, 10)
+
+        XCTAssertEqual(speakingRecordPerRound[2].participantId, "id3")
+        XCTAssertEqual(speakingRecordPerRound[2].speakingTime, 10)
 
     }
 
