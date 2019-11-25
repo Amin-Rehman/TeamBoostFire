@@ -49,8 +49,13 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
             iterationInCurrentRound = 0
             let speakingRecord = makeNewRoundRecord()
 
-            // Perform preference here
+            let adjustedSpeakingRecord = MeetingOrderEvaluator.makeSpeakerRecord(
+                originalSpeakerRecord: speakingRecord,
+                callToSpeakerQueue: callToSpeakerQueue)
 
+            storage.updateSpeakingRecordPerRound(speakerRecord: adjustedSpeakingRecord)
+            // Perform preference here
+            fireNewSpeakingRoundStartedNotification()
             self.storage.clearCallToSpeakerQueue()
 
         } else if isNewRound {
@@ -60,16 +65,19 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
             // For every round re-evaluate the meeting record for that round
             let speakingRecordsForNewRound = makeNewRoundRecord()
             storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
-
-            DispatchQueue.main.async {
-                let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
-                NotificationCenter.default.post(name: name,
-                                                object: nil)
-            }
+            fireNewSpeakingRoundStartedNotification()
         }
 
         startTheCurrentSpeakingSession()
         iterationInCurrentRound += 1
+    }
+
+    private func fireNewSpeakingRoundStartedNotification() {
+        DispatchQueue.main.async {
+            let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: nil)
+        }
     }
 
     public func stop() {
