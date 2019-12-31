@@ -16,6 +16,8 @@ class MeetingControllerStorage {
     // To be updated for every round if speaking time needs to be adjusted
     private(set) public var participantSpeakingRecordPerRound = [SpeakerRecord]()
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
+    private(set) public var totalMeetingTime = Int(0)
+
     public let coreServices: HostCoreServices
 
     private(set) public var callToSpeakerQueue = [ParticipantId]()
@@ -49,6 +51,10 @@ class MeetingControllerStorage {
     func updateTotalSpeakingTime(for participantId: String,
                                  newTime: Int) {
         participantTotalSpeakingRecord[participantId] = newTime
+    }
+
+    func incrementMeetingTime() {
+        totalMeetingTime = totalMeetingTime + 1
     }
 
     // MARK: - Call to Speaker

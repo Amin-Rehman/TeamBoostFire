@@ -21,4 +21,5 @@ enum TeamBoostNotifications: String {
 
 public enum AppNotifications: String {
     case newMeetingRoundStarted = "NewMeetingRoundStarted"
+    case meetingSecondTicked = "MeetingSecondTicked"
 }
