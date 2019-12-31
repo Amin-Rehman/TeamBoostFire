@@ -17,8 +17,9 @@ class MeetingTimeUpdater {
     private var secondTickTimer: Timer?
 
     init(with storage: MeetingControllerStorage) {
-        // First second seems to get missed, so brute force it
         self.storage = storage
+        
+        // First second seems to get missed, so brute force it
         secondTicked()
     }
 

@@ -27,7 +27,6 @@ class SpeakerSpeakingTimeUpdater {
     }
 
     @objc private func secondTicked() {
-        print("ALOG: MeetingControllerSecondTicker: secondTicked")
         guard let speakerOrder = coreServices.speakerOrder,
             let currentSpeakerIdentifier = speakerOrder.first else {
                 assertionFailure("Unable to retrieve current speaker")
