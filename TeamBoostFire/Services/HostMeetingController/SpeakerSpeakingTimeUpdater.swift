@@ -8,8 +8,11 @@
 
 import Foundation
 
+/**
+ Responsible for updating the speaking time of each speaker every second
+ */
 
-class MeetingControllerSecondTicker {
+class SpeakerSpeakingTimeUpdater {
     weak public var secondTickObserver: SpeakerControllerSecondTickObserver?
     var storage: MeetingControllerStorage
     private var secondTickTimer: Timer?
@@ -24,7 +27,6 @@ class MeetingControllerSecondTicker {
     }
 
     @objc private func secondTicked() {
-        print("ALOG: MeetingControllerSecondTicker: secondTicked")
         guard let speakerOrder = coreServices.speakerOrder,
             let currentSpeakerIdentifier = speakerOrder.first else {
                 assertionFailure("Unable to retrieve current speaker")
@@ -53,4 +55,5 @@ class MeetingControllerSecondTicker {
         secondTickTimer?.invalidate()
         secondTickTimer = nil
     }
+
 }

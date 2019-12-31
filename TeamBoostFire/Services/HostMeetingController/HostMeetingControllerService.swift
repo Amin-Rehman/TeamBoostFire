@@ -21,17 +21,29 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         return controllerStorage
     }()
 
-    public lazy var meetingControllerSecondTicker: MeetingControllerSecondTicker = {
-        return MeetingControllerSecondTicker(with: self.storage,
+    /**
+     Responsible for updating the speaking time of each speaker every second in the storage
+     */
+    public lazy var speakerSpeakingTimeUpdater: SpeakerSpeakingTimeUpdater = {
+        return SpeakerSpeakingTimeUpdater(with: self.storage,
                                              coreServices: coreServices)
     }()
 
-    public lazy var meetingControllerCurrentSessionTicker: MeetingControllerCurrentSessionTicker = {
+    /**
+     Responsible for keeping track of the current session
+     */
+
+    public lazy var speakingSessionUpdater: SpeakingSessionUpdater = {
         let speakerTickerTimerController = TeamBoostTimerController()
-        return MeetingControllerCurrentSessionTicker(with: self.storage,
-                                                   meetingMode: self.meetingMode,
-                                                   maxTalkTime: self.meetingParams.maxTalkTime,
-                                                   observer: self, timerController: speakerTickerTimerController)
+        return SpeakingSessionUpdater(with: self.storage,
+                                      meetingMode: self.meetingMode,
+                                      maxTalkTime: self.meetingParams.maxTalkTime,
+                                      observer: self,
+                                      timerController: speakerTickerTimerController)
+    }()
+
+    public lazy var meetingTimeUpdater: MeetingTimeUpdater = {
+        return MeetingTimeUpdater(with: self.storage)
     }()
 
     init(meetingParams: MeetingsParams,
@@ -47,16 +59,17 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
             // shuffleSpeakerOrder()
         }
 
-        meetingControllerSecondTicker.start()
-        meetingControllerCurrentSessionTicker.start()
+        meetingTimeUpdater.start()
+        speakerSpeakingTimeUpdater.start()
+        speakingSessionUpdater.start()
         setupParticipantIsDoneNotificationObserver()
         setupCallToSpeakerNotificationObserver()
     }
 
     // MARK: - Public API(s)
     @objc public func speakerIsDone() {
-        meetingControllerSecondTicker.stop()
-        meetingControllerCurrentSessionTicker.stop()
+        speakerSpeakingTimeUpdater.stop()
+        speakingSessionUpdater.stop()
 
         guard var speakingOrder = coreServices.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
@@ -66,19 +79,19 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         coreServices.updateSpeakerOrder(with: speakingOrder)
         orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
         
-        meetingControllerSecondTicker.start()
-        meetingControllerCurrentSessionTicker.start()
+        speakerSpeakingTimeUpdater.start()
+        speakingSessionUpdater.start()
 
     }
 
     public func endMeeting() {
-        meetingControllerSecondTicker.stop()
-        meetingControllerCurrentSessionTicker.stop()
+        speakerSpeakingTimeUpdater.stop()
+        speakingSessionUpdater.stop()
     }
 
     public func forceSpeakerChange(participantId: String) {
         do {
-            try meetingControllerCurrentSessionTicker.forceRestartRound(preferParticipantId: participantId)
+            try speakingSessionUpdater.forceRestartRound(preferParticipantId: participantId)
         } catch {
             assertionFailure("Force switching participant failed: \(error)")
         }

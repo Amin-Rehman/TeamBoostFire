@@ -12,7 +12,7 @@ import Foundation
     @objc func speakerIsDone()
 }
 
-class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
+class SpeakingSessionUpdater: TimerControllerObserver {
 
     let storage: MeetingControllerStorage
     let meetingMode: MeetingMode
@@ -100,7 +100,7 @@ class MeetingControllerCurrentSessionTicker: TimerControllerObserver {
 }
 
 // MARK: Private Helpers
-extension MeetingControllerCurrentSessionTicker {
+extension SpeakingSessionUpdater {
     private func makeNewRoundRecord() -> [SpeakerRecord] {
         switch meetingMode {
         case .AutoModerated:

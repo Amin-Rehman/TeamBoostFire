@@ -15,8 +15,7 @@ class HostMeetingViewController: UIViewController {
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var timeElapsedLabel: UILabel!
     @IBOutlet weak var timeElapsedProgressView: UIProgressView!
-    
-    private var secondTickTimer: Timer?
+
     private var totalMeetingTimeInSeconds = 0
     private var totalMeetingTimeString = String()
 
@@ -36,35 +35,33 @@ class HostMeetingViewController: UIViewController {
         setupInitialElapsedMeetingTimeRatio()
         setupAgendaQuestion()
         updateUIWithSpeakerOrder()
-        startSecondTickerTimer()
+
+        let notificationName = Notification.Name(AppNotifications.meetingSecondTicked.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(meetingActiveSecondDidTick(notification:)),
+                                               name: notificationName, object: nil)
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopSecondTickerTimer()
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
 
-    private func startSecondTickerTimer() {
-        secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                                               selector: #selector(secondTicked),
-                                               userInfo: nil, repeats: true)
-    }
+    @objc private func meetingActiveSecondDidTick(notification: NSNotification) {
+        guard let activeMeetingTime = hostControllerService?.storage.activeMeetingTime else {
+            assertionFailure("host controller service not found")
+            return
+        }
 
-    private func stopSecondTickerTimer() {
-        secondTickTimer?.invalidate()
-        secondTickTimer = nil
-    }
-
-    @objc func secondTicked() {
-        activeMeetingTimeSeconds = activeMeetingTimeSeconds + 1
-        let timeElapsedString = activeMeetingTimeSeconds.minutesAndSecondsPrettyString()
+        let timeElapsedString = activeMeetingTime.minutesAndSecondsPrettyString()
         let timeElapsedRatioString = timeElapsedString + "/" + totalMeetingTimeString
         timeElapsedLabel?.text = timeElapsedRatioString
 
         let progressRatio = Float(activeMeetingTimeSeconds) / Float(totalMeetingTimeInSeconds)
         timeElapsedProgressView.progress = progressRatio
-    }
 
+    }
 
     private func setupInitialElapsedMeetingTimeRatio() {
         guard let meetingParams = HostCoreServices.shared.meetingParams else {
@@ -111,7 +108,7 @@ class HostMeetingViewController: UIViewController {
         hostInMeetingTableViewController.didMove(toParent: self)
         hostInMeetingTableViewController.hostControllerService = hostControllerService
         // FIXME
-        hostControllerService?.meetingControllerSecondTicker.secondTickObserver = hostInMeetingTableViewController
+        hostControllerService?.speakerSpeakingTimeUpdater.secondTickObserver = hostInMeetingTableViewController
     }
 
     private func updateUIWithSpeakerOrder() {
