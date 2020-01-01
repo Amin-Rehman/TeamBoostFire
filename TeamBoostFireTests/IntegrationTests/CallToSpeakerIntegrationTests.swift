@@ -130,6 +130,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
                                                                         orderObserver: fakeSpeakerOrderObserver,
                                                                         meetingMode: .AutoModerated,
                                                                         coreServices: hostCoreServices)
+        hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
         self.wait(for: [expectation], timeout: 2.0)

@@ -38,50 +38,15 @@ class SpeakingSessionUpdater: TimerControllerObserver {
     func notifyTimerIsDone() {
         observer?.speakerIsDone()
     }
-
-
-    public func start() {
-        let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
-        let callToSpeakerQueue = self.storage.callToSpeakerQueue
-
-        if callToSpeakerQueue.count > 0 {
-            // Reset the round
-            iterationInCurrentRound = 0
-            let speakingRecord = makeNewRoundRecord()
-
-            let adjustedSpeakingRecord = MeetingOrderEvaluator.makeSpeakerRecord(
-                originalSpeakerRecord: speakingRecord,
-                callToSpeakerQueue: callToSpeakerQueue)
-
-            storage.updateSpeakingRecordPerRound(speakerRecord: adjustedSpeakingRecord)
-            // Perform preference here
-            fireNewSpeakingRoundStartedNotification()
-            self.storage.clearCallToSpeakerQueue()
-
-        } else if isNewRound {
-            print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
-            iterationInCurrentRound = 0
-
-            // For every round re-evaluate the meeting record for that round
-            let speakingRecordsForNewRound = makeNewRoundRecord()
-            storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
-            fireNewSpeakingRoundStartedNotification()
-        }
-
-        startTheCurrentSpeakingSession()
-        iterationInCurrentRound += 1
-    }
-
-    private func fireNewSpeakingRoundStartedNotification() {
-        DispatchQueue.main.async {
-            let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
-            NotificationCenter.default.post(name: name,
-                                            object: nil)
-        }
-    }
-
     public func stop() {
         timerController.stop()
+    }
+
+    public func start() {
+        adjustOrderForNewSession()
+        fireNewSpeakingRoundStartedNotification()
+        startTheCurrentSpeakingSession()
+        iterationInCurrentRound += 1
     }
 
     /**
@@ -123,6 +88,40 @@ extension SpeakingSessionUpdater {
     private func startTheCurrentSpeakingSession() {
         let currentSpeakingTime = storage.participantSpeakingRecordPerRound[iterationInCurrentRound].speakingTime
         timerController.start(with: Double(currentSpeakingTime))
+    }
+
+    private func adjustOrderForNewSession() {
+        let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
+        let callToSpeakerQueue = self.storage.callToSpeakerQueue
+
+        if callToSpeakerQueue.count > 0 {
+            // Reset the round
+            iterationInCurrentRound = 0
+            let speakingRecord = makeNewRoundRecord()
+
+            let adjustedSpeakingRecord = MeetingOrderEvaluator.makeSpeakerRecord(
+                originalSpeakerRecord: speakingRecord,
+                callToSpeakerQueue: callToSpeakerQueue)
+
+            storage.updateSpeakingRecordPerRound(speakerRecord: adjustedSpeakingRecord)
+            self.storage.clearCallToSpeakerQueue()
+
+        } else if isNewRound {
+            print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
+            iterationInCurrentRound = 0
+
+            // For every round re-evaluate the meeting record for that round
+            let speakingRecordsForNewRound = makeNewRoundRecord()
+            storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
+        }
+    }
+
+    private func fireNewSpeakingRoundStartedNotification() {
+        DispatchQueue.main.async {
+            let name = Notification.Name(AppNotifications.newMeetingRoundStarted.rawValue)
+            NotificationCenter.default.post(name: name,
+                                            object: nil)
+        }
     }
 }
 
