@@ -24,6 +24,7 @@ class MeetingTimeUpdater {
     }
 
     @objc private func secondTicked() {
+        print("MeetingTimeUpdater: secondTicked")
         storage.incrementMeetingTime()
         fireSecondTickedNotification()
     }

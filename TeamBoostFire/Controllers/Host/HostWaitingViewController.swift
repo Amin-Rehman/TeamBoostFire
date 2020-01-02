@@ -60,11 +60,10 @@ class HostWaitingViewController: UIViewController {
     @IBAction func startMeetingClicked(_ sender: Any) {
         AnalyticsService.shared.hostMeetingStarted()
         HostCoreServices.shared.startMeeting()
-        let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
+        let hostHaveYourSayViewController = HostHaveYourSayViewController(nibName: "HostHaveYourSayViewController",
                                                                   bundle: nil)
-        self.navigationController?.pushViewController(hostMeetingViewController, animated: true)
+        self.navigationController?.pushViewController(hostHaveYourSayViewController, animated: true)
     }
-
 
     @IBAction func addParticipantManuallyClicked(_ sender: Any) {
     }

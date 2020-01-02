@@ -29,18 +29,20 @@ class HostMeetingViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
 
-        setupSpeakerControllerService()
         setupChildTableViewController()
 
         setupInitialElapsedMeetingTimeRatio()
         setupAgendaQuestion()
         updateUIWithSpeakerOrder()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         let notificationName = Notification.Name(AppNotifications.meetingSecondTicked.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingActiveSecondDidTick(notification:)),
                                                name: notificationName, object: nil)
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,7 +62,6 @@ class HostMeetingViewController: UIViewController {
 
         let progressRatio = Float(activeMeetingTimeSeconds) / Float(totalMeetingTimeInSeconds)
         timeElapsedProgressView.progress = progressRatio
-
     }
 
     private func setupInitialElapsedMeetingTimeRatio() {
@@ -74,19 +75,6 @@ class HostMeetingViewController: UIViewController {
         let initialTimeElapsedString = "00:00/" + totalMeetingTimeString
         timeElapsedLabel?.text = initialTimeElapsedString
         timeElapsedProgressView.progress = 0.0
-    }
-
-    private func setupSpeakerControllerService() {
-        guard let meetingParams = HostCoreServices.shared.meetingParams else {
-            assertionFailure("Unable to retrieve meeting params")
-            return
-        }
-
-        hostControllerService = HostMeetingControllerService(
-            meetingParams: meetingParams,
-            orderObserver: self,
-            meetingMode: meetingParams.moderationMode!,
-            coreServices: HostCoreServices.shared)
     }
 
     private func setupAgendaQuestion() {
@@ -151,6 +139,10 @@ class HostMeetingViewController: UIViewController {
         hostControllerService?.speakerIsDone()
     }
 
+    @IBAction func haveYourSayTapped(_ sender: Any) {
+        self.hostControllerService?.stopParticipantSpeakingSessions()
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension HostMeetingViewController: SpeakerControllerOrderObserver {
