@@ -60,11 +60,14 @@ class HostWaitingViewController: UIViewController {
     @IBAction func startMeetingClicked(_ sender: Any) {
         AnalyticsService.shared.hostMeetingStarted()
         HostCoreServices.shared.startMeeting()
-        let hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
-                                                                  bundle: nil)
-        self.navigationController?.pushViewController(hostMeetingViewController, animated: true)
-    }
+        guard let meetingParams = HostCoreServices.shared.meetingParams else {
+            assertionFailure("Unable to retrieve meeting params from HostCoreServices")
+            return
+        }
 
+        let hostHaveYourSayViewController = HostHaveYourSayViewController(with: meetingParams)
+        self.navigationController?.pushViewController(hostHaveYourSayViewController, animated: true)
+    }
 
     @IBAction func addParticipantManuallyClicked(_ sender: Any) {
     }

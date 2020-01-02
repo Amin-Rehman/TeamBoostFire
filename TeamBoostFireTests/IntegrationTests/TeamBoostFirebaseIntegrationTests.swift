@@ -102,6 +102,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                          orderObserver: fakeSpeakerOrderObserver,
                                          meetingMode: .AutoModerated,
                                      coreServices: hostCoreServices)
+        hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
         self.wait(for: [expectation], timeout: 2.0)
@@ -183,7 +184,8 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let hostMeetingControllerService = HostMeetingControllerService(meetingParams: meetingParams,
                                          orderObserver: fakeSpeakerOrderObserver,
                                          meetingMode: .AutoModerated,
-                                     coreServices: hostCoreServices)
+                                         coreServices: hostCoreServices)
+        hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
         self.wait(for: [expectation], timeout: 2.0)
@@ -303,6 +305,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                          orderObserver: fakeSpeakerOrderObserver,
                                          meetingMode: .Uniform,
                                      coreServices: hostCoreServices)
+        hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
         self.wait(for: [expectation], timeout: 2.0)

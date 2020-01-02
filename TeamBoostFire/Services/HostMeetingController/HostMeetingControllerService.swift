@@ -55,13 +55,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         self.meetingMode = meetingMode
         self.coreServices = coreServices
 
-        if meetingMode == .AutoModerated {
-            // shuffleSpeakerOrder()
-        }
-
         meetingTimeUpdater.start()
-        speakerSpeakingTimeUpdater.start()
-        speakingSessionUpdater.start()
         setupParticipantIsDoneNotificationObserver()
         setupCallToSpeakerNotificationObserver()
     }
@@ -81,12 +75,11 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         
         speakerSpeakingTimeUpdater.start()
         speakingSessionUpdater.start()
-
     }
 
     public func endMeeting() {
-        speakerSpeakingTimeUpdater.stop()
-        speakingSessionUpdater.stop()
+        stopParticipantSpeakingSessions()
+        meetingTimeUpdater.stop()
     }
 
     public func forceSpeakerChange(participantId: String) {
@@ -95,6 +88,16 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         } catch {
             assertionFailure("Force switching participant failed: \(error)")
         }
+    }
+
+    public func startParticipantSpeakingSessions() {
+        speakerSpeakingTimeUpdater.start()
+        speakingSessionUpdater.start()
+    }
+
+    public func stopParticipantSpeakingSessions() {
+        speakerSpeakingTimeUpdater.stop()
+        speakingSessionUpdater.stop()
     }
 
     // MARK: - Private API(s)
