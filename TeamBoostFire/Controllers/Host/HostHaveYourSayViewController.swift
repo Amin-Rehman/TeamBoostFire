@@ -17,11 +17,10 @@ class HostHaveYourSayViewController: UIViewController {
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var timeElapsedLabel: UILabel!
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    init(with meetingParams: MeetingsParams) {
         self.hostMeetingViewController = HostMeetingViewController(nibName: "HostMeetingViewController",
                                                                    bundle: nil)
-        // Will crash here in case meetingParams in nil
-        self.meetingParams = HostCoreServices.shared.meetingParams!
+        self.meetingParams = meetingParams
 
         let totalMeetingTimeInSeconds = meetingParams.meetingTime * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
@@ -33,7 +32,8 @@ class HostHaveYourSayViewController: UIViewController {
             coreServices: HostCoreServices.shared)
 
         self.hostMeetingViewController.hostControllerService = self.hostControllerService
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        super.init(nibName: "HostHaveYourSayViewController",
+                   bundle: nil)
     }
 
 
