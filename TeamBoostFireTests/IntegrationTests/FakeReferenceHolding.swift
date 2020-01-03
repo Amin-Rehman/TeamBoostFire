@@ -22,6 +22,9 @@ struct FakeReferenceHolding: ReferenceHolding {
     func setReferenceForSpeakerOrder(speakingOrder: [String]) {
     }
 
+    func setReferenceForModeratorHasControl(controlState: Bool) {
+    }
+
     func testModeSetReferenceForNoParticipants() {
     }
 
