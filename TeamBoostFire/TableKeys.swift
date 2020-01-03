@@ -2,6 +2,12 @@ import Foundation
 
 enum TableKeys: String {
     case MeetingState = "meeting_state"
+
+    /**
+     Moderator interjects in the meeting and has asked for control
+     */
+    case ModeratorHasControl = "moderator_has_control"
+
     case Suspended = "suspended"
     /*
      Order in which the participants can speak

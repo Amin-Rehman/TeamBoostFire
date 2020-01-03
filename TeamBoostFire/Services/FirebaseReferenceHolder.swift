@@ -9,6 +9,7 @@ public protocol ReferenceHolding {
     func setReferenceForMeetingStarted()
     func setReferenceForMeetingEnded()
     func setReferenceForSpeakerOrder(speakingOrder: [String])
+    func setReferenceForModeratorHasControl(controlState: Bool)
 
     // TODO: Just test mode - to be removed
     func testModeSetReferenceForNoParticipants()
@@ -32,6 +33,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
     private(set) var meetingParamsTimeReference: DatabaseReference?
     private(set) var meetingParamsMaxTalkingTimeReference: DatabaseReference?
     private(set) var meetingParamsAgendaReference: DatabaseReference?
+    private(set) var moderatorHasControlReference: DatabaseReference?
 
     init(with meetingIdentifier: String) {
         self.databaseRef = Database.database().reference()
@@ -47,6 +49,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
         self.meetingParamsAgendaReference = self.meetingParamsReference?.referenceOfChild(with: .Agenda)
         self.meetingParamsMaxTalkingTimeReference = self.meetingParamsReference?.referenceOfChild(with: .MaxTalkTime)
         self.callToSpeakerReference = self.meetingReference?.referenceOfChild(with: .CallToSpeakerInterrupt)
+        self.moderatorHasControlReference = self.meetingReference?.referenceOfChild(with: .ModeratorHasControl)
     }
 
     func setupDefaultValues(with params: MeetingsParams) {
@@ -59,10 +62,15 @@ struct FirebaseReferenceHolder: ReferenceHolding {
         meetingParamsAgendaReference?.setValue(params.agenda)
         meetingParamsMaxTalkingTimeReference?.setValue(params.maxTalkTime)
         callToSpeakerReference?.setValue("")
+        moderatorHasControlReference?.setValue(false)
     }
 
     func setReferenceForSpeakerOrder(speakingOrder: [String]) {
         speakerOrderReference?.setValue(speakingOrder)
+    }
+
+    func setReferenceForModeratorHasControl(controlState: Bool) {
+        moderatorHasControlReference?.setValue(controlState)
     }
 
     func setReferenceForMeetingStarted() {

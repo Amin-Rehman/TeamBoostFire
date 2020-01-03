@@ -104,6 +104,10 @@ class HostCoreServices: TeamBoostCore {
 
         allParticipants = updatedAllParticipants
     }
+
+    public func setModeratorControlState(controlState: Bool) {
+        firebaseReferenceHolder?.setReferenceForModeratorHasControl(controlState: controlState)
+    }
 }
 
 extension HostCoreServices {

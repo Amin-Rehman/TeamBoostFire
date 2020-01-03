@@ -141,6 +141,7 @@ class HostMeetingViewController: UIViewController {
 
     @IBAction func haveYourSayTapped(_ sender: Any) {
         self.hostControllerService?.stopParticipantSpeakingSessions()
+        HostCoreServices.shared.setModeratorControlState(controlState: true)
         self.navigationController?.popViewController(animated: true)
     }
 }
