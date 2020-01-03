@@ -13,6 +13,7 @@ public protocol ReferenceObserving {
     func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
     func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void)
+    func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void)
 }
 
 struct FirebaseReferenceObserver: ReferenceObserving {
@@ -62,6 +63,16 @@ struct FirebaseReferenceObserver: ReferenceObserving {
     public func observeIAmDoneInterrupt(subscriber: @escaping () -> Void) {
         firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
             subscriber()
+        })
+    }
+
+    public func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void) {
+        firebaseReferenceHolder.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
+            guard let moderatorHasControlState = snapshot.value as? Bool else {
+                assertionFailure("Error retrieving meeting state")
+                return
+            }
+            subscriber(moderatorHasControlState)
         })
     }
 

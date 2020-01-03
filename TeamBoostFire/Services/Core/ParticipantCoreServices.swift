@@ -107,6 +107,15 @@ class ParticipantCoreServices: TeamBoostCore {
                                                 object: meetingParams)
             }
         })
+
+        firebaseReferenceObserver?.observeModeratorHasControlDidChange(subscriber: { moderatorControlState in
+            DispatchQueue.main.async {
+                let name = Notification.Name(TeamBoostNotifications.moderatorHasControlDidChange.rawValue)
+                NotificationCenter.default.post(name: name,
+                                                object: moderatorControlState)
+            }
+        })
+
     }
 
     public func registerParticipantIsDoneInterrupt() {

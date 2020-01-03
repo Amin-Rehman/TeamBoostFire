@@ -11,6 +11,7 @@ import TeamBoostFire
 
 
 class FakeReferenceObserver: ReferenceObserving {
+
     // MARK: -
     public var participantListChangedSubscriber:(([Participant]) -> Void)?
     public var iAmDoneInterruptSubscriber:(() -> Void)?
@@ -19,6 +20,9 @@ class FakeReferenceObserver: ReferenceObserving {
     // MARK: -
 
     func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void) {
+    }
+
+    func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void) {
     }
 
     func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void) {
