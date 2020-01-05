@@ -24,6 +24,7 @@
 		EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */; };
 		EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDFB22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift */; };
 		EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1AFDFC22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib */; };
+		EB1C487323C26DDF0014D236 /* teamboost_main.json in Resources */ = {isa = PBXBuildFile; fileRef = EB1C487223C26DDF0014D236 /* teamboost_main.json */; };
 		EB1D48AC22672650001A754D /* HostSetupMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */; };
 		EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */; };
 		EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48AF226729FD001A754D /* TeamBoostCore.swift */; };
@@ -128,6 +129,7 @@
 		EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		EB1AFDFB22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantMeetingEndedViewController.swift; sourceTree = "<group>"; };
 		EB1AFDFC22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantMeetingEndedViewController.xib; sourceTree = "<group>"; };
+		EB1C487223C26DDF0014D236 /* teamboost_main.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teamboost_main.json; sourceTree = "<group>"; };
 		EB1D48AB22672650001A754D /* HostSetupMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSetupMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AD22672817001A754D /* ParticipantJoinMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48AF226729FD001A754D /* TeamBoostCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostCore.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EB1C487223C26DDF0014D236 /* teamboost_main.json */,
 				EB6CE8C82309D053002D3189 /* brain_storm.json */,
 				EB6CE8BF2309C39C002D3189 /* Reactions */,
 				EB6CE8B42309B953002D3189 /* ReactionGestures */,
@@ -607,6 +610,7 @@
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
 				EB6CE8C22309C439002D3189 /* agree.json in Resources */,
 				EBCCBEBE23BD117800F203AE /* HostHaveYourSayViewController.xib in Resources */,
+				EB1C487323C26DDF0014D236 /* teamboost_main.json in Resources */,
 				EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */,
 				EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */,
 				EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */,
@@ -972,7 +976,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFire/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -993,7 +997,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFire/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -37,7 +37,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateVersionLabel()
-        brainStormAnimationView.loopMode = .loop
+        brainStormAnimationView.loopMode = .autoReverse
     }
 
     override func viewDidAppear(_ animated: Bool) {
