@@ -13,32 +13,19 @@ class ParticipantCoreServices: TeamBoostCore {
     private(set) public var meetingIdentifier: String?
     private(set) public var selfParticipantIdentifier: String?
 
-    private var firebaseReferenceHolder: FirebaseReferenceHolder?
-    private var firebaseReferenceObserver: FirebaseReferenceObserver?
+    private var firebaseReferenceHolder: ReferenceHolding?
+    private var firebaseReferenceObserver: ReferenceObserving?
 
     private init() {}
 
     public func setupCore(with participant: Participant,
+                          referenceHolder: ReferenceHolding,
+                          referenceObserver: ReferenceObserving,
                           meetingCode: String) {
         print("ALOG: ParticipantCoreServices: setupCore called")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if appDelegate.testEnvironment == true {
-            self.meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
-        } else {
-            self.meetingIdentifier = meetingCode
-        }
         selfParticipantIdentifier = participant.id
-        self.firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier!)
-        firebaseReferenceHolder?.participantsReference?.child(participant.id).setValue(
-            ["name": participant.name,
-             "id":participant.id])
-
-        guard let firebaseReferenceHolder = self.firebaseReferenceHolder else {
-            assertionFailure("fireBaseReferenceContainer unable to be initialised")
-            return
-        }
-
-        firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
+        self.firebaseReferenceHolder = referenceHolder
+        firebaseReferenceHolder?.setParticipantReference(participantName: participant.name, participantId: participant.id)
 
         setupObservers()
     }
@@ -120,7 +107,7 @@ class ParticipantCoreServices: TeamBoostCore {
 
     public func registerParticipantIsDoneInterrupt() {
         let timeStampOfInterrupt = Date().timeIntervalSinceReferenceDate
-        firebaseReferenceHolder?.iAmDoneInterruptReference?.setValue(timeStampOfInterrupt)
+        firebaseReferenceHolder?.setIAmDoneInterruptReference(timeInterval: timeStampOfInterrupt)
     }
 
     public func registerCallToSpeaker() {
@@ -130,6 +117,7 @@ class ParticipantCoreServices: TeamBoostCore {
         }
 
         let uuid = UUID().uuidString
-        firebaseReferenceHolder?.callToSpeakerReference?.setValue(callToSpeakerValue + "_" + uuid)
+        let uniqueCallToSpeakerValue = callToSpeakerValue + "_" + uuid
+        firebaseReferenceHolder?.setCallToSpeakerReference(callToSpeakerReferenceValue: uniqueCallToSpeakerValue)
     }
 }

@@ -10,6 +10,10 @@ public protocol ReferenceHolding {
     func setReferenceForMeetingEnded()
     func setReferenceForSpeakerOrder(speakingOrder: [String])
     func setReferenceForModeratorHasControl(controlState: Bool)
+    func setParticipantReference(participantName: String,
+                                 participantId: String)
+    func setIAmDoneInterruptReference(timeInterval: TimeInterval)
+    func setCallToSpeakerReference(callToSpeakerReferenceValue: String)
 
     // TODO: Just test mode - to be removed
     func testModeSetReferenceForNoParticipants()
@@ -79,6 +83,22 @@ struct FirebaseReferenceHolder: ReferenceHolding {
 
     func setReferenceForMeetingEnded() {
         meetingStateReference?.setValue("ended")
+    }
+
+    // MARK: - Participant specific
+    func setParticipantReference(participantName: String,
+                                 participantId: String) {
+        participantsReference?.child(participantId).setValue(
+            ["name": participantName,
+             "id":participantId])
+    }
+
+    func setIAmDoneInterruptReference(timeInterval: TimeInterval) {
+        iAmDoneInterruptReference?.setValue(timeInterval)
+    }
+
+    func setCallToSpeakerReference(callToSpeakerReferenceValue: String) {
+        callToSpeakerReference?.setValue(callToSpeakerReferenceValue)
     }
 
     // Test Mode

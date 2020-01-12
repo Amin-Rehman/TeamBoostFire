@@ -173,7 +173,24 @@ class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegat
         let participantIdentifier = UUID().uuidString
         let participant = Participant(id: participantIdentifier,
                                       name: participantNameText, speakerOrder: -1)
-        ParticipantCoreServices.shared.setupCore(with: participant, meetingCode: meetingCodeText)
+
+        var meetingIdentifier = ""
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.testEnvironment == true {
+            meetingIdentifier = StubMeetingVars.MeetingCode.rawValue
+        } else {
+            meetingIdentifier = meetingCodeText
+        }
+
+        let referenceHolder = FirebaseReferenceHolder(with: meetingIdentifier)
+        let referenceObserver = FirebaseReferenceObserver(with: referenceHolder)
+
+        ParticipantCoreServices.shared.setupCore(
+            with: participant,
+            referenceHolder: referenceHolder,
+            referenceObserver: referenceObserver,
+            meetingCode: meetingIdentifier)
+
         navigationController?.pushViewController(ParticipantLobbyViewController(), animated: false)
     }
 
