@@ -38,7 +38,6 @@
 		EB1D48C122675248001A754D /* HostWaitingTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */; };
 		EB1D48C322675827001A754D /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C222675827001A754D /* Participant.swift */; };
 		EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C4226762A5001A754D /* TeamBoostNotifications.swift */; };
-		EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C62267C93C001A754D /* ParticipantJoinMeetingUseCase.swift */; };
 		EB1D48CA2267CB07001A754D /* HostMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48C82267CB07001A754D /* HostMeetingViewController.swift */; };
 		EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */; };
 		EB1D48CE2267D303001A754D /* ParticipantLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */; };
@@ -152,7 +151,6 @@
 		EB1D48BF22675248001A754D /* HostWaitingTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostWaitingTableViewController.xib; sourceTree = "<group>"; };
 		EB1D48C222675827001A754D /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		EB1D48C4226762A5001A754D /* TeamBoostNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostNotifications.swift; sourceTree = "<group>"; };
-		EB1D48C62267C93C001A754D /* ParticipantJoinMeetingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantJoinMeetingUseCase.swift; sourceTree = "<group>"; };
 		EB1D48C82267CB07001A754D /* HostMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMeetingViewController.swift; sourceTree = "<group>"; };
 		EB1D48C92267CB07001A754D /* HostMeetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostMeetingViewController.xib; sourceTree = "<group>"; };
 		EB1D48CC2267D303001A754D /* ParticipantLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantLobbyViewController.swift; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				EB1D48B322672E82001A754D /* HostSetupMeetingUseCase.swift */,
-				EB1D48C62267C93C001A754D /* ParticipantJoinMeetingUseCase.swift */,
 				EBC679EA22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift */,
 			);
 			path = UseCases;
@@ -829,7 +826,6 @@
 				EB6CE8B22309B4A5002D3189 /* ParticipantReactionViewController.swift in Sources */,
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
 				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
-				EB1D48C72267C93C001A754D /* ParticipantJoinMeetingUseCase.swift in Sources */,
 				EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */,
 				EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
