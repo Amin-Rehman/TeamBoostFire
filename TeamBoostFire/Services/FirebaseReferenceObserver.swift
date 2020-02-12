@@ -67,7 +67,7 @@ struct FirebaseReferenceObserver: ReferenceObserving {
     }
 
     public func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void) {
-        firebaseReferenceHolder.meetingStateReference?.observe(DataEventType.value, with: { snapshot in
+        firebaseReferenceHolder.moderatorHasControlReference?.observe(DataEventType.value, with: { snapshot in
             guard let moderatorHasControlState = snapshot.value as? Bool else {
                 assertionFailure("Error retrieving meeting state")
                 return

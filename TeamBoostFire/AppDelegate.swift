@@ -51,16 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        if CommandLine.arguments.contains("-participantMainVC") {
-            print("Enter test mode for Participant Main VC")
-            let participantMainVC = ParticipantMainViewController(nibName: "ParticipantMainViewController",
-                                          bundle: nil)
-            UIApplication.shared.windows.first?.rootViewController?.present(participantMainVC, animated: false, completion: nil)
-        }
-    }
-
     func applicationWillTerminate(_ application: UIApplication) {
     }
 }
-
