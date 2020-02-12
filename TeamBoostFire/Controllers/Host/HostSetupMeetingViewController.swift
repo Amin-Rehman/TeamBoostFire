@@ -109,8 +109,6 @@ class HostSetupMeetingViewController: UIViewController, UITextFieldDelegate {
                                            maxTalkTime: Int(maxTalkingTime)!,
                                            moderationMode: moderationMode)
         HostSetupMeetingUseCase.perform(at: self, meetingParams: meetingParams)
-
-
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

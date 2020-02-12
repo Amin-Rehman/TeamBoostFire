@@ -14,6 +14,12 @@ protocol ParticipantUpdatable: class {
     func updateSpeakingOrder(speakingOrder: [String])
 }
 
+protocol ModeratorSpeakerTracker: class {
+    func moderatorStartedSpeaking()
+    func moderatorStoppedSpeaking()
+}
+
+
 class ParticipantControllerService {
     let meetingParams: MeetingsParams
     let meetingTime: Int
@@ -24,7 +30,8 @@ class ParticipantControllerService {
     private var currentSpeakerMaxTalkTime: Int?
     public var speakerOrder: [String]?
 
-    public weak var participantTimeUpdateable: ParticipantUpdatable?
+    private weak var participantTimeUpdateable: ParticipantUpdatable?
+    public weak var moderatorSpeakingTracker: ModeratorSpeakerTracker?
 
     private(set) public var allParticipants: [Participant]?  = {
         return ParticipantCoreServices.shared.allParticipants
@@ -82,6 +89,23 @@ class ParticipantControllerService {
         speakerOrder = speakerOrderFromNotification
         participantTimeUpdateable?.updateSpeakingOrder(speakingOrder: speakerOrderFromNotification)
     }
+
+    private func setupModeratorSpeakerTracker() {
+        let notificationName = Notification.Name(TeamBoostNotifications.moderatorHasControlDidChange.rawValue)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(moderatorHasControlDidChange(notification:)),
+                                               name: notificationName, object: nil)
+    }
+
+    @objc private func moderatorHasControlDidChange(notification: NSNotification) {
+        let moderatorStartedSpeaking = notification.object as! Bool
+        if moderatorStartedSpeaking {
+            moderatorSpeakingTracker?.moderatorStartedSpeaking()
+        } else {
+            moderatorSpeakingTracker?.moderatorStoppedSpeaking()
+        }
+    }
+
 
     private func setupCurrentSpeakerMaxTalkTimeChangedObserver() {
         let notificationName = Notification.Name(

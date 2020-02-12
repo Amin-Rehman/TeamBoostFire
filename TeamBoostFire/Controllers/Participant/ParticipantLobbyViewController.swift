@@ -34,8 +34,15 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .started {
-            navigationController?.pushViewController(ParticipantMainViewController(),
-                                                     animated: true)
+            let participantMainViewController = ParticipantMainViewController()
+            let meetingParams = ParticipantCoreServices.shared.meetingParams
+            let participantControllerService = ParticipantControllerService(with: meetingParams!,
+                                                                            timesUpdatedObserver: participantMainViewController)
+            participantMainViewController.participantControllerService = participantControllerService
+
+            navigationController?.present(participantMainViewController,
+                                          animated: true, completion: nil)
+
         }
     }
 

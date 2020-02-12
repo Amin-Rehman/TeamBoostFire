@@ -10,30 +10,38 @@ import UIKit
 import Lottie
 
 class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
-    
+
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
-    private weak var selfSpeakerViewController: ParticipantSelfSpeakerViewController?
-    
     private var allParticipants = [Participant]()
     var participantReactionViewController = ParticipantReactionViewController()
-    private var participantControllerService: ParticipantControllerService?
+    public var participantControllerService: ParticipantControllerService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let controllerService = self.participantControllerService else {
+            assertionFailure("No participant controller service available")
+            return
+        }
+
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
-        let meetingParams = ParticipantCoreServices.shared.meetingParams
-        self.participantControllerService = ParticipantControllerService(with: meetingParams!,
-                                                                         timesUpdatedObserver: self)
-        updateMeetingTimerLabel(with: (meetingParams?.meetingTime)!)
+
+        updateMeetingTimerLabel(with: (controllerService.meetingTime))
         setupTopBar()
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        participantControllerService?.participantTimeUpdateable = self
+        updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
     }
 
     private func setupTopBar() {
@@ -45,15 +53,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
         agendaQuestionLabel.text = agenda
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        participantControllerService?.participantTimeUpdateable = self
-        updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
-        super.viewDidAppear(animated)
-    }
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .ended {
@@ -76,8 +75,6 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
 // MARK: - ParticipantMainViewController UI Updates
 extension ParticipantMainViewController {
     func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
-        selfSpeakerViewController?.updateTime(participantLeftSpeakingTime: participantLeftSpeakingTime,
-                                              meetingLeftTime: meetingLeftTime)
         updateMeetingTimerLabel(with: meetingLeftTime)
     }
 
@@ -93,26 +90,8 @@ extension ParticipantMainViewController {
     private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
         let order = selfSpeakingOrder(with: speakingOrder)
         let isSpeakerSelf = order == 0
+        print(isSpeakerSelf)
 
-        if isSpeakerSelf {
-            let selfSpeakerVC = ParticipantSelfSpeakerViewController(
-                nibName: "ParticipantSelfSpeakerViewController",
-                bundle: nil)
-            selfSpeakerVC.modalPresentationStyle = .overFullScreen
-            present(selfSpeakerVC, animated: true, completion: {
-                print("ALOG: Self Participant View presented")
-                self.selfSpeakerViewController = selfSpeakerVC
-            })
-        } else {
-            guard let selfSpeakerVC = selfSpeakerViewController else {
-                return
-            }
-            selfSpeakerVC.dismiss(animated: true, completion: {
-                print("ALOG: Self Participant View dismissed")
-                let currentSpeakingParticipant = self.currentSpeaker(with: speakingOrder)
-                self.currentSpeakerLabel.text = "\(currentSpeakingParticipant!.name) is speaking"
-            })
-        }
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
