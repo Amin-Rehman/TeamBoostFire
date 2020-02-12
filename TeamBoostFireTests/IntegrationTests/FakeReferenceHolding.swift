@@ -13,6 +13,15 @@ struct FakeReferenceHolding: ReferenceHolding {
     func setupDefaultValues(with params: MeetingsParams) {
     }
 
+    func setParticipantReference(participantName: String, participantId: String) {
+    }
+
+    func setIAmDoneInterruptReference(timeInterval: TimeInterval) {
+    }
+
+    func setCallToSpeakerReference(callToSpeakerReferenceValue: String) {
+    }
+
     func setReferenceForMeetingStarted() {
     }
 
