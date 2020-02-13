@@ -82,7 +82,6 @@ extension ParticipantMainViewController {
     private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
         let order = selfSpeakingOrder(with: speakingOrder)
         let isSpeakerSelf = order == 0
-        print("ALOG: isSpeakerSelf = \(isSpeakerSelf)")
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
@@ -127,10 +126,8 @@ extension ParticipantMainViewController: ParticipantSpeakerTracker {
 extension ParticipantMainViewController: ModeratorSpeakerTracker {
 
     func moderatorStartedSpeaking() {
-        print(" ALOG: Moderator Started Speaking")
     }
 
     func moderatorStoppedSpeaking() {
-        print(" ALOG: Moderator Started stopped")
     }
 }

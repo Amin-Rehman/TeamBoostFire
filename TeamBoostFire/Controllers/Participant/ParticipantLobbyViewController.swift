@@ -35,7 +35,7 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
         let meetingState = notification.object as! MeetingState
         if meetingState == .started {
             presentParticipantMainViewController()
-            
+
             NotificationCenter.default.removeObserver(self)
         }
     }
@@ -51,8 +51,7 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
 
         // TODO: Circular dependency , can we avoid this?
         participantMainViewController.participantControllerService = participantControllerService
+        navigationController?.pushViewController(participantMainViewController, animated: true)
 
-        navigationController?.present(participantMainViewController,
-                                      animated: true, completion: nil)
     }
 }
