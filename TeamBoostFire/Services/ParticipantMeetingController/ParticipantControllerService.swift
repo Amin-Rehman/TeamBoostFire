@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ParticipantUpdatable: class {
+protocol ParticipantSpeakerTracker: class {
     func updateTime(participantLeftSpeakingTime: Int,
                     meetingLeftTime: Int)
     func updateSpeakingOrder(speakingOrder: [String])
@@ -30,8 +30,8 @@ class ParticipantControllerService {
     private var currentSpeakerMaxTalkTime: Int?
     public var speakerOrder: [String]?
 
-    private weak var participantTimeUpdateable: ParticipantUpdatable?
-    public weak var moderatorSpeakingTracker: ModeratorSpeakerTracker?
+    private weak var participantSpeakerTracker: ParticipantSpeakerTracker?
+    public weak var moderatorSpeakerTracker: ModeratorSpeakerTracker?
 
     private(set) public var allParticipants: [Participant]?  = {
         return ParticipantCoreServices.shared.allParticipants
@@ -42,12 +42,12 @@ class ParticipantControllerService {
     }()
 
     init(with meetingParams: MeetingsParams,
-         timesUpdatedObserver: ParticipantUpdatable,
-         moderatorSpeakingTracker: ModeratorSpeakerTracker) {
+         participantSpeakerTracker: ParticipantSpeakerTracker,
+         moderatorSpeakerTracker: ModeratorSpeakerTracker) {
         self.meetingParams = meetingParams
         self.meetingTime = meetingParams.meetingTime * 60
-        self.participantTimeUpdateable = timesUpdatedObserver
-        self.moderatorSpeakingTracker = moderatorSpeakingTracker
+        self.participantSpeakerTracker = participantSpeakerTracker
+        self.moderatorSpeakerTracker = moderatorSpeakerTracker
         self.currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
         self.speakerOrder = ParticipantCoreServices.shared.speakerOrder
 
@@ -76,7 +76,7 @@ class ParticipantControllerService {
         let participantTimeLeft = currentSpeakerMaxTalkTime! - secondTimerCountForParticipant
         let meetingTimeLeft = meetingTime - secondTimerCountForMeeting
 
-        participantTimeUpdateable?.updateTime(participantLeftSpeakingTime: participantTimeLeft,
+        participantSpeakerTracker?.updateTime(participantLeftSpeakingTime: participantTimeLeft,
                                               meetingLeftTime: meetingTimeLeft)
     }
 
@@ -92,7 +92,7 @@ class ParticipantControllerService {
         secondTimerCountForParticipant = 0
         currentSpeakerMaxTalkTime = meetingParams.maxTalkTime
         speakerOrder = speakerOrderFromNotification
-        participantTimeUpdateable?.updateSpeakingOrder(speakingOrder: speakerOrderFromNotification)
+        participantSpeakerTracker?.updateSpeakingOrder(speakingOrder: speakerOrderFromNotification)
     }
 
     private func setupModeratorSpeakerTracker() {
@@ -105,9 +105,9 @@ class ParticipantControllerService {
     @objc private func moderatorHasControlDidChange(notification: NSNotification) {
         let moderatorStartedSpeaking = notification.object as! Bool
         if moderatorStartedSpeaking {
-            moderatorSpeakingTracker?.moderatorStartedSpeaking()
+            moderatorSpeakerTracker?.moderatorStartedSpeaking()
         } else {
-            moderatorSpeakingTracker?.moderatorStoppedSpeaking()
+            moderatorSpeakerTracker?.moderatorStoppedSpeaking()
         }
     }
 

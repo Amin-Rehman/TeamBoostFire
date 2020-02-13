@@ -114,7 +114,7 @@ extension ParticipantMainViewController {
     }
 }
 
-extension ParticipantMainViewController: ParticipantUpdatable {
+extension ParticipantMainViewController: ParticipantSpeakerTracker {
     func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
         updateMeetingTimerLabel(with: meetingLeftTime)
     }

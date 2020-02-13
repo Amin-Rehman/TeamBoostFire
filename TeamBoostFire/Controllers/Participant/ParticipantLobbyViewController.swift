@@ -39,8 +39,8 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
             let participantControllerService =
                 ParticipantControllerService(
                     with: meetingParams!,
-                    timesUpdatedObserver: participantMainViewController,
-                    moderatorSpeakingTracker: participantMainViewController)
+                    participantSpeakerTracker: participantMainViewController,
+                    moderatorSpeakerTracker: participantMainViewController)
 
             // TODO: Circular dependency , can we avoid this?
             participantMainViewController.participantControllerService = participantControllerService
