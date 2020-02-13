@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
+class ParticipantMainViewController: UIViewController {
 
     @IBOutlet weak var agendaQuestionLabel: UILabel!
     @IBOutlet weak var meetingTimeLabel: UILabel!
@@ -71,16 +71,8 @@ class ParticipantMainViewController: UIViewController, ParticipantUpdatable {
     }
 }
 
-
 // MARK: - ParticipantMainViewController UI Updates
 extension ParticipantMainViewController {
-    func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
-        updateMeetingTimerLabel(with: meetingLeftTime)
-    }
-
-    func updateSpeakingOrder(speakingOrder: [String]) {
-        updateUIWithCurrentSpeaker(with: speakingOrder)
-    }
 
     private func updateMeetingTimerLabel(with meetingTimeLeft: Int) {
         let meetingTimeLeftString = meetingTimeLeft.minutesAndSecondsPrettyString()
@@ -90,8 +82,7 @@ extension ParticipantMainViewController {
     private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
         let order = selfSpeakingOrder(with: speakingOrder)
         let isSpeakerSelf = order == 0
-        print(isSpeakerSelf)
-
+        print("ALOG: isSpeakerSelf = \(isSpeakerSelf)")
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
@@ -120,5 +111,26 @@ extension ParticipantMainViewController {
             fatalError("Self identifier not found for participant")
         }
         return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
+    }
+}
+
+extension ParticipantMainViewController: ParticipantUpdatable {
+    func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
+        updateMeetingTimerLabel(with: meetingLeftTime)
+    }
+
+    func updateSpeakingOrder(speakingOrder: [String]) {
+        updateUIWithCurrentSpeaker(with: speakingOrder)
+    }
+}
+
+extension ParticipantMainViewController: ModeratorSpeakerTracker {
+
+    func moderatorStartedSpeaking() {
+        print(" ALOG: Moderator Started Speaking")
+    }
+
+    func moderatorStoppedSpeaking() {
+        print(" ALOG: Moderator Started stopped")
     }
 }

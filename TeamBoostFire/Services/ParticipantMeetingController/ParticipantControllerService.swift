@@ -42,16 +42,21 @@ class ParticipantControllerService {
     }()
 
     init(with meetingParams: MeetingsParams,
-         timesUpdatedObserver: ParticipantUpdatable) {
+         timesUpdatedObserver: ParticipantUpdatable,
+         moderatorSpeakingTracker: ModeratorSpeakerTracker) {
         self.meetingParams = meetingParams
         self.meetingTime = meetingParams.meetingTime * 60
         self.participantTimeUpdateable = timesUpdatedObserver
+        self.moderatorSpeakingTracker = moderatorSpeakingTracker
         self.currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
         self.speakerOrder = ParticipantCoreServices.shared.speakerOrder
 
         startSecondTickerTimer()
-        setupSpeakerOrderObserver()
+        // Keeping track if moderator speaking change changed
+        setupModeratorSpeakerTracker()
 
+        // Keeping track if participant order changes
+        setupSpeakerOrderObserver()
     }
 
     private func startSecondTickerTimer() {
