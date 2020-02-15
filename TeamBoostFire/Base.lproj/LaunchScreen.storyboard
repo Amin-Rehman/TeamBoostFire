@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,16 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TeamBoostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="piX-gi-j63">
-                                <rect key="frame" x="87" y="328" width="240" height="240"/>
+                                <rect key="frame" x="40" y="281" width="334" height="334"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="lfo-z0-Rml"/>
-                                    <constraint firstAttribute="width" constant="240" id="xpg-cc-AOS"/>
+                                    <constraint firstAttribute="width" secondItem="piX-gi-j63" secondAttribute="height" multiplier="1:1" id="Zgf-wM-gBz"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="piX-gi-j63" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KTl-ky-v0b"/>
+                            <constraint firstItem="piX-gi-j63" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="VY0-ZL-RAA"/>
                             <constraint firstItem="piX-gi-j63" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Y7I-NR-GS5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -40,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TeamBoostLogo" width="512" height="512"/>
+        <image name="TeamBoostLogo" width="256" height="256"/>
     </resources>
 </document>
