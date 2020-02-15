@@ -62,6 +62,7 @@ class ParticipantMainViewController: UIViewController {
         if meetingState == .ended {
             navigationController?.pushViewController(ParticipantMeetingEndedViewController(),
                                                      animated: true)
+            NotificationCenter.default.removeObserver(self)
         }
     }
 
