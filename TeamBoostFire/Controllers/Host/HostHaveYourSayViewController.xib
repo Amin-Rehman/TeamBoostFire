@@ -27,7 +27,7 @@
                         <constraint firstAttribute="width" constant="250" id="Xt4-2e-hXE"/>
                         <constraint firstAttribute="height" constant="30" id="Yyz-Zv-RVW"/>
                     </constraints>
-                    <state key="normal" title="Collect Ideas"/>
+                    <state key="normal" title="Let participants speak up"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="18"/>
@@ -68,8 +68,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have Your Say" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y51-Jc-C5w">
-                    <rect key="frame" x="24" y="406" width="366" height="84"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You, as the moderator, are speaking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y51-Jc-C5w">
+                    <rect key="frame" x="36" y="383.5" width="342" height="129"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="84" id="i1d-i4-4sL"/>
                     </constraints>
@@ -77,9 +77,9 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHk-WG-DTI">
-                    <rect key="frame" x="24" y="502" width="366" height="59.5"/>
-                    <string key="text">Have your say as the moderator of the meeting. When ready, collect ideas from the participants of the meeting and give them a chance to talk.</string>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHk-WG-DTI">
+                    <rect key="frame" x="36" y="536.5" width="342" height="79.5"/>
+                    <string key="text">Outline the reason and the objectives of the meeting. Add your thoughts and highlight your priorities. Synchronize the participants and create a productive experience.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -91,16 +91,15 @@
                 <constraint firstItem="MHk-WG-DTI" firstAttribute="trailing" secondItem="Y51-Jc-C5w" secondAttribute="trailing" id="BRH-D5-82k"/>
                 <constraint firstItem="10X-nL-aLc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cqh-ZD-VOo"/>
                 <constraint firstItem="e51-Du-Ieq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="FMq-Qt-Pmz"/>
-                <constraint firstItem="Y51-Jc-C5w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Jlo-Th-fLK"/>
+                <constraint firstItem="Y51-Jc-C5w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="36" id="Jlo-Th-fLK"/>
                 <constraint firstItem="Y51-Jc-C5w" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MUM-p9-ncV"/>
                 <constraint firstItem="Y51-Jc-C5w" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="MfD-zg-pWJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e51-Du-Ieq" secondAttribute="trailing" constant="24" id="TM5-0H-hCB"/>
-                <constraint firstItem="MHk-WG-DTI" firstAttribute="top" secondItem="Y51-Jc-C5w" secondAttribute="bottom" constant="12" id="Y2M-Il-KoS"/>
+                <constraint firstItem="MHk-WG-DTI" firstAttribute="top" secondItem="Y51-Jc-C5w" secondAttribute="bottom" constant="24" id="Y2M-Il-KoS"/>
                 <constraint firstItem="e51-Du-Ieq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="YlL-v1-Gnj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="10X-nL-aLc" secondAttribute="bottom" constant="26" id="ZSc-4B-ZOA"/>
                 <constraint firstItem="MHk-WG-DTI" firstAttribute="leading" secondItem="Y51-Jc-C5w" secondAttribute="leading" id="a0c-Kh-BKQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gkV-4O-gQp" secondAttribute="trailing" constant="24" id="aKM-2O-sEa"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Y51-Jc-C5w" secondAttribute="trailing" constant="24" id="cKc-nn-uo4"/>
                 <constraint firstItem="gkV-4O-gQp" firstAttribute="top" secondItem="e51-Du-Ieq" secondAttribute="bottom" constant="4" id="gIQ-1m-eSo"/>
                 <constraint firstItem="gkV-4O-gQp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="uQX-ZM-nGc"/>
             </constraints>
