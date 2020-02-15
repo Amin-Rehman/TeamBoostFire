@@ -15,6 +15,10 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var callSpeakerButton: UIButton!
+    @IBOutlet weak var iAmDoneButton: UIButton!
+
     private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
 
@@ -42,7 +46,6 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
     }
 
     private func setupTopBar() {
@@ -69,6 +72,10 @@ class ParticipantMainViewController: UIViewController {
 
     @IBAction func callSpeakerTapped(_ sender: Any) {
         ParticipantCoreServices.shared.registerCallToSpeaker()
+    }
+
+    @IBAction func iAmDoneTapped(_ sender: Any) {
+        ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
     }
 }
 
@@ -113,9 +120,33 @@ extension ParticipantMainViewController {
 extension ParticipantMainViewController: ParticipantControllerInMeetingStateObserver {
 
     func participantInMeetingStateDidChange(state: ParticipantControllerInMeetingState) {
-        // TODO: Implement this
+        if !self.isViewLoaded {
+            return
+        }
 
-        print(state)
+        switch state {
+        case .unknown:
+            assertionFailure("Unknown in meeting state")
+            likeButton.isHidden = true
+            callSpeakerButton.isHidden = true
+            iAmDoneButton.isHidden = true
+            currentSpeakerLabel.text = "Unknown"
+        case .selfIsSpeaking:
+            likeButton.isHidden = true
+            callSpeakerButton.isHidden = true
+            iAmDoneButton.isHidden = false
+            currentSpeakerLabel.text = "Have your say!"
+        case .anotherParticipantIsSpeaking(let participantName):
+            likeButton.isHidden = false
+            callSpeakerButton.isHidden = false
+            iAmDoneButton.isHidden = true
+            currentSpeakerLabel.text = "\(participantName) is Speaking"
+        case .moderatorIsSpeaking:
+            likeButton.isHidden = true
+            callSpeakerButton.isHidden = true
+            iAmDoneButton.isHidden = true
+            currentSpeakerLabel.text = "The Moderator is Speaking"
+        }
     }
 
     func updateSpeakingOrder(speakingOrder: [String]) {
