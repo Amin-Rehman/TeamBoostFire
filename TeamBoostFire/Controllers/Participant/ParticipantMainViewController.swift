@@ -203,8 +203,8 @@ extension UIView {
         UIView.transition(with: self,
              duration: duration,
               options: .transitionCrossDissolve,
-           animations: { [weak self] in
-            self?.isHidden = shouldHide
+           animations: {
+            self.isHidden = shouldHide
         }, completion: nil)
     }
 }
