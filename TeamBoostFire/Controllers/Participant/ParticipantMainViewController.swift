@@ -94,13 +94,6 @@ extension ParticipantMainViewController {
         meetingTimeLabel.text = "Meeting Time left: \(meetingTimeLeftString)"
     }
 
-    private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
-        print("ALOG: Participant update UI speaker order")
-//        currentlyDisplayedSpeakingOrder = speakingOrder
-//        let order = selfSpeakingOrder(with: speakingOrder)
-//        let isSpeakerSelf = order == 0
-    }
-
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
         guard let allParticipants = self.participantControllerService?.allParticipants else {
             assertionFailure("Unable to retrieve all participants")
@@ -131,6 +124,8 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             return
         }
 
+        let crossFadeDuration = Double(0.5)
+
         switch state {
         case .unknown:
             assertionFailure("Unknown in meeting state")
@@ -139,11 +134,14 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             iAmDoneButton.isHidden = true
             currentSpeakerLabel.text = "Unknown"
         case .selfIsSpeaking:
-            likeButton.isHidden = true
-            callSpeakerButton.isHidden = true
-            iAmDoneButton.isHidden = false
+            likeButton.crossFadeTransition(duration: crossFadeDuration,
+                                           shouldHide: true)
+            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+                                                  shouldHide: true)
+            iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
+                                              shouldHide: false)
             UIView.transition(with: currentSpeakerLabel,
-                 duration: 0.25,
+                 duration: crossFadeDuration,
                   options: .transitionCrossDissolve,
                animations: { [weak self] in
                 self?.currentSpeakerLabel.text = "Have your say!"
@@ -154,20 +152,30 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
 
+            likeButton.crossFadeTransition(duration: crossFadeDuration,
+                                           shouldHide: false)
+            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+                                                  shouldHide: false)
+            iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
+                                              shouldHide: true)
+
             UIView.transition(with: currentSpeakerLabel,
-                 duration: 0.25,
+                 duration: crossFadeDuration,
                   options: .transitionCrossDissolve,
                animations: { [weak self] in
                 self?.currentSpeakerLabel.text = "\(participantName) is Speaking"
             }, completion: nil)
 
         case .moderatorIsSpeaking:
-            likeButton.isHidden = true
-            callSpeakerButton.isHidden = true
-            iAmDoneButton.isHidden = true
+            likeButton.crossFadeTransition(duration: crossFadeDuration,
+                                           shouldHide: true)
+            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+                                                  shouldHide: true)
+            iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
+                                              shouldHide: true)
 
             UIView.transition(with: currentSpeakerLabel,
-                 duration: 0.25,
+                 duration: crossFadeDuration,
                   options: .transitionCrossDissolve,
                animations: { [weak self] in
                 self?.currentSpeakerLabel.text = "The Moderator is Speaking"
@@ -186,5 +194,17 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 extension ParticipantMainViewController: RemainingMeetingTimeUpdater {
     func updateTime(meetingLeftTime: Int) {
         updateMeetingTimerLabel(with: meetingLeftTime)
+    }
+}
+
+extension UIView {
+    func crossFadeTransition(duration: Double,
+                      shouldHide: Bool) {
+        UIView.transition(with: self,
+             duration: duration,
+              options: .transitionCrossDissolve,
+           animations: { [weak self] in
+            self?.isHidden = shouldHide
+        }, completion: nil)
     }
 }
