@@ -19,6 +19,8 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var callSpeakerButton: UIButton!
     @IBOutlet weak var iAmDoneButton: UIButton!
 
+    @IBOutlet weak var fireworksView: AnimationView!
+
     private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
 
@@ -42,6 +44,7 @@ class ParticipantMainViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
+        fireworksView.isHidden = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +71,10 @@ class ParticipantMainViewController: UIViewController {
 
 
     @IBAction func likeButtonTapped(_ sender: Any) {
-        // TODO: Implement
+        fireworksView.isHidden = false
+        fireworksView.play { (finished) in
+            self.fireworksView.isHidden = true
+        }
     }
 
     @IBAction func callSpeakerTapped(_ sender: Any) {

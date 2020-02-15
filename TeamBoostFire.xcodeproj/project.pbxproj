@@ -62,7 +62,7 @@
 		EB6CE8BE2309BA37002D3189 /* swipe-down.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8BD2309BA37002D3189 /* swipe-down.json */; };
 		EB6CE8C22309C439002D3189 /* agree.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C02309C439002D3189 /* agree.json */; };
 		EB6CE8C32309C439002D3189 /* disagree.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C12309C439002D3189 /* disagree.json */; };
-		EB6CE8C52309C472002D3189 /* celebrate.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C42309C472002D3189 /* celebrate.json */; };
+		EB6CE8C52309C472002D3189 /* celebrate_fireworks.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C42309C472002D3189 /* celebrate_fireworks.json */; };
 		EB6CE8C72309C4E7002D3189 /* curious.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C62309C4E7002D3189 /* curious.json */; };
 		EB6CE8C92309D053002D3189 /* brain_storm.json in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8C82309D053002D3189 /* brain_storm.json */; };
 		EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */; };
@@ -174,7 +174,7 @@
 		EB6CE8BD2309BA37002D3189 /* swipe-down.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-down.json"; sourceTree = "<group>"; };
 		EB6CE8C02309C439002D3189 /* agree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = agree.json; sourceTree = "<group>"; };
 		EB6CE8C12309C439002D3189 /* disagree.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = disagree.json; sourceTree = "<group>"; };
-		EB6CE8C42309C472002D3189 /* celebrate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = celebrate.json; sourceTree = "<group>"; };
+		EB6CE8C42309C472002D3189 /* celebrate_fireworks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = celebrate_fireworks.json; sourceTree = "<group>"; };
 		EB6CE8C62309C4E7002D3189 /* curious.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = curious.json; sourceTree = "<group>"; };
 		EB6CE8C82309D053002D3189 /* brain_storm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_storm.json; sourceTree = "<group>"; };
 		EB789BD822B9566C0001F395 /* lottie_participant_waiting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_waiting.json; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				EB6CE8C62309C4E7002D3189 /* curious.json */,
-				EB6CE8C42309C472002D3189 /* celebrate.json */,
+				EB6CE8C42309C472002D3189 /* celebrate_fireworks.json */,
 				EB6CE8C02309C439002D3189 /* agree.json */,
 				EB6CE8C12309C439002D3189 /* disagree.json */,
 			);
@@ -647,7 +647,7 @@
 				EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */,
 				EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */,
 				EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */,
-				EB6CE8C52309C472002D3189 /* celebrate.json in Resources */,
+				EB6CE8C52309C472002D3189 /* celebrate_fireworks.json in Resources */,
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */,
 				EBFCA67A22668D2F0047CD75 /* LaunchScreen.storyboard in Resources */,

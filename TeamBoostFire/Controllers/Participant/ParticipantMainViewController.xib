@@ -13,6 +13,7 @@
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
                 <outlet property="callSpeakerButton" destination="KHC-qS-TiF" id="SGy-gT-mEQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
+                <outlet property="fireworksView" destination="eSQ-k8-upB" id="xMT-UH-eCz"/>
                 <outlet property="iAmDoneButton" destination="uCp-UK-O2A" id="Z9d-rU-htW"/>
                 <outlet property="likeButton" destination="qoS-6N-tKL" id="dmC-iM-OlC"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
@@ -154,6 +155,13 @@
                         <action selector="iAmDoneTapped:" destination="-1" eventType="touchUpInside" id="Ded-k0-4fj"/>
                     </connections>
                 </button>
+                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-k8-upB" userLabel="FireworksView" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="0.0" y="124" width="320" height="444"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="celebrate_fireworks"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -165,11 +173,15 @@
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="top" secondItem="KHC-qS-TiF" secondAttribute="top" id="Eoh-06-hZS"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="trailing" secondItem="KHC-qS-TiF" secondAttribute="trailing" id="LBD-o2-hww"/>
+                <constraint firstItem="eSQ-k8-upB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NMV-zT-fDg"/>
                 <constraint firstItem="qoS-6N-tKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PlO-1e-WBJ"/>
                 <constraint firstItem="KHC-qS-TiF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PwB-d3-18S"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eSQ-k8-upB" secondAttribute="bottom" id="hmX-h2-Ver"/>
+                <constraint firstItem="eSQ-k8-upB" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="8" symbolic="YES" id="pMO-Va-Q7a"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" id="pOM-O7-6bY"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" constant="128" id="tWe-gm-QoV"/>
+                <constraint firstItem="eSQ-k8-upB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xN2-8D-G0b"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z6h-Uc-2gY"/>
             </constraints>
