@@ -15,10 +15,12 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
+    private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
+
     var participantReactionViewController = ParticipantReactionViewController()
     public var participantControllerService: ParticipantControllerService?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,8 +42,7 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        participantControllerService?.participantTimeUpdateable = self
-        updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
+        //updateUIWithCurrentSpeaker(with: participantControllerService?.speakerOrder ?? [])
     }
 
     private func setupTopBar() {
@@ -80,6 +81,8 @@ extension ParticipantMainViewController {
     }
 
     private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
+        print("ALOG: Participant update UI speaker order")
+//        currentlyDisplayedSpeakingOrder = speakingOrder
 //        let order = selfSpeakingOrder(with: speakingOrder)
 //        let isSpeakerSelf = order == 0
     }
@@ -105,29 +108,26 @@ extension ParticipantMainViewController {
         return nil
     }
 
-    private func selfSpeakingOrder(with speakerOrder: [String]) -> Int {
-        guard let selfIdentifier = self.participantControllerService?.selfIdentifier else {
-            fatalError("Self identifier not found for participant")
-        }
-        return speakerOrder.firstIndex(of: selfIdentifier) ?? -1
-    }
 }
 
-extension ParticipantMainViewController: ParticipantSpeakerTracker {
-    func updateTime(participantLeftSpeakingTime: Int, meetingLeftTime: Int) {
-        updateMeetingTimerLabel(with: meetingLeftTime)
+extension ParticipantMainViewController: ParticipantControllerInMeetingStateObserver {
+
+    func participantInMeetingStateDidChange(state: ParticipantControllerInMeetingState) {
+        // TODO: Implement this
+
+        print(state)
     }
 
     func updateSpeakingOrder(speakingOrder: [String]) {
-        updateUIWithCurrentSpeaker(with: speakingOrder)
+        /**
+         Debouncing on this side, as firebase can potentially (and does) trigger multiple events for the
+         speaking order
+         */
     }
 }
 
-extension ParticipantMainViewController: ModeratorSpeakerTracker {
-
-    func moderatorStartedSpeaking() {
-    }
-
-    func moderatorStoppedSpeaking() {
+extension ParticipantMainViewController: RemainingMeetingTimeUpdater {
+    func updateTime(meetingLeftTime: Int) {
+        updateMeetingTimerLabel(with: meetingLeftTime)
     }
 }
