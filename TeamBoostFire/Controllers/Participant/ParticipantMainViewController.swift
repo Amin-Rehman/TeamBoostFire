@@ -135,17 +135,36 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             likeButton.isHidden = true
             callSpeakerButton.isHidden = true
             iAmDoneButton.isHidden = false
-            currentSpeakerLabel.text = "Have your say!"
+            UIView.transition(with: currentSpeakerLabel,
+                 duration: 0.25,
+                  options: .transitionCrossDissolve,
+               animations: { [weak self] in
+                self?.currentSpeakerLabel.text = "Have your say!"
+            }, completion: nil)
+
         case .anotherParticipantIsSpeaking(let participantName):
             likeButton.isHidden = false
             callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
-            currentSpeakerLabel.text = "\(participantName) is Speaking"
+
+            UIView.transition(with: currentSpeakerLabel,
+                 duration: 0.25,
+                  options: .transitionCrossDissolve,
+               animations: { [weak self] in
+                self?.currentSpeakerLabel.text = "\(participantName) is Speaking"
+            }, completion: nil)
+
         case .moderatorIsSpeaking:
             likeButton.isHidden = true
             callSpeakerButton.isHidden = true
             iAmDoneButton.isHidden = true
-            currentSpeakerLabel.text = "The Moderator is Speaking"
+
+            UIView.transition(with: currentSpeakerLabel,
+                 duration: 0.25,
+                  options: .transitionCrossDissolve,
+               animations: { [weak self] in
+                self?.currentSpeakerLabel.text = "The Moderator is Speaking"
+            }, completion: nil)
         }
     }
 
