@@ -21,7 +21,6 @@ class HostMeetingViewController: UIViewController {
 
     var hostInMeetingTableViewController = HostInMeetingTableViewController()
     var currentSpeakerIndex = 0
-    private var activeMeetingTimeSeconds = 0
 
     var hostControllerService: HostMeetingControllerService?
 
@@ -60,8 +59,6 @@ class HostMeetingViewController: UIViewController {
         let timeElapsedRatioString = timeElapsedString + "/" + totalMeetingTimeString
         timeElapsedLabel?.text = timeElapsedRatioString
 
-        let progressRatio = Float(activeMeetingTimeSeconds) / Float(totalMeetingTimeInSeconds)
-        timeElapsedProgressView.progress = progressRatio
     }
 
     private func setupInitialElapsedMeetingTimeRatio() {
@@ -122,8 +119,9 @@ class HostMeetingViewController: UIViewController {
             HostCoreServices.shared.endMeeting()
 
             self.hostControllerService?.endMeeting()
-            HostSaveMeetingStatsToCoreUseCase.perform(meetingLengthSeconds: self.activeMeetingTimeSeconds,
-                                                      hostControllerService: self.hostControllerService)
+            HostSaveMeetingStatsToCoreUseCase.perform(
+                meetingLengthSeconds: self.hostControllerService!.storage.activeMeetingTime,
+                hostControllerService: self.hostControllerService)
 
             let hostEndMeetingStatsViewController = HostEndMeetingStatsViewController()
             self.navigationController?.pushViewController(hostEndMeetingStatsViewController,
