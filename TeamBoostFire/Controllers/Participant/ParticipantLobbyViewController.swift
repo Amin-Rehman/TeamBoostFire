@@ -35,7 +35,6 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
         let meetingState = notification.object as! MeetingState
         if meetingState == .started {
             presentParticipantMainViewController()
-
             NotificationCenter.default.removeObserver(self)
         }
     }
@@ -46,8 +45,8 @@ class ParticipantLobbyViewController: CustomTransitionViewController {
         let participantControllerService =
             ParticipantControllerService(
                 with: meetingParams!,
-                participantSpeakerTracker: participantMainViewController,
-                moderatorSpeakerTracker: participantMainViewController)
+                remainingMeetingTimeUpdater: participantMainViewController,
+                inMeetingStateObserver: participantMainViewController)
 
         // TODO: Circular dependency , can we avoid this?
         participantMainViewController.participantControllerService = participantControllerService

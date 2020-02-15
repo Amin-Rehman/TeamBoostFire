@@ -8,17 +8,61 @@
 
 import Foundation
 
-protocol ParticipantSpeakerTracker: class {
-    func updateTime(participantLeftSpeakingTime: Int,
-                    meetingLeftTime: Int)
-    func updateSpeakingOrder(speakingOrder: [String])
+enum ParticipantControllerInMeetingState: Equatable {
+    case unknown
+    case selfIsSpeaking
+    case anotherParticipantIsSpeaking(participantName: String)
+    case moderatorIsSpeaking
 }
 
-protocol ModeratorSpeakerTracker: class {
-    func moderatorStartedSpeaking()
-    func moderatorStoppedSpeaking()
+protocol RemainingMeetingTimeUpdater: class {
+    func updateTime(meetingLeftTime: Int)
 }
 
+protocol ParticipantControllerInMeetingStateObserver: class {
+    func participantInMeetingStateDidChange(state: ParticipantControllerInMeetingState)
+}
+
+struct InMeetingStateEvaluator {
+    public let selfIdentifier: String
+    public let allParticipants: [Participant]
+    public var speakerOrder: [String]?
+    public var moderatorIsSpeaking: Bool = false
+
+    var inMeetingState: ParticipantControllerInMeetingState {
+        get {
+            if moderatorIsSpeaking {
+                return ParticipantControllerInMeetingState.moderatorIsSpeaking
+            }
+
+            guard let guardedSpeakerOrder = speakerOrder else {
+                return ParticipantControllerInMeetingState.unknown
+            }
+
+            if isSpeakerSelf(with: guardedSpeakerOrder) {
+                return ParticipantControllerInMeetingState.selfIsSpeaking
+            }
+
+            let currentSpeakerIdentifier = speakerOrder![0]
+            let speakingParticipant = allParticipants.first { (participant) -> Bool in
+                participant.id == currentSpeakerIdentifier
+            }
+
+            guard let guardedSpeakingParticipant = speakingParticipant else {
+                return ParticipantControllerInMeetingState.unknown
+            }
+
+            return
+                ParticipantControllerInMeetingState.anotherParticipantIsSpeaking(participantName: guardedSpeakingParticipant.name)
+
+        }
+    }
+
+    private func isSpeakerSelf(with speakerOrder: [String]) -> Bool {
+        return (speakerOrder.firstIndex(of: selfIdentifier) == 0)
+        }
+
+}
 
 class ParticipantControllerService {
     let meetingParams: MeetingsParams
@@ -28,10 +72,13 @@ class ParticipantControllerService {
     private var secondTimerCountForParticipant = 0
     private var secondTimerCountForMeeting = 0
     private var currentSpeakerMaxTalkTime: Int?
-    public var speakerOrder: [String]?
 
-    private weak var participantSpeakerTracker: ParticipantSpeakerTracker?
-    public weak var moderatorSpeakerTracker: ModeratorSpeakerTracker?
+    private weak var remainingMeetingTimeUpdater: RemainingMeetingTimeUpdater?
+    public weak var inMeetingStateObserver: ParticipantControllerInMeetingStateObserver?
+
+    private var inMeetingStateEvaluator: InMeetingStateEvaluator
+    // Only to perform a certain level of debouncing
+    private var persistedInMeetingState: ParticipantControllerInMeetingState
 
     private(set) public var allParticipants: [Participant]?  = {
         return ParticipantCoreServices.shared.allParticipants
@@ -42,20 +89,24 @@ class ParticipantControllerService {
     }()
 
     init(with meetingParams: MeetingsParams,
-         participantSpeakerTracker: ParticipantSpeakerTracker,
-         moderatorSpeakerTracker: ModeratorSpeakerTracker) {
+         remainingMeetingTimeUpdater: RemainingMeetingTimeUpdater,
+         inMeetingStateObserver: ParticipantControllerInMeetingStateObserver) {
         self.meetingParams = meetingParams
         self.meetingTime = meetingParams.meetingTime * 60
-        self.participantSpeakerTracker = participantSpeakerTracker
-        self.moderatorSpeakerTracker = moderatorSpeakerTracker
+        self.remainingMeetingTimeUpdater = remainingMeetingTimeUpdater
+        self.inMeetingStateObserver = inMeetingStateObserver
         self.currentSpeakerMaxTalkTime = ParticipantCoreServices.shared.meetingParams?.maxTalkTime
-        self.speakerOrder = ParticipantCoreServices.shared.speakerOrder
+        let speakerOrder = ParticipantCoreServices.shared.speakerOrder
+        self.inMeetingStateEvaluator = InMeetingStateEvaluator(selfIdentifier: selfIdentifier!,
+                                                               allParticipants: allParticipants!,
+                                                               speakerOrder: speakerOrder,
+                                                               moderatorIsSpeaking: false)
+        self.persistedInMeetingState = inMeetingStateEvaluator.inMeetingState
 
         startSecondTickerTimer()
         // Keeping track if moderator speaking change changed
         setupModeratorSpeakerTracker()
-
-        // Keeping track if participant order changes
+        // Keeping track if participant speaker order changes
         setupSpeakerOrderObserver()
     }
 
@@ -73,11 +124,8 @@ class ParticipantControllerService {
     @objc func secondTicked() {
         secondTimerCountForParticipant = secondTimerCountForParticipant + 1
         secondTimerCountForMeeting = secondTimerCountForMeeting + 1
-        let participantTimeLeft = currentSpeakerMaxTalkTime! - secondTimerCountForParticipant
         let meetingTimeLeft = meetingTime - secondTimerCountForMeeting
-
-        participantSpeakerTracker?.updateTime(participantLeftSpeakingTime: participantTimeLeft,
-                                              meetingLeftTime: meetingTimeLeft)
+        remainingMeetingTimeUpdater?.updateTime(meetingLeftTime: meetingTimeLeft)
     }
 
     private func setupSpeakerOrderObserver() {
@@ -91,8 +139,8 @@ class ParticipantControllerService {
         let speakerOrderFromNotification = (notification.object as? [String]) ?? []
         secondTimerCountForParticipant = 0
         currentSpeakerMaxTalkTime = meetingParams.maxTalkTime
-        speakerOrder = speakerOrderFromNotification
-        participantSpeakerTracker?.updateSpeakingOrder(speakingOrder: speakerOrderFromNotification)
+        inMeetingStateEvaluator.speakerOrder = speakerOrderFromNotification
+        triggerMeetingStateChangeIfNeeded()
     }
 
     private func setupModeratorSpeakerTracker() {
@@ -103,14 +151,9 @@ class ParticipantControllerService {
     }
 
     @objc private func moderatorHasControlDidChange(notification: NSNotification) {
-        let moderatorStartedSpeaking = notification.object as! Bool
-        if moderatorStartedSpeaking {
-            moderatorSpeakerTracker?.moderatorStartedSpeaking()
-        } else {
-            moderatorSpeakerTracker?.moderatorStoppedSpeaking()
-        }
+        inMeetingStateEvaluator.moderatorIsSpeaking = notification.object as! Bool
+        triggerMeetingStateChangeIfNeeded()
     }
-
 
     private func setupCurrentSpeakerMaxTalkTimeChangedObserver() {
         let notificationName = Notification.Name(
@@ -120,12 +163,20 @@ class ParticipantControllerService {
                                                name: notificationName, object: nil)
     }
 
+    private func triggerMeetingStateChangeIfNeeded() {
+        if persistedInMeetingState != inMeetingStateEvaluator.inMeetingState {
+            // Trigger is needed
+            persistedInMeetingState = inMeetingStateEvaluator.inMeetingState
+            inMeetingStateObserver?.participantInMeetingStateDidChange(state: persistedInMeetingState)
+        }
+
+        // Otherwise ignore
+    }
+
     @objc private func currentSpeakerMaxTalkTimeChanged(notification: NSNotification) {
 //        currentSpeakerMaxTalkTime = notification.object as? Int ??
 //            ParticipantCoreServices.shared.meetingParams?.maxTalkTime
         // TODO: Implement this
 
     }
-
-
 }
