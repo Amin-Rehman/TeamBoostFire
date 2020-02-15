@@ -44,14 +44,12 @@ class SpeakerSpeakingTimeUpdater {
     }
 
     public func start() {
-        print("ALOG: MeetingControllerSecondTicker: start")
         secondTickTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
                                                selector: #selector(secondTicked),
                                                userInfo: nil, repeats: true)
     }
 
     public func stop() {
-        print("ALOG: MeetingControllerSecondTicker: stop")
         secondTickTimer?.invalidate()
         secondTickTimer = nil
     }

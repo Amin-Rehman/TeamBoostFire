@@ -80,8 +80,8 @@ extension ParticipantMainViewController {
     }
 
     private func updateUIWithCurrentSpeaker(with speakingOrder: [String]) {
-        let order = selfSpeakingOrder(with: speakingOrder)
-        let isSpeakerSelf = order == 0
+//        let order = selfSpeakingOrder(with: speakingOrder)
+//        let isSpeakerSelf = order == 0
     }
 
     private func currentSpeaker(with speakingOrder: [String]) -> Participant? {
