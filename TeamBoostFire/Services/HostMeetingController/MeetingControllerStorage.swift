@@ -42,10 +42,16 @@ class MeetingControllerStorage {
         }
     }
 
-    // MARK:- Accessors
+    // MARK:- Accessors / Setters
     func updateSpeakingRecordPerRound(speakerRecord: [SpeakerRecord]) {
         participantSpeakingRecordPerRound = speakerRecord
         coreServices.updateSpeakerOrder(with: self.speakingRecord)
+    }
+
+    func updateSpeakerOrder(isStartOfMeeting: Bool) {
+        let speakerOrder = coreServices.speakerOrder!
+        let proposedNewSpeakingOrder = isStartOfMeeting ? speakerOrder: speakerOrder.circularRotate()
+        coreServices.updateSpeakerOrder(with: proposedNewSpeakingOrder)
     }
 
     func updateTotalSpeakingTime(for participantId: String,

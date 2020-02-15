@@ -90,6 +90,7 @@ class HostCoreServices: TeamBoostCore {
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
+        print("ALOG: Update Speaker Order")
         speakerOrder = identifiers
         firebaseReferenceHolder?.setReferenceForSpeakerOrder(speakingOrder: speakerOrder!)
 

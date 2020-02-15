@@ -65,16 +65,14 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         speakerSpeakingTimeUpdater.stop()
         speakingSessionUpdater.stop()
 
-        guard var speakingOrder = coreServices.speakerOrder else {
+        guard let completedSessionSpeakerOrder = coreServices.speakerOrder else {
             assertionFailure("No speaker order available in CoreServices")
             return
         }
-        speakingOrder = speakingOrder.circularRotate()
-        coreServices.updateSpeakerOrder(with: speakingOrder)
-        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
-        
+        speakingSessionUpdater.start(where: completedSessionSpeakerOrder)
         speakerSpeakingTimeUpdater.start()
-        speakingSessionUpdater.start()
+
+        orderObserver?.speakingOrderUpdated(totalSpeakingRecord: storage.participantTotalSpeakingRecord)
     }
 
     public func endMeeting() {
@@ -92,7 +90,12 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
 
     public func startParticipantSpeakingSessions() {
         speakerSpeakingTimeUpdater.start()
-        speakingSessionUpdater.start()
+        guard let speakerOrder = HostCoreServices.shared.speakerOrder else {
+            assertionFailure("No speaker order available in core services")
+            return
+        }
+        
+        speakingSessionUpdater.start(where: speakerOrder, isStartOfMeeting: true)
     }
 
     public func stopParticipantSpeakingSessions() {
@@ -110,7 +113,6 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     }
 
     @objc private func participantIsDone(notification: NSNotification) {
-        print("ALOG: HostMeetingControllerService: participantIsDoneInterrupt")
         speakerIsDone()
     }
 
@@ -134,17 +136,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
                 return
         }
 
-        print("ALOG: HostMeetingControllerService: callToSpeaker")
         self.storage.appendSpeakerToCallToSpeakerQueue(participantId: callToSpeakerId)
-    }
-
-    private func shuffleSpeakerOrder() {
-        guard var speakingOrder = coreServices.speakerOrder else {
-            assertionFailure("No speaker order available in CoreServices")
-            return
-        }
-        speakingOrder = speakingOrder.shuffled()
-        coreServices.updateSpeakerOrder(with: speakingOrder)
     }
 }
 

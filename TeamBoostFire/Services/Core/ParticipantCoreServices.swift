@@ -22,7 +22,6 @@ class ParticipantCoreServices: TeamBoostCore {
                           referenceHolder: ReferenceHolding,
                           referenceObserver: ReferenceObserving,
                           meetingCode: String) {
-        print("ALOG: ParticipantCoreServices: setupCore called")
         selfParticipantIdentifier = participant.id
 
         firebaseReferenceObserver = referenceObserver

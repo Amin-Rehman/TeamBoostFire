@@ -42,8 +42,10 @@ class SpeakingSessionUpdater: TimerControllerObserver {
         timerController.stop()
     }
 
-    public func start() {
-        adjustOrderForNewSession()
+    public func start(where completedSessionSpeakerOrder: [String],
+                      isStartOfMeeting: Bool = false) {
+        adjustOrderForNewSession(previousSessionSpeakerOrder: completedSessionSpeakerOrder,
+                                 isStartOfMeeting: isStartOfMeeting)
         fireNewSpeakingRoundStartedNotification()
         startTheCurrentSpeakingSession()
         iterationInCurrentRound += 1
@@ -90,11 +92,16 @@ extension SpeakingSessionUpdater {
         timerController.start(with: Double(currentSpeakingTime))
     }
 
-    private func adjustOrderForNewSession() {
-        let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
+    private func adjustOrderForNewSession(previousSessionSpeakerOrder: [String],
+                                          isStartOfMeeting: Bool) {
         let callToSpeakerQueue = self.storage.callToSpeakerQueue
+        let isSomeOneCallingToSpeaker = callToSpeakerQueue.count > 0
+        let isNewRound = iterationInCurrentRound == storage.participantSpeakingRecordPerRound.count
 
-        if callToSpeakerQueue.count > 0 {
+        // TODO: Perhaps could have a switch statement here.
+
+        // There is someone in the call to speaker queue; give them preference
+        if isSomeOneCallingToSpeaker {
             // Reset the round
             iterationInCurrentRound = 0
             let speakingRecord = makeNewRoundRecord()
@@ -107,12 +114,20 @@ extension SpeakingSessionUpdater {
             self.storage.clearCallToSpeakerQueue()
 
         } else if isNewRound {
-            print("ALOG: MeetingControllerCurrentSpeakerTicker: newRound detected")
+            /**
+             This is a new round: i.e we have gone through the complete round robin of participants
+             for the current session
+             */
             iterationInCurrentRound = 0
 
             // For every round re-evaluate the meeting record for that round
             let speakingRecordsForNewRound = makeNewRoundRecord()
             storage.updateSpeakingRecordPerRound(speakerRecord: speakingRecordsForNewRound)
+        } else {
+            /**
+             We are still in the midst of the round robin; go to the next participant
+             */
+            storage.updateSpeakerOrder(isStartOfMeeting: isStartOfMeeting)
         }
     }
 
