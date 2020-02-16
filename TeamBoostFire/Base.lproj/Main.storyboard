@@ -37,7 +37,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT8-Dg-NrX" userLabel="BrainstormAnimationView" customClass="AnimationView" customModule="Lottie">
                                 <rect key="frame" x="30" y="176" width="315" height="315"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bT8-Dg-NrX" secondAttribute="height" multiplier="1:1" id="cmW-t2-Bwu"/>
                                 </constraints>

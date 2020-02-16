@@ -20,6 +20,7 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var iAmDoneButton: UIButton!
 
     @IBOutlet weak var fireworksView: AnimationView!
+    @IBOutlet weak var meetingStateAnimationView: AnimationView!
 
     private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
@@ -165,6 +166,9 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
                animations: { [weak self] in
                 self?.currentSpeakerLabel.text = "\(participantName) is Speaking"
             }, completion: nil)
+
+//            meetingStateAnimationView.animation = Animation.named("brain_storm")
+//            meetingStateAnimationView.loopMode = .loop
 
         case .moderatorIsSpeaking:
             likeButton.crossFadeTransition(duration: crossFadeDuration,

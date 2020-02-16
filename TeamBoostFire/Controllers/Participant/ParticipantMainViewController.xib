@@ -16,6 +16,7 @@
                 <outlet property="fireworksView" destination="eSQ-k8-upB" id="xMT-UH-eCz"/>
                 <outlet property="iAmDoneButton" destination="uCp-UK-O2A" id="Z9d-rU-htW"/>
                 <outlet property="likeButton" destination="qoS-6N-tKL" id="dmC-iM-OlC"/>
+                <outlet property="meetingStateAnimationView" destination="loz-ta-vjY" id="rnL-QK-0CP"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -65,8 +66,15 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loz-ta-vjY" userLabel="MeetingStateAnimationView" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="35" y="190" width="250" height="250"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="loz-ta-vjY" secondAttribute="height" multiplier="1:1" id="8CD-S8-Mwg"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoS-6N-tKL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="112" y="348" width="96" height="30"/>
+                    <rect key="frame" x="112" y="452" width="96" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="96" id="GFB-JJ-SkS"/>
                         <constraint firstAttribute="height" constant="30" id="pvo-it-Zq9"/>
@@ -98,7 +106,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHC-qS-TiF" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="100" y="410" width="120" height="30"/>
+                    <rect key="frame" x="100" y="514" width="120" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="F7M-hv-G8c"/>
                         <constraint firstAttribute="width" constant="120" id="df4-JG-maf"/>
@@ -129,7 +137,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-UK-O2A" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="100" y="410" width="120" height="30"/>
+                    <rect key="frame" x="100" y="514" width="120" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="I am done">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -172,15 +180,18 @@
                 <constraint firstItem="KHC-qS-TiF" firstAttribute="top" secondItem="qoS-6N-tKL" secondAttribute="bottom" constant="32" id="Ab7-WM-1bJ"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="top" secondItem="KHC-qS-TiF" secondAttribute="top" id="Eoh-06-hZS"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="top" secondItem="LKp-eu-meq" secondAttribute="bottom" constant="12" id="GCp-iT-ybK"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="trailing" secondItem="KHC-qS-TiF" secondAttribute="trailing" id="LBD-o2-hww"/>
                 <constraint firstItem="eSQ-k8-upB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NMV-zT-fDg"/>
                 <constraint firstItem="qoS-6N-tKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PlO-1e-WBJ"/>
                 <constraint firstItem="KHC-qS-TiF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PwB-d3-18S"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QFD-br-DP5"/>
+                <constraint firstItem="qoS-6N-tKL" firstAttribute="top" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="12" id="Wfw-jq-n7U"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eSQ-k8-upB" secondAttribute="bottom" id="hmX-h2-Ver"/>
                 <constraint firstItem="eSQ-k8-upB" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="8" symbolic="YES" id="pMO-Va-Q7a"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" id="pOM-O7-6bY"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" constant="128" id="tWe-gm-QoV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" constant="24" id="tWe-gm-QoV"/>
                 <constraint firstItem="eSQ-k8-upB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xN2-8D-G0b"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z6h-Uc-2gY"/>
