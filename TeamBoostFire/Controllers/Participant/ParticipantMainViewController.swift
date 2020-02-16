@@ -27,6 +27,7 @@ class ParticipantMainViewController: UIViewController {
 
     var participantReactionViewController = ParticipantReactionViewController()
     public var participantControllerService: ParticipantControllerService?
+    private var previousInMeetingState = ParticipantControllerInMeetingState.unknown
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +126,9 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             return
         }
 
+        let isStateTransition = !previousInMeetingState.typeCompare(target: state)
+        previousInMeetingState = state
+
         let crossFadeDuration = Double(0.5)
 
         switch state {
@@ -148,6 +152,10 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
                 self?.currentSpeakerLabel.text = "Have your say!"
             }, completion: nil)
 
+            if isStateTransition {
+                transitionAnimation(animationName: "you_are_presenting")
+            }
+
         case .anotherParticipantIsSpeaking(let participantName):
             likeButton.isHidden = false
             callSpeakerButton.isHidden = false
@@ -167,8 +175,9 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
                 self?.currentSpeakerLabel.text = "\(participantName) is Speaking"
             }, completion: nil)
 
-//            meetingStateAnimationView.animation = Animation.named("brain_storm")
-//            meetingStateAnimationView.loopMode = .loop
+            if isStateTransition {
+                transitionAnimation(animationName: "someone_is_speaking")
+            }
 
         case .moderatorIsSpeaking:
             likeButton.crossFadeTransition(duration: crossFadeDuration,
@@ -184,15 +193,31 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
                animations: { [weak self] in
                 self?.currentSpeakerLabel.text = "The Moderator is Speaking"
             }, completion: nil)
+
+            if isStateTransition {
+                transitionAnimation(animationName: "brain_storm")
+            }
         }
     }
 
-    func updateSpeakingOrder(speakingOrder: [String]) {
-        /**
-         Debouncing on this side, as firebase can potentially (and does) trigger multiple events for the
-         speaking order
-         */
+    private func transitionAnimation(animationName: String) {
+        self.meetingStateAnimationView.stop()
+        self.meetingStateAnimationView.animation = Animation.named(animationName)
+        self.meetingStateAnimationView.play()
+        self.meetingStateAnimationView.loopMode = .loop
     }
+
+//        let animationDuration = 0.5
+//
+//        meetingStateAnimationView.fadeOut(duration: animationDuration) { _ in
+//            self.meetingStateAnimationView.stop()
+//            self.meetingStateAnimationView.animation = Animation.named(animationName)
+//            self.meetingStateAnimationView.play()
+//            self.meetingStateAnimationView.loopMode = .loop
+//            self.meetingStateAnimationView.fadeIn(duration: animationDuration, completion: nil)
+//        }
+//    }
+
 }
 
 extension ParticipantMainViewController: RemainingMeetingTimeUpdater {
@@ -211,4 +236,33 @@ extension UIView {
             self.isHidden = shouldHide
         }, completion: nil)
     }
+}
+
+extension UIView {
+
+  /**
+  Fade in a view with a duration
+
+  - parameter duration: custom animation duration
+  */
+    func fadeIn(duration: Double, completion: ((Bool) -> Void)?) {
+        UIView.animate(
+            withDuration: duration,
+            animations: {
+            self.alpha = 1.0
+        }, completion: completion)
+    }
+
+  /**
+  Fade out a view with a duration
+
+  - parameter duration: custom animation duration
+  */
+  func fadeOut(duration: Double, completion: ((Bool) -> Void)?) {
+      UIView.animate(
+          withDuration: duration,
+          animations: {
+          self.alpha = 0.1
+      }, completion: completion)
+  }
 }

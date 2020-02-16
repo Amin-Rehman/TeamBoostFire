@@ -13,6 +13,42 @@ enum ParticipantControllerInMeetingState: Equatable {
     case selfIsSpeaking
     case anotherParticipantIsSpeaking(participantName: String)
     case moderatorIsSpeaking
+
+    func typeCompare(target: Self) -> Bool {
+        
+        switch self {
+        case .unknown:
+            switch target {
+            case .unknown:
+                return true
+            default:
+                return false
+            }
+        case .selfIsSpeaking:
+            switch target {
+            case .selfIsSpeaking:
+                return true
+            default:
+                return false
+            }
+            
+        case .anotherParticipantIsSpeaking(_):
+            switch target {
+            case .anotherParticipantIsSpeaking(_):
+                return true
+            default:
+                return false
+            }
+            
+        case .moderatorIsSpeaking:
+            switch target {
+            case .moderatorIsSpeaking:
+                return true
+            default:
+                return false
+            }
+        }
+    }
 }
 
 protocol RemainingMeetingTimeUpdater: class {

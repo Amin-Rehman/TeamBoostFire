@@ -52,6 +52,8 @@
 		EB1FAB9A22777B3C0037A6A5 /* TableKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FAB9922777B3C0037A6A5 /* TableKeys.swift */; };
 		EB3F572E23CA9D3600F8CF90 /* TeamBoostFireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */; };
 		EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */; };
+		EB5ED53023F93C8E00D28B89 /* you_are_presenting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */; };
+		EB5ED53223F93CFC00D28B89 /* someone_is_speaking.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */; };
 		EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */; };
 		EB6CE8B22309B4A5002D3189 /* ParticipantReactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6CE8B02309B4A5002D3189 /* ParticipantReactionViewController.swift */; };
 		EB6CE8B32309B4A5002D3189 /* ParticipantReactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6CE8B12309B4A5002D3189 /* ParticipantReactionViewController.xib */; };
@@ -164,6 +166,8 @@
 		EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireUITests.swift; sourceTree = "<group>"; };
 		EB3F572F23CA9D3700F8CF90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantGameControllerViewController.xib; sourceTree = "<group>"; };
+		EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = you_are_presenting.json; sourceTree = "<group>"; };
+		EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = someone_is_speaking.json; sourceTree = "<group>"; };
 		EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFirebaseIntegrationTests.swift; sourceTree = "<group>"; };
 		EB6CE8B02309B4A5002D3189 /* ParticipantReactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantReactionViewController.swift; sourceTree = "<group>"; };
 		EB6CE8B12309B4A5002D3189 /* ParticipantReactionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantReactionViewController.xib; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */,
+				EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */,
 				EB1C487223C26DDF0014D236 /* teamboost_main.json */,
 				EB6CE8C82309D053002D3189 /* brain_storm.json */,
 				EB6CE8BF2309C39C002D3189 /* Reactions */,
@@ -657,6 +663,7 @@
 				EB6CE8BE2309BA37002D3189 /* swipe-down.json in Resources */,
 				EB6CE8C92309D053002D3189 /* brain_storm.json in Resources */,
 				EB1D48B82267395E001A754D /* HostWaitingViewController.xib in Resources */,
+				EB5ED53023F93C8E00D28B89 /* you_are_presenting.json in Resources */,
 				EB6CE8C22309C439002D3189 /* agree.json in Resources */,
 				EBCCBEBE23BD117800F203AE /* HostHaveYourSayViewController.xib in Resources */,
 				EB1C487323C26DDF0014D236 /* teamboost_main.json in Resources */,
@@ -675,6 +682,7 @@
 				EB6CE8BA2309B9E7002D3189 /* swipe-right.json in Resources */,
 				EB789BD922B9566C0001F395 /* lottie_participant_waiting.json in Resources */,
 				EB6CE8C72309C4E7002D3189 /* curious.json in Resources */,
+				EB5ED53223F93CFC00D28B89 /* someone_is_speaking.json in Resources */,
 				EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1076,7 +1084,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFire/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1097,7 +1105,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 68QQNWZDTF;
 				INFOPLIST_FILE = TeamBoostFire/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

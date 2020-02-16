@@ -67,10 +67,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loz-ta-vjY" userLabel="MeetingStateAnimationView" customClass="AnimationView" customModule="Lottie">
-                    <rect key="frame" x="35" y="190" width="250" height="250"/>
+                    <rect key="frame" x="85" y="209" width="150" height="150"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="loz-ta-vjY" secondAttribute="height" multiplier="1:1" id="8CD-S8-Mwg"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="EoA-q1-1Di"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoS-6N-tKL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
@@ -180,14 +181,16 @@
                 <constraint firstItem="KHC-qS-TiF" firstAttribute="top" secondItem="qoS-6N-tKL" secondAttribute="bottom" constant="32" id="Ab7-WM-1bJ"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="top" secondItem="KHC-qS-TiF" secondAttribute="top" id="Eoh-06-hZS"/>
-                <constraint firstItem="loz-ta-vjY" firstAttribute="top" secondItem="LKp-eu-meq" secondAttribute="bottom" constant="12" id="GCp-iT-ybK"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="trailing" secondItem="KHC-qS-TiF" secondAttribute="trailing" id="LBD-o2-hww"/>
                 <constraint firstItem="eSQ-k8-upB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NMV-zT-fDg"/>
                 <constraint firstItem="qoS-6N-tKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PlO-1e-WBJ"/>
                 <constraint firstItem="KHC-qS-TiF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PwB-d3-18S"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QFD-br-DP5"/>
-                <constraint firstItem="qoS-6N-tKL" firstAttribute="top" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="12" id="Wfw-jq-n7U"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="44" id="Qzj-ZN-eR2"/>
+                <constraint firstItem="qoS-6N-tKL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="12" id="Wfw-jq-n7U"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aXi-BX-8x2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eSQ-k8-upB" secondAttribute="bottom" id="hmX-h2-Ver"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="i7e-Vq-ESA"/>
                 <constraint firstItem="eSQ-k8-upB" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="8" symbolic="YES" id="pMO-Va-Q7a"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" id="pOM-O7-6bY"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>

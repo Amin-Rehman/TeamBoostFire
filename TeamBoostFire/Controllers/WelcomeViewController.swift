@@ -46,7 +46,8 @@ class WelcomeViewController: UIViewController {
 
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            toggleTestMode()
+            // Disable toggling test mode for app store build
+            // toggleTestMode()
         }
     }
 
