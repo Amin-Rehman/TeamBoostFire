@@ -25,4 +25,17 @@ class AnalyticsService {
     public func hostMeetingEnded() {
         mixpanel.track("host_meeting_ended")
     }
+
+    public func hostMeetingCompleted() {
+        mixpanel.track("host_meeting_completed")
+    }
+
+    public func participantCalledSpeaker() {
+        mixpanel.track("participant_called_speaker")
+    }
+
+    public func participantIsDone() {
+        mixpanel.track("participant_is_done")
+    }
+
 }

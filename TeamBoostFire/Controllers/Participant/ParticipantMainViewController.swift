@@ -80,10 +80,12 @@ class ParticipantMainViewController: UIViewController {
     }
 
     @IBAction func callSpeakerTapped(_ sender: Any) {
+        AnalyticsService.shared.participantCalledSpeaker()
         ParticipantCoreServices.shared.registerCallToSpeaker()
     }
 
     @IBAction func iAmDoneTapped(_ sender: Any) {
+        AnalyticsService.shared.participantIsDone()
         ParticipantCoreServices.shared.registerParticipantIsDoneInterrupt()
     }
 }

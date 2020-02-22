@@ -81,6 +81,7 @@
 		EBC77BE8237F5D0B00EA24BB /* FakeReferenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC77BE7237F5D0B00EA24BB /* FakeReferenceObserver.swift */; };
 		EBCCBEBD23BD117800F203AE /* HostHaveYourSayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCCBEBB23BD117800F203AE /* HostHaveYourSayViewController.swift */; };
 		EBCCBEBE23BD117800F203AE /* HostHaveYourSayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBCCBEBC23BD117800F203AE /* HostHaveYourSayViewController.xib */; };
+		EBD1CD192400FD1A00DB45EF /* day_night.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD1CD182400FD1A00DB45EF /* day_night.json */; };
 		EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD3C5A822BA8C4F00EBD4FD /* lottie_participant_reaction.json */; };
 		EBD3C5AB22BA90C600EBD4FD /* lottie_participant_bulb.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */; };
 		EBDC014E22AB061D006910A0 /* HostEndMeetingStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */; };
@@ -195,6 +196,7 @@
 		EBC77BE7237F5D0B00EA24BB /* FakeReferenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeReferenceObserver.swift; sourceTree = "<group>"; };
 		EBCCBEBB23BD117800F203AE /* HostHaveYourSayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostHaveYourSayViewController.swift; sourceTree = "<group>"; };
 		EBCCBEBC23BD117800F203AE /* HostHaveYourSayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostHaveYourSayViewController.xib; sourceTree = "<group>"; };
+		EBD1CD182400FD1A00DB45EF /* day_night.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = day_night.json; sourceTree = "<group>"; };
 		EBD3C5A822BA8C4F00EBD4FD /* lottie_participant_reaction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_reaction.json; sourceTree = "<group>"; };
 		EBD3C5AA22BA90C600EBD4FD /* lottie_participant_bulb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_participant_bulb.json; sourceTree = "<group>"; };
 		EBDC014C22AB061D006910A0 /* HostEndMeetingStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEndMeetingStatsViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		EB0AAFB022B6367E0017A358 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				EBD1CD182400FD1A00DB45EF /* day_night.json */,
 				EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */,
 				EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */,
 				EB1C487223C26DDF0014D236 /* teamboost_main.json */,
@@ -669,6 +672,7 @@
 				EB1C487323C26DDF0014D236 /* teamboost_main.json in Resources */,
 				EBD3C5A922BA8C4F00EBD4FD /* lottie_participant_reaction.json in Resources */,
 				EB1D48BD226740BA001A754D /* HostWaitingTableViewCell.xib in Resources */,
+				EBD1CD192400FD1A00DB45EF /* day_night.json in Resources */,
 				EB1D48CB2267CB07001A754D /* HostMeetingViewController.xib in Resources */,
 				EB6CE8BC2309BA1F002D3189 /* swipe-up.json in Resources */,
 				EB6CE8B62309B975002D3189 /* swipe-left.json in Resources */,

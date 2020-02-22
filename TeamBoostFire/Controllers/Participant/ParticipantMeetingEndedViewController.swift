@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Lottie
 
 class ParticipantMeetingEndedViewController: UIViewController {
+
+    @IBOutlet weak var dayNightAnimationView: AnimationView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dayNightAnimationView.play()
+        dayNightAnimationView.loopMode = .loop
         navigationController?.setNavigationBarHidden(true,
                                                      animated: true)
     }
