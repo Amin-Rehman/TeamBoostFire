@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+
 
 protocol PersistenceStorage {
     func fetchValue(field: String) -> Any
