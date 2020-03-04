@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Host" representedClassName="Host" syncable="YES" codeGenerationType="class">
+        <attribute name="callToSpeakerInterrupt" optional="YES" attributeType="String"/>
+        <attribute name="callToSpeakerInterruptChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currentSpeakerSpeakingTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentSpeakerSpeakingTimeChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="iAmDoneInterrupt" optional="YES" attributeType="String"/>
+        <attribute name="iAmDoneInterruptChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="meetingParamsAgenda" optional="YES" attributeType="String"/>
+        <attribute name="meetingParamsAgendaChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="meetingParamsMaxTalkTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="meetingParamsMaxTalkTimeChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="meetingParamsMeetingTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="meetingParamsMeetingTimeChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="meetingState" optional="YES" attributeType="String"/>
+        <attribute name="meetingStateChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="moderatorHasControl" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="moderatorHasControlChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="participants" optional="YES" attributeType="Transformable"/>
+        <attribute name="participantsChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="speakerOrder" optional="YES" attributeType="Transformable"/>
+        <attribute name="speakerOrderChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="Host" positionX="-63" positionY="-18" width="128" height="343"/>
+    </elements>
+</model>
