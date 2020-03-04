@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Host" representedClassName="Host" syncable="YES" codeGenerationType="class">
+    <entity name="HostPersisted" representedClassName="HostPersisted" syncable="YES" codeGenerationType="class">
         <attribute name="callToSpeakerInterrupt" optional="YES" attributeType="String"/>
         <attribute name="callToSpeakerInterruptChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentSpeakerSpeakingTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -23,6 +23,6 @@
         <attribute name="speakerOrderChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Host" positionX="-63" positionY="-18" width="128" height="343"/>
+        <element name="HostPersisted" positionX="-63" positionY="-18" width="128" height="343"/>
     </elements>
 </model>

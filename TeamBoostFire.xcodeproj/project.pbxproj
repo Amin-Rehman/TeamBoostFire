@@ -16,7 +16,7 @@
 		EB0AEB972313289500FC384B /* MeetingControllerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEB962313289500FC384B /* MeetingControllerStorage.swift */; };
 		EB0AEC04231522A200FC384B /* SpeakerSpeakingTimeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEC03231522A200FC384B /* SpeakerSpeakingTimeUpdater.swift */; };
 		EB0AEC2D23165DA400FC384B /* SpeakerControllerContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AEC2C23165DA400FC384B /* SpeakerControllerContracts.swift */; };
-		EB17B972240FEE6D00A9790B /* HostDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB17B970240FEE6D00A9790B /* HostDataModel.xcdatamodeld */; };
+		EB17B972240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB17B970240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseReferenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */; };
 		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
@@ -313,7 +313,7 @@
 		EB17B96F240FEE3800A9790B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				EB17B970240FEE6D00A9790B /* HostDataModel.xcdatamodeld */,
+				EB17B970240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -880,7 +880,7 @@
 				EB1D48AE22672817001A754D /* ParticipantJoinMeetingViewController.swift in Sources */,
 				EB0AEC04231522A200FC384B /* SpeakerSpeakingTimeUpdater.swift in Sources */,
 				EB2C4C47240CF754003E6D27 /* FirebaseHostFetcher.swift in Sources */,
-				EB17B972240FEE6D00A9790B /* HostDataModel.xcdatamodeld in Sources */,
+				EB17B972240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld in Sources */,
 				EBC679EB22ABF05D00C9705D /* HostSaveMeetingStatsToCoreUseCase.swift in Sources */,
 				EB1D48C5226762A5001A754D /* TeamBoostNotifications.swift in Sources */,
 				EBC679E922ABEF1A00C9705D /* MeetingStats.swift in Sources */,
@@ -1244,13 +1244,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		EB17B970240FEE6D00A9790B /* HostDataModel.xcdatamodeld */ = {
+		EB17B970240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				EB17B971240FEE6D00A9790B /* HostDataModel.xcdatamodel */,
 			);
 			currentVersion = EB17B971240FEE6D00A9790B /* HostDataModel.xcdatamodel */;
-			path = HostDataModel.xcdatamodeld;
+			path = TeamBoostDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
