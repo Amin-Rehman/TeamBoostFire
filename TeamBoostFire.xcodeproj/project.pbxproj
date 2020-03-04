@@ -78,6 +78,8 @@
 		EB9C1A4A22ABC0C80048CBD0 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */; };
 		EBAB305C240FF3D3009374DA /* HostPersisted+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305A240FF3D3009374DA /* HostPersisted+CoreDataClass.swift */; };
 		EBAB305D240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */; };
+		EBAB305F240FF57E009374DA /* ManagedObjectContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */; };
+		EBAB3062240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */; };
 		EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */; };
 		EBBB4A89227F84A800D61976 /* HostMeetingControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */; };
 		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
@@ -200,6 +202,8 @@
 		EB9C1A4922ABC0C80048CBD0 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
 		EBAB305A240FF3D3009374DA /* HostPersisted+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HostPersisted+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HostPersisted+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactory.swift; sourceTree = "<group>"; };
+		EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactoryTests.swift; sourceTree = "<group>"; };
 		EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPreferableTests.swift; sourceTree = "<group>"; };
 		EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMeetingControllerService.swift; sourceTree = "<group>"; };
 		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 		EB17B96F240FEE3800A9790B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */,
 				EBAB305A240FF3D3009374DA /* HostPersisted+CoreDataClass.swift */,
 				EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */,
 				EB17B970240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld */,
@@ -527,6 +532,14 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		EBAB3060240FFDF1009374DA /* StorageTests */ = {
+			isa = PBXGroup;
+			children = (
+				EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */,
+			);
+			path = StorageTests;
+			sourceTree = "<group>";
+		};
 		EBBB4A8A227F850900D61976 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,6 +565,7 @@
 		EBF3479C2278E69E008A6154 /* TeamBoostFireTests */ = {
 			isa = PBXGroup;
 			children = (
+				EBAB3060240FFDF1009374DA /* StorageTests */,
 				EB6AE1FE237BFD440000E041 /* IntegrationTests */,
 				EBF3479D2278E69E008A6154 /* TeamBoostFireTests.swift */,
 				EBF3479F2278E69E008A6154 /* Info.plist */,
@@ -872,6 +886,7 @@
 				EBF3479E2278E69E008A6154 /* TeamBoostFireTests.swift in Sources */,
 				EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */,
 				EBEB1320238BEC60007FFE19 /* CallToSpeakerIntegrationTests.swift in Sources */,
+				EBAB3062240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,6 +921,7 @@
 				EB0AEC2D23165DA400FC384B /* SpeakerControllerContracts.swift in Sources */,
 				EBF347812278C20B008A6154 /* ArrayRotation.swift in Sources */,
 				EB2C4C45240CF746003E6D27 /* FirebaseHostPusher.swift in Sources */,
+				EBAB305F240FF57E009374DA /* ManagedObjectContextFactory.swift in Sources */,
 				EB6CE8B22309B4A5002D3189 /* ParticipantReactionViewController.swift in Sources */,
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
 				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
