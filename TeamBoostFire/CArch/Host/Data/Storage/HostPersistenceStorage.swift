@@ -11,16 +11,37 @@ import CoreData
 
 
 protocol PersistenceStorage {
-    func fetchValue(field: String) -> Any
-    func setValue(value: Any, field: String)
+    func insertNewEntity(with meetingIdentifier: String)
+    func fetchAll() -> [HostPersisted]
     func clear()
 }
 
 struct HostPersistenceStorage: PersistenceStorage {
-    func fetchValue(field: String) -> Any {
-        // To implement
-        return ""
+    let managedObjectContext: NSManagedObjectContext
+    let entityName = "HostPersisted"
+
+    func fetchAll() -> [HostPersisted] {
+        do {
+            return try managedObjectContext.fetch(HostPersisted.fetchRequest())
+        } catch {
+            fatalError("Error fetching all hosts")
+        }
     }
+
+    func insertNewEntity(with meetingIdentifier: String) {
+        let hostPersisted = NSEntityDescription.insertNewObject(
+            forEntityName: "HostPersisted",
+            into: managedObjectContext) as! HostPersisted
+
+        hostPersisted.meetingIdentifier = meetingIdentifier
+        managedObjectContext.insert(hostPersisted)
+        do {
+            try managedObjectContext.save()
+        } catch {
+            fatalError("Error while insert new entity")
+        }
+    }
+
 
     func setValue(value: Any, field: String) {
         // To implement

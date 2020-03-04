@@ -11,7 +11,6 @@ import CoreData
 
 
 extension HostPersisted {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<HostPersisted> {
         return NSFetchRequest<HostPersisted>(entityName: "HostPersisted")
     }
@@ -36,5 +35,5 @@ extension HostPersisted {
     @NSManaged public var participantsChanged: Date?
     @NSManaged public var speakerOrder: NSObject?
     @NSManaged public var speakerOrderChanged: Date?
-
+    @NSManaged public var meetingIdentifier: String?
 }

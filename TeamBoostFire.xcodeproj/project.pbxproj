@@ -80,6 +80,7 @@
 		EBAB305D240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */; };
 		EBAB305F240FF57E009374DA /* ManagedObjectContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */; };
 		EBAB3062240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */; };
+		EBAB306424100099009374DA /* HostPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB306324100099009374DA /* HostPersistenceTests.swift */; };
 		EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */; };
 		EBBB4A89227F84A800D61976 /* HostMeetingControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */; };
 		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
@@ -204,6 +205,7 @@
 		EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HostPersisted+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactory.swift; sourceTree = "<group>"; };
 		EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactoryTests.swift; sourceTree = "<group>"; };
+		EBAB306324100099009374DA /* HostPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceTests.swift; sourceTree = "<group>"; };
 		EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPreferableTests.swift; sourceTree = "<group>"; };
 		EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMeetingControllerService.swift; sourceTree = "<group>"; };
 		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */,
+				EBAB306324100099009374DA /* HostPersistenceTests.swift */,
 			);
 			path = StorageTests;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */,
 				EBEB1320238BEC60007FFE19 /* CallToSpeakerIntegrationTests.swift in Sources */,
 				EBAB3062240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift in Sources */,
+				EBAB306424100099009374DA /* HostPersistenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

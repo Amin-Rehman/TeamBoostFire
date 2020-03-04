@@ -11,5 +11,5 @@ import CoreData
 
 @objc(HostPersisted)
 public class HostPersisted: NSManagedObject {
-
+    public let entityName = "HostPersisted"
 }
