@@ -18,7 +18,6 @@ protocol PersistenceStorage {
 
 struct HostPersistenceStorage: PersistenceStorage {
     let managedObjectContext: NSManagedObjectContext
-    let entityName = "HostPersisted"
 
     func fetchAll() -> [HostPersisted] {
         do {
