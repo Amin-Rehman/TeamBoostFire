@@ -28,4 +28,20 @@ class HostPersistenceTests: XCTestCase {
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
     }
+
+    func testSaveAndRetrieveMeetingParamsMeetingTimeLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.insertNewEntity(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setMeetingParamsMeetingTime(meetingTime: 100,
+                                        meetingIdentifier: stubMeetingIdentifier,
+                                        localChange: true)
+
+        let meetingTimeFromPersistence = sut.meetingParamsMeetingTime(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingTimeFromPersistence, 100)
+    }
 }
