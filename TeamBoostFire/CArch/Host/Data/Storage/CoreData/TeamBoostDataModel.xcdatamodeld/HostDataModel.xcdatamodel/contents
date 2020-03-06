@@ -13,7 +13,7 @@
         <attribute name="meetingParamsMaxTalkTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="meetingParamsMaxTalkTimeChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="meetingParamsMeetingTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="meetingParamsMeetingTimeChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="meetingParamsMeetingTimeChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="meetingState" optional="YES" attributeType="String"/>
         <attribute name="meetingStateChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="moderatorHasControl" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
