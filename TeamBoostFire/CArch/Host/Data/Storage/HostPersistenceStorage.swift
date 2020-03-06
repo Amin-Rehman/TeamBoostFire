@@ -18,8 +18,13 @@ protocol PersistenceStorage {
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool)
-    func meetingParamsMeetingTime(for meetingIdentifier: String) -> Int64
+    func meetingParamsMeetingTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64>
 
+}
+
+struct ValueTimeStampPair<T> {
+    let value: T
+    let timestamp: NSNumber
 }
 
 struct HostPersistenceStorage: PersistenceStorage {
@@ -63,19 +68,28 @@ struct HostPersistenceStorage: PersistenceStorage {
                 fatalError("Unable to find persisted object with the identifier")
             }
             hostPersisted.meetingParamsMeetingTime = meetingTime
+
+            if localChange {
+                hostPersisted.meetingParamsMeetingTimeChanged =
+                    NSNumber(value: Date().timeIntervalSinceReferenceDate)
+            } else {
+                hostPersisted.meetingParamsMeetingTimeChanged = 0
+            }
+
             try managedObjectContext.save()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
     }
 
-    func meetingParamsMeetingTime(for meetingIdentifier: String) -> Int64 {
+    func meetingParamsMeetingTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64> {
         do {
             guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
                 print("Persisted object with meeting identifier not found")
-                return 0
+                return ValueTimeStampPair<Int64>(value: 0, timestamp: 0)
             }
-            return hostPersisted.meetingParamsMeetingTime
+            return ValueTimeStampPair<Int64>(value: hostPersisted.meetingParamsMeetingTime,
+                                             timestamp: hostPersisted.meetingParamsMeetingTimeChanged ?? 0)
         } catch {
             fatalError("Error retrieving meeting time: \(error)")
         }
