@@ -68,6 +68,7 @@ struct HostPersistenceStorage: PersistenceStorage {
         }
     }
 
+    // MARK: - Meeting Params: Meeting Time
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool) {
@@ -103,6 +104,7 @@ struct HostPersistenceStorage: PersistenceStorage {
         }
     }
 
+    // MARK: - Call to Speaker Interrupt
     func setCallToSpeakerInterrupt(callToSpeakerInterrupt: String,
                                    meetingIdentifier: String,
                                    localChange: Bool) {
@@ -137,6 +139,43 @@ struct HostPersistenceStorage: PersistenceStorage {
             fatalError("Error retrieving meeting time: \(error)")
         }
     }
+
+    // MARK: - Current Speaker Speaking Time
+    func setCurrentSpeakerSpeakingTime(currentSpeakerSpeakingTime: Int64,
+                                       meetingIdentifier: String,
+                                       localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.currentSpeakerSpeakingTime = currentSpeakerSpeakingTime
+
+            if localChange {
+                hostPersisted.currentSpeakerSpeakingTimeChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.currentSpeakerSpeakingTimeChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func currentSpeakerSpeakingTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                assertionFailure("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<Int64>(value: 0, timestamp: 0)
+            }
+            return ValueTimeStampPair<Int64>(value: hostPersisted.currentSpeakerSpeakingTime,
+                                             timestamp: hostPersisted.currentSpeakerSpeakingTimeChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
+
 }
 
 extension HostPersistenceStorage {
