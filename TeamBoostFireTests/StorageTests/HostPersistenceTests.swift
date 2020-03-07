@@ -65,4 +65,38 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(meetingTimeValuePair.value, 100)
         XCTAssertEqual(meetingTimeValuePair.timestamp.doubleValue, 0)
     }
+
+    func testSaveAndRetrieveCallToSpeakerInterruptLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setCallToSpeakerInterrupt(callToSpeakerInterrupt: "foo",
+                                      meetingIdentifier: stubMeetingIdentifier,
+                                      localChange: true)
+
+        let callToSpeakerValuePair = sut.callToSpeakerInterrupt(for: stubMeetingIdentifier)
+        XCTAssertEqual(callToSpeakerValuePair.value, "foo")
+        XCTAssertGreaterThan(callToSpeakerValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testSaveAndRetrieveCallToSpeakerInterrupt() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setCallToSpeakerInterrupt(callToSpeakerInterrupt: "foo",
+                                      meetingIdentifier: stubMeetingIdentifier,
+                                      localChange: false)
+        let callToSpeakerValuePair = sut.callToSpeakerInterrupt(for: stubMeetingIdentifier)
+        XCTAssertEqual(callToSpeakerValuePair.value, "foo")
+        XCTAssertEqual(callToSpeakerValuePair.timestamp.doubleValue, 0.0)
+    }
+
 }
