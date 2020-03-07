@@ -21,19 +21,22 @@ class HostPersistenceTests: XCTestCase {
         sut = nil
     }
 
-    func testSaveAndRetrieveMeetingIdentifierToPersistence() {
+    func testSaveAndRetrieveMeetingIdentifierLocalChange() {
         let results1 = sut.fetchAll()
         XCTAssertEqual(results1.count, 0)
-        sut.insertNewEntity(with: "foo")
-        let results2 = sut.fetchAll()
-        XCTAssertEqual(results2.count, 1)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let result = sut.fetchAll().first
+        XCTAssertEqual(result?.meetingIdentifier, stubMeetingIdentifier)
+        let meetingIdentifierTimestamp = result!.meetingIdentifierChanged!.doubleValue
+        XCTAssertGreaterThan(meetingIdentifierTimestamp, 0.0)
     }
 
     func testSaveAndRetrieveMeetingParamsMeetingTimeLocalChange() {
         let results1 = sut.fetchAll()
         XCTAssertEqual(results1.count, 0)
         let stubMeetingIdentifier = "stub-meeting-identifier"
-        sut.insertNewEntity(with: stubMeetingIdentifier)
+        sut.setMeeting(with: stubMeetingIdentifier)
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
 
@@ -50,7 +53,7 @@ class HostPersistenceTests: XCTestCase {
         let results1 = sut.fetchAll()
         XCTAssertEqual(results1.count, 0)
         let stubMeetingIdentifier = "stub-meeting-identifier"
-        sut.insertNewEntity(with: stubMeetingIdentifier)
+        sut.setMeeting(with: stubMeetingIdentifier)
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
 

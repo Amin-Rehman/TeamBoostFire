@@ -11,9 +11,10 @@ import CoreData
 
 
 protocol PersistenceStorage {
-    func insertNewEntity(with meetingIdentifier: String)
     func fetchAll() -> [HostPersisted]
     func clear()
+
+    func setMeeting(with meetingIdentifier: String)
 
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
@@ -45,12 +46,17 @@ struct HostPersistenceStorage: PersistenceStorage {
     }
 
 
-    func insertNewEntity(with meetingIdentifier: String) {
+    /**
+     setMeeting should always create a new entry in the database and firebase sync
+     should only be called once during a meeting
+     */
+    func setMeeting(with meetingIdentifier: String) {
         let hostPersisted = NSEntityDescription.insertNewObject(
             forEntityName: "HostPersisted",
             into: managedObjectContext) as! HostPersisted
 
         hostPersisted.meetingIdentifier = meetingIdentifier
+        hostPersisted.meetingIdentifierChanged = HostPersistenceStorage.makeCurrentTimestamp()
         managedObjectContext.insert(hostPersisted)
         do {
             try managedObjectContext.save()
@@ -58,7 +64,6 @@ struct HostPersistenceStorage: PersistenceStorage {
             fatalError("Error while insert new entity")
         }
     }
-
 
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
@@ -71,7 +76,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.meetingParamsMeetingTimeChanged =
-                    NSNumber(value: Date().timeIntervalSinceReferenceDate)
+                    HostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingParamsMeetingTimeChanged = 0
             }
@@ -97,6 +102,11 @@ struct HostPersistenceStorage: PersistenceStorage {
 }
 
 extension HostPersistenceStorage {
+
+    static private func makeCurrentTimestamp() -> NSNumber {
+        return NSNumber(value: Date().timeIntervalSinceReferenceDate)
+    }
+
     private func fetchHostPersisted(with meetingIdentifier: String) throws -> HostPersisted? {
         let fetchRequest = NSFetchRequest<HostPersisted>(entityName: HostPersisted.entityName)
         fetchRequest.predicate = NSPredicate(format: "meetingIdentifier == %@", meetingIdentifier)
