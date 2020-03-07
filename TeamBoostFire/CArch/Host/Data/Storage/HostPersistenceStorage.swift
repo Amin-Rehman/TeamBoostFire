@@ -138,7 +138,7 @@ struct HostPersistenceStorage: PersistenceStorage {
         } catch {
             fatalError("Error retrieving meeting time: \(error)")
         }
-    }
+    }    
 
     // MARK: - Current Speaker Speaking Time
     func setCurrentSpeakerSpeakingTime(currentSpeakerSpeakingTime: Int64,
@@ -175,7 +175,6 @@ struct HostPersistenceStorage: PersistenceStorage {
             fatalError("Error retrieving meeting time: \(error)")
         }
     }
-
 }
 
 extension HostPersistenceStorage {
