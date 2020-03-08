@@ -25,11 +25,25 @@ protocol PersistenceStorage {
                                      localChange: Bool)
     func meetingParamsMeetingTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64>
 
+    func setMeetingParamsAgenda(agenda: String,
+                                meetingIdentifier: String,
+                                localChange: Bool)
+    func meetingParamsAgenda(for meetingIdentifier: String) -> ValueTimeStampPair<String>
+
     func setCallToSpeakerInterrupt(callToSpeakerInterrupt: String,
                                    meetingIdentifier: String,
                                    localChange: Bool)
     func callToSpeakerInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
 
+    func setIAmDoneInterrupt(iAmDoneInterrupt: String,
+                                       meetingIdentifier: String,
+                                       localChange: Bool)
+    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
+
+    func setMeetingParamsMaxTalkTime(maxTalkTime: Int64,
+                                meetingIdentifier: String,
+                                localChange: Bool)
+    func meetingParamsMaxTalkTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64>
 }
 
 struct HostPersistenceStorage: PersistenceStorage {
@@ -104,6 +118,79 @@ struct HostPersistenceStorage: PersistenceStorage {
         }
     }
 
+    // MARK: - Meeting Params: Agenda
+    func setMeetingParamsAgenda(agenda: String,
+                                meetingIdentifier: String,
+                                localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.meetingParamsAgenda = agenda
+
+            if localChange {
+                hostPersisted.meetingParamsAgendaChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.meetingParamsAgendaChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func meetingParamsAgenda(for meetingIdentifier: String) -> ValueTimeStampPair<String> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                print("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<String>(value: "", timestamp: 0)
+            }
+            return ValueTimeStampPair<String>(value: hostPersisted.meetingParamsAgenda ?? "",
+                                              timestamp: hostPersisted.meetingParamsAgendaChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
+
+    // MARK: - Meeting Params: MaxTalkTime
+    func setMeetingParamsMaxTalkTime(maxTalkTime: Int64,
+                                meetingIdentifier: String,
+                                localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.meetingParamsMaxTalkTime = maxTalkTime
+
+            if localChange {
+                hostPersisted.meetingParamsMaxTalkTimeChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.meetingParamsMaxTalkTimeChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func meetingParamsMaxTalkTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                print("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<Int64>(value: 0, timestamp: 0)
+            }
+            return ValueTimeStampPair<Int64>(value: hostPersisted.meetingParamsMaxTalkTime,
+                                              timestamp: hostPersisted.meetingParamsMaxTalkTimeChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
+
+
     // MARK: - Call to Speaker Interrupt
     func setCallToSpeakerInterrupt(callToSpeakerInterrupt: String,
                                    meetingIdentifier: String,
@@ -171,6 +258,42 @@ struct HostPersistenceStorage: PersistenceStorage {
             }
             return ValueTimeStampPair<Int64>(value: hostPersisted.currentSpeakerSpeakingTime,
                                              timestamp: hostPersisted.currentSpeakerSpeakingTimeChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
+
+    // MARK: - I Am Done Interrupt
+    func setIAmDoneInterrupt(iAmDoneInterrupt: String,
+                             meetingIdentifier: String,
+                             localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.iAmDoneInterrupt = iAmDoneInterrupt
+
+            if localChange {
+                hostPersisted.iAmDoneInterruptChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.iAmDoneInterruptChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                assertionFailure("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<String>(value: "", timestamp: 0)
+            }
+            return ValueTimeStampPair<String>(value: hostPersisted.iAmDoneInterrupt ?? "",
+                                             timestamp: hostPersisted.iAmDoneInterruptChanged ?? 0)
         } catch {
             fatalError("Error retrieving meeting time: \(error)")
         }
