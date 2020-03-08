@@ -12,64 +12,58 @@ import CoreData
 struct ValueTimeStampPair<T> {
     let value: T
     let timestamp: NSNumber
+
+    func hasTimeStamp() -> Bool {
+        return timestamp.doubleValue > 0
+    }
 }
 
 protocol PersistenceStorage {
+    var storageChangedObserver: StorageChangeObserving? { get set }
+
     func fetchAll() -> [HostPersisted]
     func clear()
-
     func setMeeting(with meetingIdentifier: String)
-
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool)
     func meetingParamsMeetingTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64>
-
     func setMeetingParamsAgenda(agenda: String,
                                 meetingIdentifier: String,
                                 localChange: Bool)
     func meetingParamsAgenda(for meetingIdentifier: String) -> ValueTimeStampPair<String>
-
     func setCallToSpeakerInterrupt(callToSpeakerInterrupt: String,
                                    meetingIdentifier: String,
                                    localChange: Bool)
     func callToSpeakerInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
-
     func setIAmDoneInterrupt(iAmDoneInterrupt: String,
                              meetingIdentifier: String,
                              localChange: Bool)
     func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
-
     func setMeetingParamsMaxTalkTime(maxTalkTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool)
     func meetingParamsMaxTalkTime(for meetingIdentifier: String) -> ValueTimeStampPair<Int64>
-
     func setMeetingState(meetingState: String,
                          meetingIdentifier: String,
                          localChange: Bool)
     func meetingState(for meetingIdentifier: String) -> ValueTimeStampPair<String>
-
     func setModeratorHasControl(hasControl: Bool,
                                 meetingIdentifier: String,
                                 localChange: Bool)
     func moderatorHasControl(for meetingIdentifier: String) -> ValueTimeStampPair<Bool>
-
     func setParticipants(participants: [String],
                          meetingIdentifier: String,
                          localChange: Bool)
-
     func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
-
     func setSpeakerOrder(speakerOrder: [String],
                          meetingIdentifier: String,
                          localChange: Bool)
-
     func speakerOrder(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
-
 }
 
 struct HostPersistenceStorage: PersistenceStorage {
+    weak var storageChangedObserver: StorageChangeObserving?
     let managedObjectContext: NSManagedObjectContext
 
     func fetchAll() -> [HostPersisted] {
@@ -99,7 +93,7 @@ struct HostPersistenceStorage: PersistenceStorage {
         hostPersisted.meetingIdentifierChanged = HostPersistenceStorage.makeCurrentTimestamp()
         managedObjectContext.insert(hostPersisted)
         do {
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             fatalError("Error while insert new entity")
         }
@@ -122,7 +116,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.meetingParamsMeetingTimeChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -158,7 +152,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.meetingParamsAgendaChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -194,7 +188,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.meetingParamsMaxTalkTimeChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -231,7 +225,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.meetingParamsMeetingTimeChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -267,7 +261,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.currentSpeakerSpeakingTimeChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -303,7 +297,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.iAmDoneInterruptChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -339,7 +333,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.meetingStateChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -375,7 +369,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.moderatorHasControlChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -411,7 +405,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.participantsChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -447,7 +441,7 @@ struct HostPersistenceStorage: PersistenceStorage {
                 hostPersisted.speakerOrderChanged = 0
             }
 
-            try managedObjectContext.save()
+            try saveAndNotifyObserver()
         } catch {
             assertionFailure("Error setting meeting parameters. \(error)")
         }
@@ -471,6 +465,11 @@ extension HostPersistenceStorage {
 
     static private func makeCurrentTimestamp() -> NSNumber {
         return NSNumber(value: Date().timeIntervalSinceReferenceDate)
+    }
+
+    private func saveAndNotifyObserver() throws {
+        try managedObjectContext.save()
+        storageChangedObserver?.storageDidChange()
     }
 
     private func fetchHostPersisted(with meetingIdentifier: String) throws -> HostPersisted? {
