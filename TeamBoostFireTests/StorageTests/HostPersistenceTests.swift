@@ -200,4 +200,36 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(iAmDoneInterruptValuePair.value, "stub-interrupt")
         XCTAssertEqual(iAmDoneInterruptValuePair.timestamp.doubleValue, 0.0)
     }
+
+    func testSaveAndRetrieveMeetingParamsMaxTalkTimeLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        sut.setMeetingParamsMaxTalkTime(maxTalkTime: 100,
+                                        meetingIdentifier: stubMeetingIdentifier,
+                                        localChange: true)
+
+        let meetingParamsMaxTalkTimeValuePair = sut.meetingParamsMaxTalkTime(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingParamsMaxTalkTimeValuePair.value, 100)
+        XCTAssertGreaterThan(meetingParamsMaxTalkTimeValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testSaveAndRetrieveMeetingParamsMaxTalkTime() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        sut.setMeetingParamsMaxTalkTime(maxTalkTime: 100,
+                                        meetingIdentifier: stubMeetingIdentifier,
+                                        localChange: false)
+
+        let meetingParamsMaxTalkTimeValuePair = sut.meetingParamsMaxTalkTime(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingParamsMaxTalkTimeValuePair.value, 100)
+        XCTAssertEqual(meetingParamsMaxTalkTimeValuePair.timestamp.doubleValue, 0.0)
+    }
 }
