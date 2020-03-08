@@ -49,6 +49,24 @@ protocol PersistenceStorage {
                          meetingIdentifier: String,
                          localChange: Bool)
     func meetingState(for meetingIdentifier: String) -> ValueTimeStampPair<String>
+
+    func setModeratorHasControl(hasControl: Bool,
+                                meetingIdentifier: String,
+                                localChange: Bool)
+    func moderatorHasControl(for meetingIdentifier: String) -> ValueTimeStampPair<Bool>
+
+    func setParticipants(participants: [String],
+                         meetingIdentifier: String,
+                         localChange: Bool)
+
+    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
+
+    func setSpeakerOrder(speakerOrder: [String],
+                         meetingIdentifier: String,
+                         localChange: Bool)
+
+    func speakerOrder(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
+
 }
 
 struct HostPersistenceStorage: PersistenceStorage {
@@ -407,6 +425,42 @@ struct HostPersistenceStorage: PersistenceStorage {
             }
             return ValueTimeStampPair<[String]>(value: hostPersisted.participants ?? [],
                                                 timestamp: hostPersisted.participantsChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
+
+    // MARK: - Speaker Order
+    func setSpeakerOrder(speakerOrder: [String],
+                         meetingIdentifier: String,
+                         localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.speakerOrder = speakerOrder
+
+            if localChange {
+                hostPersisted.speakerOrderChanged  =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.speakerOrderChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func speakerOrder(for meetingIdentifier: String) -> ValueTimeStampPair<[String]> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                assertionFailure("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<[String]>(value: [], timestamp: 0)
+            }
+            return ValueTimeStampPair<[String]>(value: hostPersisted.speakerOrder ?? [],
+                                                timestamp: hostPersisted.speakerOrderChanged ?? 0)
         } catch {
             fatalError("Error retrieving meeting time: \(error)")
         }
