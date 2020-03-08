@@ -81,6 +81,7 @@
 		EBAB305F240FF57E009374DA /* ManagedObjectContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */; };
 		EBAB3062240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */; };
 		EBAB306424100099009374DA /* HostPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB306324100099009374DA /* HostPersistenceTests.swift */; };
+		EBAB306624155690009374DA /* StorageChangeNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB306524155690009374DA /* StorageChangeNotifying.swift */; };
 		EBADC614232BC4FD009F94A3 /* ParticipantPreferableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */; };
 		EBBB4A89227F84A800D61976 /* HostMeetingControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */; };
 		EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */; };
@@ -206,6 +207,7 @@
 		EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactory.swift; sourceTree = "<group>"; };
 		EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactoryTests.swift; sourceTree = "<group>"; };
 		EBAB306324100099009374DA /* HostPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceTests.swift; sourceTree = "<group>"; };
+		EBAB306524155690009374DA /* StorageChangeNotifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageChangeNotifying.swift; sourceTree = "<group>"; };
 		EBADC613232BC4FD009F94A3 /* ParticipantPreferableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPreferableTests.swift; sourceTree = "<group>"; };
 		EBBB4A88227F84A800D61976 /* HostMeetingControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMeetingControllerService.swift; sourceTree = "<group>"; };
 		EBBB4A8B2281846800D61976 /* MinutesAndSecondsPrettyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinutesAndSecondsPrettyString.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		EB2C4C43240CF715003E6D27 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				EBAB306524155690009374DA /* StorageChangeNotifying.swift */,
 				EB2C4C48240CF80E003E6D27 /* HostPersistenceStorage.swift */,
 				EB17B96F240FEE3800A9790B /* CoreData */,
 			);
@@ -920,6 +923,7 @@
 				EB1D48B422672E82001A754D /* HostSetupMeetingUseCase.swift in Sources */,
 				EBAB305C240FF3D3009374DA /* HostPersisted+CoreDataClass.swift in Sources */,
 				EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */,
+				EBAB306624155690009374DA /* StorageChangeNotifying.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
 				EBCCBEBD23BD117800F203AE /* HostHaveYourSayViewController.swift in Sources */,
 				EB0AEC2D23165DA400FC384B /* SpeakerControllerContracts.swift in Sources */,
