@@ -375,6 +375,42 @@ struct HostPersistenceStorage: PersistenceStorage {
             fatalError("Error retrieving meeting time: \(error)")
         }
     }
+
+    // MARK: - Participants
+    func setParticipants(participants: [String],
+                         meetingIdentifier: String,
+                         localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.participants = participants
+
+            if localChange {
+                hostPersisted.participantsChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.participantsChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[String]> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                assertionFailure("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<[String]>(value: [], timestamp: 0)
+            }
+            return ValueTimeStampPair<[String]>(value: hostPersisted.participants ?? [],
+                                                timestamp: hostPersisted.participantsChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
 }
 
 extension HostPersistenceStorage {

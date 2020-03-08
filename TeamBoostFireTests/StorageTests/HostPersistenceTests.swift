@@ -305,4 +305,50 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(meetingStateValuePair2.value, true)
         XCTAssertEqual(meetingStateValuePair2.timestamp.doubleValue, 0.0)
     }
+
+    func testSaveAndRetrieveParticipantsLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        let participantsToBePersisted = ["participants-a",
+                                         "participants-b",
+                                         "participants-c"]
+
+        sut.setParticipants(participants: participantsToBePersisted,
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: true)
+        let participantsValuePair = sut.participants(for: stubMeetingIdentifier)
+        XCTAssertEqual(participantsValuePair.value, participantsToBePersisted)
+        XCTAssertGreaterThan(participantsValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testSaveAndRetrieveParticipants() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        let participantsToBePersisted = ["participants-a",
+                                         "participants-b",
+                                         "participants-c"]
+
+        sut.setParticipants(participants: participantsToBePersisted,
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: true)
+        let participantsValuePair = sut.participants(for: stubMeetingIdentifier)
+        XCTAssertEqual(participantsValuePair.value, participantsToBePersisted)
+        XCTAssertGreaterThan(participantsValuePair.timestamp.doubleValue, 0.0)
+
+        sut.setParticipants(participants: participantsToBePersisted,
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: false)
+        let participantsValuePair2 = sut.participants(for: stubMeetingIdentifier)
+        XCTAssertEqual(participantsValuePair2.value, participantsToBePersisted)
+        XCTAssertEqual(participantsValuePair2.timestamp.doubleValue, 0.0)
+    }
+
 }
