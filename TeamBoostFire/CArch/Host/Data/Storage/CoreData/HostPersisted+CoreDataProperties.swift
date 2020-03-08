@@ -35,7 +35,7 @@ extension HostPersisted {
     @NSManaged public var meetingParamsMaxTalkTimeChanged: NSNumber?
     @NSManaged public var meetingParamsMeetingTimeChanged: NSNumber?
     @NSManaged public var meetingStateChanged: NSNumber?
-    @NSManaged public var moderatorHasControlChanged: Date?
+    @NSManaged public var moderatorHasControlChanged: NSNumber?
     @NSManaged public var participantsChanged: Date?
     @NSManaged public var speakerOrderChanged: Date?
 

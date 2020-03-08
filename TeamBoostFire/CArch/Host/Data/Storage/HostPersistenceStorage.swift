@@ -339,6 +339,42 @@ struct HostPersistenceStorage: PersistenceStorage {
             fatalError("Error retrieving meeting time: \(error)")
         }
     }
+
+    // MARK: - Moderator Has Control
+    func setModeratorHasControl(hasControl: Bool,
+                                meetingIdentifier: String,
+                                localChange: Bool) {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                fatalError("Unable to find persisted object with the identifier")
+            }
+            hostPersisted.moderatorHasControl  = hasControl
+
+            if localChange {
+                hostPersisted.moderatorHasControlChanged =
+                    HostPersistenceStorage.makeCurrentTimestamp()
+            } else {
+                hostPersisted.moderatorHasControlChanged = 0
+            }
+
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error setting meeting parameters. \(error)")
+        }
+    }
+
+    func moderatorHasControl(for meetingIdentifier: String) -> ValueTimeStampPair<Bool> {
+        do {
+            guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
+                print("Persisted object with meeting identifier not found")
+                return ValueTimeStampPair<Bool>(value: false, timestamp: 0)
+            }
+            return ValueTimeStampPair<Bool>(value: hostPersisted.moderatorHasControl,
+                                            timestamp: hostPersisted.moderatorHasControlChanged ?? 0)
+        } catch {
+            fatalError("Error retrieving meeting time: \(error)")
+        }
+    }
 }
 
 extension HostPersistenceStorage {
