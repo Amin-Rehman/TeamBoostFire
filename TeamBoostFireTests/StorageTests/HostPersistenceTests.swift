@@ -232,4 +232,44 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(meetingParamsMaxTalkTimeValuePair.value, 100)
         XCTAssertEqual(meetingParamsMaxTalkTimeValuePair.timestamp.doubleValue, 0.0)
     }
+
+    func testSaveAndRetrieveMeetingStateLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        sut.setMeetingState(meetingState: "started",
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: true)
+
+        let meetingStateValuePair = sut.meetingState(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingStateValuePair.value, "started")
+        XCTAssertGreaterThan(meetingStateValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testSaveAndRetrieveMeetingState() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+        sut.setMeetingState(meetingState: "started",
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: true)
+
+        let meetingStateValuePair = sut.meetingState(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingStateValuePair.value, "started")
+        XCTAssertGreaterThan(meetingStateValuePair.timestamp.doubleValue, 0.0)
+
+        sut.setMeetingState(meetingState: "ended",
+                            meetingIdentifier: stubMeetingIdentifier,
+                            localChange: false)
+
+        let meetingStateValuePair2 = sut.meetingState(for: stubMeetingIdentifier)
+        XCTAssertEqual(meetingStateValuePair2.value, "ended")
+        XCTAssertEqual(meetingStateValuePair2.timestamp.doubleValue, 0.0)
+    }
 }
