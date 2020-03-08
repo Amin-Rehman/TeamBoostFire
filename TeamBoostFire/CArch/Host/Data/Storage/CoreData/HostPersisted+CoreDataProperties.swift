@@ -24,8 +24,8 @@ extension HostPersisted {
     @NSManaged public var meetingParamsMeetingTime: Int64
     @NSManaged public var meetingState: String?
     @NSManaged public var moderatorHasControl: Bool
-    @NSManaged public var participants: NSObject?
-    @NSManaged public var speakerOrder: NSObject?
+    @NSManaged public var participants: [String]?
+    @NSManaged public var speakerOrder: [String]?
 
     @NSManaged public var meetingIdentifierChanged: NSNumber?
     @NSManaged public var callToSpeakerInterruptChanged: NSNumber?
@@ -36,7 +36,7 @@ extension HostPersisted {
     @NSManaged public var meetingParamsMeetingTimeChanged: NSNumber?
     @NSManaged public var meetingStateChanged: NSNumber?
     @NSManaged public var moderatorHasControlChanged: NSNumber?
-    @NSManaged public var participantsChanged: Date?
-    @NSManaged public var speakerOrderChanged: Date?
+    @NSManaged public var participantsChanged: NSNumber?
+    @NSManaged public var speakerOrderChanged: NSNumber?
 
 }

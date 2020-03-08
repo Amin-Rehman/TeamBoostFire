@@ -20,11 +20,11 @@
         <attribute name="moderatorHasControl" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="moderatorHasControlChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="participants" optional="YES" attributeType="Transformable"/>
-        <attribute name="participantsChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="participantsChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="speakerOrder" optional="YES" attributeType="Transformable"/>
-        <attribute name="speakerOrderChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="speakerOrderChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="HostPersisted" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="HostPersisted" positionX="-63" positionY="-18" width="128" height="373"/>
     </elements>
 </model>
