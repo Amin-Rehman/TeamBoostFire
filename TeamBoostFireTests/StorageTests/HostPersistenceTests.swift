@@ -132,4 +132,38 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.value, 200)
         XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.timestamp.doubleValue, 0.0)
     }
+
+    func testMeetingParamsAgendaLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setMeetingParamsAgenda(agenda: "stub-agenda",
+                                   meetingIdentifier: stubMeetingIdentifier,
+                                   localChange: true)
+
+        let currentSpeakerSpeakingTimeValuePair = sut.meetingParamsAgenda(for: stubMeetingIdentifier)
+        XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.value, "stub-agenda")
+        XCTAssertGreaterThan(currentSpeakerSpeakingTimeValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testMeetingParamsAgenda() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setMeetingParamsAgenda(agenda: "stub-agenda",
+                                   meetingIdentifier: stubMeetingIdentifier,
+                                   localChange: false)
+
+        let currentSpeakerSpeakingTimeValuePair = sut.meetingParamsAgenda(for: stubMeetingIdentifier)
+        XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.value, "stub-agenda")
+        XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.timestamp.doubleValue, 0.0)
+    }
 }
