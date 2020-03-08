@@ -166,4 +166,38 @@ class HostPersistenceTests: XCTestCase {
         XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.value, "stub-agenda")
         XCTAssertEqual(currentSpeakerSpeakingTimeValuePair.timestamp.doubleValue, 0.0)
     }
+
+    func testSaveAndRetrieveIAmDoneInterruptLocalChange() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setIAmDoneInterrupt(iAmDoneInterrupt: "stub-interrupt",
+                                meetingIdentifier: stubMeetingIdentifier,
+                                localChange: true)
+
+        let iAmDoneInterruptValuePair = sut.iAmDoneInterrupt(for: stubMeetingIdentifier)
+        XCTAssertEqual(iAmDoneInterruptValuePair.value, "stub-interrupt")
+        XCTAssertGreaterThan(iAmDoneInterruptValuePair.timestamp.doubleValue, 0.0)
+    }
+
+    func testSaveAndRetrieveIAmDoneInterrupt() {
+        let results1 = sut.fetchAll()
+        XCTAssertEqual(results1.count, 0)
+        let stubMeetingIdentifier = "stub-meeting-identifier"
+        sut.setMeeting(with: stubMeetingIdentifier)
+        let results2 = sut.fetchAll()
+        XCTAssertEqual(results2.count, 1)
+
+        sut.setIAmDoneInterrupt(iAmDoneInterrupt: "stub-interrupt",
+                                meetingIdentifier: stubMeetingIdentifier,
+                                localChange: false)
+
+        let iAmDoneInterruptValuePair = sut.iAmDoneInterrupt(for: stubMeetingIdentifier)
+        XCTAssertEqual(iAmDoneInterruptValuePair.value, "stub-interrupt")
+        XCTAssertEqual(iAmDoneInterruptValuePair.timestamp.doubleValue, 0.0)
+    }
 }
