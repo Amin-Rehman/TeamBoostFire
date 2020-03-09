@@ -9,6 +9,7 @@
 import Foundation
 
 struct HostDomain {
+    
     public func startMeeting() {
     }
 
