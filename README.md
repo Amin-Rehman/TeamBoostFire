@@ -1,7 +1,13 @@
-# TeamBoostFire
-TeamBoost with Firebase implementation
+# TeamBoost
 
-# TeamBoostFire Database Schema
+![TeamBoost](/Documentation/Icon.png)
+TeamBoost improves collaboration and productivity of meetings. It balances interaction of meeting participants to raise the quality of discussions. The app allows the moderator to guide the group more effectively so that everyone comes to speak and feels as part of the team. Participants can call for speaker by tapping their screen or swipe to like contributions of others. Speaking times are limited so one has to focus. The discussion experience is intense and interactive as a board game. Participants can rate meetings to create a transparent view on the group performance.
+
+[Webpage](https://www.teamboost.app)
+[Appstore](https://apps.apple.com/de/app/teamboost/id1460192923?l=en)
+
+
+# TeamBoostFire Firebase - Database Schema
 
 ```
 {
