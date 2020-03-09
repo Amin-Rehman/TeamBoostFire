@@ -441,12 +441,12 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		EB2C4C3D240CF417003E6D27 /* CArch */ = {
+		EB2C4C3D240CF417003E6D27 /* Northstar */ = {
 			isa = PBXGroup;
 			children = (
 				EB2C4C3F240CF436003E6D27 /* Host */,
 			);
-			path = CArch;
+			path = Northstar;
 			sourceTree = "<group>";
 		};
 		EB2C4C3E240CF42B003E6D27 /* Data */ = {
@@ -607,7 +607,7 @@
 		EBFCA66E22668D2E0047CD75 /* TeamBoostFire */ = {
 			isa = PBXGroup;
 			children = (
-				EB2C4C3D240CF417003E6D27 /* CArch */,
+				EB2C4C3D240CF417003E6D27 /* Northstar */,
 				EBBB4A8A227F850900D61976 /* Services */,
 				EB1D48B922674074001A754D /* Views */,
 				EB1D48A82267260F001A754D /* Controllers */,
