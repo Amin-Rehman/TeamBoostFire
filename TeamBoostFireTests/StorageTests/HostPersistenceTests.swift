@@ -313,9 +313,12 @@ class HostPersistenceTests: XCTestCase {
         sut.setMeeting(with: stubMeetingIdentifier)
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
-        let participantsToBePersisted = ["participants-a",
-                                         "participants-b",
-                                         "participants-c"]
+
+        let participantsToBePersisted = [
+            ParticipantPersisted(id: "id-a", name: "participant-a"),
+            ParticipantPersisted(id: "id-b", name: "participant-b"),
+            ParticipantPersisted(id: "id-c", name: "participant-c")
+        ]
         
         sut.setParticipants(participants: participantsToBePersisted,
                             meetingIdentifier: stubMeetingIdentifier,
@@ -332,10 +335,12 @@ class HostPersistenceTests: XCTestCase {
         sut.setMeeting(with: stubMeetingIdentifier)
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
-        let participantsToBePersisted = ["participants-a",
-                                         "participants-b",
-                                         "participants-c"]
-        
+        let participantsToBePersisted = [
+            ParticipantPersisted(id: "id-a", name: "participant-a"),
+            ParticipantPersisted(id: "id-b", name: "participant-b"),
+            ParticipantPersisted(id: "id-c", name: "participant-c")
+        ]
+
         sut.setParticipants(participants: participantsToBePersisted,
                             meetingIdentifier: stubMeetingIdentifier,
                             localChange: true)

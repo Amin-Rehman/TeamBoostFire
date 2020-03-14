@@ -52,10 +52,10 @@ protocol PersistenceStorage {
                                 meetingIdentifier: String,
                                 localChange: Bool)
     func moderatorHasControl(for meetingIdentifier: String) -> ValueTimeStampPair<Bool>
-    func setParticipants(participants: [String],
+    func setParticipants(participants: [ParticipantPersisted],
                          meetingIdentifier: String,
                          localChange: Bool)
-    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
+    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[ParticipantPersisted]>
     func setSpeakerOrder(speakerOrder: [String],
                          meetingIdentifier: String,
                          localChange: Bool)
@@ -389,7 +389,7 @@ struct HostPersistenceStorage: PersistenceStorage {
     }
 
     // MARK: - Participants
-    func setParticipants(participants: [String],
+    func setParticipants(participants: [ParticipantPersisted],
                          meetingIdentifier: String,
                          localChange: Bool) {
         do {
@@ -411,14 +411,14 @@ struct HostPersistenceStorage: PersistenceStorage {
         }
     }
 
-    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[String]> {
+    func participants(for meetingIdentifier: String) -> ValueTimeStampPair<[ParticipantPersisted]> {
         do {
             guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
                 assertionFailure("Persisted object with meeting identifier not found")
-                return ValueTimeStampPair<[String]>(value: [], timestamp: 0)
+                return ValueTimeStampPair<[ParticipantPersisted]>(value: [], timestamp: 0)
             }
-            return ValueTimeStampPair<[String]>(value: hostPersisted.participants ?? [],
-                                                timestamp: hostPersisted.participantsChanged ?? 0)
+            return ValueTimeStampPair<[ParticipantPersisted]>(value: hostPersisted.participants ?? [],
+                                                              timestamp: hostPersisted.participantsChanged ?? 0)
         } catch {
             fatalError("Error retrieving meeting time: \(error)")
         }

@@ -57,6 +57,7 @@
 		EB2C4C49240CF80E003E6D27 /* HostPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C4C48240CF80E003E6D27 /* HostPersistenceStorage.swift */; };
 		EB3F572E23CA9D3600F8CF90 /* TeamBoostFireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */; };
 		EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */; };
+		EB56C135241D688200A0A4C3 /* ParticipantPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */; };
 		EB5ED53023F93C8E00D28B89 /* you_are_presenting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */; };
 		EB5ED53223F93CFC00D28B89 /* someone_is_speaking.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */; };
 		EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */; };
@@ -183,6 +184,7 @@
 		EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireUITests.swift; sourceTree = "<group>"; };
 		EB3F572F23CA9D3700F8CF90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantGameControllerViewController.xib; sourceTree = "<group>"; };
+		EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPersisted.swift; sourceTree = "<group>"; };
 		EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = you_are_presenting.json; sourceTree = "<group>"; };
 		EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = someone_is_speaking.json; sourceTree = "<group>"; };
 		EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFirebaseIntegrationTests.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 		EB17B96F240FEE3800A9790B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */,
 				EBAB305E240FF57E009374DA /* ManagedObjectContextFactory.swift */,
 				EBAB305A240FF3D3009374DA /* HostPersisted+CoreDataClass.swift */,
 				EBAB305B240FF3D3009374DA /* HostPersisted+CoreDataProperties.swift */,
@@ -924,6 +927,7 @@
 				EBAB305C240FF3D3009374DA /* HostPersisted+CoreDataClass.swift in Sources */,
 				EBBB4A8C2281846800D61976 /* MinutesAndSecondsPrettyString.swift in Sources */,
 				EBAB306624155690009374DA /* StorageChangeNotifying.swift in Sources */,
+				EB56C135241D688200A0A4C3 /* ParticipantPersisted.swift in Sources */,
 				EB1D48B72267395E001A754D /* HostWaitingViewController.swift in Sources */,
 				EBCCBEBD23BD117800F203AE /* HostHaveYourSayViewController.swift in Sources */,
 				EB0AEC2D23165DA400FC384B /* SpeakerControllerContracts.swift in Sources */,
