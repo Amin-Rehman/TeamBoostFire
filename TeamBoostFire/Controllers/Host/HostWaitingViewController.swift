@@ -58,6 +58,21 @@ class HostWaitingViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func startMeetingClicked(_ sender: Any) {
+        if hostWaitingTableViewController.tableViewDataSource.count == 0 {
+            let alertController = UIAlertController(
+                title: "No Participants in the meeting yet!",
+                message: "Unable to start meeting till participants have joined the meeting.",
+                preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(okAction)
+
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+
         AnalyticsService.shared.hostMeetingStarted()
         HostCoreServices.shared.startMeeting()
         guard let meetingParams = HostCoreServices.shared.meetingParams else {
