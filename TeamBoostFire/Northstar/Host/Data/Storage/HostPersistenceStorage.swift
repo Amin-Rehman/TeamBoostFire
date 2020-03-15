@@ -20,6 +20,7 @@ struct ValueTimeStampPair<T> {
 
 protocol PersistenceStorage {
     var storageChangedObserver: StorageChangeObserving? { get set }
+    var managedObjectContext: NSManagedObjectContext { get }
 
     func fetchAll() -> [HostPersisted]
     func clear()
