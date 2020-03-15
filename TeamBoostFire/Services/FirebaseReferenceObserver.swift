@@ -9,7 +9,7 @@ import FirebaseDatabase
 public protocol ReferenceObserving {
     func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void)
     func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void)
-    func observeIAmDoneInterrupt(subscriber: @escaping () -> Void)
+    func observeIAmDoneInterrupt(subscriber: @escaping (String) -> Void)
     func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
     func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void)
@@ -60,9 +60,13 @@ struct FirebaseReferenceObserver: ReferenceObserving {
         })
     }
 
-    public func observeIAmDoneInterrupt(subscriber: @escaping () -> Void) {
+    public func observeIAmDoneInterrupt(subscriber: @escaping (String) -> Void) {
         firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
-            subscriber()
+            guard let iAmDoneInterruptValue = snapshot.value as? String else {
+                assertionFailure("Error retrieving I am done interrupt value")
+                return
+            }
+            subscriber(iAmDoneInterruptValue)
         })
     }
 

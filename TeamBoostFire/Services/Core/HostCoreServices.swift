@@ -97,7 +97,7 @@ extension HostCoreServices {
             }
         })
 
-        firebaseReferenceObserver?.observeIAmDoneInterrupt(subscriber: {
+        firebaseReferenceObserver?.observeIAmDoneInterrupt(subscriber: {_ in
             DispatchQueue.main.async {
                 let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
                 NotificationCenter.default.post(name: name,
