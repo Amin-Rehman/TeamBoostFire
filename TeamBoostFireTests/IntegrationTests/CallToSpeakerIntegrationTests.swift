@@ -159,7 +159,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
                                                               handler: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
-            fakeReferenceObserver.iAmDoneInterruptSubscriber!()
+            fakeReferenceObserver.iAmDoneInterruptSubscriber!("id2")
         }
 
         // Speaker 1 invokes call to speaker

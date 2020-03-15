@@ -10,19 +10,26 @@ import Foundation
 
 class FirebaseHostFetcher {
     let storage: PersistenceStorage
+    let meetingIdentifier: String
     let firebaseReferenceObserver: ReferenceObserving
 
     init(with storage: PersistenceStorage,
+         meetingIdentifier: String,
          firebaseReferenceObserver: ReferenceObserving) {
         self.storage = storage
+        self.meetingIdentifier = meetingIdentifier
         self.firebaseReferenceObserver = firebaseReferenceObserver
     }
 
     private func subscribeToReferenceChanges() {
         // TODO: Remove TeamBoostNotifications and avoid leakage.
         firebaseReferenceObserver.observeParticipantListChanges(subscriber: { allParticipants in
-
-            // TODO: Save in storage
+            let participantPersisted = allParticipants.map { (participant) -> ParticipantPersisted in
+                return ParticipantPersisted(id: participant.id, name: participant.name)
+            }
+            self.storage.setParticipants(participants: participantPersisted,
+                                         meetingIdentifier: self.meetingIdentifier,
+                                         localChange: false)
 
             DispatchQueue.main.async {
                 let name = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
@@ -31,7 +38,9 @@ class FirebaseHostFetcher {
             }
         })
         firebaseReferenceObserver.observeSpeakerOrderDidChange(subscriber: { speakerOrder in
-            // TODO: Save in storage
+            self.storage.setSpeakerOrder(speakerOrder: speakerOrder,
+                                         meetingIdentifier: self.meetingIdentifier,
+                                         localChange: false)
 
             DispatchQueue.main.async {
                 let name = Notification.Name(TeamBoostNotifications.speakerOrderDidChange.rawValue)
@@ -40,8 +49,10 @@ class FirebaseHostFetcher {
             }
         })
 
-        firebaseReferenceObserver.observeIAmDoneInterrupt(subscriber: {
-            // TODO: Save in storage
+        firebaseReferenceObserver.observeIAmDoneInterrupt(subscriber: { iAmDoneInterrupt in
+            self.storage.setIAmDoneInterrupt(iAmDoneInterrupt: iAmDoneInterrupt,
+                                             meetingIdentifier: self.meetingIdentifier,
+                                             localChange: false)
             DispatchQueue.main.async {
                 let name = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)
                 NotificationCenter.default.post(name: name,
@@ -50,7 +61,9 @@ class FirebaseHostFetcher {
         })
 
         firebaseReferenceObserver.observeCallToSpeakerDidChange(subscriber: { callToSpeakerId in
-            // TODO: Save in storage
+            self.storage.setCallToSpeakerInterrupt(callToSpeakerInterrupt: callToSpeakerId,
+                                                   meetingIdentifier: self.meetingIdentifier,
+                                                   localChange: false)
             DispatchQueue.main.async {
                 let name = Notification.Name(TeamBoostNotifications.callToSpeakerDidChange.rawValue)
                 NotificationCenter.default.post(name: name,
