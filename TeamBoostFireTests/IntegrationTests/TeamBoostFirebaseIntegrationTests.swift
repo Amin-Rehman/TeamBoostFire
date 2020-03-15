@@ -214,7 +214,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            handler: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
-            fakeReferenceObserver.iAmDoneInterruptSubscriber!()
+            fakeReferenceObserver.iAmDoneInterruptSubscriber!("id2")
         }
 
         self.wait(for: [secondSpeakerSwitchExpectation], timeout: 5.5)
@@ -334,7 +334,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            handler: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
-            fakeReferenceObserver.iAmDoneInterruptSubscriber!()
+            fakeReferenceObserver.iAmDoneInterruptSubscriber!("id2")
         }
 
         self.wait(for: [secondSpeakerSwitchExpectation], timeout: 5.5)
