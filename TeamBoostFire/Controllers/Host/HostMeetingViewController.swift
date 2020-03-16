@@ -62,7 +62,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupInitialElapsedMeetingTimeRatio() {
-        let meetingParams = hostDomain.meetingParams
+        let meetingParams = getHostDomain().meetingParams
         let meetingTimeInMinutes = meetingParams.meetingTime
         totalMeetingTimeInSeconds = meetingTimeInMinutes * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
@@ -72,7 +72,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupAgendaQuestion() {
-        let meetingParams = hostDomain.meetingParams
+        let meetingParams = getHostDomain().meetingParams
         agendaQuestionLabel.text = meetingParams.agenda
     }
 
@@ -108,12 +108,13 @@ class HostMeetingViewController: UIViewController {
 
         let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
             AnalyticsService.shared.hostMeetingEnded()
-            self.hostDomain.endMeeting()
+            let hostDomain = self.getHostDomain()
+            hostDomain.endMeeting()
 
             self.hostControllerService?.endMeeting()
             HostSaveMeetingStatsToCoreUseCase.perform(
                 meetingLengthSeconds: self.hostControllerService!.storage.activeMeetingTime,
-                hostControllerService: self.hostControllerService)
+                hostControllerService: self.hostControllerService, domain: hostDomain)
 
             let hostEndMeetingStatsViewController = HostEndMeetingStatsViewController()
             self.navigationController?.pushViewController(hostEndMeetingStatsViewController,
@@ -131,7 +132,7 @@ class HostMeetingViewController: UIViewController {
 
     @IBAction func haveYourSayTapped(_ sender: Any) {
         self.hostControllerService?.stopParticipantSpeakingSessions()
-        hostDomain.setModeratorControlState(controlState: true)
+        getHostDomain().setModeratorControlState(controlState: true)
         self.navigationController?.popViewController(animated: true)
     }
 }

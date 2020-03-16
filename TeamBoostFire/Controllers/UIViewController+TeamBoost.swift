@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    var hostDomain: HostDomain {
+    func getHostDomain() -> HostDomain {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         guard let hostDomain = appDelegate.hostDomain else {
             fatalError("Unable to retrieve hostDomain from Application Delegate")

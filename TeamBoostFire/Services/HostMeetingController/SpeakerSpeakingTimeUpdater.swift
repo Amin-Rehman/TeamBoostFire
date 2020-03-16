@@ -16,21 +16,21 @@ class SpeakerSpeakingTimeUpdater {
     weak public var secondTickObserver: SpeakerControllerSecondTickObserver?
     var storage: MeetingControllerStorage
     private var secondTickTimer: Timer?
-    private let coreServices: HostCoreServices
+    private let domain: HostDomain
 
     init(with storage: MeetingControllerStorage,
-         coreServices: HostCoreServices) {
+         domain: HostDomain) {
         // First second seems to get missed, so brute force it
         self.storage = storage
-        self.coreServices = coreServices
+        self.domain = domain
         secondTicked()
     }
 
     @objc private func secondTicked() {
-        guard let speakerOrder = coreServices.speakerOrder,
-            let currentSpeakerIdentifier = speakerOrder.first else {
-                assertionFailure("Unable to retrieve current speaker")
-                return
+        let speakerOrder = domain.speakerOrder
+        guard let currentSpeakerIdentifier = speakerOrder.first else {
+            assertionFailure("Unable to retrieve current speaker")
+            return
         }
 
         guard var speakerTime = storage.participantTotalSpeakingRecord[currentSpeakerIdentifier] else {
