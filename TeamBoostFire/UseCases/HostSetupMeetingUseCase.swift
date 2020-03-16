@@ -29,6 +29,8 @@ struct HostSetupMeetingUseCase {
                                    meetingIdentifier: meetingIdentifier,
                                    meetingParams: meetingParams)
 
+        injectFakeParticipantsForTestModeIfNeeded(referenceHolder: firebaseReferenceHolder)
+
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
 
@@ -36,6 +38,16 @@ struct HostSetupMeetingUseCase {
             let name = Notification.Name(TeamBoostNotifications.meetingCodeDidChange.rawValue)
             NotificationCenter.default.post(name: name,
                                             object: meetingIdentifier)
+        }
+    }
+
+    private static func injectFakeParticipantsForTestModeIfNeeded(referenceHolder: FirebaseReferenceHolder) {
+        referenceHolder.testModeSetReferenceForNoParticipants()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if appDelegate.testEnvironment == true {
+                referenceHolder.testModeSetReferenceForFakeParticipants()
+            }
         }
     }
 }

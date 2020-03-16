@@ -83,5 +83,4 @@ struct HostDomain {
                                        meetingIdentifier: self.meetingIdentifier,
                                        localChange: true)
     }
-
 }
