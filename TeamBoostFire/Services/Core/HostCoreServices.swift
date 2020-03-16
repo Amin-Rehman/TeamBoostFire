@@ -12,7 +12,7 @@ class HostCoreServices: TeamBoostCore {
     var meetingStatistics: MeetingStats?
     private(set) public var meetingIdentifier: String?
 
-    static let shared = HostCoreServices()
+//    static let shared = HostCoreServices()
 
     private var firebaseReferenceHolder: ReferenceHolding?
     private var firebaseReferenceObserver: ReferenceObserving?

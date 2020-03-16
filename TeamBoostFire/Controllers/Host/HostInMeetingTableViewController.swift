@@ -18,7 +18,7 @@ class HostInMeetingTableViewController: UITableViewController {
     weak var hostControllerService: HostMeetingControllerService?
 
     init() {
-        tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
+        tableViewDataSource = hostDomain.allParticipants
         super.init(style: .plain)
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
@@ -30,7 +30,7 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     @objc public func updateTableViewWithSpeakerOrder() {
-        tableViewDataSource = HostCoreServices.shared.allParticipants!
+        tableViewDataSource = hostDomain.allParticipants
         tableView.reloadData()
     }
 
@@ -68,7 +68,7 @@ class HostInMeetingTableViewController: UITableViewController {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
-        let currentSpeakerIdentifier = HostCoreServices.shared.speakerOrder?[0]
+        let currentSpeakerIdentifier = hostDomain.speakerOrder.first
         let speakerOrder = cellParticipant.speakerOrder
 
         let isCurrentSpeaker = participantIdentifier == currentSpeakerIdentifier
@@ -128,7 +128,7 @@ extension HostInMeetingTableViewController {
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
                                            speakingOrder:Int) {
-        if (HostCoreServices.shared.meetingParams?.moderationMode == MeetingMode.AutoModerated) {
+        if (hostDomain.meetingParams.moderationMode == MeetingMode.AutoModerated) {
             cell.orderLabel.isHidden = true
             return
         }

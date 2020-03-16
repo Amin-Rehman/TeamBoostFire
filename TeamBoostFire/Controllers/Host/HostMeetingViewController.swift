@@ -62,10 +62,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupInitialElapsedMeetingTimeRatio() {
-        guard let meetingParams = HostCoreServices.shared.meetingParams else {
-            assertionFailure("Unable to retrieve meeting params")
-            return
-        }
+        let meetingParams = hostDomain.meetingParams
         let meetingTimeInMinutes = meetingParams.meetingTime
         totalMeetingTimeInSeconds = meetingTimeInMinutes * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
@@ -75,13 +72,8 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupAgendaQuestion() {
-        let meetingParams = HostCoreServices.shared.meetingParams
-        guard let agenda = meetingParams?.agenda else {
-            assertionFailure("Unable to retrieve agenda from meeting params")
-            return
-        }
-
-        agendaQuestionLabel.text = agenda
+        let meetingParams = hostDomain.meetingParams
+        agendaQuestionLabel.text = meetingParams.agenda
     }
 
     private func setupChildTableViewController() {
@@ -116,7 +108,7 @@ class HostMeetingViewController: UIViewController {
 
         let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
             AnalyticsService.shared.hostMeetingEnded()
-            HostCoreServices.shared.endMeeting()
+            self.hostDomain.endMeeting()
 
             self.hostControllerService?.endMeeting()
             HostSaveMeetingStatsToCoreUseCase.perform(
@@ -139,7 +131,7 @@ class HostMeetingViewController: UIViewController {
 
     @IBAction func haveYourSayTapped(_ sender: Any) {
         self.hostControllerService?.stopParticipantSpeakingSessions()
-        HostCoreServices.shared.setModeratorControlState(controlState: true)
+        hostDomain.setModeratorControlState(controlState: true)
         self.navigationController?.popViewController(animated: true)
     }
 }

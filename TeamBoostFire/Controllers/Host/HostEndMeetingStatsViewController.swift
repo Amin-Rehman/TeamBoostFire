@@ -36,12 +36,12 @@ class HostEndMeetingStatsViewController: UIViewController {
     }
 
     func populateLabelAndDescription() {
-        guard let meetingStatistics = HostCoreServices.shared.meetingStatistics else {
-            assertionFailure("Unable to retrieve meeting statistics")
-            return
-        }
-        meetingAgendaLabel.text = meetingStatistics.agenda
-        meetingDescriptionLabel.text = "Your meeting had \(meetingStatistics.numberOfParticipants) participants and lasted \(meetingStatistics.meetingLength.minutesAndSecondsPrettyString()) minutes"
+//        guard let meetingStatistics = HostCoreServices.shared.meetingStatistics else {
+//            assertionFailure("Unable to retrieve meeting statistics")
+//            return
+//        }
+//        meetingAgendaLabel.text = meetingStatistics.agenda
+//        meetingDescriptionLabel.text = "Your meeting had \(meetingStatistics.numberOfParticipants) participants and lasted \(meetingStatistics.meetingLength.minutesAndSecondsPrettyString()) minutes"
     }
 
     func populateColourPalette() {
@@ -62,27 +62,27 @@ class HostEndMeetingStatsViewController: UIViewController {
     }
 
     func populatePieChart() {
-        guard let meetingStats = HostCoreServices.shared.meetingStatistics else {
-            assertionFailure("Meeting statistics not found in HostCoreServices")
-            return
-        }
-
-        pieChartView.chartDescription?.text = "Participant % Speaking Times"
-        pieChartView.chartDescription?.font = NSUIFont(name: "HelveticaNeue", size: 12.0)!
-        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue-Bold", size: 18.0)
-        pieChartView.entryLabelColor = NSUIColor.black
-
-        pieChartView.legend.font = NSUIFont(name: "HelveticaNeue", size: 10.0)!
-        pieChartView.usePercentValuesEnabled = true
-
-        let speakingTimes = meetingStats.participantSpeakingRecords
-        speakingTimes.forEach { (arg0) in
-            let (key, value) = arg0
-            let dataEntry = PieChartDataEntry(value: Double(value), label: key)
-            speakingTimesDataEntries.append(dataEntry)
-        }
-
-        updateChartData()
+//        guard let meetingStats = HostCoreServices.shared.meetingStatistics else {
+//            assertionFailure("Meeting statistics not found in HostCoreServices")
+//            return
+//        }
+//
+//        pieChartView.chartDescription?.text = "Participant % Speaking Times"
+//        pieChartView.chartDescription?.font = NSUIFont(name: "HelveticaNeue", size: 12.0)!
+//        pieChartView.entryLabelFont = NSUIFont(name: "HelveticaNeue-Bold", size: 18.0)
+//        pieChartView.entryLabelColor = NSUIColor.black
+//
+//        pieChartView.legend.font = NSUIFont(name: "HelveticaNeue", size: 10.0)!
+//        pieChartView.usePercentValuesEnabled = true
+//
+//        let speakingTimes = meetingStats.participantSpeakingRecords
+//        speakingTimes.forEach { (arg0) in
+//            let (key, value) = arg0
+//            let dataEntry = PieChartDataEntry(value: Double(value), label: key)
+//            speakingTimesDataEntries.append(dataEntry)
+//        }
+//
+//        updateChartData()
     }
 
     @IBAction func iAmDoneTapped(_ sender: Any) {

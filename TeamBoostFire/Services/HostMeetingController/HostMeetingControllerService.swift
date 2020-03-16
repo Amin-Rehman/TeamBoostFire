@@ -90,11 +90,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
 
     public func startParticipantSpeakingSessions() {
         speakerSpeakingTimeUpdater.start()
-        guard let speakerOrder = HostCoreServices.shared.speakerOrder else {
-            assertionFailure("No speaker order available in core services")
-            return
-        }
-        
+        let speakerOrder = hostDomain.speakerOrder        
         speakingSessionUpdater.start(where: speakerOrder, isStartOfMeeting: true)
     }
 
@@ -103,7 +99,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         speakingSessionUpdater.stop()
     }
 
-    // MARK: - Private API(s)
+    // MARK: - Private API(s) 
 
     private func setupParticipantIsDoneNotificationObserver() {
         let notificationName = Notification.Name(TeamBoostNotifications.participantIsDoneInterrupt.rawValue)

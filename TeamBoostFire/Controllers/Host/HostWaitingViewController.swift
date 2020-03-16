@@ -27,7 +27,7 @@ class HostWaitingViewController: UIViewController {
 
         loadLottieSpinner()
 
-        let meetingIdentifier = HostCoreServices.shared.meetingIdentifier
+        let meetingIdentifier = hostDomain.meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
         let notificationName = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
 
@@ -74,11 +74,8 @@ class HostWaitingViewController: UIViewController {
         }
 
         AnalyticsService.shared.hostMeetingStarted()
-        HostCoreServices.shared.startMeeting()
-        guard let meetingParams = HostCoreServices.shared.meetingParams else {
-            assertionFailure("Unable to retrieve meeting params from HostCoreServices")
-            return
-        }
+        hostDomain.startMeeting()
+        let meetingParams = hostDomain.meetingParams
 
         let hostHaveYourSayViewController = HostHaveYourSayViewController(with: meetingParams)
         self.navigationController?.pushViewController(hostHaveYourSayViewController, animated: true)

@@ -13,8 +13,9 @@ struct HostDomain {
     let fetcher: FirebaseHostFetcher
     let storage: PersistenceStorage
     let meetingIdentifier: String
+    let meetingParams: MeetingsParams
 
-    var speakerOrder: [String] {
+    public var speakerOrder: [String] {
         get {
             return self.storage.speakerOrder(for: self.meetingIdentifier).value
         }
@@ -37,11 +38,13 @@ struct HostDomain {
     init(pusher: FirebaseHostPusher,
          fetcher: FirebaseHostFetcher,
          storage: PersistenceStorage,
-         meetingIdentifier: String) {
+         meetingIdentifier: String,
+         meetingParams: MeetingsParams) {
         self.pusher = pusher
         self.fetcher = fetcher
         self.storage = storage
         self.meetingIdentifier = meetingIdentifier
+        self.meetingParams = meetingParams
     }
 
     public func startMeeting() {

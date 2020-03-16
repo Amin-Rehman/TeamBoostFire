@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var testEnvironment = false
 
     var window: UIWindow?
-    public var hostCoreServices: HostCoreServices?
     public var participantCoreServices: ParticipantCoreServices?
     public var analyticsServices: AnalyticsService?
+    public var hostDomain: HostDomain?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupSingletonServices() {
         FirebaseApp.configure()
-        hostCoreServices = HostCoreServices.shared
         participantCoreServices = ParticipantCoreServices.shared
         analyticsServices = AnalyticsService.shared
     }
@@ -52,5 +51,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+    }
+}
+
+extension AppDelegate {
+    public func makeHostDomain(referenceObserver: FirebaseReferenceObserver,
+                               referenceHolder: FirebaseReferenceHolder,
+                               meetingIdentifier: String,
+                               meetingParams: MeetingsParams) {
+
+        var storage = HostPersistenceStorage(storageChangedObserver: nil,
+                                             managedObjectContext: ManagedObjectContextFactory.make())
+
+        let fetcher = FirebaseHostFetcher(with: storage,
+                                          meetingIdentifier: meetingIdentifier,
+                                          firebaseReferenceObserver: referenceObserver)
+
+        let pusher = FirebaseHostPusher(with: storage,
+                                        firebaseReferenceHolder: referenceHolder,
+                                        meetingIdentifier: meetingIdentifier)
+        storage.storageChangedObserver = pusher
+
+
+        self.hostDomain = HostDomain(pusher: pusher,
+                                     fetcher: fetcher,
+                                     storage: storage,
+                                     meetingIdentifier: meetingIdentifier,
+                                     meetingParams: meetingParams)
+
     }
 }

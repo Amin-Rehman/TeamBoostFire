@@ -55,7 +55,7 @@ class HostHaveYourSayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        HostCoreServices.shared.setModeratorControlState(controlState: true)
+        hostDomain.setModeratorControlState(controlState: true)
         let notificationName = Notification.Name(AppNotifications.meetingSecondTicked.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingActiveSecondDidTick(notification:)),
@@ -81,7 +81,7 @@ class HostHaveYourSayViewController: UIViewController {
 
     @IBAction func collectIdeasTapped(_ sender: Any) {
         self.hostControllerService.startParticipantSpeakingSessions()
-        HostCoreServices.shared.setModeratorControlState(controlState: false)
+        hostDomain.setModeratorControlState(controlState: false)
         self.navigationController?.pushViewController(self.hostMeetingViewController, animated: true)
     }
 }
