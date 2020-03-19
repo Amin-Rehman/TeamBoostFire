@@ -32,13 +32,12 @@ struct HostSaveMeetingStatsToCoreUseCase {
             }
         }
 
-        // TODO: Implement this
-//        HostCoreServices.shared.meetingStatistics = MeetingStats(
-//            agenda: meetingAgenda,
-//            meetingLength: meetingLengthSeconds,
-//            numberOfParticipants: allParticipants.count,
-//            participantSpeakingRecords: participantSpeakingRecordWithName
-//        )
+        domain.meetingStatistics = MeetingStats(
+            agenda: meetingAgenda,
+            meetingLength: meetingLengthSeconds,
+            numberOfParticipants: allParticipants.count,
+            participantSpeakingRecords: participantSpeakingRecordWithName
+        )
     }
 
 }

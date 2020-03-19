@@ -8,12 +8,14 @@
 
 import Foundation
 
-struct HostDomain {
+class HostDomain {
     let pusher: FirebaseHostPusher
     let fetcher: FirebaseHostFetcher
     let storage: PersistenceStorage
     let meetingIdentifier: String
     let meetingParams: MeetingsParams
+    var meetingStatistics: MeetingStats?
+
 
     public var speakerOrder: [String] {
         get {
@@ -85,4 +87,5 @@ struct HostDomain {
                                        meetingIdentifier: self.meetingIdentifier,
                                        localChange: true)
     }
+
 }
