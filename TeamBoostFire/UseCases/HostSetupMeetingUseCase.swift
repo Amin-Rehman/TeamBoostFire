@@ -30,7 +30,9 @@ struct HostSetupMeetingUseCase {
                                    meetingParams: meetingParams)
 
         firebaseReferenceHolder.setupDefaultValues(with: meetingParams)
+
         injectFakeParticipantsForTestModeIfNeeded(referenceHolder: firebaseReferenceHolder)
+
 
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
@@ -41,7 +43,11 @@ struct HostSetupMeetingUseCase {
                                             object: meetingIdentifier)
         }
     }
+}
 
+
+// MARK: - Mock extension to inject fake participants
+extension HostSetupMeetingUseCase {
     private static func injectFakeParticipantsForTestModeIfNeeded(referenceHolder: FirebaseReferenceHolder) {
         referenceHolder.testModeSetReferenceForNoParticipants()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
@@ -52,8 +58,6 @@ struct HostSetupMeetingUseCase {
         }
     }
 }
-
-
 
 // MARK: - String extension
 extension String {
