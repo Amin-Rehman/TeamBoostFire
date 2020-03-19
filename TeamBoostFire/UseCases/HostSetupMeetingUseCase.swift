@@ -29,6 +29,7 @@ struct HostSetupMeetingUseCase {
                                    meetingIdentifier: meetingIdentifier,
                                    meetingParams: meetingParams)
 
+        firebaseReferenceHolder.setupDefaultValues(with: meetingParams)
         injectFakeParticipantsForTestModeIfNeeded(referenceHolder: firebaseReferenceHolder)
 
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)

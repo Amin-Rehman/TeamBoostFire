@@ -19,6 +19,8 @@ class FirebaseHostFetcher {
         self.storage = storage
         self.meetingIdentifier = meetingIdentifier
         self.firebaseReferenceObserver = firebaseReferenceObserver
+
+        subscribeToReferenceChanges()
     }
 
     private func subscribeToReferenceChanges() {
