@@ -45,6 +45,8 @@ struct HostDomain {
         self.storage = storage
         self.meetingIdentifier = meetingIdentifier
         self.meetingParams = meetingParams
+
+        self.storage.setMeeting(with: meetingIdentifier)
     }
 
     public func startMeeting() {
