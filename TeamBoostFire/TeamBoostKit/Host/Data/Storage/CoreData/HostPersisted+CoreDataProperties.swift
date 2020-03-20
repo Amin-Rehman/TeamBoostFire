@@ -18,7 +18,7 @@ extension HostPersisted {
     @NSManaged public var meetingIdentifier: String?
     @NSManaged public var callToSpeakerInterrupt: String?
     @NSManaged public var currentSpeakerSpeakingTime: Int64
-    @NSManaged public var iAmDoneInterrupt: String?
+    @NSManaged public var iAmDoneInterrupt: NSNumber?
     @NSManaged public var meetingParamsAgenda: String?
     @NSManaged public var meetingParamsMaxTalkTime: Int64
     @NSManaged public var meetingParamsMeetingTime: Int64

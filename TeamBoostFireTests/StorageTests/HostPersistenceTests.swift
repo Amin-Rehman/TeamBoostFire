@@ -175,12 +175,12 @@ class HostPersistenceTests: XCTestCase {
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
         
-        sut.setIAmDoneInterrupt(iAmDoneInterrupt: "stub-interrupt",
+        sut.setIAmDoneInterrupt(iAmDoneInterrupt: TimeInterval(2.0),
                                 meetingIdentifier: stubMeetingIdentifier,
                                 localChange: true)
         
         let iAmDoneInterruptValuePair = sut.iAmDoneInterrupt(for: stubMeetingIdentifier)
-        XCTAssertEqual(iAmDoneInterruptValuePair.value, "stub-interrupt")
+        XCTAssertEqual(iAmDoneInterruptValuePair.value, TimeInterval(2.0))
         XCTAssertGreaterThan(iAmDoneInterruptValuePair.timestamp.doubleValue, 0.0)
     }
     
@@ -192,12 +192,12 @@ class HostPersistenceTests: XCTestCase {
         let results2 = sut.fetchAll()
         XCTAssertEqual(results2.count, 1)
         
-        sut.setIAmDoneInterrupt(iAmDoneInterrupt: "stub-interrupt",
+        sut.setIAmDoneInterrupt(iAmDoneInterrupt: TimeInterval(2.0),
                                 meetingIdentifier: stubMeetingIdentifier,
                                 localChange: false)
         
         let iAmDoneInterruptValuePair = sut.iAmDoneInterrupt(for: stubMeetingIdentifier)
-        XCTAssertEqual(iAmDoneInterruptValuePair.value, "stub-interrupt")
+        XCTAssertEqual(iAmDoneInterruptValuePair.value, TimeInterval(2.0))
         XCTAssertEqual(iAmDoneInterruptValuePair.timestamp.doubleValue, 0.0)
     }
     

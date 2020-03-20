@@ -18,8 +18,14 @@ class HostInMeetingTableViewController: UITableViewController {
     weak var hostControllerService: HostMeetingControllerService?
 
     init() {
-        tableViewDataSource = HostCoreServices.shared.allParticipants ?? [Participant]()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let hostDomain = appDelegate.hostDomain else {
+            fatalError("Unable to retrieve hostDomain from Application Delegate")
+        }
+
+        tableViewDataSource = hostDomain.allParticipants
         super.init(style: .plain)
+
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
 
@@ -30,7 +36,7 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     @objc public func updateTableViewWithSpeakerOrder() {
-        tableViewDataSource = HostCoreServices.shared.allParticipants!
+        tableViewDataSource = getHostDomain().allParticipants
         tableView.reloadData()
     }
 
@@ -68,7 +74,7 @@ class HostInMeetingTableViewController: UITableViewController {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
-        let currentSpeakerIdentifier = HostCoreServices.shared.speakerOrder?[0]
+        let currentSpeakerIdentifier = getHostDomain().speakerOrder.first
         let speakerOrder = cellParticipant.speakerOrder
 
         let isCurrentSpeaker = participantIdentifier == currentSpeakerIdentifier
@@ -128,7 +134,7 @@ extension HostInMeetingTableViewController {
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
                                            speakingOrder:Int) {
-        if (HostCoreServices.shared.meetingParams?.moderationMode == MeetingMode.AutoModerated) {
+        if (getHostDomain().meetingParams.moderationMode == MeetingMode.AutoModerated) {
             cell.orderLabel.isHidden = true
             return
         }

@@ -8,13 +8,16 @@
 
 import Foundation
 
-struct HostDomain {
+class HostDomain {
     let pusher: FirebaseHostPusher
     let fetcher: FirebaseHostFetcher
     let storage: PersistenceStorage
     let meetingIdentifier: String
+    let meetingParams: MeetingsParams
+    var meetingStatistics: MeetingStats?
 
-    var speakerOrder: [String] {
+
+    public var speakerOrder: [String] {
         get {
             return self.storage.speakerOrder(for: self.meetingIdentifier).value
         }
@@ -37,11 +40,15 @@ struct HostDomain {
     init(pusher: FirebaseHostPusher,
          fetcher: FirebaseHostFetcher,
          storage: PersistenceStorage,
-         meetingIdentifier: String) {
+         meetingIdentifier: String,
+         meetingParams: MeetingsParams) {
         self.pusher = pusher
         self.fetcher = fetcher
         self.storage = storage
         self.meetingIdentifier = meetingIdentifier
+        self.meetingParams = meetingParams
+
+        self.storage.setMeeting(with: meetingIdentifier)
     }
 
     public func startMeeting() {
@@ -81,4 +88,31 @@ struct HostDomain {
                                        localChange: true)
     }
 
+}
+
+extension HostDomain {
+    public static func make(referenceObserver: ReferenceObserving,
+                            referenceHolder: ReferenceHolding,
+                            meetingIdentifier: String,
+                            meetingParams: MeetingsParams) -> HostDomain {
+
+        var storage = HostPersistenceStorage(storageChangedObserver: nil,
+                                             managedObjectContext: ManagedObjectContextFactory.make())
+
+        let fetcher = FirebaseHostFetcher(with: storage,
+                                          meetingIdentifier: meetingIdentifier,
+                                          firebaseReferenceObserver: referenceObserver)
+
+        let pusher = FirebaseHostPusher(with: storage,
+                                        firebaseReferenceHolder: referenceHolder,
+                                        meetingIdentifier: meetingIdentifier)
+        storage.storageChangedObserver = pusher
+
+        return HostDomain(pusher: pusher,
+                          fetcher: fetcher,
+                          storage: storage,
+                          meetingIdentifier: meetingIdentifier,
+                          meetingParams: meetingParams)
+
+    }
 }

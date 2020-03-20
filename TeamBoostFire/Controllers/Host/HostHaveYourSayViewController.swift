@@ -25,15 +25,21 @@ class HostHaveYourSayViewController: UIViewController {
         let totalMeetingTimeInSeconds = meetingParams.meetingTime * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
 
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let domain = appDelegate.hostDomain else {
+            fatalError("Unable to retrieve hostDomain from Application Delegate")
+        }
+
         self.hostControllerService = HostMeetingControllerService(
             meetingParams: meetingParams,
             orderObserver: self.hostMeetingViewController,
             meetingMode: meetingParams.moderationMode!,
-            coreServices: HostCoreServices.shared)
+            domain: domain)
 
-        self.hostMeetingViewController.hostControllerService = self.hostControllerService
         super.init(nibName: "HostHaveYourSayViewController",
                    bundle: nil)
+
+        self.hostMeetingViewController.hostControllerService = self.hostControllerService
     }
 
 
@@ -55,7 +61,7 @@ class HostHaveYourSayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        HostCoreServices.shared.setModeratorControlState(controlState: true)
+        getHostDomain().setModeratorControlState(controlState: true)
         let notificationName = Notification.Name(AppNotifications.meetingSecondTicked.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingActiveSecondDidTick(notification:)),
@@ -81,7 +87,7 @@ class HostHaveYourSayViewController: UIViewController {
 
     @IBAction func collectIdeasTapped(_ sender: Any) {
         self.hostControllerService.startParticipantSpeakingSessions()
-        HostCoreServices.shared.setModeratorControlState(controlState: false)
+        getHostDomain().setModeratorControlState(controlState: false)
         self.navigationController?.pushViewController(self.hostMeetingViewController, animated: true)
     }
 }

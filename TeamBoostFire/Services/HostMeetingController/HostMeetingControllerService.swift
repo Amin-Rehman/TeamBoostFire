@@ -7,17 +7,13 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private let meetingMode: MeetingMode
-    private let coreServices: HostCoreServices
+    private let domain: HostDomain
 
     public lazy var storage: MeetingControllerStorage = {
-
-        guard let allParticipantIdentifiers = coreServices.speakerOrder else {
-            assertionFailure("Unable to retrieve speaking order during setupParticipantSpeakingRecord")
-            return MeetingControllerStorage(with: [], maxTalkTime: 0,
-                                            coreServices: coreServices)
-        }
+        let allParticipantIdentifiers = domain.speakerOrder
         let controllerStorage = MeetingControllerStorage(with: allParticipantIdentifiers,
-                                                         maxTalkTime: meetingParams.maxTalkTime, coreServices: coreServices)
+                                                         maxTalkTime: meetingParams.maxTalkTime,
+                                                         domain: self.domain)
         return controllerStorage
     }()
 
@@ -26,7 +22,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
      */
     public lazy var speakerSpeakingTimeUpdater: SpeakerSpeakingTimeUpdater = {
         return SpeakerSpeakingTimeUpdater(with: self.storage,
-                                             coreServices: coreServices)
+                                          domain: self.domain)
     }()
 
     /**
@@ -49,11 +45,11 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
          meetingMode: MeetingMode = .Uniform,
-         coreServices: HostCoreServices) {
+         domain: HostDomain) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
         self.meetingMode = meetingMode
-        self.coreServices = coreServices
+        self.domain = domain
 
         meetingTimeUpdater.start()
         setupParticipantIsDoneNotificationObserver()
@@ -65,10 +61,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
         speakerSpeakingTimeUpdater.stop()
         speakingSessionUpdater.stop()
 
-        guard let completedSessionSpeakerOrder = coreServices.speakerOrder else {
-            assertionFailure("No speaker order available in CoreServices")
-            return
-        }
+        let completedSessionSpeakerOrder = domain.speakerOrder
         speakingSessionUpdater.start(where: completedSessionSpeakerOrder)
         speakerSpeakingTimeUpdater.start()
 
@@ -90,11 +83,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
 
     public func startParticipantSpeakingSessions() {
         speakerSpeakingTimeUpdater.start()
-        guard let speakerOrder = HostCoreServices.shared.speakerOrder else {
-            assertionFailure("No speaker order available in core services")
-            return
-        }
-        
+        let speakerOrder = domain.speakerOrder
         speakingSessionUpdater.start(where: speakerOrder, isStartOfMeeting: true)
     }
 

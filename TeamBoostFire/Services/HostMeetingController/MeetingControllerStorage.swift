@@ -18,7 +18,7 @@ class MeetingControllerStorage {
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     private(set) public var activeMeetingTime = Int(0)
 
-    public let coreServices: HostCoreServices
+    public let domain: HostDomain
 
     private(set) public var callToSpeakerQueue = [ParticipantId]()
 
@@ -32,8 +32,8 @@ class MeetingControllerStorage {
 
     init(with participantIds: [ParticipantId],
          maxTalkTime: Int,
-         coreServices: HostCoreServices) {
-        self.coreServices = coreServices
+         domain: HostDomain) {
+        self.domain = domain
         participantIds.forEach { identifier in
             participantTotalSpeakingRecord[identifier] = 0
             participantSpeakingRecordPerRound.append(
@@ -45,13 +45,13 @@ class MeetingControllerStorage {
     // MARK:- Accessors / Setters
     func updateSpeakingRecordPerRound(speakerRecord: [SpeakerRecord]) {
         participantSpeakingRecordPerRound = speakerRecord
-        coreServices.updateSpeakerOrder(with: self.speakingRecord)
+        domain.updateSpeakerOrder(with: self.speakingRecord)
     }
 
     func updateSpeakerOrder(isStartOfMeeting: Bool) {
-        let speakerOrder = coreServices.speakerOrder!
+        let speakerOrder = domain.speakerOrder
         let proposedNewSpeakingOrder = isStartOfMeeting ? speakerOrder: speakerOrder.circularRotate()
-        coreServices.updateSpeakerOrder(with: proposedNewSpeakingOrder)
+        domain.updateSpeakerOrder(with: proposedNewSpeakingOrder)
     }
 
     func updateTotalSpeakingTime(for participantId: String,

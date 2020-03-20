@@ -19,7 +19,6 @@
 		EB17B972240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB17B970240FEE6D00A9790B /* TeamBoostDataModel.xcdatamodeld */; };
 		EB1844F5229AA00F00DFC75D /* FirebaseReferenceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */; };
 		EB1844F7229C93F000DFC75D /* FirebaseReferenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */; };
-		EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */; };
 		EB18452D229FE62F00DFC75D /* ParticipantCoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */; };
 		EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */; };
 		EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */; };
@@ -59,6 +58,7 @@
 		EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */; };
 		EB56C135241D688200A0A4C3 /* ParticipantPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */; };
 		EB56C137241E689D00A0A4C3 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56C136241E689D00A0A4C3 /* AppConfiguration.swift */; };
+		EB56C139241F0CCB00A0A4C3 /* UIViewController+TeamBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56C138241F0CCB00A0A4C3 /* UIViewController+TeamBoost.swift */; };
 		EB5ED53023F93C8E00D28B89 /* you_are_presenting.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */; };
 		EB5ED53223F93CFC00D28B89 /* someone_is_speaking.json in Resources */ = {isa = PBXBuildFile; fileRef = EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */; };
 		EB6AE200237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */; };
@@ -145,7 +145,6 @@
 		EB17B971240FEE6D00A9790B /* HostDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HostDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EB1844F4229AA00F00DFC75D /* FirebaseReferenceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceHolder.swift; sourceTree = "<group>"; };
 		EB1844F6229C93F000DFC75D /* FirebaseReferenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReferenceObserver.swift; sourceTree = "<group>"; };
-		EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostCoreServices.swift; sourceTree = "<group>"; };
 		EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantCoreServices.swift; sourceTree = "<group>"; };
 		EB18452F22A0509D00DFC75D /* ParticipantControllerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantControllerService.swift; sourceTree = "<group>"; };
 		EB1AFDF922ADB80800756B6C /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -187,6 +186,7 @@
 		EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantGameControllerViewController.xib; sourceTree = "<group>"; };
 		EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPersisted.swift; sourceTree = "<group>"; };
 		EB56C136241E689D00A0A4C3 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		EB56C138241F0CCB00A0A4C3 /* UIViewController+TeamBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+TeamBoost.swift"; sourceTree = "<group>"; };
 		EB5ED52F23F93C8E00D28B89 /* you_are_presenting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = you_are_presenting.json; sourceTree = "<group>"; };
 		EB5ED53123F93CFC00D28B89 /* someone_is_speaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = someone_is_speaking.json; sourceTree = "<group>"; };
 		EB6AE1FF237BFD7B0000E041 /* TeamBoostFirebaseIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFirebaseIntegrationTests.swift; sourceTree = "<group>"; };
@@ -342,7 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				EB1D48AF226729FD001A754D /* TeamBoostCore.swift */,
-				EB18452A229FE5EF00DFC75D /* HostCoreServices.swift */,
 				EB18452C229FE62F00DFC75D /* ParticipantCoreServices.swift */,
 			);
 			path = Core;
@@ -351,6 +350,7 @@
 		EB1D48A82267260F001A754D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB56C138241F0CCB00A0A4C3 /* UIViewController+TeamBoost.swift */,
 				EB1D48D62268A271001A754D /* Participant */,
 				EB1D48D72268A28C001A754D /* Host */,
 				EB9C1A4722ABBBD20048CBD0 /* WelcomeViewController.swift */,
@@ -446,12 +446,12 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		EB2C4C3D240CF417003E6D27 /* Northstar */ = {
+		EB2C4C3D240CF417003E6D27 /* TeamBoostKit */ = {
 			isa = PBXGroup;
 			children = (
 				EB2C4C3F240CF436003E6D27 /* Host */,
 			);
-			path = Northstar;
+			path = TeamBoostKit;
 			sourceTree = "<group>";
 		};
 		EB2C4C3E240CF42B003E6D27 /* Data */ = {
@@ -612,7 +612,7 @@
 		EBFCA66E22668D2E0047CD75 /* TeamBoostFire */ = {
 			isa = PBXGroup;
 			children = (
-				EB2C4C3D240CF417003E6D27 /* Northstar */,
+				EB2C4C3D240CF417003E6D27 /* TeamBoostKit */,
 				EBBB4A8A227F850900D61976 /* Services */,
 				EB1D48B922674074001A754D /* Views */,
 				EB1D48A82267260F001A754D /* Controllers */,
@@ -940,7 +940,6 @@
 				EBAB305F240FF57E009374DA /* ManagedObjectContextFactory.swift in Sources */,
 				EB6CE8B22309B4A5002D3189 /* ParticipantReactionViewController.swift in Sources */,
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
-				EB18452B229FE5EF00DFC75D /* HostCoreServices.swift in Sources */,
 				EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */,
 				EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
@@ -958,6 +957,7 @@
 				EB1FAB932268AB3F0037A6A5 /* HostInMeetingTableViewCell.swift in Sources */,
 				EB2C4C41240CF4A0003E6D27 /* HostDomain.swift in Sources */,
 				EB18453022A0509D00DFC75D /* ParticipantControllerService.swift in Sources */,
+				EB56C139241F0CCB00A0A4C3 /* UIViewController+TeamBoost.swift in Sources */,
 				EB1D48B0226729FD001A754D /* TeamBoostCore.swift in Sources */,
 				EB7F8804231D73E60012A3EF /* TimerController.swift in Sources */,
 			);

@@ -12,7 +12,6 @@ import UIKit
 struct HostSetupMeetingUseCase {
     static func perform(at viewController: UIViewController,
                         meetingParams: MeetingsParams) {
-        let coreServices = HostCoreServices.shared
 
         var meetingIdentifier: String
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -24,11 +23,17 @@ struct HostSetupMeetingUseCase {
 
         let firebaseReferenceHolder = FirebaseReferenceHolder(with: meetingIdentifier)
         let firebaseReferenceObserver = FirebaseReferenceObserver(with: firebaseReferenceHolder)
-        coreServices.setupCore(
-            with: meetingParams,
-            referenceHolder: firebaseReferenceHolder,
-            referenceObserver: firebaseReferenceObserver,
-            meetingIdentifier: meetingIdentifier)
+
+        appDelegate.makeHostDomain(referenceObserver: firebaseReferenceObserver,
+                                   referenceHolder: firebaseReferenceHolder,
+                                   meetingIdentifier: meetingIdentifier,
+                                   meetingParams: meetingParams)
+
+        firebaseReferenceHolder.setupDefaultValues(with: meetingParams)
+
+        injectFakeParticipantsForTestModeIfNeeded(referenceHolder: firebaseReferenceHolder)
+
+
         let hostWaitingViewController = HostWaitingViewController(nibName: "HostWaitingViewController", bundle: nil)
         viewController.navigationController?.pushViewController(hostWaitingViewController, animated: true)
 
@@ -37,7 +42,20 @@ struct HostSetupMeetingUseCase {
             NotificationCenter.default.post(name: name,
                                             object: meetingIdentifier)
         }
+    }
+}
 
+
+// MARK: - Mock extension to inject fake participants
+extension HostSetupMeetingUseCase {
+    private static func injectFakeParticipantsForTestModeIfNeeded(referenceHolder: FirebaseReferenceHolder) {
+        referenceHolder.testModeSetReferenceForNoParticipants()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if appDelegate.testEnvironment == true {
+                referenceHolder.testModeSetReferenceForFakeParticipants()
+            }
+        }
     }
 }
 

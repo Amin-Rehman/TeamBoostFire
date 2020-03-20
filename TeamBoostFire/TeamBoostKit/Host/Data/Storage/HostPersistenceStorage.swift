@@ -37,10 +37,10 @@ protocol PersistenceStorage {
                                    meetingIdentifier: String,
                                    localChange: Bool)
     func callToSpeakerInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
-    func setIAmDoneInterrupt(iAmDoneInterrupt: String,
+    func setIAmDoneInterrupt(iAmDoneInterrupt: TimeInterval,
                              meetingIdentifier: String,
                              localChange: Bool)
-    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String>
+    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<TimeInterval>
     func setMeetingParamsMaxTalkTime(maxTalkTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool)
@@ -282,14 +282,14 @@ struct HostPersistenceStorage: PersistenceStorage {
     }
 
     // MARK: - I Am Done Interrupt
-    func setIAmDoneInterrupt(iAmDoneInterrupt: String,
+    func setIAmDoneInterrupt(iAmDoneInterrupt: TimeInterval,
                              meetingIdentifier: String,
                              localChange: Bool) {
         do {
             guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
                 fatalError("Unable to find persisted object with the identifier")
             }
-            hostPersisted.iAmDoneInterrupt = iAmDoneInterrupt
+            hostPersisted.iAmDoneInterrupt = NSNumber(value: iAmDoneInterrupt)
 
             if localChange {
                 hostPersisted.iAmDoneInterruptChanged =
@@ -304,13 +304,13 @@ struct HostPersistenceStorage: PersistenceStorage {
         }
     }
 
-    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<String> {
+    func iAmDoneInterrupt(for meetingIdentifier: String) -> ValueTimeStampPair<TimeInterval> {
         do {
             guard let hostPersisted  = try fetchHostPersisted(with: meetingIdentifier) else {
                 assertionFailure("Persisted object with meeting identifier not found")
-                return ValueTimeStampPair<String>(value: "", timestamp: 0)
+                return ValueTimeStampPair<TimeInterval>(value: 0.0, timestamp: 0)
             }
-            return ValueTimeStampPair<String>(value: hostPersisted.iAmDoneInterrupt ?? "",
+            return ValueTimeStampPair<TimeInterval>(value: hostPersisted.iAmDoneInterrupt?.doubleValue ?? 0.0,
                                               timestamp: hostPersisted.iAmDoneInterruptChanged ?? 0)
         } catch {
             fatalError("Error retrieving meeting time: \(error)")

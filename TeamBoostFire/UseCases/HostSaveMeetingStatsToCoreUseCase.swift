@@ -12,7 +12,9 @@ import Foundation
  Save statistics of the meeting to Host Core Services
  */
 struct HostSaveMeetingStatsToCoreUseCase {
-    static func perform(meetingLengthSeconds: Int, hostControllerService: HostMeetingControllerService?) {
+    static func perform(meetingLengthSeconds: Int,
+                        hostControllerService: HostMeetingControllerService?,
+                        domain: HostDomain) {
         guard let controllerService = hostControllerService else {
             assertionFailure("Unable to retrieve host controller service for HostSaveMeetingStatsToCoreUseCase")
             return
@@ -20,11 +22,8 @@ struct HostSaveMeetingStatsToCoreUseCase {
         let meetingAgenda = controllerService.meetingParams.agenda
         let participantSpeakingRecordWithId = controllerService.storage.participantTotalSpeakingRecord
 
-        guard let allParticipants = HostCoreServices.shared.allParticipants else {
-            assertionFailure("Unable to return al participant from Core: HostSaveMeetingStatsToCoreUseCase")
-            return
-        }
 
+        let allParticipants = domain.allParticipants
         var participantSpeakingRecordWithName = [String: Int]()
         for participant in allParticipants {
             let participantSpeakingTime = participantSpeakingRecordWithId[participant.id]
@@ -33,7 +32,7 @@ struct HostSaveMeetingStatsToCoreUseCase {
             }
         }
 
-        HostCoreServices.shared.meetingStatistics = MeetingStats(
+        domain.meetingStatistics = MeetingStats(
             agenda: meetingAgenda,
             meetingLength: meetingLengthSeconds,
             numberOfParticipants: allParticipants.count,

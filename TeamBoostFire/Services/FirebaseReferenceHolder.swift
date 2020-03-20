@@ -60,7 +60,7 @@ struct FirebaseReferenceHolder: ReferenceHolding {
         meetingStateReference?.setValue("suspended")
         speakerOrderReference?.setValue([""])
         meetingParamsReference?.setValue("")
-        iAmDoneInterruptReference?.setValue("")
+        iAmDoneInterruptReference?.setValue(0.0)
         currentSpeakerMaximumSpeakingTime?.setValue(0)
         meetingParamsTimeReference?.setValue(params.meetingTime)
         meetingParamsAgendaReference?.setValue(params.agenda)

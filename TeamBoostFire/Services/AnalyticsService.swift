@@ -10,32 +10,37 @@ import Foundation
 import Mixpanel
 
 class AnalyticsService {
-    let mixpanel: Mixpanel
+    let mixpanel: Mixpanel?
     static let shared = AnalyticsService()
 
     private init() {
-        self.mixpanel =
-            Mixpanel.init(token: "0f4dfa8e0b1d6dfeab99c3225f4457af", andFlushInterval: 10)
+        switch Config.appConfiguration {
+        case .TestFlight, .AppStore:
+            self.mixpanel =
+                Mixpanel.init(token: "0f4dfa8e0b1d6dfeab99c3225f4457af", andFlushInterval: 10)
+        case .Debug:
+            self.mixpanel = nil
+        }
     }
 
     public func hostMeetingStarted() {
-        mixpanel.track("host_meeting_started")
+        mixpanel?.track("host_meeting_started")
     }
 
     public func hostMeetingEnded() {
-        mixpanel.track("host_meeting_ended")
+        mixpanel?.track("host_meeting_ended")
     }
 
     public func hostMeetingCompleted() {
-        mixpanel.track("host_meeting_completed")
+        mixpanel?.track("host_meeting_completed")
     }
 
     public func participantCalledSpeaker() {
-        mixpanel.track("participant_called_speaker")
+        mixpanel?.track("participant_called_speaker")
     }
 
     public func participantIsDone() {
-        mixpanel.track("participant_is_done")
+        mixpanel?.track("participant_is_done")
     }
 
 }

@@ -78,7 +78,7 @@ extension SpeakingSessionUpdater {
         case .Uniform:
             var speakingRecord = [SpeakerRecord]()
             // TODO: Remove force wrap
-            let allParticipants = self.storage.coreServices.allParticipants!
+            let allParticipants = self.storage.domain.allParticipants
             for participant in allParticipants {
                 let speakerRecord = SpeakerRecord(participantId: participant.id , speakingTime: self.maxTalkTime)
                 speakingRecord.append(speakerRecord)
