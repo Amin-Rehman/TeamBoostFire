@@ -89,3 +89,30 @@ class HostDomain {
     }
 
 }
+
+extension HostDomain {
+    public static func make(referenceObserver: ReferenceObserving,
+                            referenceHolder: ReferenceHolding,
+                            meetingIdentifier: String,
+                            meetingParams: MeetingsParams) -> HostDomain {
+
+        var storage = HostPersistenceStorage(storageChangedObserver: nil,
+                                             managedObjectContext: ManagedObjectContextFactory.make())
+
+        let fetcher = FirebaseHostFetcher(with: storage,
+                                          meetingIdentifier: meetingIdentifier,
+                                          firebaseReferenceObserver: referenceObserver)
+
+        let pusher = FirebaseHostPusher(with: storage,
+                                        firebaseReferenceHolder: referenceHolder,
+                                        meetingIdentifier: meetingIdentifier)
+        storage.storageChangedObserver = pusher
+
+        return HostDomain(pusher: pusher,
+                          fetcher: fetcher,
+                          storage: storage,
+                          meetingIdentifier: meetingIdentifier,
+                          meetingParams: meetingParams)
+
+    }
+}

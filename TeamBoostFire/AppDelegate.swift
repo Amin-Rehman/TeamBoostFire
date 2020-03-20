@@ -60,24 +60,10 @@ extension AppDelegate {
                                meetingIdentifier: String,
                                meetingParams: MeetingsParams) {
 
-        var storage = HostPersistenceStorage(storageChangedObserver: nil,
-                                             managedObjectContext: ManagedObjectContextFactory.make())
-
-        let fetcher = FirebaseHostFetcher(with: storage,
+        self.hostDomain = HostDomain.make(referenceObserver: referenceObserver,
+                                          referenceHolder: referenceHolder,
                                           meetingIdentifier: meetingIdentifier,
-                                          firebaseReferenceObserver: referenceObserver)
-
-        let pusher = FirebaseHostPusher(with: storage,
-                                        firebaseReferenceHolder: referenceHolder,
-                                        meetingIdentifier: meetingIdentifier)
-        storage.storageChangedObserver = pusher
-
-
-        self.hostDomain = HostDomain(pusher: pusher,
-                                     fetcher: fetcher,
-                                     storage: storage,
-                                     meetingIdentifier: meetingIdentifier,
-                                     meetingParams: meetingParams)
+                                          meetingParams: meetingParams)
 
     }
 }
