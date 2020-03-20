@@ -63,7 +63,7 @@ class HostEndMeetingStatsViewController: UIViewController {
 
     func populatePieChart() {
         guard let meetingStats = getHostDomain().meetingStatistics else {
-            assertionFailure("Meeting statistics not found in HostCoreServices")
+            assertionFailure("Meeting statistics not found in HostDomain")
             return
         }
 
