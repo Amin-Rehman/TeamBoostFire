@@ -57,6 +57,10 @@ class ParticipantMainViewController: UIViewController {
                                                  action: #selector(likedRegistered(_:)))
         leftSwipe.direction = .right
         self.view.addGestureRecognizer(leftSwipe)
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(callSpeakerRegistered))
+        doubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(doubleTap)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -109,9 +113,17 @@ class ParticipantMainViewController: UIViewController {
         }
     }
 
-    @IBAction func callSpeakerTapped(_ sender: Any) {
+    @objc func callSpeakerRegistered() {
         AnalyticsService.shared.participantCalledSpeaker()
         ParticipantCoreServices.shared.registerCallToSpeaker()
+
+        let alertController = UIAlertController(title: "Moderator Called!",
+                                                message: "Moderator has been called for your attention. Please wait for your turn to speak.", preferredStyle: .alert)
+        self.present(alertController, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.00, qos: .userInteractive) {
+                alertController.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 
     @IBAction func iAmDoneTapped(_ sender: Any) {
