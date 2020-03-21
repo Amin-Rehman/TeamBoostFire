@@ -54,6 +54,8 @@
 		EB2C4C45240CF746003E6D27 /* FirebaseHostPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C4C44240CF746003E6D27 /* FirebaseHostPusher.swift */; };
 		EB2C4C47240CF754003E6D27 /* FirebaseHostFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C4C46240CF754003E6D27 /* FirebaseHostFetcher.swift */; };
 		EB2C4C49240CF80E003E6D27 /* HostPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2C4C48240CF80E003E6D27 /* HostPersistenceStorage.swift */; };
+		EB3AA73924256BC6000D2D81 /* LottieLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AA73724256BC6000D2D81 /* LottieLabelViewController.swift */; };
+		EB3AA73A24256BC6000D2D81 /* LottieLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3AA73824256BC6000D2D81 /* LottieLabelViewController.xib */; };
 		EB3F572E23CA9D3600F8CF90 /* TeamBoostFireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */; };
 		EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */; };
 		EB56C135241D688200A0A4C3 /* ParticipantPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56C134241D688200A0A4C3 /* ParticipantPersisted.swift */; };
@@ -180,6 +182,8 @@
 		EB2C4C44240CF746003E6D27 /* FirebaseHostPusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostPusher.swift; sourceTree = "<group>"; };
 		EB2C4C46240CF754003E6D27 /* FirebaseHostFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostFetcher.swift; sourceTree = "<group>"; };
 		EB2C4C48240CF80E003E6D27 /* HostPersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceStorage.swift; sourceTree = "<group>"; };
+		EB3AA73724256BC6000D2D81 /* LottieLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLabelViewController.swift; sourceTree = "<group>"; };
+		EB3AA73824256BC6000D2D81 /* LottieLabelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LottieLabelViewController.xib; sourceTree = "<group>"; };
 		EB3F572B23CA9D3600F8CF90 /* TeamBoostFireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostFireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3F572D23CA9D3600F8CF90 /* TeamBoostFireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostFireUITests.swift; sourceTree = "<group>"; };
 		EB3F572F23CA9D3700F8CF90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -406,6 +410,8 @@
 				EB4B413222F763ED0000ADB5 /* ParticipantGameControllerViewController.xib */,
 				EB6CE8B02309B4A5002D3189 /* ParticipantReactionViewController.swift */,
 				EB6CE8B12309B4A5002D3189 /* ParticipantReactionViewController.xib */,
+				EB3AA73724256BC6000D2D81 /* LottieLabelViewController.swift */,
+				EB3AA73824256BC6000D2D81 /* LottieLabelViewController.xib */,
 			);
 			path = Participant;
 			sourceTree = "<group>";
@@ -759,6 +765,7 @@
 				EB0AAFB422B644A60017A358 /* lottie_spinner.json in Resources */,
 				EB4B413422F763ED0000ADB5 /* ParticipantGameControllerViewController.xib in Resources */,
 				EB0AAFB222B6369A0017A358 /* lottie_circle.json in Resources */,
+				EB3AA73A24256BC6000D2D81 /* LottieLabelViewController.xib in Resources */,
 				EB6CE8C52309C472002D3189 /* celebrate_fireworks.json in Resources */,
 				EB1FAB942268AB3F0037A6A5 /* HostInMeetingTableViewCell.xib in Resources */,
 				EB1AFDFE22AE497B00756B6C /* ParticipantMeetingEndedViewController.xib in Resources */,
@@ -942,6 +949,7 @@
 				EB1D48D42267DC66001A754D /* ParticipantMainViewController.swift in Sources */,
 				EB1AFDFD22AE497B00756B6C /* ParticipantMeetingEndedViewController.swift in Sources */,
 				EB0AAFBA22B6EFAA0017A358 /* MeetingOrderEvaluator.swift in Sources */,
+				EB3AA73924256BC6000D2D81 /* LottieLabelViewController.swift in Sources */,
 				EB1D48C022675248001A754D /* HostWaitingTableViewController.swift in Sources */,
 				EB1AFDFA22ADB80800756B6C /* AnalyticsService.swift in Sources */,
 				EB1D48C322675827001A754D /* Participant.swift in Sources */,

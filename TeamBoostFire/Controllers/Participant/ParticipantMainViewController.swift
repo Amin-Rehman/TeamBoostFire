@@ -15,12 +15,13 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var callSpeakerButton: UIButton!
     @IBOutlet weak var iAmDoneButton: UIButton!
 
+    // TODO: Reconnect
     @IBOutlet weak var fireworksView: AnimationView!
     @IBOutlet weak var meetingStateAnimationView: AnimationView!
+
+    @IBOutlet weak var feedbackStackView: UIStackView!
 
     private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
@@ -42,11 +43,13 @@ class ParticipantMainViewController: UIViewController {
 
         updateMeetingTimerLabel(with: (controllerService.meetingTime))
         setupTopBar()
+        setupReactionStackView()
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
-        fireworksView.isHidden = true
+//        fireworksView.isHidden = true
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +63,27 @@ class ParticipantMainViewController: UIViewController {
             return
         }
         agendaQuestionLabel.text = agenda
+    }
+
+    private func setupReactionStackView() {
+        let callSpeakerReactionViewController =
+            LottieLabelViewController(animationName: "double-tap",
+                                      title: "Call Speaker")
+
+        let likeReactionViewController =
+            LottieLabelViewController(animationName: "swipe-right",
+                                      title: "Like")
+
+        feedbackStackView.addArrangedSubview(callSpeakerReactionViewController.view)
+        feedbackStackView.addArrangedSubview(likeReactionViewController.view)
+
+        //Then, add the child to the parent
+        self.addChild(callSpeakerReactionViewController)
+        self.addChild(likeReactionViewController)
+
+        // Finally, notify the child that it was moved to a parent
+        callSpeakerReactionViewController.didMove(toParent: self)
+        likeReactionViewController.didMove(toParent: self)
     }
 
     @objc private func meetingStateDidChange(notification: NSNotification) {
@@ -136,15 +160,22 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
         switch state {
         case .unknown:
             assertionFailure("Unknown in meeting state")
-            likeButton.isHidden = true
-            callSpeakerButton.isHidden = true
+//            likeButton.isHidden = true
+//            callSpeakerButton.isHidden = true
+
+            feedbackStackView.isHidden = false
             iAmDoneButton.isHidden = true
+
+
             currentSpeakerLabel.text = "Unknown"
         case .selfIsSpeaking:
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: true)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: true)
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: true)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: true)
+
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: false)
             UIView.transition(with: currentSpeakerLabel,
@@ -159,14 +190,17 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .anotherParticipantIsSpeaking(let participantName):
-            likeButton.isHidden = false
-            callSpeakerButton.isHidden = false
+//            likeButton.isHidden = false
+//            callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
 
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: false)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: false)
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: false)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: false)
+
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: false)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: true)
 
@@ -182,10 +216,12 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .moderatorIsSpeaking:
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: true)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: true)
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: true)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: true)
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: true)
 

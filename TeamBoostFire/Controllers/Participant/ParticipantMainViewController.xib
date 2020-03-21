@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -11,11 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParticipantMainViewController" customModule="TeamBoostFire" customModuleProvider="target">
             <connections>
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
-                <outlet property="callSpeakerButton" destination="KHC-qS-TiF" id="SGy-gT-mEQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
-                <outlet property="fireworksView" destination="eSQ-k8-upB" id="xMT-UH-eCz"/>
+                <outlet property="feedbackStackView" destination="ybg-4m-6Bb" id="UeL-yU-kiH"/>
                 <outlet property="iAmDoneButton" destination="uCp-UK-O2A" id="Z9d-rU-htW"/>
-                <outlet property="likeButton" destination="qoS-6N-tKL" id="dmC-iM-OlC"/>
                 <outlet property="meetingStateAnimationView" destination="loz-ta-vjY" id="rnL-QK-0CP"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,14 +21,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4J-H2-OAP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="116"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoP-On-ROX">
-                            <rect key="frame" x="16" y="18" width="296" height="22"/>
+                            <rect key="frame" x="16" y="18" width="351" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="X3r-zk-TWI"/>
                             </constraints>
@@ -39,7 +37,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agenda Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-Jk-zhF">
-                            <rect key="frame" x="16" y="56" width="288" height="36"/>
+                            <rect key="frame" x="16" y="56" width="343" height="36"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -58,7 +56,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-eu-meq">
-                    <rect key="frame" x="12" y="138" width="296" height="40"/>
+                    <rect key="frame" x="12" y="182" width="351" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="RKN-VD-Y9O"/>
                     </constraints>
@@ -67,78 +65,21 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loz-ta-vjY" userLabel="MeetingStateAnimationView" customClass="AnimationView" customModule="Lottie">
-                    <rect key="frame" x="85" y="209" width="150" height="150"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <rect key="frame" x="112.66666666666669" y="331" width="150" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="loz-ta-vjY" secondAttribute="height" multiplier="1:1" id="8CD-S8-Mwg"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="EoA-q1-1Di"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoS-6N-tKL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="112" y="452" width="96" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="96" id="GFB-JJ-SkS"/>
-                        <constraint firstAttribute="height" constant="30" id="pvo-it-Zq9"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Like">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundDefaultColor">
-                            <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="18"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundHighlightedColor">
-                            <color key="value" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="likeButtonTapped:" destination="-1" eventType="touchUpInside" id="Yvg-CZ-0bt"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHC-qS-TiF" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="100" y="514" width="120" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="F7M-hv-G8c"/>
-                        <constraint firstAttribute="width" constant="120" id="df4-JG-maf"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Call Speaker">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundDefaultColor">
-                            <color key="value" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundHighlightedColor">
-                            <color key="value" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="18"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="callSpeakerTapped:" destination="-1" eventType="touchUpInside" id="bSZ-JV-V9s"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-4m-6Bb" userLabel="FeedbackStackView">
+                    <rect key="frame" x="0.0" y="501" width="375" height="277"/>
+                </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-UK-O2A" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                    <rect key="frame" x="100" y="514" width="120" height="30"/>
+                    <rect key="frame" x="127.66666666666669" y="744" width="120" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="1zW-3B-BL7"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="I am done">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -164,38 +105,24 @@
                         <action selector="iAmDoneTapped:" destination="-1" eventType="touchUpInside" id="Ded-k0-4fj"/>
                     </connections>
                 </button>
-                <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-k8-upB" userLabel="FireworksView" customClass="AnimationView" customModule="Lottie">
-                    <rect key="frame" x="0.0" y="124" width="320" height="444"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="celebrate_fireworks"/>
-                    </userDefinedRuntimeAttributes>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6yc-yM-BJB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LKp-eu-meq" secondAttribute="trailing" constant="12" id="9Sm-94-G3r"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="9qB-x0-oKJ"/>
-                <constraint firstItem="uCp-UK-O2A" firstAttribute="leading" secondItem="KHC-qS-TiF" secondAttribute="leading" id="A7w-Y9-krM"/>
-                <constraint firstItem="KHC-qS-TiF" firstAttribute="top" secondItem="qoS-6N-tKL" secondAttribute="bottom" constant="32" id="Ab7-WM-1bJ"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DAf-aE-pb8"/>
-                <constraint firstItem="uCp-UK-O2A" firstAttribute="top" secondItem="KHC-qS-TiF" secondAttribute="top" id="Eoh-06-hZS"/>
-                <constraint firstItem="uCp-UK-O2A" firstAttribute="trailing" secondItem="KHC-qS-TiF" secondAttribute="trailing" id="LBD-o2-hww"/>
-                <constraint firstItem="eSQ-k8-upB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NMV-zT-fDg"/>
-                <constraint firstItem="qoS-6N-tKL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PlO-1e-WBJ"/>
-                <constraint firstItem="KHC-qS-TiF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PwB-d3-18S"/>
+                <constraint firstItem="uCp-UK-O2A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EG7-cI-yGk"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QFD-br-DP5"/>
-                <constraint firstItem="loz-ta-vjY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="44" id="Qzj-ZN-eR2"/>
-                <constraint firstItem="qoS-6N-tKL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="12" id="Wfw-jq-n7U"/>
+                <constraint firstItem="loz-ta-vjY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="32" id="Qzj-ZN-eR2"/>
+                <constraint firstItem="ybg-4m-6Bb" firstAttribute="leading" secondItem="N4J-H2-OAP" secondAttribute="leading" id="U1Q-jv-pUq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ybg-4m-6Bb" secondAttribute="bottom" id="WBg-M3-Spu"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aXi-BX-8x2"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eSQ-k8-upB" secondAttribute="bottom" id="hmX-h2-Ver"/>
+                <constraint firstItem="ybg-4m-6Bb" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="alQ-Ro-B4p"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="i7e-Vq-ESA"/>
-                <constraint firstItem="eSQ-k8-upB" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="8" symbolic="YES" id="pMO-Va-Q7a"/>
-                <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" id="pOM-O7-6bY"/>
+                <constraint firstItem="ybg-4m-6Bb" firstAttribute="top" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="20" id="jTI-VZ-o7r"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KHC-qS-TiF" secondAttribute="bottom" constant="24" id="tWe-gm-QoV"/>
-                <constraint firstItem="eSQ-k8-upB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xN2-8D-G0b"/>
+                <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="ybg-4m-6Bb" secondAttribute="bottom" id="sP6-N4-jNe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z6h-Uc-2gY"/>
             </constraints>
