@@ -118,10 +118,13 @@ class ParticipantMainViewController: UIViewController {
         ParticipantCoreServices.shared.registerCallToSpeaker()
 
         let alertController = UIAlertController(title: "Moderator Called!",
-                                                message: "Moderator has been called for your attention. Please wait for your turn to speak.", preferredStyle: .alert)
+                                                message: "Moderator has been called. Please wait for your turn to speak.",
+                                                preferredStyle: .alert)
         self.present(alertController, animated: true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.00, qos: .userInteractive) {
-                alertController.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.00,
+                                          qos: .userInteractive) {
+                                            alertController.dismiss(animated: true,
+                                                                    completion: nil)
             }
         }
     }
