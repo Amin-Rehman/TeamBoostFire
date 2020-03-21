@@ -48,7 +48,6 @@ class ParticipantMainViewController: UIViewController {
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
 
-        registerGestureRecognizers()
         fireworksView.isHidden = true
     }
 
@@ -61,6 +60,13 @@ class ParticipantMainViewController: UIViewController {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(callSpeakerRegistered))
         doubleTap.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(doubleTap)
+    }
+
+    private func unregisterGestureRecognizers() {
+        guard let allGestureRecognisers = self.view.gestureRecognizers else { return  }
+        for gestureRecogniser in allGestureRecognisers {
+            self.view.removeGestureRecognizer(gestureRecogniser)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -117,9 +123,10 @@ class ParticipantMainViewController: UIViewController {
         AnalyticsService.shared.participantCalledSpeaker()
         ParticipantCoreServices.shared.registerCallToSpeaker()
 
-        let alertController = UIAlertController(title: "Moderator Called!",
-                                                message: "Moderator has been called. Please wait for your turn to speak.",
-                                                preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: "Moderator Called!",
+            message: "Moderator has been called. Please wait for your turn to speak.",
+            preferredStyle: .alert)
         self.present(alertController, animated: true) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.00,
                                           qos: .userInteractive) {
@@ -184,6 +191,7 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 //            likeButton.isHidden = true
 //            callSpeakerButton.isHidden = true
 
+            registerGestureRecognizers()
             feedbackStackView.isHidden = false
             iAmDoneButton.isHidden = true
 
@@ -195,6 +203,7 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 //            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
 //                                                  shouldHide: true)
 
+            unregisterGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
                                                               shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
@@ -214,12 +223,12 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 //            likeButton.isHidden = false
 //            callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
-
 //            likeButton.crossFadeTransition(duration: crossFadeDuration,
 //                                           shouldHide: false)
 //            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
 //                                                  shouldHide: false)
 
+            registerGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
                                                               shouldHide: false)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
@@ -241,6 +250,8 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 //                                           shouldHide: true)
 //            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
 //                                                  shouldHide: true)
+
+            unregisterGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
                                                               shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
