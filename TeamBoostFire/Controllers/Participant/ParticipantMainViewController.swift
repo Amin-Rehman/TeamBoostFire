@@ -15,12 +15,12 @@ class ParticipantMainViewController: UIViewController {
     @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var currentSpeakerLabel: UILabel!
 
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var callSpeakerButton: UIButton!
     @IBOutlet weak var iAmDoneButton: UIButton!
 
     @IBOutlet weak var fireworksView: AnimationView!
     @IBOutlet weak var meetingStateAnimationView: AnimationView!
+
+    @IBOutlet weak var feedbackStackView: UIStackView!
 
     private var currentlyDisplayedSpeakingOrder: [String]?
     private var allParticipants = [Participant]()
@@ -42,11 +42,31 @@ class ParticipantMainViewController: UIViewController {
 
         updateMeetingTimerLabel(with: (controllerService.meetingTime))
         setupTopBar()
+        setupReactionStackView()
         let notificationName = Notification.Name(TeamBoostNotifications.meetingStateDidChange.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
+
         fireworksView.isHidden = true
+    }
+
+    private func registerGestureRecognizers() {
+        let leftSwipe = UISwipeGestureRecognizer(target: self,
+                                                 action: #selector(likedRegistered(_:)))
+        leftSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(callSpeakerRegistered))
+        doubleTap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(doubleTap)
+    }
+
+    private func unregisterGestureRecognizers() {
+        guard let allGestureRecognisers = self.view.gestureRecognizers else { return  }
+        for gestureRecogniser in allGestureRecognisers {
+            self.view.removeGestureRecognizer(gestureRecogniser)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +82,27 @@ class ParticipantMainViewController: UIViewController {
         agendaQuestionLabel.text = agenda
     }
 
+    private func setupReactionStackView() {
+        let callSpeakerReactionViewController =
+            LottieLabelViewController(animationName: "double-tap",
+                                      title: "Call Speaker")
+
+        let likeReactionViewController =
+            LottieLabelViewController(animationName: "swipe-right",
+                                      title: "Like")
+
+        feedbackStackView.addArrangedSubview(callSpeakerReactionViewController.view)
+        feedbackStackView.addArrangedSubview(likeReactionViewController.view)
+
+        //Then, add the child to the parent
+        self.addChild(callSpeakerReactionViewController)
+        self.addChild(likeReactionViewController)
+
+        // Finally, notify the child that it was moved to a parent
+        callSpeakerReactionViewController.didMove(toParent: self)
+        likeReactionViewController.didMove(toParent: self)
+    }
+
     @objc private func meetingStateDidChange(notification: NSNotification) {
         let meetingState = notification.object as! MeetingState
         if meetingState == .ended {
@@ -71,17 +112,28 @@ class ParticipantMainViewController: UIViewController {
         }
     }
 
-
-    @IBAction func likeButtonTapped(_ sender: Any) {
+    @objc func likedRegistered(_ sender:UISwipeGestureRecognizer) {
         fireworksView.isHidden = false
         fireworksView.play { (finished) in
             self.fireworksView.isHidden = true
         }
     }
 
-    @IBAction func callSpeakerTapped(_ sender: Any) {
+    @objc func callSpeakerRegistered() {
         AnalyticsService.shared.participantCalledSpeaker()
         ParticipantCoreServices.shared.registerCallToSpeaker()
+
+        let alertController = UIAlertController(
+            title: "Moderator Called!",
+            message: "Moderator has been called. Please wait for your turn to speak.",
+            preferredStyle: .alert)
+        self.present(alertController, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.00,
+                                          qos: .userInteractive) {
+                                            alertController.dismiss(animated: true,
+                                                                    completion: nil)
+            }
+        }
     }
 
     @IBAction func iAmDoneTapped(_ sender: Any) {
@@ -136,15 +188,24 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
         switch state {
         case .unknown:
             assertionFailure("Unknown in meeting state")
-            likeButton.isHidden = true
-            callSpeakerButton.isHidden = true
+//            likeButton.isHidden = true
+//            callSpeakerButton.isHidden = true
+
+            registerGestureRecognizers()
+            feedbackStackView.isHidden = false
             iAmDoneButton.isHidden = true
+
+
             currentSpeakerLabel.text = "Unknown"
         case .selfIsSpeaking:
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: true)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: true)
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: true)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: true)
+
+            unregisterGestureRecognizers()
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: false)
             UIView.transition(with: currentSpeakerLabel,
@@ -159,14 +220,17 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .anotherParticipantIsSpeaking(let participantName):
-            likeButton.isHidden = false
-            callSpeakerButton.isHidden = false
+//            likeButton.isHidden = false
+//            callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: false)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: false)
 
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: false)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: false)
+            registerGestureRecognizers()
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: false)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: true)
 
@@ -182,10 +246,14 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .moderatorIsSpeaking:
-            likeButton.crossFadeTransition(duration: crossFadeDuration,
-                                           shouldHide: true)
-            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-                                                  shouldHide: true)
+//            likeButton.crossFadeTransition(duration: crossFadeDuration,
+//                                           shouldHide: true)
+//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
+//                                                  shouldHide: true)
+
+            unregisterGestureRecognizers()
+            feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
+                                                              shouldHide: true)
             iAmDoneButton.crossFadeTransition(duration: crossFadeDuration,
                                               shouldHide: true)
 
