@@ -17,7 +17,6 @@ class ParticipantMainViewController: UIViewController {
 
     @IBOutlet weak var iAmDoneButton: UIButton!
 
-    // TODO: Reconnect
     @IBOutlet weak var fireworksView: AnimationView!
     @IBOutlet weak var meetingStateAnimationView: AnimationView!
 
@@ -48,8 +47,16 @@ class ParticipantMainViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingStateDidChange(notification:)),
                                                name: notificationName, object: nil)
-//        fireworksView.isHidden = true
 
+        registerGestureRecognizers()
+        fireworksView.isHidden = true
+    }
+
+    private func registerGestureRecognizers() {
+        let leftSwipe = UISwipeGestureRecognizer(target: self,
+                                                 action: #selector(likedRegistered(_:)))
+        leftSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -95,8 +102,7 @@ class ParticipantMainViewController: UIViewController {
         }
     }
 
-
-    @IBAction func likeButtonTapped(_ sender: Any) {
+    @objc func likedRegistered(_ sender:UISwipeGestureRecognizer) {
         fireworksView.isHidden = false
         fireworksView.play { (finished) in
             self.fireworksView.isHidden = true

@@ -13,6 +13,7 @@
                 <outlet property="agendaQuestionLabel" destination="ZM5-Jk-zhF" id="g89-23-ADQ"/>
                 <outlet property="currentSpeakerLabel" destination="LKp-eu-meq" id="18M-df-oRF"/>
                 <outlet property="feedbackStackView" destination="ybg-4m-6Bb" id="UeL-yU-kiH"/>
+                <outlet property="fireworksView" destination="MVh-Iy-nTc" id="JmF-Ce-uBR"/>
                 <outlet property="iAmDoneButton" destination="uCp-UK-O2A" id="Z9d-rU-htW"/>
                 <outlet property="meetingStateAnimationView" destination="loz-ta-vjY" id="rnL-QK-0CP"/>
                 <outlet property="meetingTimeLabel" destination="CoP-On-ROX" id="FWY-mL-aog"/>
@@ -105,6 +106,16 @@
                         <action selector="iAmDoneTapped:" destination="-1" eventType="touchUpInside" id="Ded-k0-4fj"/>
                     </connections>
                 </button>
+                <view hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-Iy-nTc" userLabel="FireworksAnimationView" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="celebrate_fireworks"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -116,15 +127,19 @@
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QFD-br-DP5"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="32" id="Qzj-ZN-eR2"/>
                 <constraint firstItem="ybg-4m-6Bb" firstAttribute="leading" secondItem="N4J-H2-OAP" secondAttribute="leading" id="U1Q-jv-pUq"/>
+                <constraint firstItem="MVh-Iy-nTc" firstAttribute="leading" secondItem="N4J-H2-OAP" secondAttribute="leading" id="UBx-uI-dUe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ybg-4m-6Bb" secondAttribute="bottom" id="WBg-M3-Spu"/>
+                <constraint firstItem="MVh-Iy-nTc" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Yct-dq-z7K"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aXi-BX-8x2"/>
                 <constraint firstItem="ybg-4m-6Bb" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="alQ-Ro-B4p"/>
+                <constraint firstItem="MVh-Iy-nTc" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="top" id="cEN-cs-YT7"/>
                 <constraint firstItem="loz-ta-vjY" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="i7e-Vq-ESA"/>
                 <constraint firstItem="ybg-4m-6Bb" firstAttribute="top" secondItem="loz-ta-vjY" secondAttribute="bottom" constant="20" id="jTI-VZ-o7r"/>
                 <constraint firstItem="LKp-eu-meq" firstAttribute="top" secondItem="N4J-H2-OAP" secondAttribute="bottom" constant="22" id="pao-3q-ftg"/>
                 <constraint firstItem="uCp-UK-O2A" firstAttribute="bottom" secondItem="ybg-4m-6Bb" secondAttribute="bottom" id="sP6-N4-jNe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="xid-08-3Ij"/>
                 <constraint firstItem="N4J-H2-OAP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z6h-Uc-2gY"/>
+                <constraint firstItem="MVh-Iy-nTc" firstAttribute="trailing" secondItem="N4J-H2-OAP" secondAttribute="trailing" id="zPQ-rv-WNo"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="131.25" y="153.16901408450704"/>
