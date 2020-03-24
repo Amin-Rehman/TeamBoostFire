@@ -6,16 +6,6 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-public protocol ReferenceObserving {
-    func observeSpeakerOrderDidChange(subscriber: @escaping ([String]) -> Void)
-    func observeParticipantListChanges(subscriber: @escaping ([Participant]) -> Void)
-    func observeIAmDoneInterrupt(subscriber: @escaping (TimeInterval) -> Void)
-    func observeMeetingStateDidChange(subscriber: @escaping (MeetingState) -> Void)
-    func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
-    func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void)
-    func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void)
-}
-
 struct FirebaseReferenceObserver: ReferenceObserving {
     func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void) {
         firebaseReferenceHolder.callToSpeakerReference?.observe(DataEventType.value, with: { snapshot in

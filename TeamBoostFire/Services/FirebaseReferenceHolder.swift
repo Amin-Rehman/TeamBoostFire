@@ -4,22 +4,6 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-public protocol ReferenceHolding {
-    func setupDefaultValues(with params: MeetingsParams)
-    func setReferenceForMeetingStarted()
-    func setReferenceForMeetingEnded()
-    func setReferenceForSpeakerOrder(speakingOrder: [String])
-    func setReferenceForModeratorHasControl(controlState: Bool)
-    func setParticipantReference(participantName: String,
-                                 participantId: String)
-    func setIAmDoneInterruptReference(timeInterval: TimeInterval)
-    func setCallToSpeakerReference(callToSpeakerReferenceValue: String)
-
-    // TODO: Just test mode - to be removed
-    func testModeSetReferenceForNoParticipants()
-    func testModeSetReferenceForFakeParticipants()
-}
-
 /**
  A container which holds references to all the keys in the Firebase database
  */

@@ -16,6 +16,13 @@
 		EB29D71D242A0DE300A4D5F0 /* HostPersisted+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70F242A0D6E00A4D5F0 /* HostPersisted+CoreDataProperties.swift */; };
 		EB29D71E242A0DEB00A4D5F0 /* FirebaseHostPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */; };
 		EB29D71F242A0DEB00A4D5F0 /* FirebaseHostFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D715242A0D6E00A4D5F0 /* FirebaseHostFetcher.swift */; };
+		EB29D724242A0E8B00A4D5F0 /* ReferenceObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D723242A0E8B00A4D5F0 /* ReferenceObserving.swift */; };
+		EB29D733242A0F1900A4D5F0 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D72E242A0F1800A4D5F0 /* Participant.swift */; };
+		EB29D734242A0F1900A4D5F0 /* MeetingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D72F242A0F1800A4D5F0 /* MeetingStats.swift */; };
+		EB29D735242A0F1900A4D5F0 /* TeamBoostNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D730242A0F1900A4D5F0 /* TeamBoostNotifications.swift */; };
+		EB29D736242A0F1900A4D5F0 /* MeetingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D731242A0F1900A4D5F0 /* MeetingState.swift */; };
+		EB29D737242A0F1900A4D5F0 /* MeetingParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */; };
+		EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +39,13 @@
 		EB29D710242A0D6E00A4D5F0 /* HostDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HostDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostPusher.swift; sourceTree = "<group>"; };
 		EB29D715242A0D6E00A4D5F0 /* FirebaseHostFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostFetcher.swift; sourceTree = "<group>"; };
+		EB29D723242A0E8B00A4D5F0 /* ReferenceObserving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceObserving.swift; sourceTree = "<group>"; };
+		EB29D72E242A0F1800A4D5F0 /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		EB29D72F242A0F1800A4D5F0 /* MeetingStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingStats.swift; sourceTree = "<group>"; };
+		EB29D730242A0F1900A4D5F0 /* TeamBoostNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamBoostNotifications.swift; sourceTree = "<group>"; };
+		EB29D731242A0F1900A4D5F0 /* MeetingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingState.swift; sourceTree = "<group>"; };
+		EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingParams.swift; sourceTree = "<group>"; };
+		EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceHolding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +78,7 @@
 		EB29D6F1242A0C5900A4D5F0 /* TeamBoostKit */ = {
 			isa = PBXGroup;
 			children = (
+				EB29D725242A0EC300A4D5F0 /* Model */,
 				EB29D717242A0D6E00A4D5F0 /* Data */,
 				EB29D709242A0D6E00A4D5F0 /* Domain */,
 				EB29D6F2242A0C5900A4D5F0 /* TeamBoostKit.h */,
@@ -107,6 +122,7 @@
 			children = (
 				EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */,
 				EB29D715242A0D6E00A4D5F0 /* FirebaseHostFetcher.swift */,
+				EB29D722242A0E5D00A4D5F0 /* Reference */,
 			);
 			path = Sync;
 			sourceTree = "<group>";
@@ -118,6 +134,27 @@
 				EB29D716242A0D6E00A4D5F0 /* Sync */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		EB29D722242A0E5D00A4D5F0 /* Reference */ = {
+			isa = PBXGroup;
+			children = (
+				EB29D723242A0E8B00A4D5F0 /* ReferenceObserving.swift */,
+				EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */,
+			);
+			path = Reference;
+			sourceTree = "<group>";
+		};
+		EB29D725242A0EC300A4D5F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB29D730242A0F1900A4D5F0 /* TeamBoostNotifications.swift */,
+				EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */,
+				EB29D72E242A0F1800A4D5F0 /* Participant.swift */,
+				EB29D731242A0F1900A4D5F0 /* MeetingState.swift */,
+				EB29D72F242A0F1800A4D5F0 /* MeetingStats.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,12 +238,19 @@
 			files = (
 				EB29D71A242A0DE300A4D5F0 /* ParticipantPersisted.swift in Sources */,
 				EB29D718242A0DD600A4D5F0 /* StorageChangeNotifying.swift in Sources */,
+				EB29D724242A0E8B00A4D5F0 /* ReferenceObserving.swift in Sources */,
+				EB29D735242A0F1900A4D5F0 /* TeamBoostNotifications.swift in Sources */,
 				EB29D71C242A0DE300A4D5F0 /* HostPersisted+CoreDataClass.swift in Sources */,
 				EB29D71E242A0DEB00A4D5F0 /* FirebaseHostPusher.swift in Sources */,
 				EB29D71F242A0DEB00A4D5F0 /* FirebaseHostFetcher.swift in Sources */,
 				EB29D71D242A0DE300A4D5F0 /* HostPersisted+CoreDataProperties.swift in Sources */,
+				EB29D733242A0F1900A4D5F0 /* Participant.swift in Sources */,
+				EB29D736242A0F1900A4D5F0 /* MeetingState.swift in Sources */,
 				EB29D719242A0DD600A4D5F0 /* HostPersistenceStorage.swift in Sources */,
+				EB29D734242A0F1900A4D5F0 /* MeetingStats.swift in Sources */,
+				EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */,
 				EB29D71B242A0DE300A4D5F0 /* ManagedObjectContextFactory.swift in Sources */,
+				EB29D737242A0F1900A4D5F0 /* MeetingParams.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
