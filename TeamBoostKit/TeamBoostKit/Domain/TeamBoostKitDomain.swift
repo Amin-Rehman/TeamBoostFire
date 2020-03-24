@@ -96,8 +96,9 @@ extension TeamBoostKitDomain {
                             meetingIdentifier: String,
                             meetingParams: MeetingsParams) -> TeamBoostKitDomain {
 
-        var storage = TeamBoostPersistenceStorage(storageChangedObserver: nil,
-                                             managedObjectContext: ManagedObjectContextFactory.make())
+        var storage = TeamBoostPersistenceStorage(
+            storageChangedObserver: nil,
+            managedObjectContext: ManagedObjectContextFactory.make(storageType: .inMemory))
 
         let fetcher = FirebaseHostFetcher(with: storage,
                                           meetingIdentifier: meetingIdentifier,

@@ -13,7 +13,7 @@ class HostPersistenceTests: XCTestCase {
     var sut: TeamBoostPersistenceStorage!
     
     override func setUp() {
-        let managedObjectContext = ManagedObjectContextFactory.make()
+        let managedObjectContext = ManagedObjectContextFactory.make(storageType: .inMemory)
         sut = TeamBoostPersistenceStorage(managedObjectContext: managedObjectContext)
     }
     
