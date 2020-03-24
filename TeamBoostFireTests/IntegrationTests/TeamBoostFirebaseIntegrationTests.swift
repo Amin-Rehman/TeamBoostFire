@@ -173,7 +173,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let expectation = self.expectation(for: speakingOrderPredicate,
-                                           evaluatedWith: hostDomain,
+                                           evaluatedWith: teamBoostKitDomain,
                                            handler: nil)
 
         teamBoostKitDomain.startMeeting()
