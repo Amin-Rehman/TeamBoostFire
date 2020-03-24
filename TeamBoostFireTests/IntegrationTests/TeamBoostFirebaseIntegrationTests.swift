@@ -38,7 +38,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         let fakeReferenceObserver = FakeReferenceObserver()
-        let hostDomain = HostDomain.make(referenceObserver: fakeReferenceObserver,
+        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
@@ -67,7 +67,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         let fakeReferenceObserver = FakeReferenceObserver()
-        let hostDomain = HostDomain.make(referenceObserver: fakeReferenceObserver,
+        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
@@ -85,7 +85,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         XCTAssertEqual(hostDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder.count == 3 &&
                 domain.speakerOrder[0] == "id1"
         }
@@ -107,7 +107,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         // After 4 seconds the speaker should switch
         let firstSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id2"
         }
 
@@ -119,7 +119,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         // Then the speaker should change again
         let secondSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id3"
         }
 
@@ -150,7 +150,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let fakeReferenceObserver = FakeReferenceObserver()
         let fakeSpeakerOrderObserver = FakeSpeakerOrderObserver()
 
-        let hostDomain = HostDomain.make(referenceObserver: fakeReferenceObserver,
+        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
@@ -167,7 +167,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         XCTAssertEqual(hostDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder.count == 3 &&
                 domain.speakerOrder[0] == "id1"
         }
@@ -189,7 +189,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //1: After 10 seconds the speaker should switch
         let firstSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id2"
         }
 
@@ -202,7 +202,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //2: After 4 seconds, seconds speaker says that she is done!
         let secondSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] != "id2"
         }
 
@@ -218,7 +218,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //3: Participant 3 is given full time to talk
         let thirdSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] != "id3"
         }
 
@@ -236,7 +236,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //5: Observe order in Core Service and check that the first speaker is id2 because she spoke the least
         let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id2"
         }
 
@@ -269,7 +269,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let fakeReferenceObserver = FakeReferenceObserver()
         let fakeSpeakerOrderObserver = FakeSpeakerOrderObserver()
 
-        let hostDomain = HostDomain.make(referenceObserver: fakeReferenceObserver,
+        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
@@ -286,7 +286,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         XCTAssertEqual(hostDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder.count == 3 &&
                 domain.speakerOrder[0] == "id1"
         }
@@ -308,7 +308,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //1: After 10 seconds the speaker should switch
         let firstSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id2"
         }
 
@@ -321,7 +321,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //2: After 4 seconds, seconds speaker says that she is done!
         let secondSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] != "id2"
         }
 
@@ -337,7 +337,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //3: Participant 3 is given full time to talk
         let thirdSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] != "id3"
         }
 
@@ -349,7 +349,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
 
         //5: Observe order in Core Service , it should not change
         let newRoundSpeakerOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id1"
         }
 

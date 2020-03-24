@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HostDomain {
+public class TeamBoostKitDomain {
     let pusher: FirebaseHostPusher
     let fetcher: FirebaseHostFetcher
     let storage: PersistenceStorage
@@ -90,11 +90,11 @@ public class HostDomain {
 
 }
 
-extension HostDomain {
+extension TeamBoostKitDomain {
     public static func make(referenceObserver: ReferenceObserving,
                             referenceHolder: ReferenceHolding,
                             meetingIdentifier: String,
-                            meetingParams: MeetingsParams) -> HostDomain {
+                            meetingParams: MeetingsParams) -> TeamBoostKitDomain {
 
         var storage = HostPersistenceStorage(storageChangedObserver: nil,
                                              managedObjectContext: ManagedObjectContextFactory.make())
@@ -108,7 +108,7 @@ extension HostDomain {
                                         meetingIdentifier: meetingIdentifier)
         storage.storageChangedObserver = pusher
 
-        return HostDomain(pusher: pusher,
+        return TeamBoostKitDomain(pusher: pusher,
                           fetcher: fetcher,
                           storage: storage,
                           meetingIdentifier: meetingIdentifier,

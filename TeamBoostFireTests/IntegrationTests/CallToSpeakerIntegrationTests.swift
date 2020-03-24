@@ -11,7 +11,7 @@ import XCTest
 @testable import TeamBoostKit
 
 class CallToSpeakerIntegrationTests: XCTestCase {
-    var hostDomain: HostDomain!
+    var hostDomain: TeamBoostKitDomain!
     var fakeReferenceObserver: FakeReferenceObserver!
 
     override func setUp() {
@@ -27,7 +27,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         fakeReferenceObserver = FakeReferenceObserver()
-        hostDomain = HostDomain.make(referenceObserver: fakeReferenceObserver,
+        hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                           referenceHolder: FakeReferenceHolding(),
                                           meetingIdentifier: "meetingId",
                                           meetingParams: meetingParams)
@@ -58,7 +58,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
         XCTAssertEqual(hostDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder.count == 3 &&
                 domain.speakerOrder[0] == "id1"
         }
@@ -115,7 +115,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
         XCTAssertEqual(hostDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder.count == 3 &&
                 domain.speakerOrder[0] == "id1"
         }
@@ -137,7 +137,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
 
         //1: After 10 seconds the speaker should switch
         let firstSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] == "id2"
         }
 
@@ -150,7 +150,7 @@ class CallToSpeakerIntegrationTests: XCTestCase {
 
         //2: After 4 seconds, seconds speaker says that she is done!
         let secondSpeakerSwitchPredicate = NSPredicate { (item, bindings) -> Bool in
-            let domain = item as! HostDomain
+            let domain = item as! TeamBoostKitDomain
             return domain.speakerOrder[0] != "id2"
         }
 

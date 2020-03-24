@@ -8,7 +8,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     let meetingParams: MeetingsParams
     weak var orderObserver: SpeakerControllerOrderObserver?
     private let meetingMode: MeetingMode
-    private let domain: HostDomain
+    private let domain: TeamBoostKitDomain
 
     public lazy var storage: MeetingControllerStorage = {
         let allParticipantIdentifiers = domain.speakerOrder
@@ -46,7 +46,7 @@ class HostMeetingControllerService: MeetingControllerCurrentRoundTickerObserver 
     init(meetingParams: MeetingsParams,
          orderObserver: SpeakerControllerOrderObserver,
          meetingMode: MeetingMode = .Uniform,
-         domain: HostDomain) {
+         domain: TeamBoostKitDomain) {
         self.meetingParams = meetingParams
         self.orderObserver = orderObserver
         self.meetingMode = meetingMode
