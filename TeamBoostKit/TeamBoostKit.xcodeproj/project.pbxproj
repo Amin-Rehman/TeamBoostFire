@@ -12,8 +12,6 @@
 		EB29D719242A0DD600A4D5F0 /* HostPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70B242A0D6E00A4D5F0 /* HostPersistenceStorage.swift */; };
 		EB29D71A242A0DE300A4D5F0 /* ParticipantPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70C242A0D6E00A4D5F0 /* ParticipantPersisted.swift */; };
 		EB29D71B242A0DE300A4D5F0 /* ManagedObjectContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70D242A0D6E00A4D5F0 /* ManagedObjectContextFactory.swift */; };
-		EB29D71C242A0DE300A4D5F0 /* HostPersisted+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70E242A0D6E00A4D5F0 /* HostPersisted+CoreDataClass.swift */; };
-		EB29D71D242A0DE300A4D5F0 /* HostPersisted+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70F242A0D6E00A4D5F0 /* HostPersisted+CoreDataProperties.swift */; };
 		EB29D71E242A0DEB00A4D5F0 /* FirebaseHostPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */; };
 		EB29D71F242A0DEB00A4D5F0 /* FirebaseHostFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D715242A0D6E00A4D5F0 /* FirebaseHostFetcher.swift */; };
 		EB29D724242A0E8B00A4D5F0 /* ReferenceObserving.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D723242A0E8B00A4D5F0 /* ReferenceObserving.swift */; };
@@ -29,6 +27,8 @@
 		EB29D748242A16C200A4D5F0 /* TeamBoostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB29D6EF242A0C5900A4D5F0 /* TeamBoostKit.framework */; };
 		EB29D751242A171300A4D5F0 /* HostPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D74F242A170500A4D5F0 /* HostPersistenceTests.swift */; };
 		EB29D752242A171800A4D5F0 /* ManagedObjectContextFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D74E242A170500A4D5F0 /* ManagedObjectContextFactoryTests.swift */; };
+		EB29D757242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D755242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift */; };
+		EB29D758242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D756242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +50,6 @@
 		EB29D70B242A0D6E00A4D5F0 /* HostPersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceStorage.swift; sourceTree = "<group>"; };
 		EB29D70C242A0D6E00A4D5F0 /* ParticipantPersisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPersisted.swift; sourceTree = "<group>"; };
 		EB29D70D242A0D6E00A4D5F0 /* ManagedObjectContextFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactory.swift; sourceTree = "<group>"; };
-		EB29D70E242A0D6E00A4D5F0 /* HostPersisted+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HostPersisted+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EB29D70F242A0D6E00A4D5F0 /* HostPersisted+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HostPersisted+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EB29D710242A0D6E00A4D5F0 /* HostDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HostDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostPusher.swift; sourceTree = "<group>"; };
 		EB29D715242A0D6E00A4D5F0 /* FirebaseHostFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHostFetcher.swift; sourceTree = "<group>"; };
@@ -67,6 +65,8 @@
 		EB29D747242A16C200A4D5F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB29D74E242A170500A4D5F0 /* ManagedObjectContextFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactoryTests.swift; sourceTree = "<group>"; };
 		EB29D74F242A170500A4D5F0 /* HostPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceTests.swift; sourceTree = "<group>"; };
+		EB29D755242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TeamBoostPersisted+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EB29D756242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TeamBoostPersisted+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,8 @@
 			children = (
 				EB29D70C242A0D6E00A4D5F0 /* ParticipantPersisted.swift */,
 				EB29D70D242A0D6E00A4D5F0 /* ManagedObjectContextFactory.swift */,
-				EB29D70E242A0D6E00A4D5F0 /* HostPersisted+CoreDataClass.swift */,
-				EB29D70F242A0D6E00A4D5F0 /* HostPersisted+CoreDataProperties.swift */,
+				EB29D756242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataClass.swift */,
+				EB29D755242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift */,
 				EB29D711242A0D6E00A4D5F0 /* TeamBoostDataModel.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -322,10 +322,10 @@
 				EB29D718242A0DD600A4D5F0 /* StorageChangeNotifying.swift in Sources */,
 				EB29D724242A0E8B00A4D5F0 /* ReferenceObserving.swift in Sources */,
 				EB29D735242A0F1900A4D5F0 /* TeamBoostNotifications.swift in Sources */,
-				EB29D71C242A0DE300A4D5F0 /* HostPersisted+CoreDataClass.swift in Sources */,
 				EB29D71E242A0DEB00A4D5F0 /* FirebaseHostPusher.swift in Sources */,
+				EB29D758242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataClass.swift in Sources */,
 				EB29D71F242A0DEB00A4D5F0 /* FirebaseHostFetcher.swift in Sources */,
-				EB29D71D242A0DE300A4D5F0 /* HostPersisted+CoreDataProperties.swift in Sources */,
+				EB29D757242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift in Sources */,
 				EB29D733242A0F1900A4D5F0 /* Participant.swift in Sources */,
 				EB29D736242A0F1900A4D5F0 /* MeetingState.swift in Sources */,
 				EB29D719242A0DD600A4D5F0 /* HostPersistenceStorage.swift in Sources */,

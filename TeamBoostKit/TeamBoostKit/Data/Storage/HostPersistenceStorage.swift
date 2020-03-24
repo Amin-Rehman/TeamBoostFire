@@ -22,7 +22,7 @@ protocol PersistenceStorage {
     var storageChangedObserver: StorageChangeObserving? { get set }
     var managedObjectContext: NSManagedObjectContext { get }
 
-    func fetchAll() -> [HostPersisted]
+    func fetchAll() -> [TeamBoostPersisted]
     func clear()
     func setMeeting(with meetingIdentifier: String)
     func setMeetingParamsMeetingTime(meetingTime: Int64,
@@ -67,9 +67,9 @@ struct HostPersistenceStorage: PersistenceStorage {
     weak var storageChangedObserver: StorageChangeObserving?
     let managedObjectContext: NSManagedObjectContext
 
-    func fetchAll() -> [HostPersisted] {
+    func fetchAll() -> [TeamBoostPersisted] {
         do {
-            let fetchRequest = NSFetchRequest<HostPersisted>(entityName: HostPersisted.entityName)
+            let fetchRequest = NSFetchRequest<TeamBoostPersisted>(entityName: TeamBoostPersisted.entityName)
             return try managedObjectContext.fetch(fetchRequest)
         } catch {
             fatalError("Error fetching all hosts")
@@ -87,8 +87,8 @@ struct HostPersistenceStorage: PersistenceStorage {
      */
     func setMeeting(with meetingIdentifier: String) {
         let hostPersisted = NSEntityDescription.insertNewObject(
-            forEntityName: "HostPersisted",
-            into: managedObjectContext) as! HostPersisted
+            forEntityName: "TeamBoostPersisted",
+            into: managedObjectContext) as! TeamBoostPersisted
 
         hostPersisted.meetingIdentifier = meetingIdentifier
         hostPersisted.meetingIdentifierChanged = HostPersistenceStorage.makeCurrentTimestamp()
@@ -473,8 +473,8 @@ extension HostPersistenceStorage {
         storageChangedObserver?.storageDidChange()
     }
 
-    private func fetchHostPersisted(with meetingIdentifier: String) throws -> HostPersisted? {
-        let fetchRequest = NSFetchRequest<HostPersisted>(entityName: HostPersisted.entityName)
+    private func fetchHostPersisted(with meetingIdentifier: String) throws -> TeamBoostPersisted? {
+        let fetchRequest = NSFetchRequest<TeamBoostPersisted>(entityName: TeamBoostPersisted.entityName)
         fetchRequest.predicate = NSPredicate(format: "meetingIdentifier == %@", meetingIdentifier)
         let fetchResults = try managedObjectContext.fetch(fetchRequest)
         return fetchResults.first
