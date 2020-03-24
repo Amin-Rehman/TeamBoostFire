@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 public protocol TeamBoostCore: class {
     var speakerOrder: [String]? { get set }

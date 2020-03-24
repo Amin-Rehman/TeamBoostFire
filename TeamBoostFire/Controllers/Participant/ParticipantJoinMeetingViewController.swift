@@ -8,6 +8,7 @@
 
 import UIKit
 import TransitionButton
+import TeamBoostKit
 
 class ParticipantJoinMeetingViewController: UIViewController, UITextFieldDelegate {
 

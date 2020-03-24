@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import TeamBoostKit
 
 class ParticipantMainViewController: UIViewController {
 

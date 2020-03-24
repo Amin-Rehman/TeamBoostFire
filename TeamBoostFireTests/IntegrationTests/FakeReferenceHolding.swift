@@ -8,6 +8,7 @@
 
 import Foundation
 import TeamBoostFire
+import TeamBoostKit
 
 struct FakeReferenceHolding: ReferenceHolding {
     func setupDefaultValues(with params: MeetingsParams) {

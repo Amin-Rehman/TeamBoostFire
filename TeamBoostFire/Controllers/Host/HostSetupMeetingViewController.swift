@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TeamBoostKit
 
 enum ModerationStateLabel: String {
     case AutoModerated = "Auto Moderated"

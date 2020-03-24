@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TeamBoostKit
 
 struct HostSetupMeetingUseCase {
     static func perform(at viewController: UIViewController,

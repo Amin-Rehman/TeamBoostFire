@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 /**
  Save statistics of the meeting to Host Core Services

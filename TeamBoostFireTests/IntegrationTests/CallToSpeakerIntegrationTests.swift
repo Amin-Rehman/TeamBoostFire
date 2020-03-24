@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import TeamBoostFire
+@testable import TeamBoostKit
 
 class CallToSpeakerIntegrationTests: XCTestCase {
     var hostDomain: HostDomain!

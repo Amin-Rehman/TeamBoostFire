@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TeamBoostKit
 
 extension UIViewController {
     func getHostDomain() -> HostDomain {
