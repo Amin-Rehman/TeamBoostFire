@@ -11,7 +11,11 @@ import CoreData
 
 struct ManagedObjectContextFactory {
     static public func make() -> NSManagedObjectContext {
-        guard let modelURL = Bundle.main.url(
+        guard let teamBoostKitBundle = Bundle(identifier: "yaberwock.TeamBoostKit") else {
+            fatalError("Unable to load TeamBoostKit Bundle")
+        }
+
+        guard let modelURL = teamBoostKitBundle.url(
             forResource: "TeamBoostDataModel",
             withExtension:"momd") else {
                 fatalError("Error loading model from bundle")
