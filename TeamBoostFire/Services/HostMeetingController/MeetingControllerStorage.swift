@@ -19,7 +19,7 @@ class MeetingControllerStorage {
     private(set) public var participantTotalSpeakingRecord = ParticipantSpeakingRecord()
     private(set) public var activeMeetingTime = Int(0)
 
-    public let domain: HostDomain
+    public let domain: TeamBoostKitDomain
 
     private(set) public var callToSpeakerQueue = [ParticipantId]()
 
@@ -33,7 +33,7 @@ class MeetingControllerStorage {
 
     init(with participantIds: [ParticipantId],
          maxTalkTime: Int,
-         domain: HostDomain) {
+         domain: TeamBoostKitDomain) {
         self.domain = domain
         participantIds.forEach { identifier in
             participantTotalSpeakingRecord[identifier] = 0

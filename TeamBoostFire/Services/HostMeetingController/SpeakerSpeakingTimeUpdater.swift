@@ -17,10 +17,10 @@ class SpeakerSpeakingTimeUpdater {
     weak public var secondTickObserver: SpeakerControllerSecondTickObserver?
     var storage: MeetingControllerStorage
     private var secondTickTimer: Timer?
-    private let domain: HostDomain
+    private let domain: TeamBoostKitDomain
 
     init(with storage: MeetingControllerStorage,
-         domain: HostDomain) {
+         domain: TeamBoostKitDomain) {
         // First second seems to get missed, so brute force it
         self.storage = storage
         self.domain = domain

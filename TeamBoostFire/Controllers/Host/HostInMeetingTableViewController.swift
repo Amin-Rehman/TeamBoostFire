@@ -20,11 +20,11 @@ class HostInMeetingTableViewController: UITableViewController {
 
     init() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        guard let hostDomain = appDelegate.hostDomain else {
-            fatalError("Unable to retrieve hostDomain from Application Delegate")
+        guard let teamBoostKitDomain = appDelegate.teamBoostKitDomain else {
+            fatalError("Unable to retrieve teamBoostKitDomain from Application Delegate")
         }
 
-        tableViewDataSource = hostDomain.allParticipants
+        tableViewDataSource = teamBoostKitDomain.allParticipants
         super.init(style: .plain)
 
         self.tableView.allowsSelection = true
@@ -37,7 +37,7 @@ class HostInMeetingTableViewController: UITableViewController {
     }
 
     @objc public func updateTableViewWithSpeakerOrder() {
-        tableViewDataSource = getHostDomain().allParticipants
+        tableViewDataSource = teamBoostKitDomainInstance().allParticipants
         tableView.reloadData()
     }
 
@@ -75,7 +75,7 @@ class HostInMeetingTableViewController: UITableViewController {
             cell.speakingTimeLabel.text = timeSpoken.minutesAndSecondsPrettyString()
         }
 
-        let currentSpeakerIdentifier = getHostDomain().speakerOrder.first
+        let currentSpeakerIdentifier = teamBoostKitDomainInstance().speakerOrder.first
         let speakerOrder = cellParticipant.speakerOrder
 
         let isCurrentSpeaker = participantIdentifier == currentSpeakerIdentifier
@@ -135,7 +135,7 @@ extension HostInMeetingTableViewController {
 
     private func showSpeakingOrderIfNeeded(for cell: HostInMeetingTableViewCell,
                                            speakingOrder:Int) {
-        if (getHostDomain().meetingParams.moderationMode == MeetingMode.AutoModerated) {
+        if (teamBoostKitDomainInstance().meetingParams.moderationMode == MeetingMode.AutoModerated) {
             cell.orderLabel.isHidden = true
             return
         }

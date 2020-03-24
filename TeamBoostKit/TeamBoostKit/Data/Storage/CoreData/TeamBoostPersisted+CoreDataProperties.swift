@@ -1,5 +1,5 @@
 //
-//  HostPersisted+CoreDataProperties.swift
+//  TeamBoostPersisted+CoreDataProperties.swift
 //  
 //
 //  Created by Amin Rehman on 04.03.20.
@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 
 
-extension HostPersisted {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<HostPersisted> {
-        return NSFetchRequest<HostPersisted>(entityName: "HostPersisted")
+extension TeamBoostPersisted {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<TeamBoostPersisted> {
+        return NSFetchRequest<TeamBoostPersisted>(entityName: "TeamBoostPersisted")
     }
 
     @NSManaged public var meetingIdentifier: String?

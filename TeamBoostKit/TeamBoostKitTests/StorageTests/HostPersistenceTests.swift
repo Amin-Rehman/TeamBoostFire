@@ -10,11 +10,11 @@ import XCTest
 @testable import TeamBoostKit
 
 class HostPersistenceTests: XCTestCase {
-    var sut: HostPersistenceStorage!
+    var sut: TeamBoostPersistenceStorage!
     
     override func setUp() {
-        let managedObjectContext = ManagedObjectContextFactory.make()
-        sut = HostPersistenceStorage(managedObjectContext: managedObjectContext)
+        let managedObjectContext = ManagedObjectContextFactory.make(storageType: .inMemory)
+        sut = TeamBoostPersistenceStorage(managedObjectContext: managedObjectContext)
     }
     
     override func tearDown() {

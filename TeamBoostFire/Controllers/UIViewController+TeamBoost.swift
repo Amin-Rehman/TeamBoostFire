@@ -11,11 +11,11 @@ import UIKit
 import TeamBoostKit
 
 extension UIViewController {
-    func getHostDomain() -> HostDomain {
+    func teamBoostKitDomainInstance() -> TeamBoostKitDomain {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        guard let hostDomain = appDelegate.hostDomain else {
-            fatalError("Unable to retrieve hostDomain from Application Delegate")
+        guard let teamBoostKitDomain = appDelegate.teamBoostKitDomain else {
+            fatalError("Unable to retrieve TeamBoostKitDomain from Application Delegate")
         }
-        return hostDomain
+        return teamBoostKitDomain
     }
 }

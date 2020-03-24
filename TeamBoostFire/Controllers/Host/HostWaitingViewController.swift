@@ -28,7 +28,7 @@ class HostWaitingViewController: UIViewController {
 
         loadLottieSpinner()
 
-        let meetingIdentifier = getHostDomain().meetingIdentifier
+        let meetingIdentifier = teamBoostKitDomainInstance().meetingIdentifier
         meetingCodeLabel.text = meetingIdentifier
         let notificationName = Notification.Name(TeamBoostNotifications.participantListDidChange.rawValue)
 
@@ -75,9 +75,9 @@ class HostWaitingViewController: UIViewController {
         }
 
         AnalyticsService.shared.hostMeetingStarted()
-        let hostDomain = getHostDomain()
-        hostDomain.startMeeting()
-        let meetingParams = hostDomain.meetingParams
+        let teamBoostKitDomain = teamBoostKitDomainInstance()
+        teamBoostKitDomain.startMeeting()
+        let meetingParams = teamBoostKitDomain.meetingParams
 
         let hostHaveYourSayViewController = HostHaveYourSayViewController(with: meetingParams)
         self.navigationController?.pushViewController(hostHaveYourSayViewController, animated: true)

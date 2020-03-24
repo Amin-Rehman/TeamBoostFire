@@ -11,7 +11,7 @@ import XCTest
 
 class ManagedObjectContextFactoryTests: XCTestCase {
     func testMakingInMemoryStoreIsNotNil() {
-        let managedObjectContext = ManagedObjectContextFactory.make()
+        let managedObjectContext = ManagedObjectContextFactory.make(storageType: .inMemory)
         XCTAssertNotNil(managedObjectContext)
     }
 }

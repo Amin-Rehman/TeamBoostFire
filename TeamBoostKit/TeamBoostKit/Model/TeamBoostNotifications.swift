@@ -16,12 +16,6 @@ public enum TeamBoostNotifications: String {
     case speakerOrderDidChange = "SpeakerOrderDidChange"
     case participantIsDoneInterrupt = "ParticipantIsDoneInterrupt"
     case currentParticipantMaxSpeakingTimeChanged = "CurrentParticipantMaxSpeakingTimeChanged"
-    case callToSpeakerDidChange = "callToSpeakerDidChange"
-    case moderatorHasControlDidChange = "moderatorHasControlDidChange"
-}
-
-// TODO: Take this out of TeamBoostKit
-public enum AppNotifications: String {
-    case newMeetingRoundStarted = "NewMeetingRoundStarted"
-    case meetingSecondTicked = "MeetingSecondTicked"
+    case callToSpeakerDidChange = "CallToSpeakerDidChange"
+    case moderatorHasControlDidChange = "ModeratorHasControlDidChange"
 }

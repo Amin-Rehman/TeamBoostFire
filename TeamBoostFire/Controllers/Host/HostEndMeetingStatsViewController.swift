@@ -36,7 +36,7 @@ class HostEndMeetingStatsViewController: UIViewController {
     }
 
     func populateLabelAndDescription() {
-        guard let meetingStatistics =  getHostDomain().meetingStatistics else {
+        guard let meetingStatistics =  teamBoostKitDomainInstance().meetingStatistics else {
             assertionFailure("Unable to retrieve meeting statistics")
             return
         }
@@ -62,7 +62,7 @@ class HostEndMeetingStatsViewController: UIViewController {
     }
 
     func populatePieChart() {
-        guard let meetingStats = getHostDomain().meetingStatistics else {
+        guard let meetingStats = teamBoostKitDomainInstance().meetingStatistics else {
             assertionFailure("Meeting statistics not found in HostDomain")
             return
         }

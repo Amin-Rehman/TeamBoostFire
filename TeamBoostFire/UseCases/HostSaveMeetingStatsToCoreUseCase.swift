@@ -15,7 +15,7 @@ import TeamBoostKit
 struct HostSaveMeetingStatsToCoreUseCase {
     static func perform(meetingLengthSeconds: Int,
                         hostControllerService: HostMeetingControllerService?,
-                        domain: HostDomain) {
+                        domain: TeamBoostKitDomain) {
         guard let controllerService = hostControllerService else {
             assertionFailure("Unable to retrieve host controller service for HostSaveMeetingStatsToCoreUseCase")
             return
