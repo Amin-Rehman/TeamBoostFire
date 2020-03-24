@@ -25,7 +25,19 @@
 		EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */; };
 		EB29D73A242A0F7300A4D5F0 /* TeamBoostDataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = EB29D711242A0D6E00A4D5F0 /* TeamBoostDataModel.xcdatamodeld */; };
 		EB29D73B242A11AC00A4D5F0 /* HostDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D708242A0D6E00A4D5F0 /* HostDomain.swift */; };
+		EB29D746242A16C200A4D5F0 /* TeamBoostKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D745242A16C200A4D5F0 /* TeamBoostKitTests.swift */; };
+		EB29D748242A16C200A4D5F0 /* TeamBoostKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB29D6EF242A0C5900A4D5F0 /* TeamBoostKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB29D749242A16C200A4D5F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB29D6E6242A0C5900A4D5F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB29D6EE242A0C5900A4D5F0;
+			remoteInfo = TeamBoostKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		EB29D6EF242A0C5900A4D5F0 /* TeamBoostKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TeamBoostKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +60,9 @@
 		EB29D731242A0F1900A4D5F0 /* MeetingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingState.swift; sourceTree = "<group>"; };
 		EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingParams.swift; sourceTree = "<group>"; };
 		EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceHolding.swift; sourceTree = "<group>"; };
+		EB29D743242A16C200A4D5F0 /* TeamBoostKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamBoostKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB29D745242A16C200A4D5F0 /* TeamBoostKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostKitTests.swift; sourceTree = "<group>"; };
+		EB29D747242A16C200A4D5F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB29D740242A16C200A4D5F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB29D748242A16C200A4D5F0 /* TeamBoostKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -65,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				EB29D6F1242A0C5900A4D5F0 /* TeamBoostKit */,
+				EB29D744242A16C200A4D5F0 /* TeamBoostKitTests */,
 				EB29D6F0242A0C5900A4D5F0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				EB29D6EF242A0C5900A4D5F0 /* TeamBoostKit.framework */,
+				EB29D743242A16C200A4D5F0 /* TeamBoostKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +184,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EB29D744242A16C200A4D5F0 /* TeamBoostKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB29D745242A16C200A4D5F0 /* TeamBoostKitTests.swift */,
+				EB29D747242A16C200A4D5F0 /* Info.plist */,
+			);
+			path = TeamBoostKitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -191,16 +225,38 @@
 			productReference = EB29D6EF242A0C5900A4D5F0 /* TeamBoostKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		EB29D742242A16C200A4D5F0 /* TeamBoostKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB29D74B242A16C200A4D5F0 /* Build configuration list for PBXNativeTarget "TeamBoostKitTests" */;
+			buildPhases = (
+				EB29D73F242A16C200A4D5F0 /* Sources */,
+				EB29D740242A16C200A4D5F0 /* Frameworks */,
+				EB29D741242A16C200A4D5F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB29D74A242A16C200A4D5F0 /* PBXTargetDependency */,
+			);
+			name = TeamBoostKitTests;
+			productName = TeamBoostKitTests;
+			productReference = EB29D743242A16C200A4D5F0 /* TeamBoostKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		EB29D6E6242A0C5900A4D5F0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Amin Rehman";
 				TargetAttributes = {
 					EB29D6EE242A0C5900A4D5F0 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					EB29D742242A16C200A4D5F0 = {
 						CreatedOnToolsVersion = 11.3;
 					};
 				};
@@ -219,6 +275,7 @@
 			projectRoot = "";
 			targets = (
 				EB29D6EE242A0C5900A4D5F0 /* TeamBoostKit */,
+				EB29D742242A16C200A4D5F0 /* TeamBoostKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB29D73A242A0F7300A4D5F0 /* TeamBoostDataModel.xcdatamodeld in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB29D741242A16C200A4D5F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +322,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB29D73F242A16C200A4D5F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB29D746242A16C200A4D5F0 /* TeamBoostKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB29D74A242A16C200A4D5F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB29D6EE242A0C5900A4D5F0 /* TeamBoostKit */;
+			targetProxy = EB29D749242A16C200A4D5F0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EB29D6F5242A0C5900A4D5F0 /* Debug */ = {
@@ -431,6 +511,42 @@
 			};
 			name = Release;
 		};
+		EB29D74C242A16C200A4D5F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68QQNWZDTF;
+				INFOPLIST_FILE = TeamBoostKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EB29D74D242A16C200A4D5F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 68QQNWZDTF;
+				INFOPLIST_FILE = TeamBoostKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yaberwock.TeamBoostKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,6 +564,15 @@
 			buildConfigurations = (
 				EB29D6F8242A0C5900A4D5F0 /* Debug */,
 				EB29D6F9242A0C5900A4D5F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB29D74B242A16C200A4D5F0 /* Build configuration list for PBXNativeTarget "TeamBoostKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB29D74C242A16C200A4D5F0 /* Debug */,
+				EB29D74D242A16C200A4D5F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
