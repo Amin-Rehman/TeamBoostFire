@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EB29D6F4242A0C5900A4D5F0 /* TeamBoostKit.h in Headers */ = {isa = PBXBuildFile; fileRef = EB29D6F2242A0C5900A4D5F0 /* TeamBoostKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB29D718242A0DD600A4D5F0 /* StorageChangeNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70A242A0D6E00A4D5F0 /* StorageChangeNotifying.swift */; };
-		EB29D719242A0DD600A4D5F0 /* HostPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70B242A0D6E00A4D5F0 /* HostPersistenceStorage.swift */; };
+		EB29D719242A0DD600A4D5F0 /* TeamBoostPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70B242A0D6E00A4D5F0 /* TeamBoostPersistenceStorage.swift */; };
 		EB29D71A242A0DE300A4D5F0 /* ParticipantPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70C242A0D6E00A4D5F0 /* ParticipantPersisted.swift */; };
 		EB29D71B242A0DE300A4D5F0 /* ManagedObjectContextFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D70D242A0D6E00A4D5F0 /* ManagedObjectContextFactory.swift */; };
 		EB29D71E242A0DEB00A4D5F0 /* FirebaseHostPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D714242A0D6E00A4D5F0 /* FirebaseHostPusher.swift */; };
@@ -47,7 +47,7 @@
 		EB29D6F3242A0C5900A4D5F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB29D708242A0D6E00A4D5F0 /* TeamBoostKitDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostKitDomain.swift; sourceTree = "<group>"; };
 		EB29D70A242A0D6E00A4D5F0 /* StorageChangeNotifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageChangeNotifying.swift; sourceTree = "<group>"; };
-		EB29D70B242A0D6E00A4D5F0 /* HostPersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPersistenceStorage.swift; sourceTree = "<group>"; };
+		EB29D70B242A0D6E00A4D5F0 /* TeamBoostPersistenceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBoostPersistenceStorage.swift; sourceTree = "<group>"; };
 		EB29D70C242A0D6E00A4D5F0 /* ParticipantPersisted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantPersisted.swift; sourceTree = "<group>"; };
 		EB29D70D242A0D6E00A4D5F0 /* ManagedObjectContextFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextFactory.swift; sourceTree = "<group>"; };
 		EB29D710242A0D6E00A4D5F0 /* HostDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HostDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				EB29D70A242A0D6E00A4D5F0 /* StorageChangeNotifying.swift */,
-				EB29D70B242A0D6E00A4D5F0 /* HostPersistenceStorage.swift */,
+				EB29D70B242A0D6E00A4D5F0 /* TeamBoostPersistenceStorage.swift */,
 				EB29D712242A0D6E00A4D5F0 /* CoreData */,
 			);
 			path = Storage;
@@ -328,7 +328,7 @@
 				EB29D757242A32AD00A4D5F0 /* TeamBoostPersisted+CoreDataProperties.swift in Sources */,
 				EB29D733242A0F1900A4D5F0 /* Participant.swift in Sources */,
 				EB29D736242A0F1900A4D5F0 /* MeetingState.swift in Sources */,
-				EB29D719242A0DD600A4D5F0 /* HostPersistenceStorage.swift in Sources */,
+				EB29D719242A0DD600A4D5F0 /* TeamBoostPersistenceStorage.swift in Sources */,
 				EB29D734242A0F1900A4D5F0 /* MeetingStats.swift in Sources */,
 				EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */,
 				EB29D71B242A0DE300A4D5F0 /* ManagedObjectContextFactory.swift in Sources */,

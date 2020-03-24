@@ -63,7 +63,7 @@ protocol PersistenceStorage {
     func speakerOrder(for meetingIdentifier: String) -> ValueTimeStampPair<[String]>
 }
 
-struct HostPersistenceStorage: PersistenceStorage {
+struct TeamBoostPersistenceStorage: PersistenceStorage {
     weak var storageChangedObserver: StorageChangeObserving?
     let managedObjectContext: NSManagedObjectContext
 
@@ -91,7 +91,7 @@ struct HostPersistenceStorage: PersistenceStorage {
             into: managedObjectContext) as! TeamBoostPersisted
 
         hostPersisted.meetingIdentifier = meetingIdentifier
-        hostPersisted.meetingIdentifierChanged = HostPersistenceStorage.makeCurrentTimestamp()
+        hostPersisted.meetingIdentifierChanged = TeamBoostPersistenceStorage.makeCurrentTimestamp()
         managedObjectContext.insert(hostPersisted)
         do {
             try saveAndNotifyObserver()
@@ -112,7 +112,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.meetingParamsMeetingTimeChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingParamsMeetingTimeChanged = 0
             }
@@ -148,7 +148,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.meetingParamsAgendaChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingParamsAgendaChanged = 0
             }
@@ -184,7 +184,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.meetingParamsMaxTalkTimeChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingParamsMaxTalkTimeChanged = 0
             }
@@ -221,7 +221,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.callToSpeakerInterruptChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingParamsMeetingTimeChanged = 0
             }
@@ -257,7 +257,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.currentSpeakerSpeakingTimeChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.currentSpeakerSpeakingTimeChanged = 0
             }
@@ -293,7 +293,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.iAmDoneInterruptChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.iAmDoneInterruptChanged = 0
             }
@@ -329,7 +329,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.meetingStateChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.meetingStateChanged = 0
             }
@@ -365,7 +365,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.moderatorHasControlChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.moderatorHasControlChanged = 0
             }
@@ -401,7 +401,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.participantsChanged =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.participantsChanged = 0
             }
@@ -437,7 +437,7 @@ struct HostPersistenceStorage: PersistenceStorage {
 
             if localChange {
                 hostPersisted.speakerOrderChanged  =
-                    HostPersistenceStorage.makeCurrentTimestamp()
+                    TeamBoostPersistenceStorage.makeCurrentTimestamp()
             } else {
                 hostPersisted.speakerOrderChanged = 0
             }
@@ -462,7 +462,7 @@ struct HostPersistenceStorage: PersistenceStorage {
     }
 }
 
-extension HostPersistenceStorage {
+extension TeamBoostPersistenceStorage {
 
     static private func makeCurrentTimestamp() -> NSNumber {
         return NSNumber(value: Date().timeIntervalSinceReferenceDate)
