@@ -23,6 +23,7 @@
 		EB29D736242A0F1900A4D5F0 /* MeetingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D731242A0F1900A4D5F0 /* MeetingState.swift */; };
 		EB29D737242A0F1900A4D5F0 /* MeetingParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */; };
 		EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */; };
+		EB29D73A242A0F7300A4D5F0 /* TeamBoostDataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = EB29D711242A0D6E00A4D5F0 /* TeamBoostDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB29D73A242A0F7300A4D5F0 /* TeamBoostDataModel.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
