@@ -63,7 +63,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupInitialElapsedMeetingTimeRatio() {
-        let meetingParams = getHostDomain().meetingParams
+        let meetingParams = teamBoostKitDomainInstance().meetingParams
         let meetingTimeInMinutes = meetingParams.meetingTime
         totalMeetingTimeInSeconds = meetingTimeInMinutes * 60
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
@@ -73,7 +73,7 @@ class HostMeetingViewController: UIViewController {
     }
 
     private func setupAgendaQuestion() {
-        let meetingParams = getHostDomain().meetingParams
+        let meetingParams = teamBoostKitDomainInstance().meetingParams
         agendaQuestionLabel.text = meetingParams.agenda
     }
 
@@ -109,13 +109,13 @@ class HostMeetingViewController: UIViewController {
 
         let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
             AnalyticsService.shared.hostMeetingEnded()
-            let hostDomain = self.getHostDomain()
-            hostDomain.endMeeting()
+            let teamBoostKitDomain = self.teamBoostKitDomainInstance()
+            teamBoostKitDomain.endMeeting()
 
             self.hostControllerService?.endMeeting()
             HostSaveMeetingStatsToCoreUseCase.perform(
                 meetingLengthSeconds: self.hostControllerService!.storage.activeMeetingTime,
-                hostControllerService: self.hostControllerService, domain: hostDomain)
+                hostControllerService: self.hostControllerService, domain: teamBoostKitDomain)
 
             let hostEndMeetingStatsViewController = HostEndMeetingStatsViewController()
             self.navigationController?.pushViewController(hostEndMeetingStatsViewController,
@@ -133,7 +133,7 @@ class HostMeetingViewController: UIViewController {
 
     @IBAction func haveYourSayTapped(_ sender: Any) {
         self.hostControllerService?.stopParticipantSpeakingSessions()
-        getHostDomain().setModeratorControlState(controlState: true)
+        teamBoostKitDomainInstance().setModeratorControlState(controlState: true)
         self.navigationController?.popViewController(animated: true)
     }
 }

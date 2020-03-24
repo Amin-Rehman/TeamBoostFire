@@ -27,8 +27,8 @@ class HostHaveYourSayViewController: UIViewController {
         totalMeetingTimeString = totalMeetingTimeInSeconds.minutesAndSecondsPrettyString()
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        guard let domain = appDelegate.hostDomain else {
-            fatalError("Unable to retrieve hostDomain from Application Delegate")
+        guard let domain = appDelegate.teamBoostKitDomain else {
+            fatalError("Unable to retrieve teamBoostKitDomain from Application Delegate")
         }
 
         self.hostControllerService = HostMeetingControllerService(
@@ -62,7 +62,7 @@ class HostHaveYourSayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        getHostDomain().setModeratorControlState(controlState: true)
+        teamBoostKitDomainInstance().setModeratorControlState(controlState: true)
         let notificationName = Notification.Name(AppNotifications.meetingSecondTicked.rawValue)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(meetingActiveSecondDidTick(notification:)),
@@ -88,7 +88,7 @@ class HostHaveYourSayViewController: UIViewController {
 
     @IBAction func collectIdeasTapped(_ sender: Any) {
         self.hostControllerService.startParticipantSpeakingSessions()
-        getHostDomain().setModeratorControlState(controlState: false)
+        teamBoostKitDomainInstance().setModeratorControlState(controlState: false)
         self.navigationController?.pushViewController(self.hostMeetingViewController, animated: true)
     }
 }

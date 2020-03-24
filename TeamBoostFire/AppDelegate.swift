@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     public var participantCoreServices: ParticipantCoreServices?
     public var analyticsServices: AnalyticsService?
-    public var hostDomain: TeamBoostKitDomain?
+    public var teamBoostKitDomain: TeamBoostKitDomain?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -61,7 +61,7 @@ extension AppDelegate {
                                meetingIdentifier: String,
                                meetingParams: MeetingsParams) {
 
-        self.hostDomain = TeamBoostKitDomain.make(referenceObserver: referenceObserver,
+        self.teamBoostKitDomain = TeamBoostKitDomain.make(referenceObserver: referenceObserver,
                                           referenceHolder: referenceHolder,
                                           meetingIdentifier: meetingIdentifier,
                                           meetingParams: meetingParams)

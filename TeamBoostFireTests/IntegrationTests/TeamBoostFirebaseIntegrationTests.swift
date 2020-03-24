@@ -38,12 +38,12 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         let fakeReferenceObserver = FakeReferenceObserver()
-        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
+        let teamBoostKitDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
 
-        XCTAssertEqual(hostDomain.meetingIdentifier, "meetingId")
+        XCTAssertEqual(teamBoostKitDomain.meetingIdentifier, "meetingId")
         let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
         let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
         let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
@@ -52,7 +52,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         // Fake call this block
         // In the real world , the firebase callback will call this block
         fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
-        XCTAssertEqual(hostDomain.allParticipants, allParticipants)
+        XCTAssertEqual(teamBoostKitDomain.allParticipants, allParticipants)
 
     }
 
@@ -67,13 +67,13 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            moderationMode: .AutoModerated)
 
         let fakeReferenceObserver = FakeReferenceObserver()
-        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
+        let teamBoostKitDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
 
 
-        XCTAssertEqual(hostDomain.meetingIdentifier, "meetingId")
+        XCTAssertEqual(teamBoostKitDomain.meetingIdentifier, "meetingId")
         let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
         let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
         let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
@@ -82,7 +82,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         // Fake call this block
         // In the real world , the firebase callback will call this block
         fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
-        XCTAssertEqual(hostDomain.allParticipants, allParticipants)
+        XCTAssertEqual(teamBoostKitDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
             let domain = item as! TeamBoostKitDomain
@@ -91,15 +91,15 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let expectation = self.expectation(for: speakingOrderPredicate,
-                                           evaluatedWith: hostDomain,
+                                           evaluatedWith: teamBoostKitDomain,
                                            handler: nil)
 
-        hostDomain.startMeeting()
+        teamBoostKitDomain.startMeeting()
         // Initialising it simply starts the timers
-        let hostMeetingControllerService = HostMeetingControllerService(meetingParams: hostDomain.meetingParams,
+        let hostMeetingControllerService = HostMeetingControllerService(meetingParams: teamBoostKitDomain.meetingParams,
                                                                         orderObserver: fakeSpeakerOrderObserver,
                                                                         meetingMode: .AutoModerated,
-                                                                        domain: hostDomain)
+                                                                        domain: teamBoostKitDomain)
         hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
@@ -112,7 +112,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let firstSpeakerSwitchExpectation = self.expectation(for: firstSpeakerSwitchPredicate,
-                                                             evaluatedWith: hostDomain,
+                                                             evaluatedWith: teamBoostKitDomain,
                                                              handler: nil)
 
         self.wait(for: [firstSpeakerSwitchExpectation], timeout: 5.0)
@@ -124,7 +124,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let secondSpeakerSwitchExpectation = self.expectation(for: secondSpeakerSwitchPredicate,
-                                                              evaluatedWith: hostDomain,
+                                                              evaluatedWith: teamBoostKitDomain,
                                                               handler: nil)
 
         self.wait(for: [secondSpeakerSwitchExpectation], timeout: 5.0)
@@ -150,12 +150,12 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let fakeReferenceObserver = FakeReferenceObserver()
         let fakeSpeakerOrderObserver = FakeSpeakerOrderObserver()
 
-        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
+        let teamBoostKitDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
 
-        XCTAssertEqual(hostDomain.meetingIdentifier, "meetingId")
+        XCTAssertEqual(teamBoostKitDomain.meetingIdentifier, "meetingId")
         let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
         let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
         let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
@@ -164,7 +164,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         // Fake call this block
         // In the real world , the firebase callback will call this block
         fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
-        XCTAssertEqual(hostDomain.allParticipants, allParticipants)
+        XCTAssertEqual(teamBoostKitDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
             let domain = item as! TeamBoostKitDomain
@@ -176,12 +176,12 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
                                            evaluatedWith: hostDomain,
                                            handler: nil)
 
-        hostDomain.startMeeting()
+        teamBoostKitDomain.startMeeting()
         // Initialising it simply starts the timers
         let hostMeetingControllerService = HostMeetingControllerService(meetingParams: meetingParams,
                                                                         orderObserver: fakeSpeakerOrderObserver,
                                                                         meetingMode: .AutoModerated,
-                                                                        domain: hostDomain)
+                                                                        domain: teamBoostKitDomain)
         hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
@@ -194,7 +194,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let firstSpeakerSwitchExpectation = self.expectation(for: firstSpeakerSwitchPredicate,
-                                                             evaluatedWith: hostDomain,
+                                                             evaluatedWith: teamBoostKitDomain,
                                                              handler: nil)
 
         // Give one second of extra cushion
@@ -207,7 +207,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let secondSpeakerSwitchExpectation = self.expectation(for: secondSpeakerSwitchPredicate,
-                                                              evaluatedWith: hostDomain,
+                                                              evaluatedWith: teamBoostKitDomain,
                                                               handler: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
@@ -223,7 +223,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let thirdSpeakerSwitchExpectation = self.expectation(for: thirdSpeakerSwitchPredicate,
-                                                             evaluatedWith: hostDomain,
+                                                             evaluatedWith: teamBoostKitDomain,
                                                              handler: nil)
 
         // 4: Wait for third participant to finish speaking and new round app notification
@@ -241,7 +241,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let speakerOrderExpectation = self.expectation(for: newRoundSpeakerOrderPredicate,
-                                                       evaluatedWith: hostDomain,
+                                                       evaluatedWith: teamBoostKitDomain,
                                                        handler: nil)
 
         self.wait(for: [speakerOrderExpectation], timeout: 2.0)
@@ -269,12 +269,12 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         let fakeReferenceObserver = FakeReferenceObserver()
         let fakeSpeakerOrderObserver = FakeSpeakerOrderObserver()
 
-        let hostDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
+        let teamBoostKitDomain = TeamBoostKitDomain.make(referenceObserver: fakeReferenceObserver,
                                          referenceHolder: FakeReferenceHolding(),
                                          meetingIdentifier: "meetingId",
                                          meetingParams: meetingParams)
 
-        XCTAssertEqual(hostDomain.meetingIdentifier, "meetingId")
+        XCTAssertEqual(teamBoostKitDomain.meetingIdentifier, "meetingId")
         let participant1 = Participant(id: "id1", name: "participant1", speakerOrder: -1)
         let participant2 = Participant(id: "id2", name: "participant2", speakerOrder: -1)
         let participant3 = Participant(id: "id3", name: "participant3", speakerOrder: -1)
@@ -283,7 +283,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         // Fake call this block
         // In the real world , the firebase callback will call this block
         fakeReferenceObserver.participantListChangedSubscriber!(allParticipants)
-        XCTAssertEqual(hostDomain.allParticipants, allParticipants)
+        XCTAssertEqual(teamBoostKitDomain.allParticipants, allParticipants)
 
         let speakingOrderPredicate = NSPredicate { (item, bindings) -> Bool in
             let domain = item as! TeamBoostKitDomain
@@ -292,15 +292,15 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let expectation = self.expectation(for: speakingOrderPredicate,
-                                           evaluatedWith: hostDomain,
+                                           evaluatedWith: teamBoostKitDomain,
                                            handler: nil)
 
-        hostDomain.startMeeting()
+        teamBoostKitDomain.startMeeting()
         // Initialising it simply starts the timers
         let hostMeetingControllerService = HostMeetingControllerService(meetingParams: meetingParams,
                                                                         orderObserver: fakeSpeakerOrderObserver,
                                                                         meetingMode: .Uniform,
-                                                                        domain: hostDomain)
+                                                                        domain: teamBoostKitDomain)
         hostMeetingControllerService.startParticipantSpeakingSessions()
 
         // Verify that the participants are added to the meeting
@@ -313,7 +313,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let firstSpeakerSwitchExpectation = self.expectation(for: firstSpeakerSwitchPredicate,
-                                                             evaluatedWith: hostDomain,
+                                                             evaluatedWith: teamBoostKitDomain,
                                                              handler: nil)
 
         // Give one second of extra cushion
@@ -326,7 +326,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let secondSpeakerSwitchExpectation = self.expectation(for: secondSpeakerSwitchPredicate,
-                                                              evaluatedWith: hostDomain,
+                                                              evaluatedWith: teamBoostKitDomain,
                                                               handler: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.00, qos: .userInteractive) {
@@ -342,7 +342,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let thirdSpeakerSwitchExpectation = self.expectation(for: thirdSpeakerSwitchPredicate,
-                                                             evaluatedWith: hostDomain,
+                                                             evaluatedWith: teamBoostKitDomain,
                                                              handler: nil)
 
         self.wait(for: [thirdSpeakerSwitchExpectation], timeout: 11.0)
@@ -354,7 +354,7 @@ class TeamBoostFirebaseIntegrationTests: XCTestCase {
         }
 
         let speakerOrderExpectation = self.expectation(for: newRoundSpeakerOrderPredicate,
-                                                       evaluatedWith: hostDomain,
+                                                       evaluatedWith: teamBoostKitDomain,
                                                        handler: nil)
 
         self.wait(for: [speakerOrderExpectation], timeout: 2.0)
