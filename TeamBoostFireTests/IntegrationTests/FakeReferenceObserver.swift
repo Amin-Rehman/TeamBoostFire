@@ -8,6 +8,7 @@
 
 import Foundation
 import TeamBoostFire
+import TeamBoostKit
 
 
 class FakeReferenceObserver: ReferenceObserving {

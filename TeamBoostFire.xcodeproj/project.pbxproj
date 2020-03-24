@@ -458,7 +458,8 @@
 				EBAB3061240FFE0C009374DA /* ManagedObjectContextFactoryTests.swift */,
 				EBAB306324100099009374DA /* HostPersistenceTests.swift */,
 			);
-			path = StorageTests;
+			name = StorageTests;
+			path = ../TeamBoostKit/TeamBoostKitTests/StorageTests;
 			sourceTree = "<group>";
 		};
 		EBBB4A8A227F850900D61976 /* Services */ = {

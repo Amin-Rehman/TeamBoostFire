@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TeamBoostFire
+@testable import TeamBoostKit
 
 class ManagedObjectContextFactoryTests: XCTestCase {
     func testMakingInMemoryStoreIsNotNil() {
