@@ -5,6 +5,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import TeamBoostKit
 
 struct FirebaseReferenceObserver: ReferenceObserving {
     func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void) {

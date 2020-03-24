@@ -8,14 +8,24 @@
 
 import Foundation
 
-enum MeetingMode {
+public enum MeetingMode {
     case Uniform
     case AutoModerated
 }
 
 public struct MeetingsParams {
-    let agenda: String
-    let meetingTime: Int
-    let maxTalkTime: Int
-    let moderationMode: MeetingMode?
+    public let agenda: String
+    public let meetingTime: Int
+    public let maxTalkTime: Int
+    public let moderationMode: MeetingMode?
+
+    public init(agenda: String,
+                meetingTime: Int,
+                maxTalkTime: Int,
+                moderationMode: MeetingMode?) {
+        self.agenda = agenda
+        self.meetingTime = meetingTime
+        self.maxTalkTime = maxTalkTime
+        self.moderationMode = moderationMode
+    }
 }

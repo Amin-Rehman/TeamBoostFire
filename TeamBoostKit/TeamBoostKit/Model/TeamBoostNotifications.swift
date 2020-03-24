@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TeamBoostNotifications: String {
+public enum TeamBoostNotifications: String {
     case meetingCodeDidChange = "MeetingCodeDidChange"
     case participantListDidChange = "ParticipantListDidChange"
     case meetingStateDidChange = "MeetingStateDidChange"
@@ -20,6 +20,7 @@ enum TeamBoostNotifications: String {
     case moderatorHasControlDidChange = "moderatorHasControlDidChange"
 }
 
+// TODO: Take this out of TeamBoostKit
 public enum AppNotifications: String {
     case newMeetingRoundStarted = "NewMeetingRoundStarted"
     case meetingSecondTicked = "MeetingSecondTicked"

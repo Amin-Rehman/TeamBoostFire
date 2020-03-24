@@ -24,6 +24,7 @@
 		EB29D737242A0F1900A4D5F0 /* MeetingParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D732242A0F1900A4D5F0 /* MeetingParams.swift */; };
 		EB29D739242A0F4E00A4D5F0 /* ReferenceHolding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D738242A0F4E00A4D5F0 /* ReferenceHolding.swift */; };
 		EB29D73A242A0F7300A4D5F0 /* TeamBoostDataModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = EB29D711242A0D6E00A4D5F0 /* TeamBoostDataModel.xcdatamodeld */; };
+		EB29D73B242A11AC00A4D5F0 /* HostDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D708242A0D6E00A4D5F0 /* HostDomain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB29D71A242A0DE300A4D5F0 /* ParticipantPersisted.swift in Sources */,
+				EB29D73B242A11AC00A4D5F0 /* HostDomain.swift in Sources */,
 				EB29D718242A0DD600A4D5F0 /* StorageChangeNotifying.swift in Sources */,
 				EB29D724242A0E8B00A4D5F0 /* ReferenceObserving.swift in Sources */,
 				EB29D735242A0F1900A4D5F0 /* TeamBoostNotifications.swift in Sources */,

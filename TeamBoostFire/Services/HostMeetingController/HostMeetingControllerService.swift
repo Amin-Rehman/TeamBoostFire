@@ -1,4 +1,5 @@
 import Foundation
+import TeamBoostKit
 
 public typealias ParticipantId = String
 typealias SpeakingTime = Int

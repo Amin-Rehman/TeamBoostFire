@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 @objc protocol MeetingControllerCurrentRoundTickerObserver: class {
     @objc func speakerIsDone()

@@ -8,13 +8,13 @@
 
 import Foundation
 
-class HostDomain {
+public class HostDomain {
     let pusher: FirebaseHostPusher
     let fetcher: FirebaseHostFetcher
     let storage: PersistenceStorage
-    let meetingIdentifier: String
-    let meetingParams: MeetingsParams
-    var meetingStatistics: MeetingStats?
+    public let meetingIdentifier: String
+    public let meetingParams: MeetingsParams
+    public var meetingStatistics: MeetingStats?
 
 
     public var speakerOrder: [String] {
@@ -23,7 +23,7 @@ class HostDomain {
         }
     }
 
-    var allParticipants: [Participant] {
+    public var allParticipants: [Participant] {
         get {
             let allPersistedParticipants = self.storage.participants(for: self.meetingIdentifier).value
 

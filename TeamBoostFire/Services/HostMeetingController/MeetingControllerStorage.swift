@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 typealias ParticipantSpeakingRecord = [ParticipantId: SpeakingTime]
 

@@ -3,6 +3,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import TeamBoostKit
 
 /**
  A container which holds references to all the keys in the Firebase database

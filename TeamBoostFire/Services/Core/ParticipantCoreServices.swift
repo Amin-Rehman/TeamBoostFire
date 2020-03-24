@@ -3,6 +3,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import TeamBoostKit
 
 class ParticipantCoreServices: TeamBoostCore {
     var speakerOrder: [String]?

@@ -9,6 +9,7 @@
 import UIKit
 import TransitionButton
 import Lottie
+import TeamBoostKit
 
 class ParticipantLobbyViewController: CustomTransitionViewController {
     @IBOutlet weak var lottieParticipantWaitingAnimationView: AnimationView!

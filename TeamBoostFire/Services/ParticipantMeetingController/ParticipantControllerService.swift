@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 enum ParticipantControllerInMeetingState: Equatable {
     case unknown

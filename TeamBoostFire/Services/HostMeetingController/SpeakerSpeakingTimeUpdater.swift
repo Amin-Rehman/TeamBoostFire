@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TeamBoostKit
 
 /**
  Responsible for updating the speaking time of each speaker every second

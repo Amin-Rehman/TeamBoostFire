@@ -8,12 +8,22 @@
 
 import Foundation
 
-typealias ParticipantName = String
+public typealias ParticipantName = String
 
-struct MeetingStats {
-    let agenda: String
-    let meetingLength: Int
-    let numberOfParticipants: Int
+public struct MeetingStats {
+    public let agenda: String
+    public let meetingLength: Int
+    public let numberOfParticipants: Int
     // Will be used in the pie chart
-    let participantSpeakingRecords: [ParticipantName: Int]
+    public let participantSpeakingRecords: [ParticipantName: Int]
+
+    public init(agenda: String,
+                meetingLength: Int,
+                numberOfParticipants: Int,
+                participantSpeakingRecords: [ParticipantName: Int]) {
+        self.agenda = agenda
+        self.meetingLength = meetingLength
+        self.numberOfParticipants = numberOfParticipants
+        self.participantSpeakingRecords = participantSpeakingRecords
+    }
 }

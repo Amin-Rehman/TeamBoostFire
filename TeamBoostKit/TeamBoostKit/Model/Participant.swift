@@ -9,7 +9,16 @@
 import Foundation
 
 public struct Participant: Equatable {
-    let id: String
-    let name: String
-    var speakerOrder: Int
+    public let id: String
+    public let name: String
+    // TODO: This is probably redundant: To be removed
+    public var speakerOrder: Int
+
+    public init(id: String,
+                name: String,
+                speakerOrder: Int) {
+        self.id = id
+        self.name = name
+        self.speakerOrder = speakerOrder
+    }
 }
