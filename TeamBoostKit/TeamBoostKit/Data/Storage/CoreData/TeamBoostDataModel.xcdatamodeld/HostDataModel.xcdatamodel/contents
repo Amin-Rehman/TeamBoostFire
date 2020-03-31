@@ -19,9 +19,9 @@
         <attribute name="meetingStateChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="moderatorHasControl" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="moderatorHasControlChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="participants" optional="YES" attributeType="Transformable"/>
+        <attribute name="participants" optional="YES" attributeType="Transformable" valueTransformerName="NSKeyedUnarchiveFromDataTransformerName" customClassName=".ParticipantPersisted"/>
         <attribute name="participantsChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="speakerOrder" optional="YES" attributeType="Transformable"/>
+        <attribute name="speakerOrder" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".String"/>
         <attribute name="speakerOrderChanged" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>

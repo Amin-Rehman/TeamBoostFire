@@ -5,9 +5,9 @@
       location = "group:TeamBoostFire.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Pods/../TeamBoostKit/TeamBoostKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/../TeamBoostKit/TeamBoostKit.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

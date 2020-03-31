@@ -98,7 +98,7 @@ extension TeamBoostKitDomain {
 
         var storage = TeamBoostPersistenceStorage(
             storageChangedObserver: nil,
-            managedObjectContext: ManagedObjectContextFactory.make(storageType: .inMemory))
+            managedObjectContext: ManagedObjectContextFactory.make(storageType: .onDisk))
 
         let fetcher = FirebaseHostFetcher(with: storage,
                                           meetingIdentifier: meetingIdentifier,
