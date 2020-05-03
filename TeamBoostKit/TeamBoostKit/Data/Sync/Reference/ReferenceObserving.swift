@@ -16,4 +16,5 @@ public protocol ReferenceObserving {
     func observeMeetingParamsDidChange(subscriber: @escaping (MeetingsParams) -> Void)
     func observeCallToSpeakerDidChange(subscriber: @escaping (String) -> Void)
     func observeModeratorHasControlDidChange(subscriber: @escaping (Bool) -> Void)
+    func disconnectAll()
 }

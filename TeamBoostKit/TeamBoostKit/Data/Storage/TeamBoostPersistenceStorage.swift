@@ -23,8 +23,8 @@ protocol PersistenceStorage {
     var managedObjectContext: NSManagedObjectContext { get }
 
     func fetchAll() -> [TeamBoostPersisted]
-    func clear()
     func setMeeting(with meetingIdentifier: String)
+    func clearIfNeeded(meetingIdentifer: String)
     func setMeetingParamsMeetingTime(meetingTime: Int64,
                                      meetingIdentifier: String,
                                      localChange: Bool)
@@ -76,10 +76,23 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
         }
     }
 
-    func clear() {
-        // TODO: Implement
-    }
 
+    /**
+     clearIfNeeded should cleanup the entry of the previous meeting to avoid duplicates
+     This is a fail safe for the test mode.
+     */
+    func clearIfNeeded(meetingIdentifer: String)  {
+        guard let teamBoostPersisted = try? self.fetchHostPersisted(with: meetingIdentifer) else {
+            return
+        }
+
+        managedObjectContext.delete(teamBoostPersisted)
+        do {
+            try managedObjectContext.save()
+        } catch {
+            assertionFailure("Error when trying to save a deleted change \(error as Any)")
+        }
+    }
 
     /**
      setMeeting should always create a new entry in the database and firebase sync
@@ -92,6 +105,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
         hostPersisted.meetingIdentifier = meetingIdentifier
         hostPersisted.meetingIdentifierChanged = TeamBoostPersistenceStorage.makeCurrentTimestamp()
+
         managedObjectContext.insert(hostPersisted)
         do {
             try saveAndNotifyObserver()
@@ -155,7 +169,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting agenda. \(error)")
         }
     }
 
@@ -191,7 +205,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting parameters: Max talk time. \(error)")
         }
     }
 
@@ -228,7 +242,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting parameters - Call to speaker interrupt. \(error)")
         }
     }
 
@@ -264,7 +278,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting parameters. - Current speaker speaking time:  \(error)")
         }
     }
 
@@ -300,7 +314,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting parameters - I am Done Interrupt -  \(error)")
         }
     }
 
@@ -336,7 +350,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting meeting state. \(error)")
         }
     }
 
@@ -372,7 +386,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting moderator has control. \(error)")
         }
     }
 
@@ -408,7 +422,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting Participants. \(error)")
         }
     }
 
@@ -444,7 +458,7 @@ struct TeamBoostPersistenceStorage: PersistenceStorage {
 
             try saveAndNotifyObserver()
         } catch {
-            assertionFailure("Error setting meeting parameters. \(error)")
+            assertionFailure("Error setting Speaker Order. \(error)")
         }
     }
 

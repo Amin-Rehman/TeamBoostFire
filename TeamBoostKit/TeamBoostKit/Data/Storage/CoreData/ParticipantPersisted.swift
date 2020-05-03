@@ -8,7 +8,15 @@
 
 import Foundation
 
-public class ParticipantPersisted: NSObject {
+enum ParticipantPersistedSecureKeys: String {
+  case id = "Id"
+  case name = "Name"
+}
+
+@objc(ParticipantPersisted)
+public class ParticipantPersisted: NSObject, NSSecureCoding {
+    public static var supportsSecureCoding = true
+
     let id: String
     let name: String
 
@@ -16,4 +24,15 @@ public class ParticipantPersisted: NSObject {
         self.id = id
         self.name = name
     }
+
+    public required init?(coder: NSCoder) {
+        self.id = coder.decodeObject(forKey: ParticipantPersistedSecureKeys.id.rawValue) as! String
+        self.name = coder.decodeObject(forKey: ParticipantPersistedSecureKeys.name.rawValue) as! String
+    }
+
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: ParticipantPersistedSecureKeys.id.rawValue)
+        coder.encode(name, forKey: ParticipantPersistedSecureKeys.name.rawValue)
+    }
+
 }

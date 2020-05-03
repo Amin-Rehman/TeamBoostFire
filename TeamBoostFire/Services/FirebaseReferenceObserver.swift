@@ -17,8 +17,6 @@ struct FirebaseReferenceObserver: ReferenceObserving {
             subscriber(callToSpeakerWithUniqueId)
         })
     }
-
-
     let firebaseReferenceHolder: FirebaseReferenceHolder
 
     init(with firebaseReferenceHolder: FirebaseReferenceHolder) {
@@ -50,7 +48,6 @@ struct FirebaseReferenceObserver: ReferenceObserving {
             subscriber(allParticipants)
         })
     }
-
     public func observeIAmDoneInterrupt(subscriber: @escaping (TimeInterval) -> Void) {
         firebaseReferenceHolder.iAmDoneInterruptReference?.observe(DataEventType.value, with: { snapshot in
             guard let iAmDoneInterruptValue = snapshot.value as? TimeInterval else {
@@ -106,5 +103,15 @@ struct FirebaseReferenceObserver: ReferenceObserving {
 
             subscriber(meetingParams)
         })
+    }
+
+    func disconnectAll() {
+        firebaseReferenceHolder.callToSpeakerReference?.removeAllObservers()
+        firebaseReferenceHolder.speakerOrderReference?.removeAllObservers()
+        firebaseReferenceHolder.participantsReference?.removeAllObservers()
+        firebaseReferenceHolder.iAmDoneInterruptReference?.removeAllObservers()
+        firebaseReferenceHolder.moderatorHasControlReference?.removeAllObservers()
+        firebaseReferenceHolder.meetingStateReference?.removeAllObservers()
+        firebaseReferenceHolder.meetingParamsReference?.removeAllObservers()
     }
 }
