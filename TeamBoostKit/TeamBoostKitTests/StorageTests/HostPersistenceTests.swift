@@ -20,7 +20,34 @@ class HostPersistenceTests: XCTestCase {
     override func tearDown() {
         sut = nil
     }
-    
+
+    func testClearPrevious() {
+        let managedObjectContext = ManagedObjectContextFactory.make(storageType: .inMemory)
+        sut = TeamBoostPersistenceStorage(managedObjectContext: managedObjectContext)
+        let stubMeetingIdentifier1 = "stub-meeting-identifier-1"
+        let stubMeetingIdentifier2 = "stub-meeting-identifier-2"
+        sut.setMeeting(with: stubMeetingIdentifier1)
+        sut.setMeeting(with: stubMeetingIdentifier2)
+        var allResults = sut.fetchAll()
+        allResults.sort(by: {
+            $0.meetingIdentifier! < $1.meetingIdentifier!
+        })
+
+        var result = allResults.first
+        XCTAssertEqual(result?.meetingIdentifier, stubMeetingIdentifier1)
+        result = allResults.last
+        XCTAssertEqual(result?.meetingIdentifier, stubMeetingIdentifier2)
+
+        // Clear the one meeting of interest
+        sut.clearIfNeeded(meetingIdentifer: stubMeetingIdentifier1)
+
+        // Verify
+        allResults = sut.fetchAll()
+        XCTAssertEqual(allResults.count, 1)
+        result = sut.fetchAll().first
+        XCTAssertEqual(result?.meetingIdentifier, stubMeetingIdentifier2)
+    }
+
     func testSaveAndRetrieveMeetingIdentifierLocalChange() {
         let results1 = sut.fetchAll()
         XCTAssertEqual(results1.count, 0)

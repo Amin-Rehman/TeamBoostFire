@@ -48,6 +48,7 @@ public class TeamBoostKitDomain {
         self.meetingIdentifier = meetingIdentifier
         self.meetingParams = meetingParams
 
+        self.storage.clearIfNeeded(meetingIdentifer: meetingIdentifier)
         self.storage.setMeeting(with: meetingIdentifier)
     }
 
