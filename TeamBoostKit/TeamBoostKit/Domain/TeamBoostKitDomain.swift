@@ -36,7 +36,6 @@ public class TeamBoostKitDomain {
         }
     }
 
-
     init(pusher: FirebaseHostPusher,
          fetcher: FirebaseHostFetcher,
          storage: PersistenceStorage,
@@ -47,8 +46,6 @@ public class TeamBoostKitDomain {
         self.storage = storage
         self.meetingIdentifier = meetingIdentifier
         self.meetingParams = meetingParams
-
-        self.storage.clearIfNeeded(meetingIdentifer: meetingIdentifier)
         self.storage.setMeeting(with: meetingIdentifier)
     }
 
@@ -74,6 +71,7 @@ public class TeamBoostKitDomain {
         storage.setMeetingState(meetingState: "ended",
                                 meetingIdentifier: meetingIdentifier,
                                 localChange: true)
+        fetcher.firebaseReferenceObserver.disconnectAll()
     }
 
     public func updateSpeakerOrder(with identifiers: [String]) {
@@ -100,7 +98,8 @@ extension TeamBoostKitDomain {
         var storage = TeamBoostPersistenceStorage(
             storageChangedObserver: nil,
             managedObjectContext: ManagedObjectContextFactory.make(storageType: .onDisk))
-
+        // Before linking up anything else we make sure we cleanup any meeting identifier dupes
+        storage.clearIfNeeded(meetingIdentifer: meetingIdentifier)
         let fetcher = FirebaseHostFetcher(with: storage,
                                           meetingIdentifier: meetingIdentifier,
                                           firebaseReferenceObserver: referenceObserver)

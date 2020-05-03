@@ -12,6 +12,10 @@ import TeamBoostKit
 
 
 class FakeReferenceObserver: ReferenceObserving {
+    func disconnectAll() {
+        // Do nothing
+    }
+
 
     // MARK: -
     public var participantListChangedSubscriber:(([Participant]) -> Void)?
