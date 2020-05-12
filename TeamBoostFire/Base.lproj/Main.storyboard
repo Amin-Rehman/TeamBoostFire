@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT8-Dg-NrX" userLabel="BrainstormAnimationView" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="79" y="225" width="217" height="217"/>
+                                <rect key="frame" x="55" y="201" width="265" height="265"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bT8-Dg-NrX" secondAttribute="height" multiplier="1:1" id="cmW-t2-Bwu"/>
@@ -46,9 +46,9 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rr2-jW-cUL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="27" y="466" width="321.5" height="38"/>
+                                <rect key="frame" x="27" y="490" width="321.5" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="vcW-8b-iN1"/>
+                                    <constraint firstAttribute="height" constant="32" id="vcW-8b-iN1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="I am moderating">
@@ -76,7 +76,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPi-sE-qBO" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="27" y="522" width="321.5" height="38"/>
+                                <rect key="frame" x="27" y="540" width="321.5" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="I am participating">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
-                                <rect key="frame" x="24" y="572" width="327" height="22"/>
+                                <rect key="frame" x="24" y="584" width="327" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="7Xg-w1-2on"/>
                                 </constraints>
@@ -123,13 +123,13 @@
                             <constraint firstItem="lxq-vK-MaZ" firstAttribute="top" secondItem="HPi-sE-qBO" secondAttribute="bottom" constant="12" id="G1O-hs-A4O"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="lxq-vK-MaZ" secondAttribute="trailing" constant="24" id="SNX-i1-1fQ"/>
                             <constraint firstItem="2zz-4n-wkK" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="SdU-q5-jgF"/>
-                            <constraint firstItem="bT8-Dg-NrX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="16" id="TMd-fu-wTr"/>
+                            <constraint firstItem="bT8-Dg-NrX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="12" id="TMd-fu-wTr"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="height" secondItem="Rr2-jW-cUL" secondAttribute="height" id="dZv-xO-b6N"/>
                             <constraint firstItem="bfw-mF-SWo" firstAttribute="top" secondItem="2zz-4n-wkK" secondAttribute="bottom" constant="4" id="eMn-L6-iOk"/>
                             <constraint firstItem="bT8-Dg-NrX" firstAttribute="centerY" secondItem="F4m-wl-fpi" secondAttribute="centerY" id="iOH-e2-8fd"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rr2-jW-cUL" secondAttribute="trailing" id="jSh-gy-udd"/>
                             <constraint firstItem="lxq-vK-MaZ" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="jnp-jq-YNM"/>
-                            <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="24" id="mig-bA-Jql"/>
+                            <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="12" id="mig-bA-Jql"/>
                             <constraint firstItem="bfw-mF-SWo" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="oIH-LJ-J09"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="top" secondItem="Rr2-jW-cUL" secondAttribute="bottom" constant="18" id="qWm-xw-UuU"/>
                             <constraint firstItem="Rr2-jW-cUL" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="z87-N2-LGs"/>
