@@ -28,7 +28,8 @@ class ParticipantMainViewController: UIViewController {
 
     var participantReactionViewController = ParticipantReactionViewController()
     public var participantControllerService: ParticipantControllerService?
-    private var previousInMeetingState = ParticipantControllerInMeetingState.unknown
+    // We will always start in the moderator is speaking state
+    private var previousInMeetingState = ParticipantControllerInMeetingState.moderatorIsSpeaking
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,9 @@ class ParticipantMainViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Brute force the initial state here
+        self.previousInMeetingState = .unknown
+        participantInMeetingStateDidChange(state: .moderatorIsSpeaking)
     }
 
     private func setupTopBar() {
@@ -189,9 +193,6 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
         switch state {
         case .unknown:
             assertionFailure("Unknown in meeting state")
-//            likeButton.isHidden = true
-//            callSpeakerButton.isHidden = true
-
             registerGestureRecognizers()
             feedbackStackView.isHidden = false
             iAmDoneButton.isHidden = true
@@ -199,10 +200,6 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
 
             currentSpeakerLabel.text = "Unknown"
         case .selfIsSpeaking:
-//            likeButton.crossFadeTransition(duration: crossFadeDuration,
-//                                           shouldHide: true)
-//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-//                                                  shouldHide: true)
 
             unregisterGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
@@ -221,14 +218,7 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .anotherParticipantIsSpeaking(let participantName):
-//            likeButton.isHidden = false
-//            callSpeakerButton.isHidden = false
             iAmDoneButton.isHidden = true
-//            likeButton.crossFadeTransition(duration: crossFadeDuration,
-//                                           shouldHide: false)
-//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-//                                                  shouldHide: false)
-
             registerGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
                                                               shouldHide: false)
@@ -247,11 +237,6 @@ extension ParticipantMainViewController: ParticipantControllerInMeetingStateObse
             }
 
         case .moderatorIsSpeaking:
-//            likeButton.crossFadeTransition(duration: crossFadeDuration,
-//                                           shouldHide: true)
-//            callSpeakerButton.crossFadeTransition(duration: crossFadeDuration,
-//                                                  shouldHide: true)
-
             unregisterGestureRecognizers()
             feedbackStackView.crossFadeTransition(duration: crossFadeDuration,
                                                               shouldHide: true)
