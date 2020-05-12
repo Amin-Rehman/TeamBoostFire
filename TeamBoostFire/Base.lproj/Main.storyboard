@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H6K-V0-4wR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NlY-BI-QPM">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How would you like to join the meeting?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfw-mF-SWo">
-                                <rect key="frame" x="54" y="79" width="267" height="50"/>
+                                <rect key="frame" x="27" y="79" width="321.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="uS7-wW-zLW"/>
                                 </constraints>
@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT8-Dg-NrX" userLabel="BrainstormAnimationView" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="30" y="176" width="315" height="315"/>
+                                <rect key="frame" x="79" y="225" width="217" height="217"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bT8-Dg-NrX" secondAttribute="height" multiplier="1:1" id="cmW-t2-Bwu"/>
@@ -46,7 +46,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rr2-jW-cUL" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="54" y="515" width="267" height="38"/>
+                                <rect key="frame" x="27" y="466" width="321.5" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="vcW-8b-iN1"/>
                                 </constraints>
@@ -76,7 +76,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPi-sE-qBO" customClass="SimpleRoundedButton" customModule="SimpleRoundedButton">
-                                <rect key="frame" x="54" y="571" width="267" height="38"/>
+                                <rect key="frame" x="27" y="522" width="321.5" height="38"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="I am participating">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost v1.0(1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxq-vK-MaZ">
-                                <rect key="frame" x="24" y="621" width="327" height="22"/>
+                                <rect key="frame" x="24" y="572" width="327" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="7Xg-w1-2on"/>
                                 </constraints>
@@ -115,22 +115,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Rr2-jW-cUL" firstAttribute="trailing" secondItem="bfw-mF-SWo" secondAttribute="trailing" id="3u8-J5-0L8"/>
-                            <constraint firstItem="Rr2-jW-cUL" firstAttribute="leading" secondItem="bfw-mF-SWo" secondAttribute="leading" id="Ae9-7Q-UsU"/>
+                            <constraint firstItem="HPi-sE-qBO" firstAttribute="leading" secondItem="Rr2-jW-cUL" secondAttribute="leading" id="7uU-kh-oqu"/>
                             <constraint firstItem="bT8-Dg-NrX" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="Bxd-Ft-8Dp"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="centerX" secondItem="Rr2-jW-cUL" secondAttribute="centerX" id="CJs-95-afc"/>
                             <constraint firstItem="Rr2-jW-cUL" firstAttribute="top" secondItem="bT8-Dg-NrX" secondAttribute="bottom" constant="24" id="ENG-43-nl9"/>
                             <constraint firstItem="2zz-4n-wkK" firstAttribute="top" secondItem="bCh-9H-cwG" secondAttribute="top" constant="32" id="EhI-Fu-oSj"/>
                             <constraint firstItem="lxq-vK-MaZ" firstAttribute="top" secondItem="HPi-sE-qBO" secondAttribute="bottom" constant="12" id="G1O-hs-A4O"/>
-                            <constraint firstItem="HPi-sE-qBO" firstAttribute="leading" secondItem="Rr2-jW-cUL" secondAttribute="leading" id="Q5p-pd-AmT"/>
-                            <constraint firstItem="Rr2-jW-cUL" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="54" id="RFW-Qd-oin"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="trailing" secondItem="lxq-vK-MaZ" secondAttribute="trailing" constant="24" id="SNX-i1-1fQ"/>
                             <constraint firstItem="2zz-4n-wkK" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="SdU-q5-jgF"/>
                             <constraint firstItem="bT8-Dg-NrX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="16" id="TMd-fu-wTr"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="height" secondItem="Rr2-jW-cUL" secondAttribute="height" id="dZv-xO-b6N"/>
                             <constraint firstItem="bfw-mF-SWo" firstAttribute="top" secondItem="2zz-4n-wkK" secondAttribute="bottom" constant="4" id="eMn-L6-iOk"/>
                             <constraint firstItem="bT8-Dg-NrX" firstAttribute="centerY" secondItem="F4m-wl-fpi" secondAttribute="centerY" id="iOH-e2-8fd"/>
+                            <constraint firstItem="HPi-sE-qBO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rr2-jW-cUL" secondAttribute="trailing" id="jSh-gy-udd"/>
                             <constraint firstItem="lxq-vK-MaZ" firstAttribute="leading" secondItem="bCh-9H-cwG" secondAttribute="leading" constant="24" id="jnp-jq-YNM"/>
-                            <constraint firstItem="HPi-sE-qBO" firstAttribute="trailing" secondItem="Rr2-jW-cUL" secondAttribute="trailing" id="m7K-8q-Sbp"/>
                             <constraint firstItem="bCh-9H-cwG" firstAttribute="bottom" secondItem="lxq-vK-MaZ" secondAttribute="bottom" constant="24" id="mig-bA-Jql"/>
                             <constraint firstItem="bfw-mF-SWo" firstAttribute="centerX" secondItem="F4m-wl-fpi" secondAttribute="centerX" id="oIH-LJ-J09"/>
                             <constraint firstItem="HPi-sE-qBO" firstAttribute="top" secondItem="Rr2-jW-cUL" secondAttribute="bottom" constant="18" id="qWm-xw-UuU"/>
@@ -138,6 +136,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bCh-9H-cwG"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="EQa-Ku-4yv"/>
                     <navigationItem key="navigationItem" id="Qpw-fF-wlf"/>
                     <connections>
                         <outlet property="brainStormAnimationView" destination="bT8-Dg-NrX" id="yKf-xr-UqL"/>
@@ -146,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yX4-mm-0kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="375" y="148.94366197183098"/>
+            <point key="canvasLocation" x="1312.8" y="148.87556221889056"/>
         </scene>
         <!--Join Meeting-->
         <scene sceneID="wl6-Nd-Kp4">
@@ -559,7 +558,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXn-py-aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2628.75" y="150"/>
+            <point key="canvasLocation" x="3567.1999999999998" y="149.77511244377811"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JCo-YO-5pw">
@@ -577,7 +576,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vS0-5w-ASK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1322" y="150"/>
+            <point key="canvasLocation" x="2260" y="149.77511244377811"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c6G-fn-8f9">
@@ -597,5 +596,43 @@
             </objects>
             <point key="canvasLocation" x="572" y="1004.3478260869566"/>
         </scene>
+        <!--Help-->
+        <scene sceneID="Mef-33-Dz8">
+            <objects>
+                <viewController id="xdR-wV-zKA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9KZ-nl-OaD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Vyc-7l-1sR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Help" image="questionmark.circle" catalog="system" id="ma8-Fb-Lql"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ouv-t4-zhg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-495" y="524"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="WOl-UP-iez">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NlY-BI-QPM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jwc-Dq-uuB">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="H6K-V0-4wR" kind="relationship" relationship="viewControllers" id="phI-Qi-7Gx"/>
+                        <segue destination="xdR-wV-zKA" kind="relationship" relationship="viewControllers" id="U1G-u8-JvV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iM-8a-j9m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="373.60000000000002" y="148.87556221889056"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="house" catalog="system" width="128" height="110"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
