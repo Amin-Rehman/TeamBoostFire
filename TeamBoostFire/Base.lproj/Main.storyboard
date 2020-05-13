@@ -601,15 +601,60 @@
             <objects>
                 <viewController id="xdR-wV-zKA" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9KZ-nl-OaD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsL-AW-gDb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvf-zw-ZZc" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HelpPageHeader" translatesAutoresizingMaskIntoConstraints="NO" id="8xn-Xt-GY4">
+                                                <rect key="frame" x="24" y="12" width="327" height="327"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="8xn-Xt-GY4" secondAttribute="height" multiplier="1:1" id="spe-aj-jU1"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamBoost can help you have more productive and inclusive meetings. " lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSM-pS-cw4">
+                                                <rect key="frame" x="24" y="363" width="327" height="43"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Xo-Yn-UG3">
+                                                <rect key="frame" x="24" y="414" width="327" height="416"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="416" id="pPw-jv-7Ut"/>
+                                                </constraints>
+                                                <mutableString key="text">Join the meeting as a moderator to have full control over which participant speaks up at which time.
+Automatic moderation will take all the load off you. Participants who don’t speak up will be given the opportunity to talk more. As a moderator you can take control at any point and interject to guide the meeting where you want it to go. 
+At the end of the meeting, you can have a look at some important meeting statistics, giving you the opportunity to improve the meeting next time.
+
+As a participant, let the moderator know that you would like to speak up at any point. You would then be put into a queue and the app will give you the chance to speak asap!
+In a meeting , you can also like another persons comment.</mutableString>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="8xn-Xt-GY4" firstAttribute="centerX" secondItem="Bvf-zw-ZZc" secondAttribute="centerX" id="41c-Ak-H7W"/>
+                                            <constraint firstItem="jSM-pS-cw4" firstAttribute="top" secondItem="8xn-Xt-GY4" secondAttribute="bottom" constant="24" id="A2j-ns-DAB"/>
+                                            <constraint firstItem="jSM-pS-cw4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8xn-Xt-GY4" secondAttribute="leading" id="BSz-a3-CWT"/>
+                                            <constraint firstItem="jSM-pS-cw4" firstAttribute="centerX" secondItem="8xn-Xt-GY4" secondAttribute="centerX" id="BiQ-01-EoU"/>
+                                            <constraint firstItem="9Xo-Yn-UG3" firstAttribute="top" secondItem="jSM-pS-cw4" secondAttribute="bottom" constant="8" id="GUv-9W-8A6"/>
+                                            <constraint firstItem="8xn-Xt-GY4" firstAttribute="leading" secondItem="Bvf-zw-ZZc" secondAttribute="leading" constant="24" id="Thy-gB-fTz"/>
+                                            <constraint firstItem="jSM-pS-cw4" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8xn-Xt-GY4" secondAttribute="trailing" id="fhi-un-eX5"/>
+                                            <constraint firstItem="9Xo-Yn-UG3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jSM-pS-cw4" secondAttribute="leading" id="jPc-eQ-BRt"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Xo-Yn-UG3" secondAttribute="trailing" constant="24" id="kih-UG-wfG"/>
+                                            <constraint firstItem="9Xo-Yn-UG3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jSM-pS-cw4" secondAttribute="trailing" id="rkP-Ae-CUC"/>
+                                            <constraint firstItem="8xn-Xt-GY4" firstAttribute="top" secondItem="Bvf-zw-ZZc" secondAttribute="top" constant="12" id="tNZ-wC-oz4"/>
+                                            <constraint firstAttribute="bottom" secondItem="9Xo-Yn-UG3" secondAttribute="bottom" constant="70" id="xJ1-Bu-nsO"/>
+                                            <constraint firstItem="9Xo-Yn-UG3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jSM-pS-cw4" secondAttribute="leading" id="yTH-L7-kXR"/>
+                                            <constraint firstItem="9Xo-Yn-UG3" firstAttribute="leading" secondItem="Bvf-zw-ZZc" secondAttribute="leading" constant="24" id="zAB-DT-YNn"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -635,11 +680,11 @@
                         <viewLayoutGuide key="safeArea" id="Vyc-7l-1sR"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Help" image="questionmark.circle" catalog="system" id="ma8-Fb-Lql"/>
-                    <size key="freeformSize" width="375" height="1000"/>
+                    <size key="freeformSize" width="375" height="900"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ouv-t4-zhg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-661.60000000000002" y="759.67016491754134"/>
+            <point key="canvasLocation" x="-661.60000000000002" y="759.22038980509751"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WOl-UP-iez">
@@ -662,6 +707,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="HelpPageHeader" width="256" height="256"/>
         <image name="house" catalog="system" width="128" height="110"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
     </resources>
